@@ -15,6 +15,7 @@ from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 
 
 from py_boost import GradientBoosting, SketchBoost
+from py_boost.gpu.history_boosting import HistoryBasedBoostingModel
 from py_boost.multioutput.sketching import *
 from py_boost.multioutput.target_splitter import *
 
@@ -73,6 +74,10 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
     with mlflow.start_run(run_name=f"{dataset_name}_{run_name}"):
         # Log parameters
         mlflow.log_params({k: v for k, v in params.items() if k in SEARCH_SPACE})
+        global grad_histories
+        grad_histories = []
+        global hess_histories
+        hess_histories = []
         
         for fold, (train_idx, test_idx) in enumerate(cv.split(X, y)):
             # Split data into training and test sets
@@ -81,6 +86,30 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
 
             # Initialize and train model
             model = model_generator(**params)
+
+            def patched_before_iteration(self, build_info):
+                global grad_histories
+                global hess_histories
+                self._current_iteration = build_info['num_iter'] + 1
+                train = build_info['data']['train']
+                grad: cp.ndarray = train.get('grad')
+                hess: cp.ndarray = train.get('hess')
+
+                # accumulate to history when grads and hesses are available
+                if grad is not None and hess is not None:
+                    self._update_history(grad, hess)
+                    # check if we should apply approximation based on history
+                    self.use_approximation = self._scheduler()
+                    if params['lr'] == 0.05 and fold == 0:
+                        if self._current_iteration % (2 * self.history_period) == 0:
+                            grad_histories.append(self._hist_grad)
+                            hess_histories.append(self._hess_grad)
+
+
+            for callback in model.callbacks:
+                if callback.__name__ == 'GradHessHistory':
+                    callback.before_iteration = patched_before_iteration
+
             start_time = time.time()
             model.fit(
                 X_train, y_train,
@@ -111,11 +140,19 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
         results.to_csv(results_file, index=False)
         mlflow.log_artifact(results_file)
 
-        # Log histories as an artifact
-        histories_file = f"histories_{dataset_name}_{run_name}.pkl"
-        with open(histories_file, 'wb') as file:
-            pickle.dump(histories, file)
-        mlflow.log_artifact(histories_file)
+        if grad_histories:
+            grad_stacked = cp.stack(grad_histories, axis=0)
+            grad_stacked_numpy = cp.asnumpy(grad_stacked)
+            grad_histories_file = f"grad_histories_{dataset_name}_{run_name}.npy"
+            np.save(grad_histories_file, grad_stacked_numpy)
+            mlflow.log_artifact(grad_histories_file)
+
+        if hess_histories:
+            hess_stacked = cp.stack(hess_histories, axis=0)
+            hess_stacked_numpy = cp.asnumpy(hess_stacked)
+            hess_histories_file = f"hess_histories_{dataset_name}_{run_name}.npy"
+            np.save(hess_histories_file, hess_stacked_numpy)
+            mlflow.log_artifact(hess_histories_file)
 
     return results, histories
 
@@ -175,4 +212,12 @@ def run_experiments(model_generator, datasets):
             pickle.dump(all_histories, file)
 
 if __name__ == '__main__':
-    run_experiments(SketchBoost, DATASETS)
+    datasets = {'genbase': {'id': 'genbase', 'source': 'openml', 'version': 2},
+    'birds': {'id': 'birds', 'source': 'openml', 'version': 3},}
+    SEARCH_SPACE = {
+        'sketch_method': ['topk'],
+        'lr': LR,
+        'sketch_outputs': None,  # To be set based on dataset
+        'subsample': SAMPLE_RATIO
+    }
+    run_experiments(HistoryBasedBoostingModel, datasets)
