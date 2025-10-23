@@ -9,7 +9,24 @@ from py_boost.multioutput.sketching import GradSketch
 class GradHessHistory(GradSketch):
     """Callback that accumulates grads/hess, schedules and applies Fedcore approximation."""
 
-    def __init__(self, history_period: int = 10, derivative_threshold: float = 0.1):
+    def __init__(self, history_period: int = 10, derivative_threshold: float = 0.1, **kwargs):
+        skecth_method = kwargs.get('skecth_method', 'topk')
+        sketch_params = kwargs.get('sketch_params', {})
+        sketch_outputs = kwargs.get('sketch_outputs', 1)
+        match skecth_method:
+            case 'filter':
+                self.sketch = FilterSketch(sketch_outputs, **sketch_params)
+            case 'svd':
+                self.sketch = SVDSketch(sketch_outputs, **sketch_params)
+            case 'topk':
+                self.sketch = TopOutputsSketch(sketch_outputs)
+            case 'rand':
+                self.sketch = RandomSamplingSketch(sketch_outputs, **sketch_params)
+            case 'proj':
+                self.sketch = RandomProjectionSketch(sketch_outputs, **sketch_params)
+            case _:
+                raise ValueError('Unknown sketching strategy')
+
         self.history_period = int(history_period)
         self.derivative_threshold = derivative_threshold
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -82,6 +99,7 @@ class GradHessHistory(GradSketch):
         avg_recent_deriv = cp.mean(cp.abs(derivative))
         return avg_recent_deriv < threshold
 
+    # TODO: add sketch integration (self.sketch_method)
     def get_indexers(self, tensor: cp.ndarray, top_fraction: float):
         """
         Compute row and column indexers based on SVD decomposition and norm analysis.
