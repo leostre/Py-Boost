@@ -11,29 +11,37 @@ import mlflow.sklearn
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
 
+from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
+
+
 from py_boost import GradientBoosting, SketchBoost
 from py_boost.multioutput.sketching import *
 from py_boost.multioutput.target_splitter import *
 
-from dataset_loading import DATASETS
-from setups import SKETCH_METHODS, LR, SAMPLE_RATIO, DEFAULTS
+from data.load_data import DATASETS, load_and_preprocess_datasets
+from constants import SKETCH_METHODS, LR, SAMPLE_RATIO, DEFAULTS
+
+
 
 # Configuration for evaluation metrics
 AVERAGE = 'weighted'
+ZERO_DIVISION = np.nan
 METRICS = {
-    'f1': partial(f1_score, average=AVERAGE),
+    'f1': partial(f1_score, average=AVERAGE, zero_division=ZERO_DIVISION),
     'accuracy': accuracy_score,
-    'precision': partial(precision_score, average=AVERAGE),
-    'recall': partial(recall_score, average=AVERAGE)
+    'precision': partial(precision_score, average=AVERAGE, zero_division=ZERO_DIVISION),
+    'recall': partial(recall_score, average=AVERAGE, zero_division=ZERO_DIVISION)
 }
+PRED_THR = .5
 
 # Configuration for cross-validation
 RANDOM_STATE = 42
-FOLDS = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
+FOLDS = MultilabelStratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
 
 # Default model parameters
-DEFAULTS['es'] = 30  # Early stopping rounds
+DEFAULTS['es'] = 15  # Early stopping rounds
 DEFAULTS['ntrees'] = 10000  # Maximum number of trees
+DEFAULTS['loss'] = 'multilabel'
 
 # Parameter search space for experimentation
 SEARCH_SPACE = {
@@ -82,7 +90,7 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
             num_trees = len(model.models)
 
             # Predict and evaluate
-            predictions = np.argmax(model.predict(X_test), axis=-1)
+            predictions = (model.predict(X_test) > PRED_THR).astype(int)
             for metric_name, metric_func in METRICS.items():
                 score = metric_func(y_test, predictions)
                 results.loc[len(results)] = {
@@ -120,11 +128,14 @@ def run_experiments(model_generator, datasets):
         datasets: Dictionary of dataset names and loading functions
     """
     # Set MLflow experiment
-    mlflow.set_experiment("SketchBoost_Experiments")
+    dataset_gen = load_and_preprocess_datasets(datasets)
 
-    for dataset_name, dataset_loader in datasets:
+    for dataset_name, dataset in dataset_gen:
         # Load dataset
-        X, y, n_classes = dataset_loader()
+        
+        X = dataset['features']
+        y = dataset['target']
+        n_classes = len(np.unique(y))
         
         # Update sketch_outputs in search space based on number of classes
         SEARCH_SPACE['sketch_outputs'] = [max(1, int(n_classes * ratio)) for ratio in SAMPLE_RATIO]
@@ -157,13 +168,11 @@ def run_experiments(model_generator, datasets):
         final_results = pd.concat(all_results, ignore_index=True)
         final_results_file = f'baselines_{dataset_name}.csv'
         final_results.to_csv(final_results_file, index=False)
-        mlflow.log_artifact(final_results_file)
 
         # Save combined histories for the dataset
         final_histories_file = f'histories_{dataset_name}.pkl'
         with open(final_histories_file, 'wb') as file:
             pickle.dump(all_histories, file)
-        mlflow.log_artifact(final_histories_file)
 
 if __name__ == '__main__':
-    run_experiments(SketchBoost, DATASETS.items())
+    run_experiments(SketchBoost, DATASETS)

@@ -1,3 +1,8 @@
+from pathlib import Path
+
+SAVE_PATH = Path('./results')
+DATA_PATH = Path('./data')
+
 DEFAULTS = dict(
     loss='crossentropy', 
     metric=None,
