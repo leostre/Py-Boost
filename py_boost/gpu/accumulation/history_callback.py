@@ -3,7 +3,7 @@ import inspect
 import logging
 
 import cupy as cp
-from py_boost.multioutput.sketching import GradSketch
+from py_boost.multioutput.sketching import FilterSketch, GradSketch, RandomProjectionSketch, RandomSamplingSketch, SVDSketch, TopOutputsSketch
 
 
 class GradHessHistory(GradSketch):
@@ -13,6 +13,8 @@ class GradHessHistory(GradSketch):
         skecth_method = kwargs.get('skecth_method', 'topk')
         sketch_params = kwargs.get('sketch_params', {})
         sketch_outputs = kwargs.get('sketch_outputs', 1)
+
+        # TODO: move decomposition params to decomposition callback
         match skecth_method:
             case 'filter':
                 self.sketch = FilterSketch(sketch_outputs, **sketch_params)
@@ -26,6 +28,10 @@ class GradHessHistory(GradSketch):
                 self.sketch = RandomProjectionSketch(sketch_outputs, **sketch_params)
             case _:
                 raise ValueError('Unknown sketching strategy')
+
+        # TODO: move subsampling params to subsampling callback
+        self.subsample = kwargs.get('subsample', 0.5)
+        self.sketch_outputs = kwargs.get('sketch_outputs', 1)
 
         self.history_period = int(history_period)
         self.derivative_threshold = derivative_threshold
@@ -100,7 +106,7 @@ class GradHessHistory(GradSketch):
         return avg_recent_deriv < threshold
 
     # TODO: add sketch integration (self.sketch_method)
-    def get_indexers(self, tensor: cp.ndarray, top_fraction: float):
+    def get_indexers(self, tensor: cp.ndarray):
         """
         Compute row and column indexers based on SVD decomposition and norm analysis.
         
@@ -113,25 +119,23 @@ class GradHessHistory(GradSketch):
 
         Args:
             tensor: Input tensor of shape (n, m) to analyze.
-            top_fraction: Fraction of top rows/columns to select (0.0 to 1.0).
-                        For example, 0.1 selects top 10% of rows and columns.
 
         Returns:
             Tuple of (row_indexer, col_indexer) where:
                 - row_indexer: Indices of selected rows, shape (k_row,) where 
-                            k_row = max(1, int(n * top_fraction))
+                            k_row = max(1, int(n * self.subsample))
                 - col_indexer: Indices of selected columns, shape (k_col,) where 
-                            k_col = max(1, int(m * top_fraction))
+                            k_col = max(1, self.sketch_outputs)
         """
         U, s, Vh = cp.linalg.svd(tensor, full_matrices=False)
         s_diag_root = cp.diag(cp.sqrt(s))
 
         row_norms = cp.linalg.norm(U @ s_diag_root, axis=1)
-        k_row = max(1, int(len(row_norms) * top_fraction))
+        k_row = max(1, int(len(row_norms) * self.subsample))
         row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
 
         col_norms = cp.linalg.norm(s_diag_root @ Vh, axis=0)
-        k_col = max(1, int(len(col_norms) * top_fraction))
+        k_col = max(1, self.sketch_outputs)
         col_indexer = cp.sort(cp.argsort(col_norms)[-k_col:]).astype(cp.uint64)
 
         return row_indexer, col_indexer
@@ -155,7 +159,7 @@ class GradHessHistory(GradSketch):
 
     def __call__(self, grad: cp.ndarray, hess: cp.ndarray):
         if self.use_approximation:
-            row_indexer, col_indexer = self.get_indexers(grad, top_fraction=0.5)
+            row_indexer, col_indexer = self.get_indexers(grad)
             self._set_indexers(row_indexer=row_indexer, col_indexer=col_indexer)
             self.use_approximation = False
         return grad, hess
@@ -165,7 +169,7 @@ class WeightedHistorySampling(GradHessHistory):
     def __call__(self, grad: cp.ndarray, hess: cp.ndarray):
         if self.use_approximation:
             weights = self.get_weights(grad, hess)
-            row_indexer, col_indexer = self.get_indexers(weights, top_fraction=0.5)
+            row_indexer, col_indexer = self.get_indexers(weights)
             self._set_indexers(row_indexer=row_indexer, col_indexer=col_indexer)
             self.use_approximation = False
         return grad, hess
