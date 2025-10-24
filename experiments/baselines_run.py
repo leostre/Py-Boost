@@ -72,12 +72,12 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
     """
     results = pd.DataFrame(columns=[*SEARCH_SPACE.keys(), 'fold', 'num_trees', 'training_time', 'metric', 'score'])
     histories = []
-    global grad_histories, hess_histories
+    global grad_histories, hess_histories, raw_grads
     grad_histories = []
     hess_histories = []
 
     def patched_before_iteration(self, build_info):
-        global grad_histories, hess_histories
+        # global grad_histories, hess_histories, raw_grads
         self._current_iteration = build_info['num_iter'] + 1
         train = build_info['data']['train']
         grad: cp.ndarray = train.get('grad')
@@ -90,8 +90,8 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
             self.use_approximation = self._scheduler()
             if params['lr'] == 0.05 and fold == 0:
                 if self._current_iteration % (2 * self.history_period) == 0:
-                    grad_histories.append(self._hist_grad)
-                    hess_histories.append(self._hess_grad)
+                    grad_histories.append(self._hist_grad.copy())
+                    hess_histories.append(self._hist_hess.copy())
 
     with mlflow.start_run(run_name=f"{dataset_name}_{run_name}"):
         # Log parameters
