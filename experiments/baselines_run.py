@@ -15,7 +15,9 @@ from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 
 
 from py_boost import GradientBoosting, SketchBoost
+from py_boost.gpu.accumulation.history_callback import GradHessHistory
 from py_boost.gpu.history_boosting import HistoryBasedBoostingModel
+from py_boost.gpu.tree import DepthwiseTreeBuilder
 from py_boost.multioutput.sketching import *
 from py_boost.multioutput.target_splitter import *
 
@@ -70,15 +72,33 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
     """
     results = pd.DataFrame(columns=[*SEARCH_SPACE.keys(), 'fold', 'num_trees', 'training_time', 'metric', 'score'])
     histories = []
+    global grad_histories, hess_histories
+    grad_histories = []
+    hess_histories = []
+
+    def patched_before_iteration(self, build_info):
+        global grad_histories, hess_histories
+        self._current_iteration = build_info['num_iter'] + 1
+        train = build_info['data']['train']
+        grad: cp.ndarray = train.get('grad')
+        hess: cp.ndarray = train.get('hess')
+
+        # accumulate to history when grads and hesses are available
+        if grad is not None and hess is not None:
+            self._update_history(grad, hess)
+            # check if we should apply approximation based on history
+            self.use_approximation = self._scheduler()
+            if params['lr'] == 0.05 and fold == 0:
+                if self._current_iteration % (2 * self.history_period) == 0:
+                    grad_histories.append(self._hist_grad)
+                    hess_histories.append(self._hess_grad)
 
     with mlflow.start_run(run_name=f"{dataset_name}_{run_name}"):
         # Log parameters
         mlflow.log_params({k: v for k, v in params.items() if k in SEARCH_SPACE})
-        global grad_histories
-        grad_histories = []
-        global hess_histories
-        hess_histories = []
-        
+        grad_histories.clear()
+        hess_histories.clear()
+
         for fold, (train_idx, test_idx) in enumerate(cv.split(X, y)):
             # Split data into training and test sets
             X_train, X_test = X[train_idx], X[test_idx]
@@ -87,28 +107,7 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
             # Initialize and train model
             model = model_generator(**params)
 
-            def patched_before_iteration(self, build_info):
-                global grad_histories
-                global hess_histories
-                self._current_iteration = build_info['num_iter'] + 1
-                train = build_info['data']['train']
-                grad: cp.ndarray = train.get('grad')
-                hess: cp.ndarray = train.get('hess')
-
-                # accumulate to history when grads and hesses are available
-                if grad is not None and hess is not None:
-                    self._update_history(grad, hess)
-                    # check if we should apply approximation based on history
-                    self.use_approximation = self._scheduler()
-                    if params['lr'] == 0.05 and fold == 0:
-                        if self._current_iteration % (2 * self.history_period) == 0:
-                            grad_histories.append(self._hist_grad)
-                            hess_histories.append(self._hess_grad)
-
-
-            for callback in model.callbacks:
-                if callback.__name__ == 'GradHessHistory':
-                    callback.before_iteration = patched_before_iteration
+            GradHessHistory.before_iteration = patched_before_iteration
 
             start_time = time.time()
             model.fit(
@@ -154,6 +153,8 @@ def run_single_experiment(model_generator, params, X, y, cv, dataset_name, run_n
             np.save(hess_histories_file, hess_stacked_numpy)
             mlflow.log_artifact(hess_histories_file)
 
+    grad_histories.clear()
+    hess_histories.clear()
     return results, histories
 
 def run_experiments(model_generator, datasets):
