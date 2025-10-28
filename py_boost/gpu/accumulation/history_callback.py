@@ -3,29 +3,93 @@ import inspect
 import logging
 
 import cupy as cp
-from py_boost.multioutput.sketching import FilterSketch, GradSketch, RandomProjectionSketch, RandomSamplingSketch, SVDSketch, TopOutputsSketch
+from py_boost.multioutput.sketching import GradSketch
+
+
+def sample_svd_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
+    k_row = max(1, int(tensor.shape[0] * subsample))
+    k_col = max(1, sketch_outputs)
+
+    U, s, Vh = cp.linalg.svd(tensor, full_matrices=False)
+    s_diag_root = cp.diag(cp.sqrt(s))
+
+    row_norms = cp.linalg.norm(U @ s_diag_root, axis=1)
+    row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
+
+    col_norms = cp.linalg.norm(s_diag_root @ Vh, axis=0)
+    col_indexer = cp.sort(cp.argsort(col_norms)[-k_col:]).astype(cp.uint64)
+
+    return row_indexer, col_indexer
+
+
+def sample_topk_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
+    k_row = max(1, int(tensor.shape[0] * subsample))
+    k_col = max(1, sketch_outputs)
+
+    row_norms = cp.linalg.norm(tensor, axis=1)
+    row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
+
+    col_weights = (tensor ** 2).mean(axis=0)
+    col_indexer = cp.sort(cp.argsort(col_weights)[-k_col:]).astype(cp.uint64)
+
+    return row_indexer, col_indexer
+
+
+def sample_random_sampling_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
+    k_row = max(1, int(tensor.shape[0] * subsample))
+    k_col = max(1, sketch_outputs)
+
+    row_weights = cp.linalg.norm(tensor, axis=1) ** 2 + 1e-3
+    row_probs = row_weights / row_weights.sum()
+
+    smooth = 0.1
+    row_probs = smooth * cp.ones_like(row_probs) / tensor.shape[0] + (1 - smooth) * row_probs
+    row_indexer = cp.sort(cp.random.choice(cp.arange(tensor.shape[0]), size=k_row, 
+                                           replace=False, p=row_probs)).astype(cp.uint64)
+
+    col_weights = (tensor ** 2).mean(axis=0) + 1e-3
+    col_probs = col_weights / col_weights.sum()
+    col_probs = smooth * cp.ones_like(col_probs) / tensor.shape[1] + (1 - smooth) * col_probs
+    col_indexer = cp.sort(cp.random.choice(cp.arange(tensor.shape[1]), size=k_col, 
+                                           replace=False, p=col_probs)).astype(cp.uint64)
+
+    return row_indexer, col_indexer
+
+
+def sample_random_projection_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
+    k_row = max(1, int(tensor.shape[0] * subsample))
+    k_col = max(1, sketch_outputs)
+
+    P = cp.random.randn(tensor.shape[1], k_col, dtype=cp.float32)
+    P /= cp.sqrt(k_col)
+    projected = cp.dot(tensor, P)
+
+    row_norms = cp.linalg.norm(projected, axis=1)
+    row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
+
+    col_weights = (tensor ** 2).mean(axis=0)
+    col_indexer = cp.sort(cp.argsort(col_weights)[-k_col:]).astype(cp.uint64)
+
+    return row_indexer, col_indexer
 
 
 class GradHessHistory(GradSketch):
     """Callback that accumulates grads/hess, schedules and applies Fedcore approximation."""
 
     def __init__(self, history_period: int = 10, derivative_threshold: float = 0.1, **kwargs):
-        skecth_method = kwargs.get('skecth_method', 'topk')
-        sketch_params = kwargs.get('sketch_params', {})
-        sketch_outputs = kwargs.get('sketch_outputs', 1)
+        sketch_method = kwargs.get('sketch_method', 'svd')
+        self.sketch_params = kwargs.get('sketch_params', {})
 
         # TODO: move decomposition params to decomposition callback
-        match skecth_method:
-            case 'filter':
-                self.sketch = FilterSketch(sketch_outputs, **sketch_params)
+        match sketch_method:
             case 'svd':
-                self.sketch = SVDSketch(sketch_outputs, **sketch_params)
+                self.sketch = sample_svd_sketch
             case 'topk':
-                self.sketch = TopOutputsSketch(sketch_outputs)
+                self.sketch = sample_topk_sketch
             case 'rand':
-                self.sketch = RandomSamplingSketch(sketch_outputs, **sketch_params)
+                self.sketch = sample_random_sampling_sketch
             case 'proj':
-                self.sketch = RandomProjectionSketch(sketch_outputs, **sketch_params)
+                self.sketch = sample_random_projection_sketch
             case _:
                 raise ValueError('Unknown sketching strategy')
 
@@ -105,40 +169,16 @@ class GradHessHistory(GradSketch):
         avg_recent_deriv = cp.mean(cp.abs(derivative))
         return avg_recent_deriv < threshold
 
-    # TODO: add sketch integration (self.sketch_method)
     def get_indexers(self, tensor: cp.ndarray):
         """
-        Compute row and column indexers based on SVD decomposition and norm analysis.
-        
-        Performs truncated SVD on the input tensor and selects the top-k rows and columns
-        based on their norms in the factorized space. The method:
-        1. Computes SVD: $tensor = U \\cdot \\Sigma \\cdot V^H$
-        2. Computes row norms from $U \\cdot \\sqrt{\\Sigma}$
-        3. Computes column norms from $\\sqrt{\\Sigma} \\cdot V^H$
-        4. Selects top fraction of rows and columns based on these norms
-
-        Args:
-            tensor: Input tensor of shape (n, m) to analyze.
+        Compute row and column indexers based on the sketch method.
 
         Returns:
             Tuple of (row_indexer, col_indexer) where:
-                - row_indexer: Indices of selected rows, shape (k_row,) where 
-                            k_row = max(1, int(n * self.subsample))
-                - col_indexer: Indices of selected columns, shape (k_col,) where 
-                            k_col = max(1, self.sketch_outputs)
+                - row_indexer: Indices of selected rows, shape (k_row,)
+                - col_indexer: Indices of selected columns, shape (k_col,)
         """
-        U, s, Vh = cp.linalg.svd(tensor, full_matrices=False)
-        s_diag_root = cp.diag(cp.sqrt(s))
-
-        row_norms = cp.linalg.norm(U @ s_diag_root, axis=1)
-        k_row = max(1, int(len(row_norms) * self.subsample))
-        row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
-
-        col_norms = cp.linalg.norm(s_diag_root @ Vh, axis=0)
-        k_col = max(1, self.sketch_outputs)
-        col_indexer = cp.sort(cp.argsort(col_norms)[-k_col:]).astype(cp.uint64)
-
-        return row_indexer, col_indexer
+        return self.sketch(tensor, self.subsample, self.sketch_outputs)
 
     def _set_indexers(self, row_indexer: cp.ndarray, col_indexer: cp.ndarray) -> None:
         stack = inspect.stack()
