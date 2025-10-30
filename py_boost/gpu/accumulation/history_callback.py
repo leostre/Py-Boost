@@ -91,7 +91,7 @@ class GradHessHistory(GradSketch):
             case 'proj':
                 self.sketch = sample_random_projection_sketch
             case _:
-                raise ValueError('Unknown sketching strategy')
+                raise ValueError(f'Unknown sketching strategy {sketch_method}')
 
         # TODO: move subsampling params to subsampling callback
         self.subsample = kwargs.get('subsample', 0.5)
@@ -234,13 +234,12 @@ class WeightedHistorySampling(GradHessHistory):
         Returns:
             weights: Weight tensor of shape (n, m).
         """
+        def sigmoid(x):
+            return 1 / (1 + cp.exp(-x))
+
         mean_grad = cp.mean(self._hist_grad, axis=0)
         mean_hess = cp.mean(self._hist_hess, axis=0)
 
-        diff = (grad - mean_grad) * (hess - mean_hess)
-
-        # safety threshold for near-zero values of diffs
-        safe_diff = cp.maximum(cp.abs(diff), 1e-10) * cp.sign(diff)
-        weights = cp.reciprocal(safe_diff)
+        weights = -sigmoid((grad - mean_grad) * (hess - mean_hess))
 
         return weights
