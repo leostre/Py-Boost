@@ -137,8 +137,15 @@ class GradHessHistory(GradSketch):
         if len(data) < 3:
             return data
 
+        if data.ndim > 1:
+            data = data.flatten()
+
+        data = cp.ascontiguousarray(data)
+        if cp.any(cp.isnan(data)) or cp.any(cp.isinf(data)):
+            return data
+
         kernel_size = min(5, len(data))
-        x = cp.arange(kernel_size) - (kernel_size - 1) // 2
+        x = cp.arange(kernel_size, dtype=cp.float32) - (kernel_size - 1) // 2
         kernel = cp.exp(-0.5 * (x / sigma) ** 2)
         kernel = kernel / cp.sum(kernel)
         smoothed = cp.convolve(data, kernel, mode='same')
@@ -162,12 +169,20 @@ class GradHessHistory(GradSketch):
         if self._hist_grad is None or self._current_iteration < self.history_period:
             return False
 
-        threshold = self.derivative_threshold
-        grad_norms = cp.linalg.norm(self._hist_grad, axis=0)
-        derivative = cp.gradient(self._gaussian_smooth(grad_norms))
+        try:
+            threshold = self.derivative_threshold
+            # _hist_grad shape: (history_period, n_samples, n_outputs)
+            # compute norm across the last two dimensions for each iteration
+            grad_norms = cp.linalg.norm(self._hist_grad.reshape(self._hist_grad.shape[0], -1), axis=1)
 
-        avg_recent_deriv = cp.mean(cp.abs(derivative))
-        return avg_recent_deriv < threshold
+            smoothed = self._gaussian_smooth(grad_norms)
+            derivative = cp.gradient(smoothed)
+
+            avg_recent_deriv = cp.mean(cp.abs(derivative))
+            return avg_recent_deriv < threshold
+        except Exception as e:
+            self.logger.warning(f"Error in scheduler, disabling approximation: {e}")
+            return False
 
     def get_indexers(self, tensor: cp.ndarray):
         """
@@ -192,10 +207,9 @@ class GradHessHistory(GradSketch):
                     ctypes.pythonapi.PyFrame_LocalsToFast(ctypes.py_object(frame), ctypes.c_int(1))
                     frame.f_locals['col_indexer'] = col_indexer
                     ctypes.pythonapi.PyFrame_LocalsToFast(ctypes.py_object(frame), ctypes.c_int(1))
+                    break
                 except Exception:
                     pass
-                finally:
-                    break
 
     def __call__(self, grad: cp.ndarray, hess: cp.ndarray):
         if self.use_approximation:
