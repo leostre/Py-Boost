@@ -1,13 +1,48 @@
+import os 
+from pathlib import Path 
+
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, LabelBinarizer
+from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from ucimlrepo import fetch_ucirepo
 from typing import Dict, Any, Generator
 
-from .dataloader import DatasetLoader
-from .dataloader import setup_logging
+try:
+    from .dataloader import DatasetLoader
+    from .dataloader import setup_logging
+except:
+    from dataloader import DatasetLoader
+    from dataloader import setup_logging
 
+
+DATA_DIR = Path('/home/leostre/Рабочий стол/py-boost/experiments/data')
+
+
+def load_age_prediction(): 
+    fold = 0
+    assert os.path.exists(DATA_DIR / f'age_pred')
+    while os.path.exists(DATA_DIR / f'age_pred/fold_{fold}'):
+        test = pd.read_csv(DATA_DIR / f'age_pred/fold_{fold}/emb_test.csv')
+        train = pd.read_csv(DATA_DIR / f'age_pred/fold_{fold}/emb_train.csv')
+        ytr = train['bins']
+        yte = test['bins']
+        xtr = train.drop(['bins', 'client_id'], axis=1)
+        xte = test.drop(['bins', 'client_id'], axis=1)
+        # pca = PCA(20)
+        # xtr = pca.fit_transform(train)
+        # xte = pca.transform(test)
+        lb = LabelBinarizer()
+        ytr = lb.fit_transform(ytr)
+        yte = lb.transform(yte)
+        yield xtr, ytr, xte, yte, fold
+        fold += 1
+    assert fold > 0, 'No folds were returned'
+
+SPECIAL_LOADERS = {
+    'age_prediction': {'loader': load_age_prediction, 'n_classes': 4, 'task': 'onelabel'}
+}
 
 # TODO: remove/refactor legacy method
 def load_benchmark_data(dataset_id: int = 110):
@@ -96,34 +131,40 @@ def preprocess_dataset(X, dataset_name: str):
 
 
 def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) -> Generator[str, Dict, Any]:
-    print(dataset_config)
     loader = DatasetLoader(dataset_config)
     datasets = loader.dataset_gen()
     processed_datasets = {}
 
     for name, dataset_info in datasets:
-        features = dataset_info['features']
-        target = dataset_info['target']
-        metadata = dataset_info['metadata']
+        n_classes = processed_dataset = None
+        try:
+            features = dataset_info['features']
+            target = dataset_info['target']
+            metadata = dataset_info['metadata']
 
-        processed_features = preprocess_dataset(features, name)
-        processed_target = preprocess_dataset(target, f"{name}_target")
+            n_classes = target.nunique() if len(target.shape) == 1 else target.shape[1]
 
-        if to_numpy:
-            processed_features = np.array(processed_features)
-            processed_target = np.array(processed_target)
+            processed_features = preprocess_dataset(features, name)
+            processed_target = preprocess_dataset(target, f"{name}_target")
 
-        if len(processed_target.shape) == 1:
-            processed_target = LabelBinarizer().fit_transform(processed_target)
-        
-        metadata.processed_shape = processed_features.shape
+            if to_numpy:
+                processed_features = np.array(processed_features)
+                processed_target = np.array(processed_target)
 
-        processed_dataset = {
-            'features': processed_features,
-            'target': processed_target,
-            'metadata': metadata,
-        }
-        yield name, processed_dataset
+            is_multilabel = True
+            if len(processed_target.shape) == 1:
+                processed_target = LabelBinarizer().fit_transform(processed_target)
+            
+            metadata.processed_shape = processed_features.shape
+
+            processed_dataset = {
+                'features': processed_features,
+                'target': processed_target,
+                'metadata': metadata,
+            }
+        except: pass
+        finally:
+            yield name, processed_dataset, n_classes
 
 
 DATASETS = {
@@ -131,6 +172,7 @@ DATASETS = {
     'genbase': {'id': 'genbase', 'source': 'openml', 'version': 2},
     'birds': {'id': 'birds', 'source': 'openml', 'version': 3},
     'rt_iot2022': {'id': 942, 'source': 'uci'},
+    'age_prediction': {}
         # 'mediamill': {'id': 'mediamill', 'source': 'direct',
         #               'method': download_specific_mediamill,
         #               'method_params': {'experiment': 'exp1'}},
@@ -139,4 +181,5 @@ DATASETS = {
 
 if __name__ == "__main__":
     dataset_config = DATASETS
+    # dataset_config = {'age_prediction': {}}
     datasets = load_and_preprocess_datasets(dataset_config)

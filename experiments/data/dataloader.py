@@ -5,6 +5,7 @@ from ucimlrepo import fetch_ucirepo
 from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
 
+
 def setup_logging(name=__name__, level=logging.INFO):
     # Create logger
     logger = logging.getLogger(name)
@@ -45,7 +46,6 @@ class DatasetLoader:
     def load(self, dataset_name: str) -> Optional[Dict[str, Any]]:
         config = self.dataset_config[dataset_name]
         result = None
-        print(config)
 
         match config['source']:
             case 'openml':
@@ -96,5 +96,14 @@ class DatasetLoader:
             return None
 
     def dataset_gen(self) -> Any:
+        from data.load_data import SPECIAL_LOADERS
+
         for name in self.dataset_config.keys():
-            yield name, self.load(name)
+            try:
+                result = self.load(name)
+                yield name, result
+            except:
+                if name in SPECIAL_LOADERS:
+                    yield name, {}
+                else:
+                    raise
