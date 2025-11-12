@@ -1,0 +1,20 @@
+yeast:
+  id: "yeast"
+  source: "openml"
+  version: 1
+
+genbase:
+  id: "genbase"
+  source: "openml" 
+  version: 2
+
+birds:
+  id: "birds"
+  source: "openml"
+  version: 3
+
+rt_iot2022:
+  id: 942
+  source: "uci"
+
+age_prediction: {}
