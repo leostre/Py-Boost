@@ -8,13 +8,12 @@ from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 from ucimlrepo import fetch_ucirepo
 from typing import Dict, Any, Generator
+from scipy.io import arff
 
 try:
-    from .dataloader import DatasetLoader
-    from .dataloader import setup_logging
+    from .dataloader import DatasetLoader, DatasetMetadata, setup_logging
 except:
-    from dataloader import DatasetLoader
-    from dataloader import setup_logging
+    from dataloader import DatasetLoader, DatasetMetadata, setup_logging
 
 
 DATA_DIR = Path('/home/leostre/Рабочий стол/py-boost/experiments/data')
@@ -39,6 +38,39 @@ def load_age_prediction():
         yield xtr, ytr, xte, yte, fold
         fold += 1
     assert fold > 0, 'No folds were returned'
+
+def load_mnist():
+    fold = 0
+    path = DATA_DIR / f'mnist'
+    assert os.path.exists(path)
+    while os.path.exists(path / f'fold_{fold}'):
+        fold_path = path / f'fold_{fold}'
+        xtr = np.load(fold_path / 'xtr.npy')
+        ytr = np.load(fold_path / 'ytr.npy')
+        xte = np.load(fold_path / 'xte.npy')
+        yte = np.load(fold_path / 'yte.npy')
+        yield xtr, ytr, xte, yte, fold
+        fold += 1
+    assert fold > 0, 'No folds were returned'
+
+def load_mediamill():
+    raw_data, meta = arff.loadarff('/home/leostre/Рабочий стол/py-boost/experiments/data/mediamill/mediamill.arff')
+    data = pd.DataFrame(raw_data)
+    xcols = [c for c in data.columns if c.startswith('Att')]
+    ycols = [c for c in data.columns if c.startswith('Cl')]
+    y =  data[ycols].astype(str).astype(int)
+    X = data[xcols]
+    return {
+        'features': X,
+        'target': y,
+        'metadata': DatasetMetadata(
+                    name='mediamill',
+                    source='custom',
+                    shape=X.shape,
+                )
+    }
+
+
 
 SPECIAL_LOADERS = {
     'age_prediction': {'loader': load_age_prediction, 'n_classes': 4, 'task': 'onelabel'}
@@ -172,10 +204,11 @@ DATASETS = {
     'genbase': {'id': 'genbase', 'source': 'openml', 'version': 2},
     'birds': {'id': 'birds', 'source': 'openml', 'version': 3},
     'rt_iot2022': {'id': 942, 'source': 'uci'},
-    'age_prediction': {}
-        # 'mediamill': {'id': 'mediamill', 'source': 'direct',
-        #               'method': download_specific_mediamill,
-        #               'method_params': {'experiment': 'exp1'}},
+    'age_prediction': {},
+    'mediamill': {'id': 'mediamill', 'source': 'custom',
+                      'method': load_mediamill,
+                      'method_params': {}},
+    'mnist': {'id': 'mnist_784', 'version': 1, 'source': 'openml'}
 }
 
 

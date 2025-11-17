@@ -1,0 +1,18 @@
+defaults:
+  - _self_
+  - datasets: default
+
+model:
+  _target_: models.PreparedCatBoost
+  _partial_: true  # This tells Hydra to create a partial
+
+experiment:
+  run_name: "analogues_3.1"
+  skip_datasets: []
+    # - yeast 
+    # - rt_iot2022
+    # - genbase
+    # - birds
+    # - age_prediction
+  skip_first: {}
+    # age_prediction: 191

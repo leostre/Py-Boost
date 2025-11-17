@@ -53,7 +53,7 @@ class DatasetLoader:
             case 'uci':
                 result = self._load_uci_dataset(dataset_name, config)
             case 'custom':
-                result = config['method'](**config['method_params'])
+                result = config['method']
             case _:
                 self.logger.error(f"Unknown dataset source: {config['source']} for dataset {dataset_name}")
 

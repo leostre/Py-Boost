@@ -9,8 +9,12 @@ model:
 experiment:
   run_name: "baselines_3.1"
   skip_datasets: 
+    - yeast 
     - rt_iot2022
     - genbase
     - birds
-    # - age_prediction
-  skip_first: {}
+    # - mediamill
+    - age_prediction
+  skip_first: 
+    # age_prediction: 191
+    yeast: 191

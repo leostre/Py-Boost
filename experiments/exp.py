@@ -10,7 +10,8 @@ def main(cfg: DictConfig):
     # Instantiate the model
     # cfg = hydra.utils.instantiate(cfg)
     experiment = hydra.utils.instantiate(cfg.experiment)
-    datasets = {name: d for name, d in cfg.datasets.items() if name not in experiment.skip_datasets}
+    datasets = hydra.utils.instantiate(cfg.datasets)
+    datasets = {name: dict(d) for name, d in datasets.items() if name not in experiment.skip_datasets}
     run_experiments_silent(
         model_generator=hydra.utils.instantiate(cfg.model),  # or pass the instance if supported
         datasets=datasets,

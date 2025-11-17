@@ -1,0 +1,19 @@
+defaults:
+  - _self_
+  - datasets: default
+
+model:
+  # _target_: py_boost.gpu.sketch_boost.SketchBoost
+  _target_: models.HyperbolicHistoryBoost
+  _partial_: true  # This tells Hydra to create a partial
+
+experiment:
+  run_name: "hyperbolic_corrupted"
+  skip_datasets: 
+    # - yeast
+    # - genbase
+    # - birds
+    # - rt_iot2022
+    - age_prediction
+    - mediamill
+  skip_first: {}

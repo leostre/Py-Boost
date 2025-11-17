@@ -12,7 +12,7 @@ import os
 import tempfile
 import shutil
 
-from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
+from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score, roc_auc_score
 from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 from py_boost.multioutput.sketching import *
 from py_boost.multioutput.target_splitter import *
@@ -31,6 +31,8 @@ METRICS = {
     'precision': partial(precision_score, average=AVERAGE, zero_division=ZERO_DIVISION),
     'recall': partial(recall_score, average=AVERAGE, zero_division=ZERO_DIVISION)
 }
+ROCAUC_SCORE = partial(roc_auc_score, average=AVERAGE, multi_class='ovr')
+
 PRED_THR = .5
 
 def multilabel_postprocess(pred: np.ndarray):
@@ -178,7 +180,10 @@ def run_single_experiment_core(args):
                 # mlflow.log_metric("fold_training_time", training_time, step=fold)
                 # mlflow.log_metric("fold_num_trees", num_trees, step=fold)
                 with GPUTimer() as inference_timer:
-                    predictions = current_postproc_func(safe_predict(model, X_test, 1000))
+                    probas = safe_predict(model, X_test, 1000)
+                rocauc = ROCAUC_SCORE(y_test, probas)
+                mlflow.log_metric(f'roc_auc_fold_{fold}', rocauc)      
+                predictions = current_postproc_func(probas)
                 inference_time = inference_timer.time
                 mlflow.log_metric(f'inference_time_fold_{fold}', inference_time, step=fold)                
                 for metric_name, metric_func in METRICS.items():
