@@ -8,7 +8,7 @@ class HyperbolicWeightedHistorySampling(WeightedHistorySampling):
             Compute weights based on differences between current and historical gradients and hessians.
             
             The weight for each element (i,j) is computed as:
-                $$w_{i,j} = \\frac{1}{(g_{i,j} - \\mu_{g_{i,j}}) \\cdot (h_{i,j} - \\mu_{h_{i,j}})}$$
+                $$w_{i,j} = -(g_{i,j} - \\mu_{g_{i,j}}) \\cdot (h_{i,j} - \\mu_{h_{i,j}})$$
             
             where:
                 - $g_{i,j}$: current gradient at position (i,j)
@@ -23,8 +23,6 @@ class HyperbolicWeightedHistorySampling(WeightedHistorySampling):
             Returns:
                 weights: Weight tensor of shape (n, m).
             """
-            def sigmoid(x):
-                return 1 / (1 + cp.exp(-x))
 
             mean_grad = cp.mean(self._hist_grad, axis=0)
             mean_hess = cp.mean(self._hist_hess, axis=0)

@@ -3,74 +3,12 @@ import inspect
 import logging
 
 import cupy as cp
+from py_boost.gpu.accumulation.sketches.sketch_methods import (sample_random_projection_sketch,
+                                                               sample_random_sampling_sketch,
+                                                               sample_svd_sketch,
+                                                               sample_svd_sketch_heuristic,
+                                                               sample_topk_sketch)
 from py_boost.multioutput.sketching import GradSketch
-
-
-def sample_svd_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
-    k_row = max(1, int(tensor.shape[0] * subsample))
-    k_col = max(1, sketch_outputs)
-
-    U, s, Vh = cp.linalg.svd(tensor, full_matrices=False)
-    s_diag_root = cp.diag(cp.sqrt(s))
-
-    row_norms = cp.linalg.norm(U @ s_diag_root, axis=1)
-    row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
-
-    col_norms = cp.linalg.norm(s_diag_root @ Vh, axis=0)
-    col_indexer = cp.sort(cp.argsort(col_norms)[-k_col:]).astype(cp.uint64)
-
-    return row_indexer, col_indexer
-
-
-def sample_topk_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
-    k_row = max(1, int(tensor.shape[0] * subsample))
-    k_col = max(1, sketch_outputs)
-
-    row_norms = cp.linalg.norm(tensor, axis=1)
-    row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
-
-    col_weights = (tensor ** 2).mean(axis=0)
-    col_indexer = cp.sort(cp.argsort(col_weights)[-k_col:]).astype(cp.uint64)
-
-    return row_indexer, col_indexer
-
-
-def sample_random_sampling_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
-    k_row = max(1, int(tensor.shape[0] * subsample))
-    k_col = max(1, sketch_outputs)
-
-    row_weights = cp.linalg.norm(tensor, axis=1) ** 2 + 1e-3
-    row_probs = row_weights / row_weights.sum()
-
-    smooth = 0.1
-    row_probs = smooth * cp.ones_like(row_probs) / tensor.shape[0] + (1 - smooth) * row_probs
-    row_indexer = cp.sort(cp.random.choice(cp.arange(tensor.shape[0]), size=k_row, 
-                                           replace=False, p=row_probs)).astype(cp.uint64)
-
-    col_weights = (tensor ** 2).mean(axis=0) + 1e-3
-    col_probs = col_weights / col_weights.sum()
-    col_probs = smooth * cp.ones_like(col_probs) / tensor.shape[1] + (1 - smooth) * col_probs
-    col_indexer = cp.sort(cp.random.choice(cp.arange(tensor.shape[1]), size=k_col, 
-                                           replace=False, p=col_probs)).astype(cp.uint64)
-
-    return row_indexer, col_indexer
-
-
-def sample_random_projection_sketch(tensor: cp.ndarray, subsample: float, sketch_outputs: int):
-    k_row = max(1, int(tensor.shape[0] * subsample))
-    k_col = max(1, sketch_outputs)
-
-    P = cp.random.randn(tensor.shape[1], k_col, dtype=cp.float32)
-    P /= cp.sqrt(k_col)
-    projected = cp.dot(tensor, P)
-
-    row_norms = cp.linalg.norm(projected, axis=1)
-    row_indexer = cp.sort(cp.argsort(row_norms)[-k_row:]).astype(cp.uint64)
-
-    col_weights = (tensor ** 2).mean(axis=0)
-    col_indexer = cp.sort(cp.argsort(col_weights)[-k_col:]).astype(cp.uint64)
-
-    return row_indexer, col_indexer
 
 
 class GradHessHistory(GradSketch):
@@ -78,10 +16,11 @@ class GradHessHistory(GradSketch):
 
     def __init__(self, history_period: int = 10, derivative_threshold: float = 0.1, **kwargs):
         sketch_method = kwargs.get('sketch_method', 'svd')
-        self.sketch_params = kwargs.get('sketch_params', {})
 
         # TODO: move decomposition params to decomposition callback
         match sketch_method:
+            case 'svd_heuristic':
+                self.sketch = sample_svd_sketch_heuristic
             case 'svd':
                 self.sketch = sample_svd_sketch
             case 'topk':
@@ -96,6 +35,9 @@ class GradHessHistory(GradSketch):
         # TODO: move subsampling params to subsampling callback
         self.subsample = kwargs.get('subsample', 0.5)
         self.sketch_outputs = kwargs.get('sketch_outputs', 1)
+        # TODO: leave only sketch_params dict dep.injection, subsample 
+        self.sketch_params = kwargs.get('sketch_params', {'subsample': self.subsample,
+                                                          'sketch_outputs': self.sketch_outputs})
 
         self.history_period = int(history_period)
         self.derivative_threshold = derivative_threshold
@@ -193,7 +135,7 @@ class GradHessHistory(GradSketch):
                 - row_indexer: Indices of selected rows, shape (k_row,)
                 - col_indexer: Indices of selected columns, shape (k_col,)
         """
-        return self.sketch(tensor, self.subsample, self.sketch_outputs)
+        return self.sketch(tensor, **self.sketch_params)
 
     def _set_indexers(self, row_indexer: cp.ndarray, col_indexer: cp.ndarray) -> None:
         stack = inspect.stack()
@@ -233,7 +175,7 @@ class WeightedHistorySampling(GradHessHistory):
         Compute weights based on differences between current and historical gradients and hessians.
         
         The weight for each element (i,j) is computed as:
-            $$w_{i,j} = \\frac{1}{(g_{i,j} - \\mu_{g_{i,j}}) \\cdot (h_{i,j} - \\mu_{h_{i,j}})}$$
+            $$w_{i,j} = -sigmoid((g_{i,j} - \\mu_{g_{i,j}}) \\cdot (h_{i,j} - \\mu_{h_{i,j}}))$$
         
         where:
             - $g_{i,j}$: current gradient at position (i,j)
