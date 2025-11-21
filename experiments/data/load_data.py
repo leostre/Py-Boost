@@ -10,21 +10,16 @@ from ucimlrepo import fetch_ucirepo
 from typing import Dict, Any, Generator
 from scipy.io import arff
 
-try:
-    from .dataloader import DatasetLoader, DatasetMetadata, setup_logging
-except:
-    from dataloader import DatasetLoader, DatasetMetadata, setup_logging
-
-
-DATA_DIR = Path('/home/leostre/Рабочий стол/py-boost/experiments/data')
+from experiments.data.dataloader import DatasetMetadata, DatasetLoader, setup_logging
+from py_boost.paths import EXPERIMENTS_DATA_PATH
 
 
 def load_age_prediction(): 
     fold = 0
-    assert os.path.exists(DATA_DIR / f'age_pred')
-    while os.path.exists(DATA_DIR / f'age_pred/fold_{fold}'):
-        test = pd.read_csv(DATA_DIR / f'age_pred/fold_{fold}/emb_test.csv')
-        train = pd.read_csv(DATA_DIR / f'age_pred/fold_{fold}/emb_train.csv')
+    assert os.path.exists(EXPERIMENTS_DATA_PATH + '/age_pred')
+    while os.path.exists(EXPERIMENTS_DATA_PATH + f'/age_pred/fold_{fold}'):
+        test = pd.read_csv(EXPERIMENTS_DATA_PATH + f'/age_pred/fold_{fold}/emb_test.csv')
+        train = pd.read_csv(EXPERIMENTS_DATA_PATH + f'/age_pred/fold_{fold}/emb_train.csv')
         ytr = train['bins']
         yte = test['bins']
         xtr = train.drop(['bins', 'client_id'], axis=1)
@@ -41,20 +36,20 @@ def load_age_prediction():
 
 def load_mnist():
     fold = 0
-    path = DATA_DIR / f'mnist'
+    path = EXPERIMENTS_DATA_PATH + '/mnist'
     assert os.path.exists(path)
-    while os.path.exists(path / f'fold_{fold}'):
-        fold_path = path / f'fold_{fold}'
-        xtr = np.load(fold_path / 'xtr.npy')
-        ytr = np.load(fold_path / 'ytr.npy')
-        xte = np.load(fold_path / 'xte.npy')
-        yte = np.load(fold_path / 'yte.npy')
+    while os.path.exists(path + f'/fold_{fold}'):
+        fold_path = path + f'/fold_{fold}'
+        xtr = np.load(fold_path + '/xtr.npy')
+        ytr = np.load(fold_path + '/ytr.npy')
+        xte = np.load(fold_path + '/xte.npy')
+        yte = np.load(fold_path + '/yte.npy')
         yield xtr, ytr, xte, yte, fold
         fold += 1
     assert fold > 0, 'No folds were returned'
 
 def load_mediamill():
-    raw_data, meta = arff.loadarff('/home/leostre/Рабочий стол/py-boost/experiments/data/mediamill/mediamill.arff')
+    raw_data, meta = arff.loadarff(os.path.join(EXPERIMENTS_DATA_PATH, 'mediamill', 'mediamill.arff'))
     data = pd.DataFrame(raw_data)
     xcols = [c for c in data.columns if c.startswith('Att')]
     ycols = [c for c in data.columns if c.startswith('Cl')]

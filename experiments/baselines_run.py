@@ -168,7 +168,7 @@ def run_experiments(model_generator, datasets):
     # Set MLflow experiment
     dataset_gen = load_and_preprocess_datasets(datasets)
 
-    for dataset_name, dataset in dataset_gen:
+    for dataset_name, dataset, n_classes in dataset_gen:
         # Load dataset
         
         X = dataset['features']

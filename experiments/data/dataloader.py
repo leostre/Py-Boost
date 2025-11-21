@@ -96,7 +96,7 @@ class DatasetLoader:
             return None
 
     def dataset_gen(self) -> Any:
-        from data.load_data import SPECIAL_LOADERS
+        from experiments.data.load_data import SPECIAL_LOADERS
 
         for name in self.dataset_config.keys():
             try:
