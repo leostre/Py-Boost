@@ -1,4 +1,5 @@
-import logging 
+import logging
+import sys
 
 from sklearn.datasets import fetch_openml
 from ucimlrepo import fetch_ucirepo
@@ -6,24 +7,20 @@ from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
 
 
-def setup_logging(name=__name__, level=logging.INFO):
-    # Create logger
+def setup_logging(name: str = __name__, level: int = logging.INFO, verbose: bool = False):
     logger = logging.getLogger(name)
     logger.setLevel(level)
-    
-    # Create formatter
+
     formatter = logging.Formatter(
         '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
-    
-    # # Create console handler
-    # console_handler = logging.StreamHandler(sys.stdout)
-    # console_handler.setLevel(level)
-    # console_handler.setFormatter(formatter)
-    
-    # # Add handler to logger
-    # logger.addHandler(console_handler)
+
+    if verbose:
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setLevel(level)
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
     
     return logger
 
