@@ -50,13 +50,12 @@ FOLDS = MultilabelStratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_
 
 # Default model parameters
 DEFAULTS['es'] = 15
-DEFAULTS['ntrees'] = 10000
+DEFAULTS['ntrees'] = 100_000
 DEFAULTS['loss'] = 'multilabel'
 
-sketch_methods = [m for m in SKETCH_METHODS if m not in ('svd', 'filter', None)]
 SEARCH_SPACE = {
-    'sketch_method': sketch_methods,
-    'lr': LR,
+    'sketch_method': ['topk', 'rand'],
+    'lr': [0.1, 0.005],
     'sketch_outputs': None,
     'subsample': SAMPLE_RATIO
 }
