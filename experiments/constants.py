@@ -25,7 +25,7 @@ DEFAULTS = dict(
 
     sketch_outputs=1,
     sketch_method='proj',
-    use_hess=False,
+    use_hess=True,
 
     callbacks=None,
     sketch_params=None

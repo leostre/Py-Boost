@@ -6,7 +6,7 @@ from py_boost.gpu.tree import DepthwiseTreeBuilder
 class HistoryBasedBoostingModel(GradientBoosting):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.use_hess = kwargs.get('use_hess', False)
+        self.use_hess = kwargs.get('use_hess', True)
         self.history_period = int(kwargs.get('history_period', 10))
         self.multioutput_sketch = kwargs.get('multioutput_sketch', WeightedHistorySampling)
 
