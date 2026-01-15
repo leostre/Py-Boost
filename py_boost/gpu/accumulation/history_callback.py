@@ -113,9 +113,7 @@ class GradHessHistory(GradSketch):
 
         try:
             threshold = self.derivative_threshold
-            # _hist_grad shape: (history_period, n_samples, n_outputs)
-            # compute norm across the last two dimensions for each iteration
-            grad_norms = cp.linalg.norm(self._hist_grad.reshape(self._hist_grad.shape[0], -1), axis=1)
+            grad_norms = cp.linalg.norm(self._hist_grad, axis=0)
 
             smoothed = self._gaussian_smooth(grad_norms)
             derivative = cp.gradient(smoothed)
