@@ -7,13 +7,12 @@ model:
   _partial_: true  # This tells Hydra to create a partial
 
 experiment:
-  run_name: "sigmoid_3.1"
+  run_name: "sigmoid_4.0"
   skip_datasets: 
     - yeast
     - rt_iot2022
-    - genbase
-    - birds
+    - mediamill
+    - mbd
     - age_prediction
-    - mnist
   skip_first: 
-    mediamill: 33
+  #   mediamill: 33

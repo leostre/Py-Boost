@@ -7,14 +7,12 @@ model:
   _partial_: true  # This tells Hydra to create a partial
 
 experiment:
-  run_name: "baselines_3.1"
-  skip_datasets: 
-    - yeast 
+  run_name: "baselines_4.0"
+  skip_datasets:
     - rt_iot2022
-    - genbase
-    - birds
-    # - mediamill
+    - mediamill
+    - mbd
     - age_prediction
   skip_first: 
     # age_prediction: 191
-    yeast: 191
+    # yeast: 191
