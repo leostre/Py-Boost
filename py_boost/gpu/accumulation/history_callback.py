@@ -115,10 +115,9 @@ class GradHessHistory(GradSketch):
             threshold = self.derivative_threshold
             grad_norms = cp.linalg.norm(self._hist_grad, axis=0)
 
-            smoothed = self._gaussian_smooth(grad_norms)
-            derivative = cp.gradient(smoothed)
+            derivative = cp.gradient(grad_norms)
+            avg_recent_deriv = cp.mean(cp.abs(derivative[0]))
 
-            avg_recent_deriv = cp.mean(cp.abs(derivative))
             return avg_recent_deriv < threshold
         except Exception as e:
             self.logger.warning(f"Error in scheduler, disabling approximation: {e}")
@@ -133,6 +132,7 @@ class GradHessHistory(GradSketch):
                 - row_indexer: Indices of selected rows, shape (k_row,)
                 - col_indexer: Indices of selected columns, shape (k_col,)
         """
+        self.sketch_params = self.sketch_params or {'subsample': self.subsample, 'sketch_outputs': self.sketch_outputs}
         return self.sketch(tensor, **self.sketch_params)
 
     def _set_indexers(self, row_indexer: cp.ndarray, col_indexer: cp.ndarray) -> None:
