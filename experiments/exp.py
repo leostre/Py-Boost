@@ -17,7 +17,7 @@ def main(cfg: DictConfig):
         datasets=datasets,
         skip=experiment.skip_datasets,
         run_name=experiment.run_name,
-        skip_first=dict(experiment.skip_first),
+        skip_first=dict(experiment.skip_first or {}),
     )
     
     print("All experiments completed successfully!")
