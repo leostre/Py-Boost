@@ -40,7 +40,10 @@ class GradHessHistory(GradSketch):
                                                           'sketch_outputs': self.sketch_outputs})
 
         self.history_period = int(history_period)
+        self.stabilization_window = int(kwargs.get('stabilization_window', history_period))
+        self.smoothing_alpha = kwargs.get('smoothing_alpha', 0.1 ** (1 / 9))
         self.derivative_threshold = derivative_threshold
+        self.require_consecutive = kwargs.get('require_consecutive', False)
         self.logger = logging.getLogger(self.__class__.__name__)
 
         self.use_approximation = False
@@ -93,12 +96,22 @@ class GradHessHistory(GradSketch):
         smoothed = cp.convolve(data, kernel, mode='same')
         return smoothed
 
+    def _exponential_smooth(self, data: cp.ndarray, alpha: float) -> cp.ndarray:
+        alpha = max(0.01, min(1.0, alpha))
+
+        smoothed = cp.empty_like(data)
+        smoothed[0] = data[0]
+        for i in range(1, data.shape[0]):
+            smoothed[i] = (1 - alpha) * data[i] + alpha * smoothed[i-1]
+
+        return smoothed
+
     def _scheduler(self) -> bool:
         """
         Determine if gradient stabilization has occurred to enable approximation.
         Checks if gradient norms have stabilized by analyzing their derivatives:
-        1. Compute L2 norms of historical gradients across iterations
-        2. Apply Gaussian smoothing to reduce noise in gradient norms
+        1. Compute L2 norm across outputs for each sample at each iteration
+        2. Apply exponential smoothing along iteration dimension (axis=0)
         3. Calculate derivatives of smoothed gradient norms
         4. Check if average absolute derivative is below threshold
 
@@ -108,17 +121,41 @@ class GradHessHistory(GradSketch):
                 still changing significantly.
         """
         # TODO: rewrite as dynamic observers
-        if self._hist_grad is None or self._current_iteration < self.history_period:
+        min_history = max(self.history_period, self.stabilization_window)
+        if (self._hist_grad is None or
+            self._current_iteration < min_history or
+            self._hist_grad.shape[0] < min_history):
             return False
 
         try:
-            threshold = self.derivative_threshold
-            grad_norms = cp.linalg.norm(self._hist_grad, axis=0)
+            # # _hist_grad shape: (history_period, n_samples, n_outputs)
+            # grad_norms = cp.linalg.norm(self._hist_grad.reshape(self._hist_grad.shape[0], -1), axis=1)
+            # smoothed = self._gaussian_smooth(grad_norms)
+            # derivative = cp.gradient(smoothed)
+            # avg_recent_deriv = cp.mean(cp.abs(derivative))
+            # return avg_recent_deriv < threshold
+            # self._hist_grad = cp.ascontiguousarray(self._hist_grad)
 
-            derivative = cp.gradient(grad_norms)
-            avg_recent_deriv = cp.mean(cp.abs(derivative[0]))
+            # grad_norms = cp.linalg.norm(self._hist_grad, axis=0)
+            # derivative = cp.gradient(grad_norms)
+            # avg_recent_deriv = cp.mean(cp.abs(derivative[0]))
 
-            return avg_recent_deriv < threshold
+            # _hist_grad shape: (history_period, n_samples, n_outputs)
+            grad_norms = cp.linalg.norm(self._hist_grad, axis=2)  # (history_period, n_samples)
+            smoothed_norms = self._exponential_smooth(grad_norms, self.smoothing_alpha)
+
+            derivative = cp.gradient(smoothed_norms, axis=0)
+            abs_derivative = cp.abs(derivative)
+            recent_derivatives = abs_derivative[-self.stabilization_window:]
+
+            if self.require_consecutive:
+                stabilization_detected = cp.all(recent_derivatives < self.derivative_threshold)
+            else:
+                avg_abs_deriv_per_iteration = cp.mean(cp.abs(recent_derivatives), axis=1)
+                avg_recent_deriv = cp.mean(avg_abs_deriv_per_iteration)
+                stabilization_detected = avg_recent_deriv < self.derivative_threshold
+
+            return stabilization_detected
         except Exception as e:
             self.logger.warning(f"Error in scheduler, disabling approximation: {e}")
             return False
