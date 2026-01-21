@@ -217,8 +217,7 @@ def run_single_experiment_core(args):
 
                 timing_data = time_patch_methods(model=model,
                                                  method_names=['get_weights',
-                                                               'sample_topk_sketch',
-                                                               'sample_random_sampling_sketch'])
+                                                               'get_indexers'])
                 with GPUTimer() as fit_time:
                     model.fit(
                         X_train, y_train,
@@ -275,7 +274,6 @@ def run_single_experiment_core(args):
                 y_train, y_test = y[train_idx], y[test_idx]
                 after_split_training(X_train, y_train, X_test, y_test, fold)
         else:
-            print('NOT IN SPECIAL')
             loader = SPECIAL_LOADERS[dataset_name]['loader']()
             for data in loader:
                 after_split_training(*data)
