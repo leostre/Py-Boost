@@ -18,3 +18,27 @@ rt_iot2022:
   source: "uci"
 
 age_prediction: {}
+
+mediamill:
+  id: mediamill
+  source: custom
+  method:
+    _target_: data.load_data.load_mediamill
+
+mnist:
+  id: mnist_784
+  source: custom
+  method:
+    _target_: data.load_data.load_mnist
+
+cifar10:
+  id: cifar10
+  source: custom
+  method:
+    _target_: data.load_data.load_cifar10
+
+mbd:
+  id: ai-lab/MBD-mini
+  source: custom
+  method:
+    _target_: data.load_data.load_mbd
