@@ -3,159 +3,122 @@ import inspect
 import logging
 
 import cupy as cp
-from py_boost.gpu.accumulation.sketches.sketch_methods import (sample_random_projection_sketch,
-                                                               sample_random_sampling_sketch,
-                                                               sample_svd_sketch,
-                                                               sample_svd_sketch_heuristic,
-                                                               sample_topk_sketch)
+from py_boost.gpu.accumulation.sketches.sketch_methods import SUPPORTED_SKETCH_METHODS
 from py_boost.multioutput.sketching import GradSketch
 
 
 class GradHessHistory(GradSketch):
     """Callback that accumulates grads/hess, schedules and applies Fedcore approximation."""
 
-    def __init__(self, history_period: int = 10, derivative_threshold: float = 0.1, **kwargs):
+    def __init__(self, **kwargs):
         sketch_method = kwargs.get('sketch_method', 'svd')
 
-        # TODO: move decomposition params to decomposition callback
-        match sketch_method:
-            case 'svd_heuristic':
-                self.sketch = sample_svd_sketch_heuristic
-            case 'svd':
-                self.sketch = sample_svd_sketch
-            case 'topk':
-                self.sketch = sample_topk_sketch
-            case 'rand':
-                self.sketch = sample_random_sampling_sketch
-            case 'proj':
-                self.sketch = sample_random_projection_sketch
-            case _:
-                raise ValueError(f'Unknown sketching strategy {sketch_method}')
+        self.sketch = SUPPORTED_SKETCH_METHODS.get(sketch_method)
+        if self.sketch is None:
+            raise ValueError(
+                f'Unknown sketching strategy: {sketch_method}. '
+                f'Available methods: {", ".join(SUPPORTED_SKETCH_METHODS.keys())}'
+            )
 
-        # TODO: move subsampling params to subsampling callback
         self.subsample = kwargs.get('subsample', 0.5)
         self.sketch_outputs = kwargs.get('sketch_outputs', 1)
-        # TODO: leave only sketch_params dict dep.injection, subsample 
         self.sketch_params = kwargs.get('sketch_params', {'subsample': self.subsample,
                                                           'sketch_outputs': self.sketch_outputs})
 
-        self.history_period = int(history_period)
-        self.stabilization_window = int(kwargs.get('stabilization_window', history_period))
+        self.stabilization_window = int(kwargs.get('stabilization_window', 10))
         self.smoothing_alpha = kwargs.get('smoothing_alpha', 0.1 ** (1 / 9))
-        self.derivative_threshold = derivative_threshold
-        self.require_consecutive = kwargs.get('require_consecutive', False)
+        self.stabilization_threshold = 0.1
+
+        self.eps = kwargs.get('eps', 1e-6)
+        self.weight_transform = kwargs.get('weight_transform', 'sigmoidal')
+
         self.logger = logging.getLogger(self.__class__.__name__)
 
         self.use_approximation = False
-        self._hist_grad, self._hist_hess = None, None
-        self._current_iteration = 0
+        self._curr_iteration = 0
+
+        self.prev_grad_norms = None  # v_g^(t-1) - previous gradient norms
+        self.prev_hess_norms = None  # v_h^(t-1) - previous hessian norms
+        self.curr_grad_norms = None  # v_g^(t) - current gradient norms
+        self.curr_hess_norms = None  # v_h^(t) - current hessian norms
+        self.grad_history = None  # h_g^(t) - gradient history EMA
+        self.hess_history = None  # h_h^(t) - hessian history EMA
 
     def before_train(self, build_info):
         self.use_approximation = False
-        self._hist_grad, self._hist_hess = None, None
-        self._current_iteration = 0
+        self._curr_iteration = 0
+        self.prev_grad_norms = None
+        self.prev_hess_norms = None
+        self.grad_history = None
+        self.hess_history = None
+        self.curr_grad_norms = None
+        self.curr_hess_norms = None
 
     def before_iteration(self, build_info):
-        self._current_iteration = build_info['num_iter'] + 1
+        self._curr_iteration = build_info['num_iter'] + 1
         train = build_info['data']['train']
         grad: cp.ndarray = train.get('grad')
         hess: cp.ndarray = train.get('hess')
 
-        # accumulate to history when grads and hesses are available
         if grad is not None and hess is not None:
-            self._update_history(grad, hess)
-            # check if we should apply approximation based on history
+            self.curr_grad_norms = cp.linalg.norm(grad, axis=1)
+            self.curr_hess_norms = cp.linalg.norm(hess, axis=1)
+
+            # check if we should apply approximation based on EMA history
             self.use_approximation = self._scheduler()
+            self._update_history()
 
-    def _update_history(self, grad: cp.ndarray, hess: cp.ndarray):
-        if self._hist_grad is None or len(self._hist_grad) < self.history_period:
-            self._hist_grad = cp.stack([grad.copy()] * self.history_period)
-            self._hist_hess = cp.stack([hess.copy()] * self.history_period)
-        else:
-            # sliding window: roll and replace the oldest grad and hess
-            self._hist_grad = cp.roll(self._hist_grad, -1, axis=0)
-            self._hist_hess = cp.roll(self._hist_hess, -1, axis=0)
-            self._hist_grad[-1] = grad.copy()
-            self._hist_hess[-1] = hess.copy()
+    def _update_history(self):
+        if self.prev_grad_norms is None or self.prev_hess_norms is None:
+            if self.curr_grad_norms is not None and self.curr_hess_norms is not None:
+                self.prev_grad_norms = self.curr_grad_norms.copy()
+                self.prev_hess_norms = self.curr_hess_norms.copy()
+                self.grad_history = cp.zeros_like(self.curr_grad_norms)
+                self.hess_history = cp.zeros_like(self.curr_hess_norms)
+            return
 
-    def _gaussian_smooth(self, data: cp.ndarray, sigma: float = 1.0) -> cp.ndarray:
-        if len(data) < 3:
-            return data
+        if self.curr_grad_norms is not None and self.prev_grad_norms is not None:
+            grad_delta = self.curr_grad_norms - self.prev_grad_norms
 
-        if data.ndim > 1:
-            data = data.flatten()
+            if self.grad_history is None:
+                self.grad_history = grad_delta
+            else:
+                self.grad_history = (
+                    self.smoothing_alpha * self.grad_history + (1 - self.smoothing_alpha) * grad_delta
+                )
 
-        data = cp.ascontiguousarray(data)
-        if cp.any(cp.isnan(data)) or cp.any(cp.isinf(data)):
-            return data
+            self.prev_grad_norms = self.curr_grad_norms.copy()
 
-        kernel_size = min(5, len(data))
-        x = cp.arange(kernel_size, dtype=cp.float32) - (kernel_size - 1) // 2
-        kernel = cp.exp(-0.5 * (x / sigma) ** 2)
-        kernel = kernel / cp.sum(kernel)
-        smoothed = cp.convolve(data, kernel, mode='same')
-        return smoothed
+        if self.curr_hess_norms is not None and self.prev_hess_norms is not None:
+            hess_delta = self.curr_hess_norms - self.prev_hess_norms
 
-    def _exponential_smooth(self, data: cp.ndarray, alpha: float) -> cp.ndarray:
-        alpha = max(0.01, min(1.0, alpha))
+            if self.hess_history is None:
+                self.hess_history = hess_delta
+            else:
+                self.hess_history = (
+                    self.smoothing_alpha * self.hess_history + (1 - self.smoothing_alpha) * hess_delta
+                )
 
-        smoothed = cp.empty_like(data)
-        smoothed[0] = data[0]
-        for i in range(1, data.shape[0]):
-            smoothed[i] = (1 - alpha) * data[i] + alpha * smoothed[i-1]
-
-        return smoothed
+            self.prev_hess_norms = self.curr_hess_norms.copy()
 
     def _scheduler(self) -> bool:
         """
         Determine if gradient stabilization has occurred to enable approximation.
-        Checks if gradient norms have stabilized by analyzing their derivatives:
-        1. Compute L2 norm across outputs for each sample at each iteration
-        2. Apply exponential smoothing along iteration dimension (axis=0)
-        3. Calculate derivatives of smoothed gradient norms
-        4. Check if average absolute derivative is below threshold
-
-        Returns:
-            bool: True if gradients have stabilized (low derivatives), enabling 
-                approximation. False if more history needed or gradients are 
-                still changing significantly.
+        Condition: ||∇v_g^(t)||1 / (||h_g^(t-1)||1 + eps) < stabilization_threshold
         """
-        # TODO: rewrite as dynamic observers
-        min_history = max(self.history_period, self.stabilization_window)
-        if (self._hist_grad is None or
-            self._current_iteration < min_history or
-            self._hist_grad.shape[0] < min_history):
+        if (self.prev_grad_norms is None or self.curr_grad_norms is None or 
+            self.grad_history is None or self._curr_iteration < 2):
             return False
 
         try:
-            # # _hist_grad shape: (history_period, n_samples, n_outputs)
-            # grad_norms = cp.linalg.norm(self._hist_grad.reshape(self._hist_grad.shape[0], -1), axis=1)
-            # smoothed = self._gaussian_smooth(grad_norms)
-            # derivative = cp.gradient(smoothed)
-            # avg_recent_deriv = cp.mean(cp.abs(derivative))
-            # return avg_recent_deriv < threshold
-            # self._hist_grad = cp.ascontiguousarray(self._hist_grad)
+            grad_delta = self.curr_grad_norms - self.prev_grad_norms
 
-            # grad_norms = cp.linalg.norm(self._hist_grad, axis=0)
-            # derivative = cp.gradient(grad_norms)
-            # avg_recent_deriv = cp.mean(cp.abs(derivative[0]))
+            delta_norm = cp.linalg.norm(grad_delta, ord=1)
+            history_norm = cp.linalg.norm(self.grad_history, ord=1)
+            stabilization_ratio = delta_norm / (history_norm + self.eps)
 
-            # _hist_grad shape: (history_period, n_samples, n_outputs)
-            grad_norms = cp.linalg.norm(self._hist_grad, axis=2)  # (history_period, n_samples)
-            smoothed_norms = self._exponential_smooth(grad_norms, self.smoothing_alpha)
-
-            derivative = cp.gradient(smoothed_norms, axis=0)
-            abs_derivative = cp.abs(derivative)
-            recent_derivatives = abs_derivative[-self.stabilization_window:]
-
-            if self.require_consecutive:
-                stabilization_detected = cp.all(recent_derivatives < self.derivative_threshold)
-            else:
-                avg_abs_deriv_per_iteration = cp.mean(cp.abs(recent_derivatives), axis=1)
-                avg_recent_deriv = cp.mean(avg_abs_deriv_per_iteration)
-                stabilization_detected = avg_recent_deriv < self.derivative_threshold
-
-            return stabilization_detected
+            use_approximation = stabilization_ratio < self.stabilization_threshold
+            return use_approximation
         except Exception as e:
             self.logger.warning(f"Error in scheduler, disabling approximation: {e}")
             return False
@@ -207,30 +170,64 @@ class WeightedHistorySampling(GradHessHistory):
 
     def get_weights(self, grad: cp.ndarray, hess: cp.ndarray) -> cp.ndarray:
         """
-        Compute weights based on differences between current and historical gradients and hessians.
-        
-        The weight for each element (i,j) is computed as:
-            $$w_{i,j} = -sigmoid((g_{i,j} - \\mu_{g_{i,j}}) \\cdot (h_{i,j} - \\mu_{h_{i,j}}))$$
-        
-        where:
-            - $g_{i,j}$: current gradient at position (i,j)
-            - $\\mu_{g_{i,j}}$: historical mean gradient at position (i,j) 
-            - $h_{i,j}$: current hessian at position (i,j)
-            - $\\mu_{h_{i,j}}$: historical mean hessian at position (i,j)
-        
+        Compute adaptive weights based on deviations from historical gradient and hessian norms.
+
+        For each element (i,j), the weight is computed as:
+            1. Calculate deviation metrics:
+                g_dev = (grad[i,j] / (|grad_history[i]| + eps)) - 1
+                h_dev = (hess[i,j] / (|hess_history[i]| + eps)) - 1
+
+            2. Compute the product deviation: deviation = g_dev * h_dev
+
+            3. Transform via selected method:
+                - 'sigmoidal': weight = 1 - sigmoid(deviation)
+                - 'hyperbolic': weight = 1 - normalized(deviation)
+
+        The weights are clipped to [0, 1], where lower values indicate larger deviations
+        from historical behavior, suggesting higher uncertainty or novelty.
+
         Args:
-            grad: Current gradient tensor of shape (n, m).
-            hess: Current hessian tensor of shape (n, m).
+            grad: Current gradient tensor of shape (n_samples, n_outputs).
+            hess: Current hessian tensor of shape (n_samples, n_outputs).
 
         Returns:
-            weights: Weight tensor of shape (n, m).
+            weights: Weight tensor of shape (n_samples, n_outputs) with values in [0, 1].
         """
-        def sigmoid(x):
-            return 1 / (1 + cp.exp(-x))
+        n_samples, n_outputs = grad.shape
 
-        mean_grad = cp.mean(self._hist_grad, axis=0)
-        mean_hess = cp.mean(self._hist_hess, axis=0)
+        if self.grad_history is None or self.hess_history is None:
+            return cp.ones((n_samples, n_outputs), dtype=cp.float32)
 
-        weights = -sigmoid((grad - mean_grad) * (hess - mean_hess))
+        # expand history to match [n_samples, n_outputs]
+        grad_history_expanded = cp.tile(
+            cp.abs(self.grad_history)[:, cp.newaxis], 
+            (1, n_outputs)
+        )
+        hess_history_expanded = cp.tile(
+            cp.abs(self.hess_history)[:, cp.newaxis], 
+            (1, n_outputs)
+        )
+
+        grad_dev = grad / (grad_history_expanded + self.eps) - 1
+        hess_dev = hess / (hess_history_expanded + self.eps) - 1
+        deviation = grad_dev * hess_dev
+
+        if self.weight_transform == 'sigmoidal':
+            weights = 1 - 1 / (1 + cp.exp(-deviation))
+        elif self.weight_transform == 'hyperbolic':
+            min_val = cp.min(deviation)
+            max_val = cp.max(deviation)
+            if max_val > min_val:
+                normalized = (deviation - min_val) / (max_val - min_val)
+            else:
+                normalized = cp.zeros_like(deviation)
+            weights = 1 - normalized
+        else:
+            raise ValueError(
+                f"Unknown weight_transform: {self.weight_transform}. "
+                "Must be 'sigmoidal' or 'hyperbolic'."
+            )
+
+        weights = cp.clip(weights, 0.0, 1.0)
 
         return weights

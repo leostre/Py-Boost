@@ -128,3 +128,12 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
     col_indexer = cp.sort(cp.argsort(col_weights)[-k_col:]).astype(cp.uint64)
 
     return row_indexer, col_indexer
+
+
+SUPPORTED_SKETCH_METHODS = {
+    'svd_heuristic': sample_svd_sketch_heuristic,
+    'svd': sample_svd_sketch,
+    'topk': sample_topk_sketch,
+    'rand': sample_random_sampling_sketch,
+    'proj': sample_random_projection_sketch,
+}
