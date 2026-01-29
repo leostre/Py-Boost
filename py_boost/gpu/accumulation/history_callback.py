@@ -71,8 +71,8 @@ class GradHessHistory(GradSketch):
     def _update_history(self):
         if self.prev_grad_norms is None or self.prev_hess_norms is None:
             if self.curr_grad_norms is not None and self.curr_hess_norms is not None:
-                self.prev_grad_norms = self.curr_grad_norms.copy()
-                self.prev_hess_norms = self.curr_hess_norms.copy()
+                self.prev_grad_norms = self.curr_grad_norms
+                self.prev_hess_norms = self.curr_hess_norms
                 self.grad_history = cp.zeros_like(self.curr_grad_norms)
                 self.hess_history = cp.zeros_like(self.curr_hess_norms)
             return
@@ -87,7 +87,7 @@ class GradHessHistory(GradSketch):
                     self.smoothing_alpha * self.grad_history + (1 - self.smoothing_alpha) * grad_delta
                 )
 
-            self.prev_grad_norms = self.curr_grad_norms.copy()
+            self.prev_grad_norms = self.curr_grad_norms
 
         if self.curr_hess_norms is not None and self.prev_hess_norms is not None:
             hess_delta = self.curr_hess_norms - self.prev_hess_norms
@@ -99,7 +99,7 @@ class GradHessHistory(GradSketch):
                     self.smoothing_alpha * self.hess_history + (1 - self.smoothing_alpha) * hess_delta
                 )
 
-            self.prev_hess_norms = self.curr_hess_norms.copy()
+            self.prev_hess_norms = self.curr_hess_norms
 
     def _scheduler(self) -> bool:
         """
