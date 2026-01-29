@@ -110,18 +110,14 @@ class GradHessHistory(GradSketch):
             self.grad_history is None or self._curr_iteration < 2):
             return False
 
-        try:
-            grad_delta = self.curr_grad_norms - self.prev_grad_norms
+        grad_delta = self.curr_grad_norms - self.prev_grad_norms
 
-            delta_norm = cp.linalg.norm(grad_delta, ord=1)
-            history_norm = cp.linalg.norm(self.grad_history, ord=1)
-            stabilization_ratio = delta_norm / (history_norm + self.eps)
+        delta_norm = cp.linalg.norm(grad_delta, ord=1)
+        history_norm = cp.linalg.norm(self.grad_history, ord=1)
+        stabilization_ratio = delta_norm / (history_norm + self.eps)
 
-            use_approximation = stabilization_ratio < self.stabilization_threshold
-            return use_approximation
-        except Exception as e:
-            self.logger.warning(f"Error in scheduler, disabling approximation: {e}")
-            return False
+        use_approximation = stabilization_ratio < self.stabilization_threshold
+        return use_approximation
 
     def get_indexers(self, tensor: cp.ndarray):
         """
