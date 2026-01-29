@@ -194,15 +194,9 @@ class WeightedHistorySampling(GradHessHistory):
         if self.grad_history is None or self.hess_history is None:
             return cp.ones((n_samples, n_outputs), dtype=cp.float32)
 
-        # expand history to match [n_samples, n_outputs]
-        grad_history_expanded = cp.tile(
-            cp.abs(self.grad_history)[:, cp.newaxis], 
-            (1, n_outputs)
-        )
-        hess_history_expanded = cp.tile(
-            cp.abs(self.hess_history)[:, cp.newaxis], 
-            (1, n_outputs)
-        )
+        # expand history to [n_samples, 1], rely on broadcasting to match [n_samples, n_outputs]
+        grad_history_expanded = cp.abs(self.grad_history)[:, cp.newaxis]
+        hess_history_expanded = cp.abs(self.hess_history)[:, cp.newaxis]
 
         grad_dev = grad / (grad_history_expanded + self.eps) - 1
         hess_dev = hess / (hess_history_expanded + self.eps) - 1
@@ -223,7 +217,5 @@ class WeightedHistorySampling(GradHessHistory):
                 f"Unknown weight_transform: {self.weight_transform}. "
                 "Must be 'sigmoidal' or 'hyperbolic'."
             )
-
-        weights = cp.clip(weights, 0.0, 1.0)
 
         return weights
