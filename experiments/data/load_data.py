@@ -292,6 +292,7 @@ def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) 
     loader = DatasetLoader(dataset_config)
     datasets = loader.dataset_gen()
     processed_datasets = {}
+    n_classes = processed_dataset = None
 
     for name, dataset_info in datasets:
         n_classes = processed_dataset = None

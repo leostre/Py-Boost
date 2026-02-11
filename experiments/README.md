@@ -62,6 +62,47 @@
    - Make sure the data paths match the project configuration (typically under `experiments/data` or as defined in `py_boost.paths.EXPERIMENTS_DATA_PATH`).
 4. After the notebook finishes successfully, the datasets are ready for experiments.
 
+##### Adding custom datasets
+
+To plug in your own datasets:
+
+1. **(Optional) Reuse `prepare_datasets.ipynb` for preprocessing**
+   - Add cells that:
+     - Load your raw data from the original source.
+     - Perform any heavy preprocessing / feature engineering.
+     - Save the processed data under a stable path (ideally under the directory used in `py_boost.paths.EXPERIMENTS_DATA_PATH` or `experiments/data`).
+
+2. **Create a loader in `experiments/data/load_data.py`**
+   - Add a function similar to the existing ones (`load_mediamill`, `load_mbd`, etc.), for example:
+     ```python
+     def load_my_dataset():
+         # Load from files prepared in step 1
+         features = ...
+         target = ...
+         metadata = DatasetMetadata(
+             name="my_dataset",
+             source="custom",
+             shape=features.shape,
+         )
+         return {
+             "features": features,
+             "target": target,
+             "metadata": metadata,
+         }
+     ```
+   - If your dataset is naturally split into folds or comes with pre-defined train/test splits, you can also model it after `load_mnist` / `load_cifar10` and then register it in `SPECIAL_LOADERS` in the same file.
+
+3. **Register the dataset in the Hydra datasets config**
+   - Open `experiments/config/datasets/default.yaml` and add a new entry, for example:
+     ```yaml
+     my_dataset:
+       id: my_dataset
+       source: custom
+       method:
+         _target_: data.load_data.load_my_dataset
+     ```
+   - After this, any experiment config that includes `datasets: default` can see `my_dataset` and you can control inclusion/exclusion via `skip_datasets` and `skip_first` in the scenario YAMLs (e.g. `hyperbolic.yaml`, `baselines.yaml`, etc.).
+
 #### 3. Experiments structure
 
 The main components live under `experiments/`:
