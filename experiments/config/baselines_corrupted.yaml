@@ -7,6 +7,7 @@ model:
   _partial_: true  # This tells Hydra to create a partial
 
 experiment:
+  _target_: experiments.runners.CorruptedLabelsExperiment
   run_name: "baselines_corrupted"
   skip_datasets: 
     # - yeast 

@@ -1,26 +1,39 @@
 import hydra
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import DictConfig
 
-from experimental_fundamentals import run_experiments_silent
+from experiments.core.experiment import ExperimentRunner, BaseExperiment
 
 
 @hydra.main(version_base=None, config_path="config", config_name="experiment")
 def main(cfg: DictConfig):
-    
-    # Instantiate the model
-    # cfg = hydra.utils.instantiate(cfg)
-    experiment = hydra.utils.instantiate(cfg.experiment)
-    datasets = hydra.utils.instantiate(cfg.datasets)
-    datasets = {name: dict(d) for name, d in datasets.items() if name not in experiment.skip_datasets}
-    run_experiments_silent(
-        model_generator=hydra.utils.instantiate(cfg.model),  # or pass the instance if supported
-        datasets=datasets,
-        skip=experiment.skip_datasets,
+    """
+    Canonical Hydra entrypoint for all experiments.
+
+    The Hydra config is expected to provide:
+      - experiment._target_: a subclass of BaseExperiment
+      - model._target_: a callable or partial that constructs the model
+      - datasets: mapping of dataset configs understood by load_and_preprocess_datasets
+    """
+    experiment: BaseExperiment = hydra.utils.instantiate(cfg.experiment)
+    model_factory = hydra.utils.instantiate(cfg.model)
+
+    datasets_cfg = hydra.utils.instantiate(cfg.datasets)
+    datasets = {
+        name: dict(d)
+        for name, d in datasets_cfg.items()
+        if name not in getattr(experiment, "skip_datasets", ())
+    }
+
+    runner = ExperimentRunner()
+    runner.run(
+        experiment=experiment,
+        model_factory=model_factory,
+        datasets_config=datasets,
         run_name=experiment.run_name,
-        skip_first=dict(experiment.skip_first or {}),
     )
-    
+
     print("All experiments completed successfully!")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -5,7 +5,7 @@ yeast:
 
 genbase:
   id: "genbase"
-  source: "openml" 
+  source: "openml"
   version: 2
 
 birds:
