@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Mapping, Sequence
+from typing import Dict, Mapping, Sequence, Any
 
 import os
 import pickle
@@ -13,20 +13,7 @@ from experiments.core.experiment import BaseExperiment, ExperimentContext
 
 
 class BaselinesExperiment(BaseExperiment):
-
     name = "baselines"
-
-    def __init__(
-        self,
-        run_name: str = "sketchboost_baselines",
-        skip_datasets: Sequence[str] | None = None,
-        skip_first: Dict[str, int] | None = None,
-        timeout: int = 3600,
-    ) -> None:
-        self.run_name = run_name
-        self.skip_datasets = tuple(skip_datasets or ())
-        self.skip_first = dict(skip_first or {})
-        self.timeout = timeout
 
     def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence[Any]]:
         sketch_outputs = [

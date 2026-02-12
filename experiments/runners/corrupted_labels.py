@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import Dict, Mapping, Sequence
+from typing import Dict, Mapping, Sequence, Any
 
 import numpy as np
 
 from experiments.constants import SAMPLE_RATIO, DEFAULTS, LR
 from experiments.core.experiment import ExperimentContext
+from experiments.runners.baselines import BaselinesExperiment
 from experiments.runners.fundamentals import FundamentalsExperiment
 
 
@@ -109,3 +110,45 @@ class CorruptedLabelsExperiment(FundamentalsExperiment):
             y_train = label_corruptor.corrupt(y_train)
         return X_train, y_train, X_test, y_test
 
+
+class CorruptedLabelsBaselinesExperiment(BaselinesExperiment):
+    name = "corrupted_labels_baselines"
+
+    def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence[Any]]:
+        sketch_outputs = [
+            max(1, int(context.n_classes * ratio)) for ratio in SAMPLE_RATIO
+        ]
+        return {
+            "sketch_method": ["topk"],
+            "lr": LR,
+            "sketch_outputs": sketch_outputs,
+            "subsample": SAMPLE_RATIO,
+            "label_corruption": [0.05, 0.1, 0.2],
+        }
+
+    def build_default_params(self, context: ExperimentContext) -> Dict[str, Any]:
+        params = dict(DEFAULTS)
+        params.update(
+            {
+                "es": 15,
+                "ntrees": 10_000,
+                "loss": "multilabel",
+            }
+        )
+        return params
+
+    def before_fold(
+        self,
+        context: ExperimentContext,
+        fold_idx: int,
+        params: Dict[str, Any],
+        X_train,
+        y_train,
+        X_test,
+        y_test,
+    ):
+        corruption_level = params.get("label_corruption", 0.0)
+        if corruption_level > 0:
+            label_corruptor = LabelCorruptor(corruption_level)
+            y_train = label_corruptor.corrupt(y_train)
+        return X_train, y_train, X_test, y_test

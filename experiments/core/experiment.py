@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from itertools import product
 from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 
-from data.load_data import load_and_preprocess_datasets, SPECIAL_LOADERS
+from experiments.data.load_data import load_and_preprocess_datasets, SPECIAL_LOADERS
 from experiments.core.cv import FOLDS
 from experiments.core.gpu import nuclear_cleanup
 
@@ -19,7 +19,7 @@ class ExperimentContext:
     # Names of hyperparameters that define the search space for this dataset.
     search_keys: Optional[Sequence[str]] = None
 
-
+@dataclass
 class BaseExperiment:
     """
     Base class for all experiments.
@@ -35,7 +35,7 @@ class BaseExperiment:
     # Datasets to skip completely
     skip_datasets: Tuple[str, ...] = ()
     # Number of initial param configs to skip per dataset
-    skip_first: Dict[str, int] = {}
+    skip_first: Dict[str, int] = field(default_factory=dict)
     # Default timeout (seconds) for a single parameter configuration
     timeout: int = 3600
 

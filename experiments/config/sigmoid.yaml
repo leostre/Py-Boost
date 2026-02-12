@@ -7,8 +7,8 @@ model:
   _partial_: true  # This tells Hydra to create a partial
 
 experiment:
-  _target_: experiments.runners.SigmoidWeightedExperiment
-  run_name: "sigmoid_4.0"
+  _target_: experiments.runners.fundamentals.FundamentalsExperiment
+  run_name: "sigmoid_5.0"
   skip_datasets: 
     - yeast
     - rt_iot2022

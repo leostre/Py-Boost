@@ -9,7 +9,7 @@ import mlflow
 import numpy as np
 import pandas as pd
 
-from data.load_data import SPECIAL_LOADERS
+from experiments.data.load_data import SPECIAL_LOADERS
 from experiments.core.experiment import BaseExperiment, ExperimentContext
 from experiments.core.gpu import GPUTimer, initialize_gpu_settings, safe_predict
 from experiments.core.metrics import (

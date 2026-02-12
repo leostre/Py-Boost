@@ -291,7 +291,6 @@ def preprocess_dataset(X, dataset_name: str):
 def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) -> Generator[str, Dict, Any]:
     loader = DatasetLoader(dataset_config)
     datasets = loader.dataset_gen()
-    processed_datasets = {}
     n_classes = processed_dataset = None
 
     for name, dataset_info in datasets:
@@ -310,7 +309,6 @@ def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) 
                 processed_features = np.array(processed_features)
                 processed_target = np.array(processed_target)
 
-            is_multilabel = True
             if len(processed_target.shape) == 1:
                 processed_target = LabelBinarizer().fit_transform(processed_target)
             
@@ -321,7 +319,8 @@ def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) 
                 'target': processed_target,
                 'metadata': metadata,
             }
-        except: pass
+        except:
+            pass
         finally:
             yield name, processed_dataset, n_classes
 
