@@ -17,7 +17,7 @@ from experiments.data.dataloader import DatasetMetadata, DatasetLoader, setup_lo
 from py_boost.paths import EXPERIMENTS_DATA_PATH
 
 
-def load_age_prediction(): 
+def load_age_prediction():
     fold = 0
     assert os.path.exists(EXPERIMENTS_DATA_PATH + '/age_pred')
     while os.path.exists(EXPERIMENTS_DATA_PATH + f'/age_pred/fold_{fold}'):
@@ -37,6 +37,7 @@ def load_age_prediction():
         fold += 1
     assert fold > 0, 'No folds were returned'
 
+
 def load_mnist():
     fold = 0
     path = EXPERIMENTS_DATA_PATH + '/mnist'
@@ -51,6 +52,7 @@ def load_mnist():
         fold += 1
     assert fold > 0, 'No folds were returned'
 
+
 def load_cifar10():
     fold = 0
     path = EXPERIMENTS_DATA_PATH + '/cifar10'
@@ -64,6 +66,7 @@ def load_cifar10():
         yield xtr, ytr, xte, yte, fold
         fold += 1
     assert fold > 0, 'No folds were returned'
+
 
 def load_mediamill():
     raw_data, meta = arff.loadarff(os.path.join(EXPERIMENTS_DATA_PATH, 'mediamill', 'mediamill.arff'))
@@ -82,133 +85,30 @@ def load_mediamill():
                 )
     }
 
-def load_mbd(fold: int = 1, modality: str = 'all', base_data_path: Optional[str] = None, logger: Optional[Logger] = None):
-    if logger is None:
-        logger = setup_logging('load_mbd', verbose=True)
-    if base_data_path is None:
-        base_data_path = os.path.join(EXPERIMENTS_DATA_PATH, 'mbd')
 
-    os.makedirs(base_data_path, exist_ok=True)
-
-    client_split_path = Path(base_data_path) / 'client_split.tar.gz'
-    if not client_split_path.exists():
-        logger.info(f"Downloading client_split.tar.gz to {base_data_path}...")
-        hf_hub_download(repo_id="ai-lab/MBD-mini",
-                        filename="client_split.tar.gz",
-                        repo_type="dataset",
-                        local_dir=base_data_path)
-
-    logger.info(f"Extracting client IDs for fold {fold} from client_split.tar.gz...")
-    fold_client_ids = []
-    with tarfile.open(client_split_path, 'r:gz') as tar:
-        fold_pattern = f"client_split/fold={fold}/"
-
-        for member in tar.getmembers():
-            if member.name.endswith('.parquet') and fold_pattern in member.name:
-                f = tar.extractfile(member)
-                df = pd.read_parquet(io.BytesIO(f.read()))
-
-                if 'client_id' in df.columns:
-                    fold_client_ids.extend(df['client_id'].tolist())
-
-    logger.info(f"Found {len(fold_client_ids)} unique clients in fold {fold}")
-
-    fold_client_ids_set = set(fold_client_ids)
-
-    targets_path = Path(base_data_path) / 'targets.tar.gz'
-    if not targets_path.exists():
-        logger.info(f"Downloading targets.tar.gz to {base_data_path}...")
-        hf_hub_download(repo_id="ai-lab/MBD-mini",
-                        filename="targets.tar.gz",
-                        repo_type="dataset",
-                        local_dir=base_data_path)
-
-    logger.info(f"Loading targets for fold {fold}...")
-    targets_dfs = []
-    with tarfile.open(targets_path, 'r:gz') as tar:
-        for member in tar.getmembers():
-            if member.name.endswith('.parquet'):
-                f = tar.extractfile(member)
-                df = pd.read_parquet(io.BytesIO(f.read()))
-
-                if 'fold' in df.columns:  # filter by fold column if it exists, otherwise by client_id
-                    fold_targets = df[df['fold'] == fold]
-                elif 'client_id' in df.columns:
-                    fold_targets = df[df['client_id'].isin(fold_client_ids_set)]
-                else:
-                    continue
-                
-                if not fold_targets.empty:
-                    targets_dfs.append(fold_targets)
-
-    targets_df = pd.concat(targets_dfs, ignore_index=True) if targets_dfs else pd.DataFrame()
-    logger.info(f"Loaded {len(targets_df)} target rows")
-
-    logger.info(f"Loading features for modality '{modality}'...")
-
-    if modality == 'detail':
-        feature_file = 'detail.tar.gz'
-    else:  # 'all', 'dialog', 'geo', 'trx', 'ptls'
-        feature_file = 'ptls.tar.gz'
-
-    feature_path = Path(base_data_path) / feature_file
-    if not feature_path.exists():
-        logger.info(f"Downloading {feature_file} to {base_data_path}...")
-        hf_hub_download(repo_id="ai-lab/MBD-mini",
-                        filename=feature_file,
-                        repo_type="dataset",
-                        local_dir=base_data_path)
-
-    feature_dfs = []
-    with tarfile.open(feature_path, 'r:gz') as tar:
-        files_processed = 0
-        for member in tar.getmembers():
-            if member.name.endswith('.parquet'):
-                files_processed += 1
-                f = tar.extractfile(member)
-                df = pd.read_parquet(io.BytesIO(f.read()))
-
-                if 'fold' in df.columns:  # filter for our fold
-                    fold_features = df[df['fold'] == fold]
-                elif 'client_id' in df.columns:
-                    fold_features = df[df['client_id'].isin(fold_client_ids_set)]
-                else:
-                    continue
-
-                if not fold_features.empty:
-                    feature_dfs.append(fold_features)
-
-    features_df = pd.concat(feature_dfs, ignore_index=True) if feature_dfs else pd.DataFrame()
-    logger.info(f"Loaded {len(features_df)} feature rows from {files_processed} files")
-
-    if feature_file == 'ptls.tar.gz' and modality in ['dialog', 'geo', 'trx']:
-        logger.info(f"Filtering for {modality} features...")
-
-        if not features_df.empty:
-            columns_to_keep = ['client_id', 'fold'] if 'fold' in features_df.columns else ['client_id']
-            if modality == 'dialog' and 'dialog' in features_df.columns:
-                columns_to_keep.append('dialog')
-            elif modality == 'geo' and 'geo' in features_df.columns:
-                columns_to_keep.append('geo')
-            elif modality == 'trx' and 'trx' in features_df.columns:
-                columns_to_keep.append('trx')
-
-            features_df = features_df[columns_to_keep]
-
-    logger.info(f"Features: {features_df.shape[0]} rows, {features_df.shape[1]} columns")
-    logger.info(f"Targets:  {targets_df.shape[0]} rows, {targets_df.shape[1]} columns")
-
-    if not features_df.empty:
-        logger.info(f"Feature columns: {features_df.columns.tolist()}")
-    if not targets_df.empty:
-        target_cols = [c for c in targets_df.columns if c.startswith('target_')]
-        logger.info(f"Target columns: {target_cols}")
-
-    return {
-        'features': features_df,
-        'target': targets_df,
-        'metadata': DatasetMetadata(name='mbd', source='custom', shape=features_df.shape)
-    }
+def load_mbd(prop_keep=0.05):
+    def drop_empty(X, y, prop_keep):
+        np.random.seed(RANDOM_SEED)
+        valuable_mask = y.any(axis=1)
+        full_idx = np.arange(len(y))
+        empty_idx = full_idx[~valuable_mask]
+        idx2keep = np.random.permutation(empty_idx)[:int(len(y) * prop_keep)]
+        final_idx = np.concat([full_idx[valuable_mask], idx2keep])
+        np.random.shuffle(final_idx)
+        return X[final_idx], y[final_idx]
+    fold = 0
+    path = EXPERIMENTS_DATA_PATH + '/mbd'
+    assert os.path.exists(path)
+    while os.path.exists(path + f'/fold_{fold}'):
+        fold_path = path + f'/fold_{fold}'
+        xtr = pd.read_parquet(fold_path + '/xtr.parquet').values
+        ytr = pd.read_parquet(fold_path + '/ytr.parquet').values
+        xte = pd.read_parquet(fold_path + '/xte.parquet').values
+        yte = pd.read_parquet(fold_path + '/yte.parquet').values
+        xtr, ytr = drop_empty(xtr, ytr, prop_keep)
+        yield xtr, ytr, xte, yte, fold
+        fold += 1
+    assert fold > 0, 'No folds were returned'
 
 
 # TODO: remove/refactor legacy method
@@ -343,11 +243,5 @@ SPECIAL_LOADERS = {
     'mnist': {'loader': load_mnist, 'n_classes': 10, 'task': 'onelabel'},
     'cifar10': {'loader': load_cifar10, 'n_classes': 10, 'task': 'onelabel'},
     'age_prediction': {'loader': load_age_prediction, 'n_classes': 4, 'task': 'onelabel'},
-    'mbd': {'loader': load_mbd}
+    'mbd': {'loader': load_mbd, 'n_classes': 4, 'task': 'multilabel'}
 }
-
-
-if __name__ == "__main__":
-    dataset_config = DATASETS
-    # dataset_config = {'age_prediction': {}}
-    datasets = load_and_preprocess_datasets(dataset_config)
