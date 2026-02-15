@@ -38,6 +38,8 @@ class BaseExperiment:
     skip_first: Dict[str, int] = field(default_factory=dict)
     # Default timeout (seconds) for a single parameter configuration
     timeout: int = 3600
+    # Threshold for converting probabilities to labels in multilabel setting
+    pred_thr: float = 0.5
 
     def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence[Any]]:
         """

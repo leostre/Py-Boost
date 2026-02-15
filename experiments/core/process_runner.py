@@ -12,12 +12,7 @@ import pandas as pd
 from experiments.data.load_data import SPECIAL_LOADERS
 from experiments.core.experiment import BaseExperiment, ExperimentContext
 from experiments.core.gpu import GPUTimer, initialize_gpu_settings, safe_predict
-from experiments.core.metrics import (
-    METRICS,
-    ROCAUC_SCORE,
-    multilabel_postprocess,
-    onelabel_postproc,
-)
+from experiments.core.metrics import METRICS, ROCAUC_SCORE, onelabel_postproc
 from experiments.core.model_timing import log_timing_data, time_patch_methods
 from experiments.core.mlflow_utils import log_param_dict, start_run_for_dataset
 
@@ -106,10 +101,6 @@ def _run_single_experiment_core(
         raise RuntimeError("The wrong configuration of dataset")
 
     os.makedirs(output_dir, exist_ok=True)
-
-    current_postproc_func = (
-        onelabel_postproc if context.task != "multilabel" else multilabel_postprocess
-    )
 
     histories = []
     fold_scores: Dict[str, list] = {metric_name: [] for metric_name in METRICS.keys()}
@@ -205,7 +196,12 @@ def _run_single_experiment_core(
                 except Exception:
                     pass
 
-                predictions = current_postproc_func(probas)
+                # Post-process probabilities into discrete predictions
+                if context.task == "multilabel":
+                    thr = getattr(experiment, "pred_thr", 0.5)
+                    predictions = (probas > thr).astype(int)
+                else:
+                    predictions = onelabel_postproc(probas)
 
                 # Standard metrics
                 fold_metric_values: Dict[str, float] = {}
