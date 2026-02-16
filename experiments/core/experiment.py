@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from itertools import product
 from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 
+import mlflow
+
 from experiments.data.load_data import load_and_preprocess_datasets, SPECIAL_LOADERS
 from experiments.core.cv import FOLDS
 from experiments.core.gpu import nuclear_cleanup
@@ -176,6 +178,7 @@ class ExperimentRunner:
     ):
         from experiments.core.process_runner import run_experiment_in_process
 
+        mlflow.set_experiment(run_name)
         dataset_gen = load_and_preprocess_datasets(datasets_config)
 
         for dataset_name, dataset, n_classes in dataset_gen:
