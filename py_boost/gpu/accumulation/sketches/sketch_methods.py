@@ -100,13 +100,13 @@ def sample_random_sampling_sketch(tensor: cp.ndarray, **kwargs):
     smooth = 0.1
     row_probs = smooth * cp.ones_like(row_probs) / tensor.shape[0] + (1 - smooth) * row_probs
     row_indexer = cp.sort(cp.random.choice(cp.arange(tensor.shape[0]), size=k_row, 
-                                           replace=False, p=row_probs)).astype(cp.uint64)
+                                           replace=True, p=row_probs)).astype(cp.uint64)
 
     col_weights = (tensor ** 2).mean(axis=0) + 1e-3
     col_probs = col_weights / col_weights.sum()
     col_probs = smooth * cp.ones_like(col_probs) / tensor.shape[1] + (1 - smooth) * col_probs
     col_indexer = cp.sort(cp.random.choice(cp.arange(tensor.shape[1]), size=k_col, 
-                                           replace=False, p=col_probs)).astype(cp.uint64)
+                                           replace=True, p=col_probs)).astype(cp.uint64)
 
     return row_indexer, col_indexer
 
