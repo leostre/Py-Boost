@@ -10,9 +10,10 @@ class FundamentalsExperiment(BaseExperiment):
     name = "fundamentals"
 
     def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence[Any]]:
-        sketch_outputs = [
+        sketch_outputs = set(
             max(1, int(context.n_classes * ratio)) for ratio in SAMPLE_RATIO
-        ]
+        )
+        sketch_outputs = sorted(list(sketch_outputs))
         return {
             "sketch_method": ["topk", "rand"],
             "lr": [0.1, 0.005],
