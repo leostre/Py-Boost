@@ -4,6 +4,7 @@ import shutil
 import tempfile
 from typing import Any, Dict, Tuple
 import pickle
+import traceback
 
 import mlflow
 import numpy as np
@@ -240,7 +241,7 @@ def _run_single_experiment_core(
                 )
 
             except Exception as e:
-                mlflow.log_param(f"fold_{fold}_error", str(e))
+                mlflow.log_param(f"fold_{fold}_error", traceback.format_exc())
             finally:
                 # Explicitly drop references to the model
                 del model
