@@ -60,7 +60,7 @@ def load_cifar10():
         yte = np.load(fold_path + '/yte.npy')
         lb = LabelBinarizer()
         ytr = lb.fit_transform(ytr)
-        yte = lb.transform(yte)ы
+        yte = lb.transform(yte)
         yield xtr, ytr, xte, yte, fold
         fold += 1
     assert fold > 0, 'No folds were returned'

@@ -24,12 +24,6 @@ METRICS = {
 
 ROCAUC_SCORE = partial(roc_auc_score, average=AVERAGE, multi_class="ovr")
 
-PRED_THR = 0.5
-
-
-def multilabel_postprocess(pred: np.ndarray) -> np.ndarray:
-    return (pred > PRED_THR).astype(int)
-
 
 def onelabel_postproc(pred: np.ndarray) -> np.ndarray:
     from sklearn.preprocessing import LabelBinarizer
@@ -55,4 +49,3 @@ def calculate_aggregated_metrics(fold_scores):
                 }
             )
     return aggregated
-
