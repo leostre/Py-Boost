@@ -27,7 +27,7 @@ class GradHessHistory(GradSketch):
 
         self.stabilization_window = int(kwargs.get('stabilization_window', 10))
         self.smoothing_alpha = kwargs.get('smoothing_alpha', 0.1 ** (1 / 9))
-        self.stabilization_threshold = 0.1
+        self.stabilization_threshold = float(kwargs.get('stabilization_threshold', 1.0))
 
         self.eps = kwargs.get('eps', 1e-6)
         self.weight_transform = kwargs.get('weight_transform', 'sigmoidal')
@@ -43,6 +43,8 @@ class GradHessHistory(GradSketch):
         self.curr_hess_norms = None  # v_h^(t) - current hessian norms
         self.grad_history = None  # h_g^(t) - gradient history EMA
         self.hess_history = None  # h_h^(t) - hessian history EMA
+        self.curr_aggregated_norm = None
+        self.aggregated_norm_history = None
 
     def before_train(self, build_info):
         self.use_approximation = False
@@ -64,6 +66,12 @@ class GradHessHistory(GradSketch):
             self.curr_grad_norms = cp.linalg.norm(grad, axis=1)
             self.curr_hess_norms = cp.linalg.norm(hess, axis=1)
 
+            if self.prev_grad_norms is not None:
+                grad_delta = self.curr_grad_norms - self.prev_grad_norms
+                self.curr_aggregated_norm = cp.linalg.norm(grad_delta, ord=1)
+                if self.aggregated_norm_history is None:
+                    self.aggregated_norm_history = 0.0
+
             # check if we should apply approximation based on EMA history
             self.use_approximation = self._scheduler()
             self._update_history()
@@ -79,6 +87,10 @@ class GradHessHistory(GradSketch):
 
         if self.curr_grad_norms is not None and self.prev_grad_norms is not None:
             grad_delta = self.curr_grad_norms - self.prev_grad_norms
+
+            self.aggregated_norm_history =  (
+                self.smoothing_alpha * self.aggregated_norm_history + (1 - self.smoothing_alpha) * self.curr_aggregated_norm
+            )
 
             if self.grad_history is None:
                 self.grad_history = grad_delta
@@ -110,11 +122,7 @@ class GradHessHistory(GradSketch):
             self.grad_history is None or self._curr_iteration < 2):
             return False
 
-        grad_delta = self.curr_grad_norms - self.prev_grad_norms
-
-        delta_norm = cp.linalg.norm(grad_delta, ord=1)
-        history_norm = cp.linalg.norm(self.grad_history, ord=1)
-        stabilization_ratio = delta_norm / (history_norm + self.eps)
+        stabilization_ratio = self.curr_aggregated_norm / (self.aggregated_norm_history + self.eps)
 
         use_approximation = stabilization_ratio < self.stabilization_threshold
         return use_approximation
