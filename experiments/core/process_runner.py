@@ -29,12 +29,25 @@ def run_experiment_in_process(
     timeout: int | None = None,
 ):
     """
-    Run a single parameter configuration in a separate process.
+    Run a single parameter configuration, optionally in a separate process.
     """
+    temp_dir = tempfile.mkdtemp(prefix=f"mlflow_{context.dataset_name}_{run_name}_")
+
+    # Allow disabling multiprocessing via environment for constrained runtimes (e.g. Docker)
+    if os.getenv("PY_BOOST_DISABLE_MP", "0") == "1":
+        return _run_single_experiment_core(
+            experiment,
+            model_factory,
+            params,
+            X,
+            y,
+            context,
+            run_name,
+            temp_dir,
+        )
+
     if timeout is None:
         timeout = context.timeout
-
-    temp_dir = tempfile.mkdtemp(prefix=f"mlflow_{context.dataset_name}_{run_name}_")
 
     worker_args = (
         experiment,
