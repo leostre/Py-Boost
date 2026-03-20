@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Mapping, Sequence, Any
+from typing import Dict, Mapping, Sequence, Any, Tuple
 
 import os
 import pickle
@@ -16,12 +16,13 @@ class BaselinesExperiment(BaseExperiment):
     name = "baselines"
 
     def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence[Any]]:
-        sketch_outputs = [
+        sketch_outputs = set(
             max(1, int(context.n_classes * ratio)) for ratio in SAMPLE_RATIO
-        ]
+        )
+        sketch_outputs = sorted(list(sketch_outputs))
         return {
-            "sketch_method": SKETCH_METHODS,
-            "lr": LR,
+            "sketch_method": ["topk"],
+            "lr": [0.1, 0.005],
             "sketch_outputs": sketch_outputs,
             "subsample": SAMPLE_RATIO,
         }
@@ -31,7 +32,7 @@ class BaselinesExperiment(BaseExperiment):
         params.update(
             {
                 "es": 15,
-                "ntrees": 10_000,
+                "ntrees": 100_000,
                 "loss": "multilabel",
             }
         )
@@ -39,6 +40,19 @@ class BaselinesExperiment(BaseExperiment):
 
     def wants_results_dataframe(self) -> bool:
         return True
+
+    def estimate_ensemble_structure(self, model) -> Tuple[float, float]:
+        nodes = leaves = 0
+        models = getattr(model, "models", None)
+        if not models:
+            return 0.0, 0.0
+        for tree in models:
+            nodes += getattr(tree, "max_nodes", 0)
+            leaves += getattr(tree, "max_leaves", 0)
+        n = len(models)
+        if n == 0:
+            return 0.0, 0.0
+        return nodes / n, leaves / n
 
     def after_dataset(
         self,

@@ -18,7 +18,15 @@ class AnaloguesExperiment(BaseExperiment):
         }
 
     def build_default_params(self, context: ExperimentContext) -> Dict:
-        return {}
+        return {
+            "feature_fraction": 0.75,
+            "max_depth": 6,
+            "lambda_l1": 1,
+            "lambda_l2": 1,
+            "min_data_in_leaf": 50,
+            "n_jobs": 8,
+            "verbose": -1,
+        }
 
     def fit_model(
         self,

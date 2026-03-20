@@ -15,10 +15,12 @@ class FundamentalsExperiment(BaseExperiment):
         )
         sketch_outputs = sorted(list(sketch_outputs))
         return {
-            "sketch_method": ["topk", "rand"],
+            "sketch_method": ["topk"],
             "lr": [0.1, 0.005],
             "sketch_outputs": sketch_outputs,
             "subsample": SAMPLE_RATIO,
+            "smoothing_alpha": [0.9],
+            "stabilization_threshold": [0.5, 1.0],
         }
 
     def build_default_params(self, context: ExperimentContext) -> Dict[str, Any]:
