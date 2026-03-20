@@ -7,7 +7,7 @@ from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 import mlflow
 
 from experiments.data.load_data import load_and_preprocess_datasets, SPECIAL_LOADERS
-from experiments.core.cv import FOLDS
+from experiments.core.cv import FOLDS, SKLEARN_FOLDS
 from experiments.core.gpu import nuclear_cleanup
 
 
@@ -204,11 +204,20 @@ class ExperimentRunner:
                 n_classes = y.shape[1] if is_multilabel else len(np.unique(y))
                 task = "multilabel" if is_multilabel else "onelabel"
 
+            # Select appropriate cross-validation strategy.
+            # Most multilabel datasets use MultilabelStratifiedKFold (FOLDS),
+            # but rt_iot2022 has a single encoded target column and should
+            # use standard StratifiedKFold instead.
+            if dataset_name == "rt_iot2022":
+                cv = SKLEARN_FOLDS
+            else:
+                cv = FOLDS if task == "multilabel" else SKLEARN_FOLDS
+
             context = ExperimentContext(
                 dataset_name=dataset_name,
                 task=task,
                 n_classes=n_classes or 0,
-                cv=FOLDS,
+                cv=cv,
                 timeout=experiment.timeout,
             )
 
