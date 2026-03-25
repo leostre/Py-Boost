@@ -218,21 +218,35 @@ def _run_single_experiment_core(
                 # Post-process probabilities into discrete predictions
                 if context.task == "multilabel":
                     # BCE loss is computed on probabilities (not thresholded)
-                    y_true = y_te.astype(float)
+                    y_true_test = y_te.astype(float)
                     eps = 1e-10
-                    y_prob = np.clip(probas, eps, 1.0 - eps)
+                    y_prob_test = np.clip(probas, eps, 1.0 - eps)
                     bce_loss = -np.mean(
-                        y_true * np.log(y_prob) + (1.0 - y_true) * np.log(1.0 - y_prob)
+                        y_true_test * np.log(y_prob_test)
+                        + (1.0 - y_true_test) * np.log(1.0 - y_prob_test)
                     )
                     mlflow.log_metric(
                         f"bce_loss_fold_{fold}", float(bce_loss), step=fold
                     )
 
                     thr = getattr(experiment, "pred_thr")
-                    if thr is None or (
+                    is_adaptive = thr is None or (
                         isinstance(thr, str) and thr.lower() == "adaptive"
-                    ):
-                        thr = optimize_threshold_per_label(y_true, probas, metric="f1")
+                    )
+
+                    if is_adaptive:
+                        with GPUTimer() as adapt_inference_timer:
+                            probas_tr = safe_predict(
+                                model, X_tr, batch_size=1000
+                            )
+                        mlflow.log_metric(
+                            f"adaptive_threshold_inference_time_fold_{fold}",
+                            adapt_inference_timer.time,
+                            step=fold,
+                        )
+                        thr = optimize_threshold_per_label(
+                            y_tr.astype(float), probas_tr, metric="f1"
+                        )
 
                     predictions = (probas > thr).astype(int)
                 else:

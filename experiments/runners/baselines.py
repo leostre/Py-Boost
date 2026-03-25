@@ -32,7 +32,7 @@ class BaselinesExperiment(BaseExperiment):
         params.update(
             {
                 "es": 15,
-                "ntrees": 100_000,
+                "ntrees": 2 * 100_000,
                 "loss": "multilabel",
             }
         )
