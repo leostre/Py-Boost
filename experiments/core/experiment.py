@@ -182,6 +182,38 @@ class ExperimentRunner:
     ):
         from experiments.core.process_runner import run_experiment_in_process
 
+        def infer_task_and_n_classes(target: np.ndarray) -> tuple[str, int]:
+            """
+            Infer task type robustly from target shape/content.
+
+            - (N,) -> onelabel
+            - (N, 1) -> onelabel (single encoded class column)
+            - (N, C) binary indicator:
+                * mutually-exclusive rows (sum==1) -> onelabel (one-hot multiclass)
+                * otherwise -> multilabel
+            - fallback -> onelabel
+            """
+            y_arr = np.asarray(target)
+            if y_arr.ndim == 1:
+                return "onelabel", int(len(np.unique(y_arr)))
+            if y_arr.ndim != 2:
+                return "onelabel", int(len(np.unique(y_arr.reshape(-1))))
+
+            n_cols = y_arr.shape[1]
+            if n_cols == 1:
+                return "onelabel", int(len(np.unique(y_arr[:, 0])))
+
+            uniq = np.unique(y_arr)
+            is_binary_matrix = np.all(np.isin(uniq, [0, 1]))
+            if is_binary_matrix:
+                row_sums = y_arr.sum(axis=1)
+                is_mutually_exclusive = np.all(row_sums == 1)
+                if is_mutually_exclusive:
+                    return "onelabel", int(n_cols)
+                return "multilabel", int(n_cols)
+
+            return "onelabel", int(len(np.unique(np.argmax(y_arr, axis=1))))
+
         mlflow.set_experiment(run_name)
         dataset_gen = load_and_preprocess_datasets(datasets_config)
 
@@ -204,18 +236,10 @@ class ExperimentRunner:
                     continue
                 X = dataset["features"]
                 y = dataset["target"]
-                is_multilabel = len(y.shape) > 1
-                n_classes = y.shape[1] if is_multilabel else len(np.unique(y))
-                task = "multilabel" if is_multilabel else "onelabel"
+                task, inferred_n_classes = infer_task_and_n_classes(y)
+                n_classes = inferred_n_classes
 
-            # Select appropriate cross-validation strategy.
-            # Most multilabel datasets use MultilabelStratifiedKFold (FOLDS),
-            # but rt_iot2022 has a single encoded target column and should
-            # use standard StratifiedKFold instead.
-            if dataset_name == "rt_iot2022":
-                cv = SKLEARN_FOLDS
-            else:
-                cv = FOLDS if task == "multilabel" else SKLEARN_FOLDS
+            cv = FOLDS if task == "multilabel" else SKLEARN_FOLDS
 
             context = ExperimentContext(
                 dataset_name=dataset_name,

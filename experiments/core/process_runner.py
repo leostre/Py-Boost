@@ -9,6 +9,7 @@ import traceback
 import mlflow
 import numpy as np
 import pandas as pd
+from sklearn.metrics import log_loss
 
 from experiments.data.load_data import SPECIAL_LOADERS
 from experiments.core.experiment import BaseExperiment, ExperimentContext
@@ -217,6 +218,9 @@ def _run_single_experiment_core(
 
                 # Post-process probabilities into discrete predictions
                 if context.task == "multilabel":
+                    threshold_applied = 0.0
+                    threshold_fallback = 0.0
+
                     # BCE loss is computed on probabilities (not thresholded)
                     y_true_test = y_te.astype(float)
                     eps = 1e-10
@@ -235,21 +239,124 @@ def _run_single_experiment_core(
                     )
 
                     if is_adaptive:
-                        with GPUTimer() as adapt_inference_timer:
-                            probas_tr = safe_predict(
-                                model, X_tr, batch_size=1000
-                            )
-                        mlflow.log_metric(
-                            f"adaptive_threshold_inference_time_fold_{fold}",
-                            adapt_inference_timer.time,
-                            step=fold,
+                        # Adaptive per-label thresholding is valid only for
+                        # non-exclusive multilabel binary targets.
+                        y_tr_arr = np.asarray(y_tr)
+                        uniq = np.unique(y_tr_arr)
+                        is_binary_matrix = (
+                            y_tr_arr.ndim == 2
+                            and y_tr_arr.shape[1] > 1
+                            and np.all(np.isin(uniq, [0, 1]))
                         )
-                        thr = optimize_threshold_per_label(
-                            y_tr.astype(float), probas_tr, metric="f1"
-                        )
+                        is_non_exclusive = False
+                        if is_binary_matrix:
+                            row_sums = y_tr_arr.sum(axis=1)
+                            is_non_exclusive = np.any(row_sums > 1) or np.any(row_sums == 0)
+
+                        if not (is_binary_matrix and is_non_exclusive):
+                            # Fallback for one-label encodings (e.g. (N,1) class ids
+                            # or one-hot multiclass where rows sum to 1).
+                            thr = 0.5
+                            threshold_fallback = 1.0
+                        else:
+                            try:
+                                with GPUTimer() as adapt_inference_timer:
+                                    probas_tr = safe_predict(
+                                        model, X_tr, batch_size=1000
+                                    )
+                                mlflow.log_metric(
+                                    f"adaptive_threshold_inference_time_fold_{fold}",
+                                    adapt_inference_timer.time,
+                                    step=fold,
+                                )
+                                thr = optimize_threshold_per_label(
+                                    y_tr.astype(float), probas_tr, metric="f1"
+                                )
+                                threshold_applied = 1.0
+                            except Exception:
+                                # Never fail fold scoring because of threshold tuning.
+                                thr = 0.5
+                                threshold_fallback = 1.0
 
                     predictions = (probas > thr).astype(int)
+
+                    # Diagnostics for thresholding behavior.
+                    mlflow.log_metric(
+                        f"adaptive_threshold_applied_fold_{fold}",
+                        threshold_applied,
+                        step=fold,
+                    )
+                    mlflow.log_metric(
+                        f"adaptive_threshold_fallback_fold_{fold}",
+                        threshold_fallback,
+                        step=fold,
+                    )
+
+                    if np.isscalar(thr):
+                        mlflow.log_metric(
+                            f"threshold_value_fold_{fold}",
+                            float(thr),
+                            step=fold,
+                        )
+                        mlflow.log_metric(
+                            f"threshold_is_vector_fold_{fold}",
+                            0.0,
+                            step=fold,
+                        )
+                    else:
+                        thr_arr = np.asarray(thr, dtype=float)
+                        mlflow.log_metric(
+                            f"threshold_is_vector_fold_{fold}",
+                            1.0,
+                            step=fold,
+                        )
+                        mlflow.log_metric(
+                            f"threshold_value_mean_fold_{fold}",
+                            float(np.mean(thr_arr)),
+                            step=fold,
+                        )
+                        mlflow.log_metric(
+                            f"threshold_value_min_fold_{fold}",
+                            float(np.min(thr_arr)),
+                            step=fold,
+                        )
+                        mlflow.log_metric(
+                            f"threshold_value_max_fold_{fold}",
+                            float(np.max(thr_arr)),
+                            step=fold,
+                        )
                 else:
+                    # Onelabel task: log multiclass log-loss on probabilities.
+                    try:
+                        y_true_arr = np.asarray(y_te)
+                        if y_true_arr.ndim == 2 and y_true_arr.shape[1] > 1:
+                            y_true_logloss = np.argmax(y_true_arr, axis=1)
+                        else:
+                            y_true_logloss = y_true_arr.reshape(-1)
+
+                        probs_arr = np.asarray(probas, dtype=float)
+                        eps = 1e-10
+                        if probs_arr.ndim == 1:
+                            probs_arr = np.column_stack([1.0 - probs_arr, probs_arr])
+                        elif probs_arr.ndim == 2 and probs_arr.shape[1] == 1:
+                            p = probs_arr.reshape(-1)
+                            probs_arr = np.column_stack([1.0 - p, p])
+                        probs_arr = np.clip(probs_arr, eps, 1.0 - eps)
+                        probs_arr = probs_arr / probs_arr.sum(axis=1, keepdims=True)
+
+                        multiclass_logloss = log_loss(
+                            y_true_logloss,
+                            probs_arr,
+                            labels=list(range(probs_arr.shape[1])),
+                        )
+                        mlflow.log_metric(
+                            f"multiclass_logloss_fold_{fold}",
+                            float(multiclass_logloss),
+                            step=fold,
+                        )
+                    except Exception:
+                        pass
+
                     predictions = onelabel_postproc(probas)
 
                 # Standard metrics
