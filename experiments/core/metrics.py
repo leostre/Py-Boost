@@ -13,6 +13,26 @@ from sklearn.metrics import (
 AVERAGE = "weighted"
 ZERO_DIVISION = np.nan
 
+
+def exact_match_score(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    """
+    Exact match ratio:
+    (number of samples with fully correct label vector) / N.
+    """
+    y_true_arr = np.asarray(y_true)
+    y_pred_arr = np.asarray(y_pred)
+
+    if y_true_arr.shape != y_pred_arr.shape:
+        raise ValueError(f"Shape mismatch: y_true={y_true_arr.shape}, y_pred={y_pred_arr.shape}")
+
+    # Single-label: exact match is standard accuracy.
+    if y_true_arr.ndim == 1:
+        return float(np.mean(y_true_arr == y_pred_arr))
+
+    # Multilabel: all labels in a sample must match.
+    return float(np.mean(np.all(y_true_arr == y_pred_arr, axis=1)))
+
+
 METRICS = {
     "f1": partial(f1_score, average=AVERAGE, zero_division=ZERO_DIVISION),
     "f1_micro": partial(
@@ -22,6 +42,7 @@ METRICS = {
         f1_score, average="macro", zero_division=ZERO_DIVISION
     ),
     "accuracy": accuracy_score,
+    "exact_match": exact_match_score,
     "precision": partial(
         precision_score, average=AVERAGE, zero_division=ZERO_DIVISION
     ),
