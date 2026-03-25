@@ -15,6 +15,12 @@ ZERO_DIVISION = np.nan
 
 METRICS = {
     "f1": partial(f1_score, average=AVERAGE, zero_division=ZERO_DIVISION),
+    "f1_micro": partial(
+        f1_score, average="micro", zero_division=ZERO_DIVISION
+    ),
+    "f1_macro": partial(
+        f1_score, average="macro", zero_division=ZERO_DIVISION
+    ),
     "accuracy": accuracy_score,
     "precision": partial(
         precision_score, average=AVERAGE, zero_division=ZERO_DIVISION
@@ -31,6 +37,49 @@ def onelabel_postproc(pred: np.ndarray) -> np.ndarray:
     lb = LabelBinarizer()
     labels = lb.fit_transform(np.argmax(pred, -1))
     return labels
+
+
+def optimize_threshold_per_label(
+    y_true: np.ndarray, y_prob: np.ndarray, metric: str = "f1"
+) -> np.ndarray:
+    """
+    Optimize per-label decision thresholds for multilabel problems.
+
+    Matches the requested logic: for each label, compute precision/recall
+    over thresholds and pick the threshold maximizing F1.
+    """
+    if metric != "f1":
+        raise ValueError(
+            "Only metric='f1' is supported in optimize_threshold_per_label"
+        )
+    if y_true.ndim != 2 or y_prob.ndim != 2:
+        raise ValueError(
+            "Expected y_true and y_prob to be 2D arrays (n_samples, n_labels)"
+        )
+    if y_true.shape != y_prob.shape:
+        raise ValueError(f"Shape mismatch: y_true={y_true.shape}, y_prob={y_prob.shape}")
+
+    n_labels = y_true.shape[1]
+    thresholds: list[float] = []
+
+    from sklearn.metrics import precision_recall_curve
+
+    for i in range(n_labels):
+        precision, recall, thresh = precision_recall_curve(
+            y_true[:, i], y_prob[:, i]
+        )
+
+        f1_scores = 2 * (precision * recall) / (precision + recall + 1e-10)
+        best_idx = int(np.argmax(f1_scores))
+
+        # precision_recall_curve last threshold corresponds to 1.0
+        if best_idx < len(thresh):
+            best_thresh = float(thresh[best_idx])
+        else:
+            best_thresh = 1.0
+        thresholds.append(best_thresh)
+
+    return np.array(thresholds, dtype=float)
 
 
 def calculate_aggregated_metrics(fold_scores):

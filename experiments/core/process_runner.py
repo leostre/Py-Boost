@@ -13,7 +13,12 @@ import pandas as pd
 from experiments.data.load_data import SPECIAL_LOADERS
 from experiments.core.experiment import BaseExperiment, ExperimentContext
 from experiments.core.gpu import GPUTimer, initialize_gpu_settings, safe_predict
-from experiments.core.metrics import METRICS, ROCAUC_SCORE, onelabel_postproc
+from experiments.core.metrics import (
+    METRICS,
+    ROCAUC_SCORE,
+    onelabel_postproc,
+    optimize_threshold_per_label,
+)
 from experiments.core.model_timing import log_timing_data, time_patch_methods
 from experiments.core.mlflow_utils import log_param_dict, start_run_for_dataset
 
@@ -212,7 +217,23 @@ def _run_single_experiment_core(
 
                 # Post-process probabilities into discrete predictions
                 if context.task == "multilabel":
-                    thr = getattr(experiment, "pred_thr", 0.5)
+                    # BCE loss is computed on probabilities (not thresholded)
+                    y_true = y_te.astype(float)
+                    eps = 1e-10
+                    y_prob = np.clip(probas, eps, 1.0 - eps)
+                    bce_loss = -np.mean(
+                        y_true * np.log(y_prob) + (1.0 - y_true) * np.log(1.0 - y_prob)
+                    )
+                    mlflow.log_metric(
+                        f"bce_loss_fold_{fold}", float(bce_loss), step=fold
+                    )
+
+                    thr = getattr(experiment, "pred_thr")
+                    if thr is None or (
+                        isinstance(thr, str) and thr.lower() == "adaptive"
+                    ):
+                        thr = optimize_threshold_per_label(y_true, probas, metric="f1")
+
                     predictions = (probas > thr).astype(int)
                 else:
                     predictions = onelabel_postproc(probas)

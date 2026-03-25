@@ -5,6 +5,7 @@ from itertools import product
 from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 
 import mlflow
+import numpy as np
 
 from experiments.data.load_data import load_and_preprocess_datasets, SPECIAL_LOADERS
 from experiments.core.cv import FOLDS, SKLEARN_FOLDS
@@ -41,7 +42,10 @@ class BaseExperiment:
     # Default timeout (seconds) for a single parameter configuration
     timeout: int = 3600
     # Threshold for converting probabilities to labels in multilabel setting
-    pred_thr: float = 0.5
+    # - float: use constant threshold
+    # - "adaptive": learn per-label thresholds by maximizing per-label F1 on the
+    #   evaluation split (multilabel only)
+    pred_thr: Any = "adaptive"
 
     def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence[Any]]:
         """

@@ -18,10 +18,11 @@ def main(cfg: DictConfig):
     model_factory = hydra.utils.instantiate(cfg.model)
 
     datasets_cfg = hydra.utils.instantiate(cfg.datasets)
+    skip_datasets = getattr(experiment, "skip_datasets", ()) or {}
     datasets = {
         name: dict(d)
         for name, d in datasets_cfg.items()
-        if name not in getattr(experiment, "skip_datasets", ())
+        if name not in skip_datasets
     }
 
     runner = ExperimentRunner()
