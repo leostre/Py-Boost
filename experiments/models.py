@@ -4,6 +4,7 @@ from functools import partial
 
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
+from xgboost import XGBClassifier
 from py_boost.gpu.accumulation.history_callback import WeightedHistorySampling
 from py_boost.gpu.history_boosting import HistoryBasedBoostingModel
 from sklearn.multioutput import MultiOutputClassifier
@@ -25,6 +26,17 @@ def PreparedLGBM(**kwargs):
         'subsample_freq': 1,
         }, **kwargs
         )
+    )
+
+
+def PreparedXGBoost(**kwargs):
+    return MultiOutputClassifier(
+        XGBClassifier(**{
+            'random_state': 42,
+            'n_estimators': 500,
+            'objective': 'binary:logistic',
+            'eval_metric': 'logloss',
+        }, **kwargs)
     )
 
 HyperbolicHistoryBoost = partial(HistoryBasedBoostingModel, multioutput_sketch=HyperbolicWeightedHistorySampling)
