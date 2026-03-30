@@ -1,3 +1,25 @@
+rt_iot2022:
+  id: 942
+  source: "uci"
+
+age_prediction:
+  id: age_prediction
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_age_prediction
+
+mbd:
+  id: ai-lab/MBD-mini
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_mbd
+
+mediamill:
+  id: mediamill
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_mediamill
+
 yeast:
   id: "yeast"
   source: "openml"
@@ -13,22 +35,6 @@ birds:
   source: "openml"
   version: 3
 
-rt_iot2022:
-  id: 942
-  source: "uci"
-
-age_prediction:
-  id: age_prediction
-  source: custom
-  method:
-    _target_: experiments.data.load_data.load_age_prediction
-
-mediamill:
-  id: mediamill
-  source: custom
-  method:
-    _target_: experiments.data.load_data.load_mediamill
-
 mnist:
   id: mnist_784
   source: custom
@@ -40,9 +46,3 @@ cifar10:
   source: custom
   method:
     _target_: experiments.data.load_data.load_cifar10
-
-mbd:
-  id: ai-lab/MBD-mini
-  source: custom
-  method:
-    _target_: experiments.data.load_data.load_mbd
