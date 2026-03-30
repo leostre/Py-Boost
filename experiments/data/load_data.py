@@ -65,6 +65,23 @@ def load_cifar10():
         fold += 1
     assert fold > 0, 'No folds were returned'
 
+def load_delicious():
+    fold = 0
+    path = EXPERIMENTS_DATA_PATH + '/delicious'
+    assert os.path.exists(path)
+    while os.path.exists(path + f'/fold_{fold}'):
+        fold_path = path + f'/fold_{fold}'
+        xtr = np.load(fold_path + '/xtr.npy')
+        ytr = np.load(fold_path + '/ytr.npy')
+        xte = np.load(fold_path + '/xte.npy')
+        yte = np.load(fold_path + '/yte.npy')
+        lb = LabelBinarizer()
+        ytr = lb.fit_transform(ytr)
+        yte = lb.transform(yte)
+        yield xtr, ytr, xte, yte, fold
+        fold += 1
+    assert fold > 0, 'No folds were returned'
+
 
 def load_mediamill():
     raw_data, meta = arff.loadarff(os.path.join(EXPERIMENTS_DATA_PATH, 'mediamill', 'mediamill.arff'))
@@ -233,6 +250,7 @@ DATASETS = {
                       'method': load_mediamill,
                       'method_params': {}},
     'mnist': {'id': 'mnist_784', 'source': 'custom', 'method': load_mnist},
+    'delicious': {'id': 'delicious', 'source': 'custom', 'method': load_delicious},
     'cifar10': {'id': 'cifar10', 'source': 'custom', 'method': load_cifar10},
     'mbd': {'id': 'ai-lab/MBD-mini', 'source': 'custom', 'method': load_mbd}
 }
@@ -240,6 +258,7 @@ DATASETS = {
 SPECIAL_LOADERS = {
     'mnist': {'loader': load_mnist, 'n_classes': 10, 'task': 'onelabel'},
     'cifar10': {'loader': load_cifar10, 'n_classes': 10, 'task': 'onelabel'},
+    'delicious': {'loader': load_delicious, 'n_classes': 983, 'task': 'multilabel'},
     'age_prediction': {'loader': load_age_prediction, 'n_classes': 4, 'task': 'onelabel'},
     'mbd': {'loader': load_mbd, 'n_classes': 4, 'task': 'multilabel'}
 }

@@ -46,3 +46,9 @@ cifar10:
   source: custom
   method:
     _target_: experiments.data.load_data.load_cifar10
+
+delicious:
+  id: delicious
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_delicious
