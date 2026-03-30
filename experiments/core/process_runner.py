@@ -24,6 +24,26 @@ from experiments.core.model_timing import log_timing_data, time_patch_methods
 from experiments.core.mlflow_utils import log_param_dict, start_run_for_dataset
 
 
+def _y_for_stratified_cv_split(y, task: str):
+    """
+    StratifiedKFold only accepts binary / multiclass as a 1D vector of class
+    labels. One-hot targets from LabelBinarizer are 2D {0,1} with row-sum 1;
+    sklearn treats them as multilabel-indicator and raises.
+    """
+    y_arr = np.asarray(y)
+    if task == "multilabel":
+        return y_arr
+    if y_arr.ndim == 2:
+        if y_arr.shape[1] == 1:
+            return y_arr.ravel()
+        uniq = np.unique(y_arr)
+        if np.all(np.isin(uniq, [0, 1])) and np.allclose(
+            y_arr.sum(axis=1), 1.0, rtol=0.0, atol=1e-7
+        ):
+            return np.argmax(y_arr, axis=1)
+    return np.ravel(y_arr)
+
+
 def run_experiment_in_process(
     experiment: BaseExperiment,
     model_factory,
@@ -357,7 +377,11 @@ def _run_single_experiment_core(
                     except Exception:
                         pass
 
-                    predictions = onelabel_postproc(probas)
+                    n_cls = context.n_classes
+                    yt = np.asarray(y_te)
+                    if yt.ndim == 2 and yt.shape[1] > 1:
+                        n_cls = int(yt.shape[1])
+                    predictions = onelabel_postproc(probas, n_classes=n_cls)
 
                 # Standard metrics
                 fold_metric_values: Dict[str, float] = {}
@@ -402,7 +426,10 @@ def _run_single_experiment_core(
                 del model
 
         if dataset_name not in SPECIAL_LOADERS:
-            for fold, (train_idx, test_idx) in enumerate(context.cv.split(X, y)):
+            y_split = _y_for_stratified_cv_split(y, context.task)
+            for fold, (train_idx, test_idx) in enumerate(
+                context.cv.split(X, y_split)
+            ):
                 X_train, X_test = X[train_idx], X[test_idx]
                 y_train, y_test = y[train_idx], y[test_idx]
                 after_split_training(X_train, y_train, X_test, y_test, fold)

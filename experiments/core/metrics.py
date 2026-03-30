@@ -52,12 +52,23 @@ METRICS = {
 ROCAUC_SCORE = partial(roc_auc_score, average=AVERAGE, multi_class="ovr")
 
 
-def onelabel_postproc(pred: np.ndarray) -> np.ndarray:
+def onelabel_postproc(pred: np.ndarray, n_classes: int | None = None) -> np.ndarray:
+    """
+    One-hot predictions aligned to ``n_classes`` columns.
+
+    Fitting ``LabelBinarizer`` only on predicted labels can yield fewer columns
+    than ``y_true`` (e.g. one-hot from training with all classes). Pass
+    ``n_classes`` (typically ``y_test.shape[1]`` or ``context.n_classes``).
+    """
     from sklearn.preprocessing import LabelBinarizer
 
+    pred = np.asarray(pred)
+    y_pred_labels = np.argmax(pred, axis=-1)
+    if n_classes is None:
+        n_classes = int(pred.shape[-1])
     lb = LabelBinarizer()
-    labels = lb.fit_transform(np.argmax(pred, -1))
-    return labels
+    lb.fit(np.arange(n_classes, dtype=int))
+    return lb.transform(y_pred_labels)
 
 
 def optimize_threshold_per_label(

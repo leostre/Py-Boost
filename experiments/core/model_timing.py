@@ -1,3 +1,4 @@
+import functools
 import inspect
 import types
 from typing import Dict, Iterable
@@ -18,6 +19,9 @@ def time_patch_methods(model, method_names: Iterable[str]) -> Dict[str, dict]:
         if method_name not in timing_data:
             timing_data[method_name] = {"total_time": 0.0, "call_count": 0}
 
+        underlying = getattr(original_method, "__func__", original_method)
+
+        @functools.wraps(underlying)
         def timed_wrapper(*args, **kwargs):
             with GPUTimer() as timer:
                 result = original_method(*args, **kwargs)
@@ -25,9 +29,16 @@ def time_patch_methods(model, method_names: Iterable[str]) -> Dict[str, dict]:
             timing_data[method_name]["call_count"] += 1
             return result
 
+        # Marker to make patching idempotent across folds/runs.
+        timed_wrapper._is_timed_wrapper = True
         return timed_wrapper
 
     def patch_method(obj, method_name, original_method):
+        # Skip methods that are already wrapped to avoid recursive wrapping.
+        maybe_func = getattr(original_method, "__func__", original_method)
+        if getattr(maybe_func, "_is_timed_wrapper", False):
+            return
+
         timed_method = create_timed_method(original_method, method_name)
         if inspect.isclass(obj):
             setattr(obj, method_name, timed_method)
