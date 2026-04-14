@@ -71,10 +71,10 @@ def load_delicious():
     assert os.path.exists(path)
     while os.path.exists(path + f'/fold_{fold}'):
         fold_path = path + f'/fold_{fold}'
-        xtr = np.load(fold_path + '/xtr.npy')
-        ytr = np.load(fold_path + '/ytr.npy')
-        xte = np.load(fold_path + '/xte.npy')
-        yte = np.load(fold_path + '/yte.npy')
+        xtr = pd.read_parquet(fold_path + '/xtr.parquet').values
+        ytr = pd.read_parquet(fold_path + '/ytr.parquet').values
+        xte = pd.read_parquet(fold_path + '/xte.parquet').values
+        yte = pd.read_parquet(fold_path + '/yte.parquet').values
         lb = LabelBinarizer()
         ytr = lb.fit_transform(ytr)
         yte = lb.transform(yte)

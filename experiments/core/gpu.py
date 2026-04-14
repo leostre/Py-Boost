@@ -71,17 +71,55 @@ def nuclear_cleanup() -> None:
         pass
 
 
+def _sklearn_feature_names_for_predict(model):
+    """
+    If the fitted estimator recorded feature names (e.g. LGBM on DataFrame),
+    return them so batched predict can use matching pandas inputs and avoid
+    sklearn's 'X does not have valid feature names' warning.
+    """
+    fn = getattr(model, "feature_names_in_", None)
+    if fn is not None and len(fn) > 0:
+        return list(fn)
+    estimators = getattr(model, "estimators_", None)
+    if estimators is not None and len(estimators) > 0:
+        sub = estimators[0]
+        fn = getattr(sub, "feature_names_in_", None)
+        if fn is not None and len(fn) > 0:
+            return list(fn)
+    return None
+
+
 def safe_predict(model, X_test, batch_size: int = 1000):
     """
     Run predictions in batches to reduce peak memory usage.
+
+    When the underlying estimator was fit with feature names (common for
+    ``MultiOutputClassifier`` + ``LGBMClassifier``), batches are wrapped in a
+    ``pandas.DataFrame`` with those column names so predict matches training.
     """
+    import numpy as np
+    import pandas as pd
+
+    names = _sklearn_feature_names_for_predict(model)
+
+    if isinstance(X_test, pd.DataFrame):
+        n = len(X_test)
+        predictions = []
+        for i in range(0, n, batch_size):
+            batch = X_test.iloc[i : min(i + batch_size, n)]
+            pred_batch = model.predict(batch)
+            predictions.append(pred_batch)
+        return np.concatenate(predictions)
+
+    X_arr = np.asarray(X_test)
+    n = len(X_arr)
     predictions = []
-    n = len(X_test)
     for i in range(0, n, batch_size):
-        batch = X_test[i : min(i + batch_size, n)]
+        batch = X_arr[i : min(i + batch_size, n)]
+        if names is not None and batch.ndim == 2 and batch.shape[1] == len(names):
+            batch = pd.DataFrame(batch, columns=names)
         pred_batch = model.predict(batch)
         predictions.append(pred_batch)
-    import numpy as np
 
     return np.concatenate(predictions)
 
