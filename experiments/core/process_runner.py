@@ -10,6 +10,7 @@ import mlflow
 import numpy as np
 import pandas as pd
 from sklearn.metrics import log_loss
+from sklearn.model_selection import StratifiedGroupKFold
 
 from experiments.data.load_data import SPECIAL_LOADERS
 from experiments.core.experiment import BaseExperiment, ExperimentContext
@@ -42,6 +43,22 @@ def _y_for_stratified_cv_split(y, task: str):
         ):
             return np.argmax(y_arr, axis=1)
     return np.ravel(y_arr)
+
+
+def _feature_row_groups(X) -> np.ndarray:
+    """
+    Build stable group ids so identical feature rows stay in the same fold.
+    Used to prevent duplicate-row leakage in grouped CV.
+    """
+    if isinstance(X, pd.DataFrame):
+        hashes = pd.util.hash_pandas_object(X, index=False).to_numpy()
+    else:
+        x_arr = np.asarray(X)
+        if x_arr.ndim != 2:
+            x_arr = np.atleast_2d(x_arr)
+        x_df = pd.DataFrame(x_arr)
+        hashes = pd.util.hash_pandas_object(x_df, index=False).to_numpy()
+    return hashes
 
 
 def run_experiment_in_process(
@@ -427,8 +444,24 @@ def _run_single_experiment_core(
 
         if dataset_name not in SPECIAL_LOADERS:
             y_split = _y_for_stratified_cv_split(y, context.task)
+            splitter = context.cv
+            split_kwargs = {}
+
+            # rt_iot2022 has duplicate rows crossing random stratified splits.
+            # Keep identical feature rows in the same fold while preserving class stratification.
+            if dataset_name == "rt_iot2022" and context.task == "onelabel":
+                n_splits = getattr(context.cv, "n_splits", 5)
+                shuffle = getattr(context.cv, "shuffle", True)
+                random_state = getattr(context.cv, "random_state", 42) if shuffle else None
+                splitter = StratifiedGroupKFold(
+                    n_splits=n_splits,
+                    shuffle=shuffle,
+                    random_state=random_state,
+                )
+                split_kwargs["groups"] = _feature_row_groups(X)
+
             for fold, (train_idx, test_idx) in enumerate(
-                context.cv.split(X, y_split)
+                splitter.split(X, y_split, **split_kwargs)
             ):
                 X_train, X_test = X[train_idx], X[test_idx]
                 y_train, y_test = y[train_idx], y[test_idx]
