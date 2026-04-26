@@ -342,15 +342,23 @@ class MDOB(SketchBoost):
                         f"max_otree_ngroups={max_otree_ngroups})"
                     ) from e
 
+            def _alpha_float(a) -> float:
+                if isinstance(a, cp.ndarray):
+                    return float(a.item())
+                if hasattr(a, "item"):
+                    return float(a.item())
+                return float(a)
+
             _sync("post_alloc_and_init")
 
             alpha = 0.0
             for tree, otree, alpha in zip(self.models, self.ortho_branch, self.alpha):
+                alpha_f = _alpha_float(alpha)
                 # Strict mode: synchronize before and after each branch call so
                 # the failing kernel surfaces at the exact call site.
                 _sync("pre_tree_predict")
                 try:
-                    pred = cp.ascontiguousarray(tree.predict(X, gpu_pred, leaves_tree[:, :tree.ngroups]))
+                    tree.predict(X, gpu_pred, leaves_tree[:, :tree.ngroups])
                     _sync("post_tree_predict")
                 except Exception as e:
                     raise RuntimeError(
@@ -358,10 +366,12 @@ class MDOB(SketchBoost):
                         f"X_shape={getattr(X, 'shape', None)}, pred_shape={gpu_pred.shape}, "
                         f"leaves_shape={leaves_tree[:, :tree.ngroups].shape}"
                     ) from e
-                gpu_pred -= alpha * pred
+                # tree.predict updates gpu_pred in-place; preserve existing math:
+                # gpu_pred -= alpha * gpu_pred  <=>  gpu_pred *= (1 - alpha)
+                gpu_pred *= (1.0 - alpha_f)
                 _sync("post_tree_blend")
                 try:
-                    pred = cp.ascontiguousarray(otree.predict(X, ogpu_pred, leaves_otree[:, :otree.ngroups]))
+                    otree.predict(X, ogpu_pred, leaves_otree[:, :otree.ngroups])
                     _sync("post_otree_predict")
                 except Exception as e:
                     raise RuntimeError(
@@ -369,7 +379,9 @@ class MDOB(SketchBoost):
                         f"X_shape={getattr(X, 'shape', None)}, pred_shape={ogpu_pred.shape}, "
                         f"leaves_shape={leaves_otree[:, :otree.ngroups].shape}"
                     ) from e
-                ogpu_pred -= (1 - alpha) * pred
+                # otree.predict updates ogpu_pred in-place; preserve existing math:
+                # ogpu_pred -= (1-alpha) * ogpu_pred  <=>  ogpu_pred *= alpha
+                ogpu_pred *= alpha_f
                 _sync("post_otree_blend")
 
             gpu_pred += alpha * ogpu_pred
