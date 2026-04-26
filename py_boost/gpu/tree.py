@@ -292,6 +292,47 @@ class Tree:
 
         if pred_leaves is None:
             pred_leaves = cp.empty((X.shape[0], self.ngroups), dtype=cp.int32)
+        elif pred_leaves.shape[1] < self.ngroups:
+            raise ValueError(
+                f"pred_leaves has insufficient width: {pred_leaves.shape[1]} < ngroups={self.ngroups}"
+            )
+        if self.test_format is None or self.test_format_offsets is None:
+            raise ValueError("Tree is not reformatted for prediction (missing test_format buffers)")
+        if not isinstance(self.test_format, cp.ndarray) or not isinstance(
+            self.test_format_offsets, cp.ndarray
+        ):
+            raise TypeError(
+                "Tree buffers must be on GPU. "
+                f"test_format_type={type(self.test_format)}, "
+                f"test_format_offsets_type={type(self.test_format_offsets)}"
+            )
+        if self.test_format.dtype != cp.float32:
+            raise TypeError(f"test_format dtype must be float32, got {self.test_format.dtype}")
+        if self.test_format_offsets.dtype != cp.int32:
+            raise TypeError(
+                f"test_format_offsets dtype must be int32, got {self.test_format_offsets.dtype}"
+            )
+        if int(self.test_format_offsets.shape[0]) != int(self.ngroups):
+            raise ValueError(
+                "Invalid test_format_offsets size for tree groups: "
+                f"offsets={self.test_format_offsets.shape[0]}, ngroups={self.ngroups}"
+            )
+        if self.test_format.shape[0] % 4 != 0:
+            raise ValueError(
+                f"Invalid test_format length (must be divisible by 4): {self.test_format.shape[0]}"
+            )
+        if pred_leaves.dtype != cp.int32:
+            raise TypeError(f"pred_leaves dtype must be int32, got {pred_leaves.dtype}")
+        if pred_leaves.shape[1] < self.ngroups:
+            raise ValueError(
+                f"pred_leaves width too small: {pred_leaves.shape[1]} < ngroups={self.ngroups}"
+            )
+        if not (X.flags["C_CONTIGUOUS"] or X.flags["F_CONTIGUOUS"]):
+            raise ValueError(
+                "X must be C/F contiguous before kernel launch. "
+                f"shape={X.shape}, dtype={X.dtype}, c={X.flags['C_CONTIGUOUS']}, f={X.flags['F_CONTIGUOUS']}"
+            )
+        n_tree_nodes = int(self.test_format.shape[0] // 4)
 
         # CUDA parameters initialization
         threads = 128  # threads in one CUDA block
@@ -304,6 +345,7 @@ class Tree:
             tree_prediction_leaves_typed_kernels[dt]((blocks,), (threads,), ((X,
                                                                               self.test_format,
                                                                               self.test_format_offsets,
+                                                                              n_tree_nodes,
                                                                               X.shape[1],
                                                                               X.shape[0],
                                                                               self.ngroups,
@@ -313,13 +355,17 @@ class Tree:
             tree_prediction_leaves_typed_kernels_f[dt]((blocks,), (threads,), ((X,
                                                                                 self.test_format,
                                                                                 self.test_format_offsets,
+                                                                                n_tree_nodes,
                                                                                 X.shape[1],
                                                                                 X.shape[0],
                                                                                 self.ngroups,
                                                                                 pred_leaves.shape[1],
                                                                                 pred_leaves)))
         else:
-            raise Exception("X must be 'C_CONTIGUOUS' or 'F_CONTIGUOUS'")
+            raise RuntimeError(
+                "Unexpected non-contiguous X at kernel launch "
+                f"(shape={X.shape}, dtype={X.dtype})"
+            )
         return pred_leaves
 
     def predict(self, X, pred=None, pred_leaves=None):

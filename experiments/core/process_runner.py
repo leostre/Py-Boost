@@ -3,7 +3,6 @@ import os
 import shutil
 import tempfile
 from typing import Any, Dict, Tuple
-import pickle
 import traceback
 
 import mlflow
@@ -61,6 +60,107 @@ def _feature_row_groups(X) -> np.ndarray:
     return hashes
 
 
+def _to_metric_name(name: str) -> str:
+    return (
+        str(name)
+        .strip()
+        .replace(" ", "_")
+        .replace("/", "_")
+        .replace(".", "_")
+        .replace("-", "_")
+    )
+
+
+def _extract_alpha_array(history: Any):
+    if history is None:
+        return None
+    if isinstance(history, dict):
+        if "alpha" in history:
+            try:
+                arr = np.asarray(history["alpha"])
+                if arr.size:
+                    return arr
+            except Exception:
+                return None
+        for v in history.values():
+            arr = _extract_alpha_array(v)
+            if arr is not None:
+                return arr
+    return None
+
+
+def _log_alpha_artifact(history: Any, fold: int, output_dir: str) -> None:
+    alpha_arr = _extract_alpha_array(history)
+    if alpha_arr is None:
+        return
+    alpha_dir = os.path.join(output_dir, "alpha_artifacts")
+    os.makedirs(alpha_dir, exist_ok=True)
+    alpha_path = os.path.join(alpha_dir, f"alpha_fold_{fold}.npy")
+    np.save(alpha_path, alpha_arr)
+    mlflow.log_artifact(alpha_path, artifact_path="alpha_artifacts")
+
+
+def _log_history_metrics(history: Any, fold: int, prefix: str = "history") -> None:
+    """
+    Log model history payload as MLflow metrics for the current fold.
+    Supports nested dicts/lists/arrays and logs numeric values only.
+    """
+    if history is None:
+        return
+
+    if isinstance(history, dict):
+        for k, v in history.items():
+            # Alpha is tracked as a fold artifact array, not as per-index metrics.
+            if _to_metric_name(k) == "alpha":
+                continue
+            _log_history_metrics(v, fold=fold, prefix=f"{prefix}_{_to_metric_name(k)}")
+        return
+
+    if isinstance(history, (list, tuple)):
+        arr = np.asarray(history)
+    elif isinstance(history, np.ndarray):
+        arr = history
+    else:
+        arr = None
+
+    if arr is not None:
+        if arr.size == 0:
+            return
+        # scalar-like arrays
+        if arr.ndim == 0:
+            try:
+                mlflow.log_metric(f"{prefix}_fold_{fold}", float(arr), step=fold)
+            except Exception:
+                pass
+            return
+
+        # vector-like numeric payloads: per-index + summary stats
+        try:
+            arr_f = arr.astype(float).reshape(-1)
+        except Exception:
+            return
+
+        for i, val in enumerate(arr_f):
+            try:
+                mlflow.log_metric(f"{prefix}_{i}_fold_{fold}", float(val), step=fold)
+            except Exception:
+                continue
+        try:
+            mlflow.log_metric(f"{prefix}_mean_fold_{fold}", float(np.mean(arr_f)), step=fold)
+            mlflow.log_metric(f"{prefix}_min_fold_{fold}", float(np.min(arr_f)), step=fold)
+            mlflow.log_metric(f"{prefix}_max_fold_{fold}", float(np.max(arr_f)), step=fold)
+        except Exception:
+            pass
+        return
+
+    # plain scalar
+    if isinstance(history, (int, float, np.number, bool)):
+        try:
+            mlflow.log_metric(f"{prefix}_fold_{fold}", float(history), step=fold)
+        except Exception:
+            pass
+
+
 def run_experiment_in_process(
     experiment: BaseExperiment,
     model_factory,
@@ -102,9 +202,26 @@ def run_experiment_in_process(
         run_name,
         temp_dir,
     )
-    ctx = mp.get_context("spawn")
-    result_queue = ctx.Queue()
-    process = ctx.Process(target=_process_worker, args=(result_queue, worker_args))
+    try:
+        ctx = mp.get_context("spawn")
+        result_queue = ctx.Queue()
+        process = ctx.Process(target=_process_worker, args=(result_queue, worker_args))
+    except (BrokenPipeError, OSError, RuntimeError) as e:
+        # Docker / constrained IPC: semaphore registration for mp.Queue can fail.
+        print(
+            f"[process_runner] Multiprocessing init failed ({type(e).__name__}: {e}); "
+            "falling back to in-process execution."
+        )
+        return _run_single_experiment_core(
+            experiment,
+            model_factory,
+            params,
+            X,
+            y,
+            context,
+            run_name,
+            temp_dir,
+        )
 
     process.start()
     process.join(timeout=timeout)
@@ -159,7 +276,6 @@ def _run_single_experiment_core(
 
     os.makedirs(output_dir, exist_ok=True)
 
-    histories = []
     fold_scores: Dict[str, list] = {metric_name: [] for metric_name in METRICS.keys()}
     training_times: list[float] = []
     num_trees_list: list[int] = []
@@ -421,11 +537,6 @@ def _run_single_experiment_core(
                         )
                         results_df.loc[len(results_df)] = row
 
-                # Store history if available
-                history = getattr(model, "history", None)
-                if history is not None:
-                    histories.append(history)
-
                 experiment.after_fold(
                     context=context,
                     fold_idx=fold,
@@ -436,8 +547,22 @@ def _run_single_experiment_core(
                     fold_metrics=fold_metric_values,
                 )
 
+                # Store history as MLflow metrics (after hooks may populate it).
+                history = getattr(model, "history", None)
+                _log_alpha_artifact(history=history, fold=fold, output_dir=output_dir)
+                _log_history_metrics(history=history, fold=fold, prefix="history")
+
             except Exception as e:
-                mlflow.log_param(f"fold_{fold}_error", traceback.format_exc())
+                err_text = traceback.format_exc()
+                mlflow.log_param(f"fold_{fold}_error", err_text)
+                # CUDA illegal-address corrupts the current CUDA context.
+                # Continuing to next folds only yields secondary failures (malloc/Event/etc).
+                err_lower = err_text.lower()
+                if "cudaerrorillegaladdress" in err_lower or "cuda_error_illegal_address" in err_lower:
+                    raise RuntimeError(
+                        f"Fatal CUDA illegal-address in fold {fold}. "
+                        "Aborting remaining folds for this run to avoid cascading errors."
+                    ) from e
             finally:
                 # Explicitly drop references to the model
                 del model
@@ -450,7 +575,7 @@ def _run_single_experiment_core(
             # rt_iot2022 has duplicate rows crossing random stratified splits.
             # Keep identical feature rows in the same fold while preserving class stratification.
             if dataset_name == "rt_iot2022" and context.task == "onelabel":
-                n_splits = getattr(context.cv, "n_splits", 5)
+                n_splits = getattr(context.cv, "n_splits", 3)
                 shuffle = getattr(context.cv, "shuffle", True)
                 random_state = getattr(context.cv, "random_state", 42) if shuffle else None
                 splitter = StratifiedGroupKFold(
@@ -472,7 +597,6 @@ def _run_single_experiment_core(
                 # loaders yield (X_train, y_train, X_test, y_test, fold)
                 after_split_training(*data)
 
-        histories_file = None
         results_file = None
         if results_df is not None and not results_df.empty:
             results_file = os.path.join(
@@ -480,14 +604,6 @@ def _run_single_experiment_core(
             )
             results_df.to_csv(results_file, index=False)
             mlflow.log_artifact(results_file)
-
-        if histories:
-            histories_file = os.path.join(
-                output_dir, f"histories_{dataset_name}_{run_name}.pkl"
-            )
-            with open(histories_file, "wb") as file:
-                pickle.dump(histories, file)
-            mlflow.log_artifact(histories_file)
 
     return {
         "run_id": run_id,
@@ -497,7 +613,7 @@ def _run_single_experiment_core(
         "success": True,
         "artifact_files": {
             "results": results_file,
-            "histories": histories_file,
+            "histories": None,
         },
     }
 

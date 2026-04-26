@@ -1,0 +1,27 @@
+services:
+  experiment:
+    image: nvidia/cuda:12.4.0-devel-ubuntu22.04
+    container_name: "py-boost-experiment-${SUFFIX:-baselines}"
+    gpus:
+      - device: "${GPU_ID:-0}"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=${GPU_ID:-0}
+      - CUDA_VISIBLE_DEVICES=${GPU_ID:-0}
+      - NUMBA_THREADING_LAYER=workqueue
+      - HYDRA_FULL_ERROR=1
+      - PY_BOOST_DISABLE_MP=1
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: >
+      bash -lc
+      "apt-get update &&
+       apt-get install -y python3 python3-pip curl git &&
+       rm -rf /var/lib/apt/lists/* &&
+       curl -LsSf https://astral.sh/uv/install.sh | sh &&
+       export PATH=\"/root/.local/bin:$PATH\" &&
+       uv pip install --system -e . &&
+       uv pip install --system -r experiments/requirements.txt &&
+       exec -a \"py-boost-experiment-${SUFFIX:-baselines}\" python3 ${SCRIPT:--m\ experiments.exp} ${ARGS:---config-name\ baselines}"

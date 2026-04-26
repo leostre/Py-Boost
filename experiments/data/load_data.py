@@ -255,6 +255,12 @@ def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) 
     for name, dataset_info in datasets:
         n_classes = processed_dataset = None
         try:
+            if name in SPECIAL_LOADERS:
+                # Special loaders are consumed downstream fold-by-fold and do not
+                # provide a standard {"features","target","metadata"} payload here.
+                n_classes = SPECIAL_LOADERS[name].get("n_classes")
+                processed_dataset = None
+                continue
             if dataset_info is None:
                 logger.error(f"Dataset loader returned None for {name}")
                 continue
@@ -302,7 +308,7 @@ DATASETS = {
     'genbase': {'id': 'genbase', 'source': 'openml', 'version': 2},
     'birds': {'id': 'birds', 'source': 'openml', 'version': 3},
     'rt_iot2022': {'id': 942, 'source': 'uci'},
-    'age_prediction': {},
+    'age_prediction': {'id': 'age_prediction', 'source': 'custom', 'method': load_age_prediction},
     'mediamill': {'id': 'mediamill', 'source': 'custom',
                       'method': load_mediamill,
                       'method_params': {}},

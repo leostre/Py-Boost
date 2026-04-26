@@ -15,18 +15,33 @@ class GPUTimer:
         self.time: Optional[float] = None
         self.start_event: Optional[cp.cuda.Event] = None
         self.end_event: Optional[cp.cuda.Event] = None
+        self._enabled: bool = True
 
     def __enter__(self) -> "GPUTimer":
-        self.start_event = cp.cuda.Event()
-        self.end_event = cp.cuda.Event()
-        self.start_event.record()
+        try:
+            self.start_event = cp.cuda.Event()
+            self.end_event = cp.cuda.Event()
+            self.start_event.record()
+            self._enabled = True
+        except Exception:
+            # If CUDA is already in a bad state (e.g. illegal address from a prior kernel),
+            # timer creation itself can fail and mask the real error. Degrade to no-op.
+            self._enabled = False
+            self.start_event = None
+            self.end_event = None
         return self
 
     def __exit__(self, *args, **kwargs) -> None:
+        if not self._enabled:
+            return
         assert self.end_event is not None and self.start_event is not None
-        self.end_event.record()
-        self.end_event.synchronize()
-        self.time = cp.cuda.get_elapsed_time(self.start_event, self.end_event)
+        try:
+            self.end_event.record()
+            self.end_event.synchronize()
+            self.time = cp.cuda.get_elapsed_time(self.start_event, self.end_event)
+        except Exception:
+            # Keep timer best-effort only.
+            self.time = None
 
 
 def initialize_gpu_settings() -> None:

@@ -2,7 +2,7 @@ from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 from sklearn.model_selection import StratifiedKFold
 
 RANDOM_STATE = 42
-N_SPLITS = 5
+N_SPLITS = 3
 
 FOLDS = MultilabelStratifiedKFold(
     n_splits=N_SPLITS,
