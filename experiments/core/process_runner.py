@@ -100,67 +100,6 @@ def _log_alpha_artifact(history: Any, fold: int, output_dir: str) -> None:
     mlflow.log_artifact(alpha_path, artifact_path="alpha_artifacts")
 
 
-def _log_history_metrics(history: Any, fold: int, prefix: str = "history") -> None:
-    """
-    Log model history payload as MLflow metrics for the current fold.
-    Supports nested dicts/lists/arrays and logs numeric values only.
-    """
-    if history is None:
-        return
-
-    if isinstance(history, dict):
-        for k, v in history.items():
-            # Alpha is tracked as a fold artifact array, not as per-index metrics.
-            if _to_metric_name(k) == "alpha":
-                continue
-            _log_history_metrics(v, fold=fold, prefix=f"{prefix}_{_to_metric_name(k)}")
-        return
-
-    if isinstance(history, (list, tuple)):
-        arr = np.asarray(history)
-    elif isinstance(history, np.ndarray):
-        arr = history
-    else:
-        arr = None
-
-    if arr is not None:
-        if arr.size == 0:
-            return
-        # scalar-like arrays
-        if arr.ndim == 0:
-            try:
-                mlflow.log_metric(f"{prefix}_fold_{fold}", float(arr), step=fold)
-            except Exception:
-                pass
-            return
-
-        # vector-like numeric payloads: per-index + summary stats
-        try:
-            arr_f = arr.astype(float).reshape(-1)
-        except Exception:
-            return
-
-        for i, val in enumerate(arr_f):
-            try:
-                mlflow.log_metric(f"{prefix}_{i}_fold_{fold}", float(val), step=fold)
-            except Exception:
-                continue
-        try:
-            mlflow.log_metric(f"{prefix}_mean_fold_{fold}", float(np.mean(arr_f)), step=fold)
-            mlflow.log_metric(f"{prefix}_min_fold_{fold}", float(np.min(arr_f)), step=fold)
-            mlflow.log_metric(f"{prefix}_max_fold_{fold}", float(np.max(arr_f)), step=fold)
-        except Exception:
-            pass
-        return
-
-    # plain scalar
-    if isinstance(history, (int, float, np.number, bool)):
-        try:
-            mlflow.log_metric(f"{prefix}_fold_{fold}", float(history), step=fold)
-        except Exception:
-            pass
-
-
 def run_experiment_in_process(
     experiment: BaseExperiment,
     model_factory,
@@ -550,7 +489,6 @@ def _run_single_experiment_core(
                 # Store history as MLflow metrics (after hooks may populate it).
                 history = getattr(model, "history", None)
                 _log_alpha_artifact(history=history, fold=fold, output_dir=output_dir)
-                _log_history_metrics(history=history, fold=fold, prefix="history")
 
             except Exception as e:
                 err_text = traceback.format_exc()
