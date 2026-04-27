@@ -2,6 +2,7 @@ import multiprocessing as mp
 import os
 import shutil
 import tempfile
+import inspect
 from typing import Any, Dict, Tuple
 import traceback
 
@@ -309,6 +310,7 @@ def _run_single_experiment_core(
                     pass
 
                 # Post-process probabilities into discrete predictions
+                threshold_info: Dict[str, Any] | None = None
                 if context.task == "multilabel":
                     threshold_applied = 0.0
                     threshold_fallback = 0.0
@@ -371,6 +373,12 @@ def _run_single_experiment_core(
                                 threshold_fallback = 1.0
 
                     predictions = (probas > thr).astype(int)
+                    threshold_info = {
+                        "threshold": thr,
+                        "adaptive_applied": bool(threshold_applied),
+                        "adaptive_fallback": bool(threshold_fallback),
+                        "is_vector": not np.isscalar(thr),
+                    }
 
                     # Diagnostics for thresholding behavior.
                     mlflow.log_metric(
@@ -476,7 +484,7 @@ def _run_single_experiment_core(
                         )
                         results_df.loc[len(results_df)] = row
 
-                experiment.after_fold(
+                after_fold_kwargs = dict(
                     context=context,
                     fold_idx=fold,
                     model=model,
@@ -485,6 +493,9 @@ def _run_single_experiment_core(
                     predictions=predictions,
                     fold_metrics=fold_metric_values,
                 )
+                if "threshold_info" in inspect.signature(experiment.after_fold).parameters:
+                    after_fold_kwargs["threshold_info"] = threshold_info
+                experiment.after_fold(**after_fold_kwargs)
 
                 # Store history as MLflow metrics (after hooks may populate it).
                 history = getattr(model, "history", None)

@@ -98,6 +98,7 @@ class MDOBExperiment(_BaseMDOBExperiment):
         probas,
         predictions,
         fold_metrics: Dict[str, float],
+        threshold_info: Dict[str, Any] | None = None,
     ) -> None:
         model.history = {"alpha": self._to_numpy_array(getattr(model, "alpha", []))}
         return None
@@ -122,6 +123,7 @@ class MDOBSepAlphaExperiment(_BaseMDOBExperiment):
         probas,
         predictions,
         fold_metrics: Dict[str, float],
+        threshold_info: Dict[str, Any] | None = None,
     ) -> None:
         model.history = {"alpha": self._to_numpy_array(getattr(model, "alpha", []))}
         return None
@@ -139,6 +141,17 @@ class MDOBSeqExperiment(_BaseMDOBExperiment):
 
 
 class _BranchingMDOBExperiment(_BaseMDOBExperiment):
+    @staticmethod
+    def _threshold_predictions(proba: np.ndarray, threshold_info: Dict[str, Any] | None) -> np.ndarray:
+        if threshold_info is None:
+            thr = 0.5
+        else:
+            thr = threshold_info.get("threshold", 0.5)
+        thr_arr = np.asarray(thr)
+        if thr_arr.ndim == 0:
+            return (proba > float(thr_arr)).astype(int)
+        return (proba > thr_arr).astype(int)
+
     def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence[Any]]:
         return {
             "lr": [0.1, 0.005],
@@ -196,6 +209,7 @@ class _BranchingMDOBExperiment(_BaseMDOBExperiment):
         probas,
         predictions,
         fold_metrics: Dict[str, float],
+        threshold_info: Dict[str, Any] | None = None,
     ) -> None:
         # Persist branch lengths in history artifact.
         model.history = {
@@ -219,7 +233,7 @@ class _BranchingMDOBExperiment(_BaseMDOBExperiment):
         for branch_idx in range(model.n_branches + 1):
             try:
                 disabled_proba = self._predict_with_disabled_branch(model, x_test, branch_idx)
-                disabled_pred = (disabled_proba > 0.5).astype(int)
+                disabled_pred = self._threshold_predictions(disabled_proba, threshold_info)
                 for metric_name, metric_fn in METRICS.items():
                     score = metric_fn(y_test, disabled_pred)
                     mlflow.log_metric(

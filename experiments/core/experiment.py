@@ -148,6 +148,7 @@ class BaseExperiment:
         probas,
         predictions,
         fold_metrics: Dict[str, float],
+        threshold_info: Optional[Dict[str, Any]] = None,
     ) -> None:
         """
         Hook called after a fold has been trained and evaluated.
