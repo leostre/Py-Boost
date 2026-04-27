@@ -3,13 +3,13 @@ import os
 import shutil
 import tempfile
 from typing import Any, Dict, Tuple
-import pickle
 import traceback
 
 import mlflow
 import numpy as np
 import pandas as pd
 from sklearn.metrics import log_loss
+from sklearn.model_selection import StratifiedGroupKFold
 
 from experiments.data.load_data import SPECIAL_LOADERS
 from experiments.core.experiment import BaseExperiment, ExperimentContext
@@ -42,6 +42,62 @@ def _y_for_stratified_cv_split(y, task: str):
         ):
             return np.argmax(y_arr, axis=1)
     return np.ravel(y_arr)
+
+
+def _feature_row_groups(X) -> np.ndarray:
+    """
+    Build stable group ids so identical feature rows stay in the same fold.
+    Used to prevent duplicate-row leakage in grouped CV.
+    """
+    if isinstance(X, pd.DataFrame):
+        hashes = pd.util.hash_pandas_object(X, index=False).to_numpy()
+    else:
+        x_arr = np.asarray(X)
+        if x_arr.ndim != 2:
+            x_arr = np.atleast_2d(x_arr)
+        x_df = pd.DataFrame(x_arr)
+        hashes = pd.util.hash_pandas_object(x_df, index=False).to_numpy()
+    return hashes
+
+
+def _to_metric_name(name: str) -> str:
+    return (
+        str(name)
+        .strip()
+        .replace(" ", "_")
+        .replace("/", "_")
+        .replace(".", "_")
+        .replace("-", "_")
+    )
+
+
+def _extract_alpha_array(history: Any):
+    if history is None:
+        return None
+    if isinstance(history, dict):
+        if "alpha" in history:
+            try:
+                arr = np.asarray(history["alpha"])
+                if arr.size:
+                    return arr
+            except Exception:
+                return None
+        for v in history.values():
+            arr = _extract_alpha_array(v)
+            if arr is not None:
+                return arr
+    return None
+
+
+def _log_alpha_artifact(history: Any, fold: int, output_dir: str) -> None:
+    alpha_arr = _extract_alpha_array(history)
+    if alpha_arr is None:
+        return
+    alpha_dir = os.path.join(output_dir, "alpha_artifacts")
+    os.makedirs(alpha_dir, exist_ok=True)
+    alpha_path = os.path.join(alpha_dir, f"alpha_fold_{fold}.npy")
+    np.save(alpha_path, alpha_arr)
+    mlflow.log_artifact(alpha_path, artifact_path="alpha_artifacts")
 
 
 def run_experiment_in_process(
@@ -85,9 +141,26 @@ def run_experiment_in_process(
         run_name,
         temp_dir,
     )
-    ctx = mp.get_context("spawn")
-    result_queue = ctx.Queue()
-    process = ctx.Process(target=_process_worker, args=(result_queue, worker_args))
+    try:
+        ctx = mp.get_context("spawn")
+        result_queue = ctx.Queue()
+        process = ctx.Process(target=_process_worker, args=(result_queue, worker_args))
+    except (BrokenPipeError, OSError, RuntimeError) as e:
+        # Docker / constrained IPC: semaphore registration for mp.Queue can fail.
+        print(
+            f"[process_runner] Multiprocessing init failed ({type(e).__name__}: {e}); "
+            "falling back to in-process execution."
+        )
+        return _run_single_experiment_core(
+            experiment,
+            model_factory,
+            params,
+            X,
+            y,
+            context,
+            run_name,
+            temp_dir,
+        )
 
     process.start()
     process.join(timeout=timeout)
@@ -142,7 +215,6 @@ def _run_single_experiment_core(
 
     os.makedirs(output_dir, exist_ok=True)
 
-    histories = []
     fold_scores: Dict[str, list] = {metric_name: [] for metric_name in METRICS.keys()}
     training_times: list[float] = []
     num_trees_list: list[int] = []
@@ -404,11 +476,6 @@ def _run_single_experiment_core(
                         )
                         results_df.loc[len(results_df)] = row
 
-                # Store history if available
-                history = getattr(model, "history", None)
-                if history is not None:
-                    histories.append(history)
-
                 experiment.after_fold(
                     context=context,
                     fold_idx=fold,
@@ -419,16 +486,45 @@ def _run_single_experiment_core(
                     fold_metrics=fold_metric_values,
                 )
 
+                # Store history as MLflow metrics (after hooks may populate it).
+                history = getattr(model, "history", None)
+                _log_alpha_artifact(history=history, fold=fold, output_dir=output_dir)
+
             except Exception as e:
-                mlflow.log_param(f"fold_{fold}_error", traceback.format_exc())
+                err_text = traceback.format_exc()
+                mlflow.log_param(f"fold_{fold}_error", err_text)
+                # CUDA illegal-address corrupts the current CUDA context.
+                # Continuing to next folds only yields secondary failures (malloc/Event/etc).
+                err_lower = err_text.lower()
+                if "cudaerrorillegaladdress" in err_lower or "cuda_error_illegal_address" in err_lower:
+                    raise RuntimeError(
+                        f"Fatal CUDA illegal-address in fold {fold}. "
+                        "Aborting remaining folds for this run to avoid cascading errors."
+                    ) from e
             finally:
                 # Explicitly drop references to the model
                 del model
 
         if dataset_name not in SPECIAL_LOADERS:
             y_split = _y_for_stratified_cv_split(y, context.task)
+            splitter = context.cv
+            split_kwargs = {}
+
+            # rt_iot2022 has duplicate rows crossing random stratified splits.
+            # Keep identical feature rows in the same fold while preserving class stratification.
+            if dataset_name == "rt_iot2022" and context.task == "onelabel":
+                n_splits = getattr(context.cv, "n_splits", 3)
+                shuffle = getattr(context.cv, "shuffle", True)
+                random_state = getattr(context.cv, "random_state", 42) if shuffle else None
+                splitter = StratifiedGroupKFold(
+                    n_splits=n_splits,
+                    shuffle=shuffle,
+                    random_state=random_state,
+                )
+                split_kwargs["groups"] = _feature_row_groups(X)
+
             for fold, (train_idx, test_idx) in enumerate(
-                context.cv.split(X, y_split)
+                splitter.split(X, y_split, **split_kwargs)
             ):
                 X_train, X_test = X[train_idx], X[test_idx]
                 y_train, y_test = y[train_idx], y[test_idx]
@@ -439,7 +535,6 @@ def _run_single_experiment_core(
                 # loaders yield (X_train, y_train, X_test, y_test, fold)
                 after_split_training(*data)
 
-        histories_file = None
         results_file = None
         if results_df is not None and not results_df.empty:
             results_file = os.path.join(
@@ -447,14 +542,6 @@ def _run_single_experiment_core(
             )
             results_df.to_csv(results_file, index=False)
             mlflow.log_artifact(results_file)
-
-        if histories:
-            histories_file = os.path.join(
-                output_dir, f"histories_{dataset_name}_{run_name}.pkl"
-            )
-            with open(histories_file, "wb") as file:
-                pickle.dump(histories, file)
-            mlflow.log_artifact(histories_file)
 
     return {
         "run_id": run_id,
@@ -464,7 +551,7 @@ def _run_single_experiment_core(
         "success": True,
         "artifact_files": {
             "results": results_file,
-            "histories": histories_file,
+            "histories": None,
         },
     }
 

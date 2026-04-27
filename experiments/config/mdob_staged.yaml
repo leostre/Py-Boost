@@ -1,0 +1,22 @@
+defaults:
+  - _self_
+  - datasets: default
+
+model:
+  _target_: experiments.models.PreparedRealMDOBStaged
+  _partial_: true
+
+experiment:
+  _target_: experiments.runners.mdob_variants.MDOBStagedExperiment
+  run_name: "mdob_staged"
+  skip_datasets:
+    # - yeast
+    - genbase
+    - rt_iot2022
+    # - mediamill
+    # - mnist
+    - cifar10
+    - birds
+    - age_prediction
+    - delicious
+  skip_first:

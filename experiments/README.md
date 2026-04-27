@@ -134,11 +134,18 @@ The main components live under `experiments/`:
   - `AnaloguesExperiment`: uses a simplified search space (`learning_rate`, `subsample`) and a `fit_model` override that supports models with `eval_set`.
   - `BaselinesExperiment`: baseline experiments that enable per-configuration results CSVs and aggregate them per dataset in `after_dataset`.
   - `SigmoidWeightedExperiment`: sigmoid-weighted history baselines that filter sketch methods and log dataset-level MLflow summaries with aggregated results and histories.
+  - `MDOBExperiment`: orthogonal-branch MDOB with notebook grid (`lr`, `ortho_weight`) and alpha history artifact capture.
+  - `MDOBSepAlphaExperiment`: per-label alpha MDOB variant with the same grid and alpha artifact capture.
+  - `MDOBSeqExperiment`: sequential SVD MDOB variant (`lr`, `singular_thr`).
+  - `MDOBMultibranchExperiment`: multibranch MDOB (`lr`, `eval_size`, `n_branches`, `branching_threshold`) with branch-disable metrics and branch-length artifacts.
+  - `MDOBStagedExperiment`: staged multibranch MDOB (multibranch grid + `edge_proportion`).
 
 - **Models** (`experiments/models.py`):
   - `HyperbolicHistoryBoost` (via `HyperbolicWeightedHistorySampling`).
   - `PreparedLGBM` (multi-output LGBM wrapper).
   - `PreparedCatBoost` (CatBoost with default experiment-friendly params).
+  - `PreparedMDOB`, `PreparedMDOBSepAlpha`, `PreparedMDOBSeq`.
+  - `PreparedDataClusterMDOB`, `PreparedRealMDOBStaged`.
 
 - **Configs** (`experiments/config/`):
   - Main scenario configs:
@@ -146,6 +153,8 @@ The main components live under `experiments/`:
     - `baselines.yaml`, `baselines_corrupted.yaml`
     - `sigmoid.yaml`, `sigmoid_corrupted.yaml`
     - `catboost.yaml`, `lgbm.yaml`, `trial.yaml`, `tmp_mnist_hyperbolic.yaml`
+    - `mdob.yaml`, `mdob_sep_alpha.yaml`, `mdob_seq.yaml`
+    - `mdob_multibranch.yaml`, `mdob_staged.yaml`
   - Datasets config:
     - `datasets/default.yaml`
 
@@ -186,6 +195,14 @@ Examples:
   ```bash
   python -m experiments.exp --config-name sigmoid
   python -m experiments.exp --config-name sigmoid_corrupted
+  ```
+- MDOB variants:
+  ```bash
+  python -m experiments.exp --config-name mdob
+  python -m experiments.exp --config-name mdob_sep_alpha
+  python -m experiments.exp --config-name mdob_seq
+  python -m experiments.exp --config-name mdob_multibranch
+  python -m experiments.exp --config-name mdob_staged
   ```
 - Analogues with CatBoost / LGBM:
   ```bash

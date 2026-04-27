@@ -625,6 +625,7 @@ generic_tree_prediction_leaves_kernel_f = r'''
         const {T}* X,
         const float4* tree,
         const int* gr_subtree_offsets,
+        const int n_tree_nodes,
         const int n_features,
         const int x_size,
         const int n_gr,
@@ -646,10 +647,22 @@ generic_tree_prediction_leaves_kernel_f = r'''
 
         // going through the tree
         while (n_node >= 0) {{
-            nd = tree[tree_offset + n_node];
+            int node_idx = tree_offset + n_node;
+            if (node_idx < 0 || node_idx >= n_tree_nodes) {{
+                n_node = -1;
+                continue;
+            }}
+            nd = tree[node_idx];
 
             n_feat_raw = (int)nd.x;
-            x = X[x_size * (abs(n_feat_raw) - 1) + i_];
+            int feat_idx = abs(n_feat_raw) - 1;
+            if (feat_idx < 0 || feat_idx >= n_features) {{
+                // Defensive fallback for malformed tree nodes:
+                // route to a terminal node instead of illegal memory access.
+                n_node = -1;
+                continue;
+            }}
+            x = X[x_size * feat_idx + i_];
 
             {comp}
         }}
@@ -665,6 +678,7 @@ generic_tree_prediction_leaves_kernel = r'''
         const {T}* X,
         const float4* tree,
         const int* gr_subtree_offsets,
+        const int n_tree_nodes,
         const int n_features,
         const int x_size,
         const int n_gr,
@@ -687,10 +701,22 @@ generic_tree_prediction_leaves_kernel = r'''
 
         // going through the tree
         while (n_node >= 0) {{
-            nd = tree[tree_offset + n_node];
+            int node_idx = tree_offset + n_node;
+            if (node_idx < 0 || node_idx >= n_tree_nodes) {{
+                n_node = -1;
+                continue;
+            }}
+            nd = tree[node_idx];
 
             n_feat_raw = (int)nd.x;
-            x = X[x_feat_offset + abs(n_feat_raw) - 1];
+            int feat_idx = abs(n_feat_raw) - 1;
+            if (feat_idx < 0 || feat_idx >= n_features) {{
+                // Defensive fallback for malformed tree nodes:
+                // route to a terminal node instead of illegal memory access.
+                n_node = -1;
+                continue;
+            }}
+            x = X[x_feat_offset + feat_idx];
             
             {comp}
         }}

@@ -227,3 +227,12 @@ class WeightedHistorySampling(GradHessHistory):
             )
 
         return weights
+
+
+class FullGHistorySampling(GradHessHistory):
+    def __call__(self, grad: cp.ndarray, hess: cp.ndarray):
+        if self.use_approximation:
+            row_indexer, col_indexer = self.get_indexers(grad)
+            self._set_indexers(row_indexer=row_indexer, col_indexer=col_indexer)
+            self.use_approximation = False
+        return grad, hess

@@ -1,4 +1,5 @@
 import os
+import traceback
 
 import numpy as np
 import pandas as pd
@@ -71,13 +72,10 @@ def load_delicious():
     assert os.path.exists(path)
     while os.path.exists(path + f'/fold_{fold}'):
         fold_path = path + f'/fold_{fold}'
-        xtr = np.load(fold_path + '/xtr.npy')
-        ytr = np.load(fold_path + '/ytr.npy')
-        xte = np.load(fold_path + '/xte.npy')
-        yte = np.load(fold_path + '/yte.npy')
-        lb = LabelBinarizer()
-        ytr = lb.fit_transform(ytr)
-        yte = lb.transform(yte)
+        xtr = pd.read_parquet(fold_path + '/xtr.parquet').values
+        ytr = pd.read_parquet(fold_path + '/ytr.parquet').values
+        xte = pd.read_parquet(fold_path + '/xte.parquet').values
+        yte = pd.read_parquet(fold_path + '/yte.parquet').values
         yield xtr, ytr, xte, yte, fold
         fold += 1
     assert fold > 0, 'No folds were returned'
@@ -203,26 +201,90 @@ def preprocess_dataset(X, dataset_name: str):
     return X_processed
 
 
+def sanitize_rt_iot_features(X, dataset_name: str):
+    """
+    Drop obvious identifier/leakage columns for rt_iot2022.
+    """
+    if dataset_name != "rt_iot2022":
+        return X
+
+    if not isinstance(X, pd.DataFrame):
+        return X
+
+    logger = setup_logging()
+    cols_lower = {c: c.lower() for c in X.columns}
+    drop_cols = []
+
+    # Explicit high-risk identifier/network endpoint columns.
+    explicit_drop = {
+        "id.orig_h",
+        "id.resp_h",
+        "id.orig_p",
+        "id.resp_p",
+        "uid",
+        "ts",
+    }
+    for col in X.columns:
+        if cols_lower[col] in explicit_drop:
+            drop_cols.append(col)
+
+    # Defensive heuristic for hidden ID-like keys.
+    for col in X.columns:
+        c = cols_lower[col]
+        if c in explicit_drop:
+            continue
+        if c.endswith("_id") or c.startswith("id_") or c == "id":
+            drop_cols.append(col)
+
+    drop_cols = sorted(set(drop_cols))
+    if drop_cols:
+        logger.info(
+            f"Dropping {len(drop_cols)} suspected leakage/id columns in {dataset_name}: {drop_cols}"
+        )
+        return X.drop(columns=drop_cols, errors="ignore")
+
+    return X
+
+
 def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) -> Generator[str, Dict, Any]:
     loader = DatasetLoader(dataset_config)
+    logger = setup_logging()
     datasets = loader.dataset_gen()
     n_classes = processed_dataset = None
 
     for name, dataset_info in datasets:
         n_classes = processed_dataset = None
         try:
+            if name in SPECIAL_LOADERS:
+                # Special loaders are consumed downstream fold-by-fold and do not
+                # provide a standard {"features","target","metadata"} payload here.
+                n_classes = SPECIAL_LOADERS[name].get("n_classes")
+                processed_dataset = None
+                continue
+            if dataset_info is None:
+                logger.error(f"Dataset loader returned None for {name}")
+                continue
+            if not all(k in dataset_info for k in ("features", "target", "metadata")):
+                logger.error(f"Dataset payload for {name} is incomplete: keys={list(dataset_info.keys())}")
+                continue
             features = dataset_info['features']
             target = dataset_info['target']
             metadata = dataset_info['metadata']
 
             n_classes = target.nunique() if len(target.shape) == 1 else target.shape[1]
 
+            features = sanitize_rt_iot_features(features, name)
             processed_features = preprocess_dataset(features, name)
             processed_target = preprocess_dataset(target, f"{name}_target")
 
             if to_numpy:
                 processed_features = np.array(processed_features)
                 processed_target = np.array(processed_target)
+
+            # rt_iot2022 target arrives as a single encoded class column.
+            # Flatten it so LabelBinarizer can produce a proper one-hot matrix.
+            if name == "rt_iot2022" and len(processed_target.shape) == 2 and processed_target.shape[1] == 1:
+                processed_target = processed_target.reshape(-1)
 
             if len(processed_target.shape) == 1:
                 processed_target = LabelBinarizer().fit_transform(processed_target)
@@ -234,8 +296,9 @@ def load_and_preprocess_datasets(dataset_config: Dict[str, Any], to_numpy=True) 
                 'target': processed_target,
                 'metadata': metadata,
             }
-        except:
-            pass
+        except Exception as e:
+            logger.error(f"Failed to preprocess dataset {name}: {e}")
+            logger.debug(traceback.format_exc())
         finally:
             yield name, processed_dataset, n_classes
 
@@ -245,7 +308,7 @@ DATASETS = {
     'genbase': {'id': 'genbase', 'source': 'openml', 'version': 2},
     'birds': {'id': 'birds', 'source': 'openml', 'version': 3},
     'rt_iot2022': {'id': 942, 'source': 'uci'},
-    'age_prediction': {},
+    'age_prediction': {'id': 'age_prediction', 'source': 'custom', 'method': load_age_prediction},
     'mediamill': {'id': 'mediamill', 'source': 'custom',
                       'method': load_mediamill,
                       'method_params': {}},
