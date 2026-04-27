@@ -565,7 +565,19 @@ class RealMDOB_staged:
         return self
 
     def _analize_root(self, n, ensemble: Ensemble) -> List[List[int]]:
-        labels = self.clustering_func(self.root.sketch.full_grad_hist.get()).flatten()
+        # HistoryBasedBoostingModel stores the history callback instance in
+        # `multioutput_sketch` (not `sketch`).
+        sketch_obj = getattr(self.root, "multioutput_sketch", None)
+        full_grad_hist = getattr(sketch_obj, "full_grad_hist", None)
+        if full_grad_hist is None:
+            raise AttributeError(
+                "Root model does not provide `full_grad_hist` in `multioutput_sketch`; "
+                "cannot cluster branches."
+            )
+        full_grad_hist_np = (
+            full_grad_hist.get() if hasattr(full_grad_hist, "get") else np.asarray(full_grad_hist)
+        )
+        labels = self.clustering_func(full_grad_hist_np).flatten()
         idx = np.arange(len(labels))
         return [idx[labels == i] for i in range(self.n_branches)]
 
