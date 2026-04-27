@@ -249,6 +249,8 @@ class FullGHistorySampling(WeightedHistorySampling):
     def before_train(self, build_info):
         self.curr_full_grad = None
         self.full_grad_hist = None 
+        self.curr_aggregated_norm = None
+        self.aggregated_norm_history = None
         return super().before_train(build_info)
 
     def before_iteration(self, build_info):
@@ -261,6 +263,11 @@ class FullGHistorySampling(WeightedHistorySampling):
             self.curr_full_grad = grad
             self.curr_grad_norms = cp.linalg.norm(grad, axis=1)
             self.curr_hess_norms = cp.linalg.norm(hess, axis=1)
+            if self.prev_grad_norms is not None:
+                grad_delta = self.curr_grad_norms - self.prev_grad_norms
+                self.curr_aggregated_norm = cp.linalg.norm(grad_delta, ord=1)
+                if self.aggregated_norm_history is None:
+                    self.aggregated_norm_history = 0.0
 
             # check if we should apply approximation based on EMA history
             self.use_approximation = self._scheduler()
