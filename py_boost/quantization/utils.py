@@ -4,7 +4,12 @@ import numba
 import numpy as np
 from numba import float32, float64, uint8, prange, njit, int64
 
-numba.config.THREADING_LAYER = 'threadsafe'
+
+try:
+    numba.config.THREADING_LAYER = 'workqueue'
+except ValueError:
+    # If the threading layer was already selected elsewhere, make it threadsafe.
+    numba.config.THREADING_LAYER = 'threadsafe'
 
 
 def _apply_borders_1d(x_raw, x_enc, borders):

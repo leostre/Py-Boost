@@ -43,7 +43,8 @@ class GradientBoosting(Ensemble):
                  verbose=10,
                  callbacks=None,
 
-                 debug=False
+                 debug=False,
+                 **kwargs
                  ):
         """
 

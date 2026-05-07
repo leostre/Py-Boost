@@ -1,0 +1,54 @@
+rt_iot2022:
+  id: 942
+  source: "uci"
+
+age_prediction:
+  id: age_prediction
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_age_prediction
+
+mbd:
+  id: ai-lab/MBD-mini
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_mbd
+
+mediamill:
+  id: mediamill
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_mediamill
+
+yeast:
+  id: "yeast"
+  source: "openml"
+  version: 1
+
+genbase:
+  id: "genbase"
+  source: "openml"
+  version: 2
+
+birds:
+  id: "birds"
+  source: "openml"
+  version: 3
+
+mnist:
+  id: mnist_784
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_mnist
+
+cifar10:
+  id: cifar10
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_cifar10
+
+delicious:
+  id: delicious
+  source: custom
+  method:
+    _target_: experiments.data.load_data.load_delicious

@@ -1,0 +1,24 @@
+defaults:
+  - _self_
+  - datasets: default
+
+model:
+  _target_: experiments.models.PreparedXGBoost
+  _partial_: true  # This tells Hydra to create a partial
+
+experiment:
+  _target_: experiments.runners.analogues.AnaloguesExperiment
+  run_name: "xgboost_5.2.1"
+  # pred_thr: 0.2
+  skip_datasets:
+    # - yeast
+    # - genbase
+    - rt_iot2022
+    # - mediamill
+    # - mnist
+    # - mbd
+    # - cifar10
+    # - birds
+    # - age_prediction
+  skip_first: 
+  #   mediamill: 32
