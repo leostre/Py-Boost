@@ -14,7 +14,7 @@ class AnaloguesExperiment(BaseExperiment):
     def build_search_space(self, context: ExperimentContext) -> Mapping[str, Sequence]:
         return {
             "learning_rate": [0.1, 0.005],
-            "subsample": [0.05, 0.5, 0.75],
+            "subsample": SAMPLE_RATIO,
         }
 
     def build_default_params(self, context: ExperimentContext) -> Dict:
