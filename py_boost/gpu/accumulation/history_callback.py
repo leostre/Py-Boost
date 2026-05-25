@@ -8,9 +8,22 @@ from py_boost.multioutput.sketching import GradSketch
 
 
 class GradHessHistory(GradSketch):
-    """Callback that accumulates grads/hess, schedules and applies Fedcore approximation."""
+    """Grad/hess history sketching. Schedules row/col subsampling when norm deltas stabilize."""
 
     def __init__(self, **kwargs):
+        """
+        Args:
+            **kwargs: callback params. Supported keys:
+                sketch_method: str, key in SUPPORTED_SKETCH_METHODS, default 'svd'
+                subsample: float, row fraction for sketching, default 0.5
+                sketch_outputs: int, number of output columns to keep, default 1
+                sketch_params: dict, extra args for sketch callable
+                stabilization_window: int, stored window size, default 10
+                smoothing_alpha: float, EMA coefficient for norm history
+                stabilization_threshold: float, ratio threshold to enable sketching, default 1.0
+                eps: float, numerical stabilizer, default 1e-6
+                weight_transform: str, 'sigmoidal' or 'hyperbolic' (subclasses), default 'sigmoidal'
+        """
         sketch_method = kwargs.get('sketch_method', 'svd')
 
         self.sketch = SUPPORTED_SKETCH_METHODS.get(sketch_method)
@@ -47,6 +60,11 @@ class GradHessHistory(GradSketch):
         self.aggregated_norm_history = None
 
     def before_train(self, build_info):
+        """Reset iteration counter and all history buffers at train start.
+
+        Args:
+            build_info: Boosting build context passed by the trainer (unused).
+        """
         self.use_approximation = False
         self._curr_iteration = 0
         self.prev_grad_norms = None
@@ -57,6 +75,15 @@ class GradHessHistory(GradSketch):
         self.curr_hess_norms = None
 
     def before_iteration(self, build_info):
+        """Update norm statistics and decide whether to sketch on the next step.
+
+        Reads ``grad`` and ``hess`` from ``build_info['data']['train']``, computes
+        per-sample L2 norms, updates EMA history, and sets ``use_approximation`` via
+        :meth:`_scheduler`.
+
+        Args:
+            build_info: Per-iteration context with ``num_iter`` and training tensors.
+        """
         self._curr_iteration = build_info['num_iter'] + 1
         train = build_info['data']['train']
         grad: cp.ndarray = train.get('grad')
@@ -77,6 +104,7 @@ class GradHessHistory(GradSketch):
             self._update_history()
 
     def _update_history(self):
+        """Apply EMA updates to per-sample norm deltas and aggregated L1 change."""
         if self.prev_grad_norms is None or self.prev_hess_norms is None:
             if self.curr_grad_norms is not None and self.curr_hess_norms is not None:
                 self.prev_grad_norms = self.curr_grad_norms
@@ -114,9 +142,12 @@ class GradHessHistory(GradSketch):
             self.prev_hess_norms = self.curr_hess_norms
 
     def _scheduler(self) -> bool:
-        """
-        Determine if gradient stabilization has occurred to enable approximation.
-        Condition: ||∇v_g^(t)||1 / (||h_g^(t-1)||1 + eps) < stabilization_threshold
+        """Check if grad norm changes stabilized enough to sketch
+
+        Uses curr_aggregated_norm / (aggregated_norm_history + eps) < stabilization_threshold
+
+        Returns:
+            bool, if approximation should run on next __call__
         """
         if (self.prev_grad_norms is None or self.curr_grad_norms is None or 
             self.grad_history is None or self._curr_iteration < 2):
@@ -128,18 +159,20 @@ class GradHessHistory(GradSketch):
         return use_approximation
 
     def get_indexers(self, tensor: cp.ndarray):
-        """
-        Compute row and column indexers based on the sketch method.
+        """Apply configured sketch to select row and column indices
+
+        Args:
+            tensor: cp.ndarray, 2d matrix to sketch (grad or weights)
 
         Returns:
-            Tuple of (row_indexer, col_indexer) where:
-                - row_indexer: Indices of selected rows, shape (k_row,)
-                - col_indexer: Indices of selected columns, shape (k_col,)
+            cp.ndarray, row indices
+            cp.ndarray, column indices
         """
         self.sketch_params = self.sketch_params or {'subsample': self.subsample, 'sketch_outputs': self.sketch_outputs}
         return self.sketch(tensor, **self.sketch_params)
 
     def _set_indexers(self, row_indexer: cp.ndarray, col_indexer: cp.ndarray) -> None:
+        """Pass indexers into build_tree frame locals"""
         stack = inspect.stack()
         target_method = 'build_tree'
 
@@ -156,6 +189,16 @@ class GradHessHistory(GradSketch):
                     pass
 
     def __call__(self, grad: cp.ndarray, hess: cp.ndarray):
+        """Inject row/col indexers when approximation is scheduled; return grad/hess unchanged
+
+        Args:
+            grad: cp.ndarray, gradients
+            hess: cp.ndarray, hessians
+
+        Returns:
+            cp.ndarray, grad
+            cp.ndarray, hess
+        """
         if self.use_approximation:
             row_indexer, col_indexer = self.get_indexers(grad)
             self._set_indexers(row_indexer=row_indexer, col_indexer=col_indexer)
@@ -164,7 +207,24 @@ class GradHessHistory(GradSketch):
 
 
 class WeightedHistorySampling(GradHessHistory):
+    """History-based sketching driven by per-element deviation weights.
+
+    Like :class:`GradHessHistory`, but passes a weight tensor derived from
+    grad/hess deviation from EMA norm history into the sketch method instead of
+    raw gradients.
+    """
+
     def __call__(self, grad: cp.ndarray, hess: cp.ndarray):
+        """Sketch from adaptive weights when approximation is scheduled
+
+        Args:
+            grad: cp.ndarray, gradients
+            hess: cp.ndarray, hessians
+
+        Returns:
+            cp.ndarray, grad
+            cp.ndarray, hess
+        """
         if self.use_approximation:
             weights = self.get_weights(grad, hess)
             row_indexer, col_indexer = self.get_indexers(weights)
@@ -173,29 +233,27 @@ class WeightedHistorySampling(GradHessHistory):
         return grad, hess
 
     def get_weights(self, grad: cp.ndarray, hess: cp.ndarray) -> cp.ndarray:
-        """
-        Compute adaptive weights based on deviations from historical gradient and hessian norms.
+        """Map grad/hess deviations from EMA history to sampling weights.
 
-        For each element (i,j), the weight is computed as:
-            1. Calculate deviation metrics:
-                g_dev = (grad[i,j] / (|grad_history[i]| + eps)) - 1
-                h_dev = (hess[i,j] / (|hess_history[i]| + eps)) - 1
+        Per element ``(i, j)``:
 
-            2. Compute the product deviation: deviation = g_dev * h_dev
+            g_dev = grad[i, j] / (|grad_history[i]| + eps) - 1
+            h_dev = hess[i, j] / (|hess_history[i]| + eps) - 1
+            deviation = g_dev * h_dev
 
-            3. Transform via selected method:
-                - 'sigmoidal': weight = 1 - sigmoid(deviation)
-                - 'hyperbolic': weight = 1 - normalized(deviation)
+        Then applies ``weight_transform``:
 
-        The weights are clipped to [0, 1], where lower values indicate larger deviations
-        from historical behavior, suggesting higher uncertainty or novelty.
+            * ``'sigmoidal'``: ``1 - sigmoid(deviation)``
+            * ``'hyperbolic'``: ``1 - min-max(deviation)``
+
+        Lower weights indicate larger deviation from historical norms.
 
         Args:
-            grad: Current gradient tensor of shape (n_samples, n_outputs).
-            hess: Current hessian tensor of shape (n_samples, n_outputs).
+            grad: cp.ndarray, gradients
+            hess: cp.ndarray, hessians
 
         Returns:
-            weights: Weight tensor of shape (n_samples, n_outputs) with values in [0, 1].
+            cp.ndarray, weights of shape (n_samples, n_outputs)
         """
         n_samples, n_outputs = grad.shape
 

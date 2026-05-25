@@ -56,6 +56,17 @@ def sample_svd_sketch_heuristic(tensor: cp.ndarray, **kwargs):
 
 
 def sample_svd_sketch(tensor: cp.ndarray, **kwargs):
+    """SVD sketch by row/column leverage scores
+
+    Args:
+        tensor: cp.ndarray, shape (m, n)
+        subsample: float, row fraction, default 0.5
+        sketch_outputs: int, number of columns to keep, default 1
+
+    Returns:
+        cp.ndarray, row indices
+        cp.ndarray, column indices
+    """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
     k_row = max(1, int(tensor.shape[0] * subsample))
@@ -74,6 +85,17 @@ def sample_svd_sketch(tensor: cp.ndarray, **kwargs):
 
 
 def sample_topk_sketch(tensor: cp.ndarray, **kwargs):
+    """Top-k rows by L2 norm and top columns by mean squared value
+
+    Args:
+        tensor: cp.ndarray, shape (m, n)
+        subsample: float, row fraction, default 0.5
+        sketch_outputs: int, number of columns to keep, default 1
+
+    Returns:
+        cp.ndarray, row indices
+        cp.ndarray, column indices
+    """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
     k_row = max(1, int(tensor.shape[0] * subsample))
@@ -89,6 +111,17 @@ def sample_topk_sketch(tensor: cp.ndarray, **kwargs):
 
 
 def sample_random_sampling_sketch(tensor: cp.ndarray, **kwargs):
+    """Importance sampling of rows and columns with uniform smoothing
+
+    Args:
+        tensor: cp.ndarray, shape (m, n)
+        subsample: float, row fraction, default 0.5
+        sketch_outputs: int, number of columns to keep, default 1
+
+    Returns:
+        cp.ndarray, row indices
+        cp.ndarray, column indices
+    """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
     k_row = max(1, int(tensor.shape[0] * subsample))
@@ -112,6 +145,17 @@ def sample_random_sampling_sketch(tensor: cp.ndarray, **kwargs):
 
 
 def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
+    """Random projection sketch for rows; top columns by mean squared weight
+
+    Args:
+        tensor: cp.ndarray, shape (m, n)
+        subsample: float, row fraction, default 0.5
+        sketch_outputs: int, projection width and column count, default 1
+
+    Returns:
+        cp.ndarray, row indices
+        cp.ndarray, column indices
+    """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
     k_row = max(1, int(tensor.shape[0] * subsample))
@@ -130,6 +174,7 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
     return row_indexer, col_indexer
 
 
+# svd_heuristic, svd, topk, rand, proj -> sketch callables for GradHessHistory
 SUPPORTED_SKETCH_METHODS = {
     'svd_heuristic': sample_svd_sketch_heuristic,
     'svd': sample_svd_sketch,
