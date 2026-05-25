@@ -1,5 +1,7 @@
+import json
 import os
 import traceback
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -66,16 +68,68 @@ def load_cifar10():
         fold += 1
     assert fold > 0, 'No folds were returned'
 
+def _load_fold_npy_or_parquet(fold_path: str, name: str, x_dtype, y_dtype):
+    npy = os.path.join(fold_path, f'{name}.npy')
+    pq = os.path.join(fold_path, f'{name}.parquet')
+    if os.path.isfile(npy):
+        arr = np.load(npy)
+    elif os.path.isfile(pq):
+        arr = pd.read_parquet(pq).values
+    else:
+        raise FileNotFoundError(f'Need {npy} or {pq}')
+    if name.startswith('y'):
+        return np.asarray(arr, dtype=y_dtype)
+    return np.asarray(arr, dtype=x_dtype)
+
+
+def _delicious_filtered_n_classes(subdir: str, default: int) -> int:
+    meta_path = Path(EXPERIMENTS_DATA_PATH) / subdir / 'metadata.json'
+    if meta_path.is_file():
+        with open(meta_path, encoding='utf-8') as f:
+            return int(json.load(f)['n_labels_kept'])
+    return default
+
+
 def load_delicious():
     fold = 0
     path = EXPERIMENTS_DATA_PATH + '/delicious'
     assert os.path.exists(path)
     while os.path.exists(path + f'/fold_{fold}'):
         fold_path = path + f'/fold_{fold}'
-        xtr = pd.read_parquet(fold_path + '/xtr.parquet').values
-        ytr = pd.read_parquet(fold_path + '/ytr.parquet').values
-        xte = pd.read_parquet(fold_path + '/xte.parquet').values
-        yte = pd.read_parquet(fold_path + '/yte.parquet').values
+        xtr = _load_fold_npy_or_parquet(fold_path, 'xtr', np.float64, np.int64)
+        ytr = _load_fold_npy_or_parquet(fold_path, 'ytr', np.float64, np.int64)
+        xte = _load_fold_npy_or_parquet(fold_path, 'xte', np.float64, np.int64)
+        yte = _load_fold_npy_or_parquet(fold_path, 'yte', np.float64, np.int64)
+        yield xtr, ytr, xte, yte, fold
+        fold += 1
+    assert fold > 0, 'No folds were returned'
+
+
+def load_delicious_topk():
+    fold = 0
+    path = EXPERIMENTS_DATA_PATH + '/delicious_top200'
+    assert os.path.exists(path)
+    while os.path.exists(path + f'/fold_{fold}'):
+        fold_path = path + f'/fold_{fold}'
+        xtr = _load_fold_npy_or_parquet(fold_path, 'xtr', np.float64, np.int64)
+        ytr = _load_fold_npy_or_parquet(fold_path, 'ytr', np.float64, np.int64)
+        xte = _load_fold_npy_or_parquet(fold_path, 'xte', np.float64, np.int64)
+        yte = _load_fold_npy_or_parquet(fold_path, 'yte', np.float64, np.int64)
+        yield xtr, ytr, xte, yte, fold
+        fold += 1
+    assert fold > 0, 'No folds were returned'
+
+
+def load_moa():
+    fold = 0
+    path = EXPERIMENTS_DATA_PATH + '/moa'
+    assert os.path.exists(path)
+    while os.path.exists(path + f'/fold_{fold}'):
+        fold_path = path + f'/fold_{fold}'
+        xtr = np.asarray(pd.read_parquet(fold_path + '/xtr.parquet').values, dtype=np.float64)
+        ytr = np.asarray(pd.read_parquet(fold_path + '/ytr.parquet').values, dtype=np.int64)
+        xte = np.asarray(pd.read_parquet(fold_path + '/xte.parquet').values, dtype=np.float64)
+        yte = np.asarray(pd.read_parquet(fold_path + '/yte.parquet').values, dtype=np.int64)
         yield xtr, ytr, xte, yte, fold
         fold += 1
     assert fold > 0, 'No folds were returned'
@@ -122,21 +176,6 @@ def load_mbd(prop_keep=0.05):
         yield xtr, ytr, xte, yte, fold
         fold += 1
     assert fold > 0, 'No folds were returned'
-
-
-# TODO: remove/refactor legacy method
-def split_benchmark_data(dataset_dict: dict, use_subsample=None):
-    X = dataset_dict['features'].values.astype('float32')
-    y = dataset_dict['target'].values
-    if y.dtype == object:
-        encoder = LabelEncoder()
-        encoder.fit(y)
-        y = encoder.transform(y)
-    X, X_test, y, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=True)
-    return dict(train_features=X,
-                test_features=X_test,
-                train_target=y,
-                test_target=y_test)
 
 
 def preprocess_dataset(X, dataset_name: str):
@@ -313,7 +352,8 @@ DATASETS = {
                       'method': load_mediamill,
                       'method_params': {}},
     'mnist': {'id': 'mnist_784', 'source': 'custom', 'method': load_mnist},
-    'delicious': {'id': 'delicious', 'source': 'custom', 'method': load_delicious},
+    'delicious': {'id': 'delicious', 'source': 'custom', 'method': load_delicious_topk},
+    'moa': {'id': 'moa', 'source': 'custom', 'method': load_moa},
     'cifar10': {'id': 'cifar10', 'source': 'custom', 'method': load_cifar10},
     'mbd': {'id': 'ai-lab/MBD-mini', 'source': 'custom', 'method': load_mbd}
 }
@@ -321,7 +361,13 @@ DATASETS = {
 SPECIAL_LOADERS = {
     'mnist': {'loader': load_mnist, 'n_classes': 10, 'task': 'onelabel'},
     'cifar10': {'loader': load_cifar10, 'n_classes': 10, 'task': 'onelabel'},
-    'delicious': {'loader': load_delicious, 'n_classes': 983, 'task': 'multilabel'},
+    # 'delicious': {'loader': load_delicious, 'n_classes': 983, 'task': 'multilabel'},
+    'delicious': {
+        'loader': load_delicious_topk,
+        'n_classes': _delicious_filtered_n_classes('delicious_top200', 200),
+        'task': 'multilabel',
+    },
+    'moa': {'loader': load_moa, 'n_classes': 206, 'task': 'multilabel'},
     'age_prediction': {'loader': load_age_prediction, 'n_classes': 4, 'task': 'onelabel'},
     'mbd': {'loader': load_mbd, 'n_classes': 4, 'task': 'multilabel'}
 }
