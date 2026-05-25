@@ -260,7 +260,15 @@ class DataClusterMDOB:
         return self
 
     def _analize_root(self, n, ensemble: Ensemble) -> List[List[int]]:
-        U, S, Vh = cp.linalg.svd(self.root.sketch.full_grad_hist, full_matrices=False)
+        sketch_obj = getattr(self.root, "multioutput_sketch", None)
+        full_grad_hist = getattr(sketch_obj, "full_grad_hist", None)
+        if full_grad_hist is None:
+            raise AttributeError(
+                "Root model does not provide `full_grad_hist` in `multioutput_sketch`; "
+                "cannot analyze root branches."
+            )
+        full_grad_hist_cp = full_grad_hist if isinstance(full_grad_hist, cp.ndarray) else cp.asarray(full_grad_hist)
+        U, S, Vh = cp.linalg.svd(full_grad_hist_cp, full_matrices=False)
         n_cls = max(1, U.shape[1] // 2)
         U, S = U[:, :n_cls], S[:n_cls]
         to_cluster = (U * S).get()
