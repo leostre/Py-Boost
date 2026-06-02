@@ -227,3 +227,80 @@ class WeightedHistorySampling(GradHessHistory):
             )
 
         return weights
+
+
+class FullGHistorySampling(WeightedHistorySampling):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.curr_full_grad = None
+        self.full_grad_hist = None
+        self.branching_threshold = kwargs.get('branching_threshold', 0.)
+        self.mode = kwargs.get('stop_mode', 'norm_grad')
+
+    def _update_history(self):
+        if self.full_grad_hist is None:
+            if self.curr_full_grad is not None:
+                self.full_grad_hist = self.curr_full_grad
+        
+        if self.full_grad_hist is not None and self.curr_full_grad is not None:
+            self.full_grad_hist = self.full_grad_hist * self.smoothing_alpha + (1 - self.smoothing_alpha) * self.curr_full_grad
+        return super()._update_history()
+    
+    def before_train(self, build_info):
+        self.curr_full_grad = None
+        self.full_grad_hist = None 
+        self.curr_aggregated_norm = None
+        self.aggregated_norm_history = None
+        return super().before_train(build_info)
+
+    def before_iteration(self, build_info):
+        self._curr_iteration = build_info['num_iter'] + 1
+        train = build_info['data']['train']
+        grad: cp.ndarray = train.get('grad')
+        hess: cp.ndarray = train.get('hess')
+
+        if grad is not None and hess is not None:
+            self.curr_full_grad = grad
+            self.curr_grad_norms = cp.linalg.norm(grad, axis=1)
+            self.curr_hess_norms = cp.linalg.norm(hess, axis=1)
+            if self.prev_grad_norms is not None:
+                grad_delta = self.curr_grad_norms - self.prev_grad_norms
+                self.curr_aggregated_norm = cp.linalg.norm(grad_delta, ord=1)
+                if self.aggregated_norm_history is None:
+                    self.aggregated_norm_history = 0.0
+
+            # check if we should apply approximation based on EMA history
+            self.use_approximation = self._scheduler()
+            self._update_history()
+
+    def after_iteration(self, build_info):
+        """Check early stopping condition and update the state
+
+        Args:
+            build_info: dict
+
+        Returns:
+            bool, if early stopping condition was met
+        """
+        if ('iter_score' not in build_info):
+            return False
+        if self.mode == 'norm_grad':
+            difference_norm = cp.linalg.norm(self.full_grad_hist - self.curr_full_grad)
+            old_norm = cp.linalg.norm(self.curr_full_grad)
+            stop = difference_norm / old_norm < self.branching_threshold
+        elif self.mode == 'variance':
+            persample_norms = cp.linalg.norm(self.curr_full_grad, axis=-1)
+            cv = cp.std(persample_norms) / cp.mean(persample_norms)
+            stop = cv < self.branching_threshold
+        else:
+            raise ValueError(f'Unknown mode `{self.mode}` for {self.__class__.__name__}')
+        return stop
+    
+
+    def after_train(self, build_info):
+        import numpy as np 
+        save_path = build_info.get('save_GH_ckpt', None)
+        if not save_path is None:
+            np.save(save_path / 'root_FG.npy', self.curr_full_grad.get())
+            np.save(save_path / 'root_FGH.npy', self.full_grad_hist.get())
+        return super().after_iteration(build_info)

@@ -38,3 +38,4 @@ ucimlrepo==0.0.7
 
 cupy-cuda12x==13.6.0
 tbb
+pynndescent==0.6.0

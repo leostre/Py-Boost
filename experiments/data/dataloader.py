@@ -1,3 +1,5 @@
+import functools
+import inspect
 import logging
 import sys
 
@@ -40,6 +42,13 @@ class DatasetLoader:
         self.dataset_config = dataset_config or {}
         self.logger = setup_logging()
 
+    @staticmethod
+    def _callable_underlying(method) -> Any:
+        fn = method
+        while isinstance(fn, functools.partial):
+            fn = fn.func
+        return fn
+
     def load(self, dataset_name: str) -> Optional[Dict[str, Any]]:
         config = self.dataset_config[dataset_name]
         result = None
@@ -50,7 +59,24 @@ class DatasetLoader:
             case 'uci':
                 result = self._load_uci_dataset(dataset_name, config)
             case 'custom':
-                result = config['method']
+                m = config['method']
+                # Hydra may call a zero-arg generator factory and store a live generator;
+                # that object is unusable here and breaks preprocessing (no .keys()).
+                if inspect.isgenerator(m):
+                    self.logger.error(
+                        f"Dataset {dataset_name}: `method` is a generator instance. "
+                        "Use `_partial_: true` under `method` in the datasets YAML so the "
+                        "factory callable is preserved (see age_prediction / mnist)."
+                    )
+                    return None
+                underlying = self._callable_underlying(m)
+                if inspect.isgeneratorfunction(underlying):
+                    # Fold-wise loaders: return the callable/partial; do not invoke here.
+                    result = m
+                elif callable(m):
+                    result = m()
+                else:
+                    result = m
             case _:
                 self.logger.error(f"Unknown dataset source: {config['source']} for dataset {dataset_name}")
 
