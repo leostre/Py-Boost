@@ -1,5 +1,62 @@
 {
   "phase": "publication",
+  "calibration_pilot_completed": {
+    "path": "/root/.orx/runs/9ef53290-e34a-46c2-bdf0-68440a6d0aeb/repo/results/calibration_pilot_20261023/report.json",
+    "sha256": "2b36135c9265b0d70aecd79ce248f9a243955cd2717c1b635ee0c5bac0dde02d"
+  },
+  "calibration_pilot": {
+    "source_development": {
+      "path": "/root/.orx/runs/9dd4f52c-7c03-4149-ba58-63b2401d792c/repo/results/budget_quality_stage1_20261022/development_manifest.json",
+      "sha256": "02efe33437e705c4d8435337ad7856dd77e46cc4ba30a2414778401e13ef627f"
+    },
+    "fractions": [
+      0.25,
+      0.5,
+      1.0
+    ],
+    "repeats": 10,
+    "seed": 20261023,
+    "schemes": [
+      "separate",
+      "pooled",
+      "crossfit"
+    ],
+    "folds": 3,
+    "matched_refit_models": [
+      "d5-t200",
+      "frozen8"
+    ],
+    "minimum_positive_support": 1,
+    "minimum_negative_support": 1,
+    "stop_after_pilot": true,
+    "tree_training_allowed": false,
+    "gpu_execution": false
+  },
+  "completed_audit": {
+    "path": "/root/.orx/runs/92fc7d6b-0427-42a4-b106-681eeee68268/repo/results/budget_quality_analysis_20261022/audit_report.json",
+    "sha256": "2319bc655f1654ac7e06925f0b115ae729f019ae4c7883271d9d3ba4d6b3d9ce"
+  },
+  "budget_quality_source": {
+    "run_id": "9dd4f52c-7c03-4149-ba58-63b2401d792c",
+    "report": "/root/.orx/runs/9dd4f52c-7c03-4149-ba58-63b2401d792c/repo/results/budget_quality_stage1_20261022/report.json",
+    "report_sha256": "de3d7851fc1ea97542b603495dcd408fc98aaa8b21a7ff44eb5f00b42eb35ffd"
+  },
+  "budget_ratios": [
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.5,
+    2,
+    4
+  ],
+  "bootstrap_repeats": 500,
+  "bounded_tree_execution": true,
+  "lr": 0.1,
+  "ntrees": 800,
+  "lambda_l2": 1,
+  "own_pool_limit_bytes": 17179869184,
+  "native_source_commit": "a0b9249da8a2d0fe29d4249b726da789ce768ff4",
   "bank_batches": [
     1,
     32,
@@ -55,16 +112,16 @@
   ],
   "depths": [
     3,
-    4,
     5
   ],
-  "rounds": 200,
+  "rounds": 800,
   "prefixes": [
     40,
     80,
-    120,
     160,
-    200
+    200,
+    400,
+    800
   ],
   "minimum_free_bytes": 8589934592,
   "torch_memory_fraction": 0.4,
@@ -99,6 +156,6 @@
   "frozen_hasboost_environment": "/root/hasboost_compactness_20260928/environment.json",
   "frozen_hasboost_sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
   "tabpfn_weights_authorized": false,
-  "output_dir": "results/tfm_bank_serving_short_20261022",
-  "publication_source_phase": "tfm_bank_serving"
+  "output_dir": "results/calibration_pilot_audit_20261023",
+  "publication_source_phase": "calibration_pilot_audit"
 }

@@ -38,7 +38,7 @@ def main():
              HF_HOME=str(root/'hf-cache'),MPLCONFIGDIR=str(root/'mpl'),
              OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2',MKL_NUM_THREADS='2')
     lock=root/'environment.json'
-    if cfg['phase'] in ('weights_readiness','sharing_readiness','matched_data','quality_development','quality_final','bank_selection','tfm_bank_serving'):
+    if cfg['phase'] in ('weights_readiness','sharing_readiness','matched_data','quality_development','quality_final','bank_selection','tfm_bank_serving','budget_quality','budget_quality_analysis','budget_quality_matched_policy','calibration_pilot','calibration_pilot_audit'):
         if not cfg['tabpfn_weights_authorized'] or digest(lock)!=cfg['external_environment_sha256']:
             raise RuntimeError('licensed weights or frozen runtime gate missing')
         frozen=json.loads(lock.read_text(encoding='utf-8'))
@@ -50,9 +50,16 @@ def main():
         worker={'weights_readiness':'weights_worker.py','sharing_readiness':'sharing_worker.py',
                 'matched_data':'matched_data.py','quality_development':'quality_worker.py',
                 'quality_final':'quality_audit.py','bank_selection':'bank_selection.py',
-                'tfm_bank_serving':'tfm_bank_worker.py'}[cfg['phase']]
+                'tfm_bank_serving':'tfm_bank_worker.py','budget_quality':'budget_quality_worker.py',
+                'budget_quality_analysis':'audit_stage1.py','budget_quality_matched_policy':'matched_policy_worker.py',
+                'calibration_pilot':'calibration_pilot_worker.py',
+                'calibration_pilot_audit':'audit_calibration_pilot.py'}[cfg['phase']]
+        if cfg['phase']=='calibration_pilot':
+            run([root/'venv/bin/python','-m','pytest','-q',source/'tests/test_budget_quality_core.py',
+                 source/'tests/test_calibration_pilot_core.py',source/'tests/test_calibration_pilot_properties.py',
+                 '--basetemp',output/'pytest-tmp'],env=env,cwd=source,timeout=180)
         run([root/'venv/bin/python',source/worker,source/'external_config.json',output],
-            env=env,timeout=21600 if cfg['phase'] in ('quality_development','quality_final','tfm_bank_serving') else (1200 if cfg['phase']=='weights_readiness' else 6000))
+            env=env,timeout=21600 if cfg['phase'] in ('quality_development','quality_final','tfm_bank_serving','budget_quality','calibration_pilot') else (1200 if cfg['phase']=='weights_readiness' else 6000))
         if digest(old)!=cfg['frozen_hasboost_sha256'] or digest(lock)!=cfg['external_environment_sha256']:
             raise RuntimeError('environment descriptor changed during weight preparation')
         return
