@@ -24,3 +24,16 @@
 ## Границы
 
 Прежний PR #2 сохраняется отдельно. Данные, ключи, веса и сохранённые модели не публикуются. Автоматическое слияние и новая экспериментальная серия сюда не входят.
+
+## Опубликованные PR
+
+- [ ] HBP-01: [PR #3](https://github.com/leostre/Py-Boost/pull/3) — Исправить семантику скетчинга и пересчёта листьев.
+- [ ] HBP-02: [PR #4](https://github.com/leostre/Py-Boost/pull/4) — Зафиксировать историю оптимизации и измерительный контур.
+- [ ] HBP-03: [PR #5](https://github.com/leostre/Py-Boost/pull/5) — Сохранить точные GPU-редукции и диагностику разбиений.
+- [ ] HBP-04: [PR #6](https://github.com/leostre/Py-Boost/pull/6) — Зафиксировать спектральные гипотезы и событийный планировщик.
+- [ ] HBP-05: [PR #7](https://github.com/leostre/Py-Boost/pull/7) — Добавить общий базис листьев, остатки и отбор по качеству.
+- [ ] HBP-06: [PR #8](https://github.com/leostre/Py-Boost/pull/8) — Сохранить CPU/CUDA-инференс AB + L и схемы обхода.
+- [ ] HBP-07: [PR #9](https://github.com/leostre/Py-Boost/pull/9) — Добавить обучение сжатого ансамбля, историю G/H и ветви.
+- [ ] HBP-08: [PR #10](https://github.com/leostre/Py-Boost/pull/10) — Зафиксировать совместный бюджет и размещение нескольких моделей.
+- [ ] HBP-09: [PR #11](https://github.com/leostre/Py-Boost/pull/11) — Добавить внешние контроли и сравнение с TabPFN.
+- [ ] HBP-10: [PR #12](https://github.com/leostre/Py-Boost/pull/12) — Зафиксировать кривые бюджета и экономную калибровку.
