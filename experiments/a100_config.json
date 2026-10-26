@@ -1,78 +1,87 @@
 {
-  "phase": "prepared_inference",
-  "online_sources": {
-    "yeast": "/root/.orx/runs/c0c10c72-ef22-4c3f-b879-234d5ef584b3/repo/results/online_leaf_yeast_20261019",
-    "mediamill": "/root/.orx/runs/26ffce9f-3678-498a-ac7f-39f6cabc7bf1/repo/results/online_leaf_mediamill_20261019",
-    "helena": "/root/.orx/runs/f2484a8d-791c-4d78-993a-ee6653aa5e0e/repo/results/online_leaf_helena_20261019"
-  },
-  "online_report_hashes": {
-    "yeast": "e6208df4f153ed3ee55e7c29635707c9dfd6a0008474437817ff13c3c10adfd5",
-    "mediamill": "1ce99ef2072d670e0dae4adcf4ed7c34ec90c45749e2d6833288a99c2fec8ab4",
-    "helena": "2d7964ca848f9d417f1f7cb5f6fb333a2093accd5d1663bb83bb60afcd6364a9"
-  },
-  "expected_environment_sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
-  "hypothesis": "H-K4 paired comparison of four traversal schedules on45 frozen models after passed numerical gate; no fitting or test labels",
+  "phase": "held_budget_event",
+  "event_development_manifest": "/root/.orx/runs/ed171ae3-5338-44b3-94b4-db5a3c25750d/repo/results/horizon_reserve_validation_20261021/cumulative_development_manifest.json",
+  "event_development_sha256": "48fb4d2c48b3163d79bbd31d30ff3dd46817b1ca1dc60c6057e0e50e3041e4aa",
+  "event_roles_manifest": "/root/.orx/runs/c869ca47-6f98-4459-8d60-3b68c1e8c46e/repo/results/absolute_roles_preflight_20261021/absolute_roles_manifest.json",
+  "event_roles_sha256": "835b86d1f26d86c90e85ff15c1867836ee6b74fae6f3843c7468dc67070f2fdd",
+  "reserve_roles_manifest": "/root/.orx/runs/c869ca47-6f98-4459-8d60-3b68c1e8c46e/repo/results/absolute_roles_preflight_20261021/absolute_roles_manifest.json",
+  "reserve_roles_manifest_sha256": "835b86d1f26d86c90e85ff15c1867836ee6b74fae6f3843c7468dc67070f2fdd",
+  "reserve_pilot_manifest": "/root/.orx/runs/163dde15-fca8-47df-818f-27916d912b1b/repo/results/horizon_reserve_pilot_20261021/cumulative_development_manifest.json",
+  "reserve_pilot_manifest_sha256": "24dc9ed83535428b76d7ea8a821e97ada02e2d22d97778f20fa0a8b68387d120",
+  "reserve_expected_reused_trees": 1600,
+  "variant_source_roles_manifest": "/root/.orx/runs/c869ca47-6f98-4459-8d60-3b68c1e8c46e/repo/results/absolute_roles_preflight_20261021/absolute_roles_manifest.json",
+  "variant_source_roles_manifest_sha256": "835b86d1f26d86c90e85ff15c1867836ee6b74fae6f3843c7468dc67070f2fdd",
+  "variant_cases": ["yeast_1304","mediamill_1104","helena_1204","bibtex_2304"],
+  "reserve_future_topology": true,
+  "serving_tree_horizon": 200,
   "history_beta": 0.8,
-  "history_basis_period": 20,
-  "history_observation_period": 5,
-  "online_warmup": 20,
-  "online_rank_fraction": 0.5,
-  "online_residual_fraction": 0.05,
-  "inference_backends": ["gpu"],
-  "inference_cpu_paths": ["compiled", "accumulated"],
-  "inference_gpu_paths": ["unified", "warp", "groups", "tiled"],
-  "inference_kernel_profile": true,
-  "inference_parity_atol": 2e-12,
-  "inference_gpu_policy": "shared",
-  "inference_gpu_minimum_free_mib": 2048,
-  "inference_protocol": "experiments/traversal_protocol.md",
-  "prepared_source_manifest": "/root/.orx/runs/b32b8c19-030f-42a7-85af-0357418523bd/repo/results/inference_benchmark_20261016/benchmark_manifest.json",
-  "prepared_source_manifest_sha256": "1715d70919d7d042801dddca3f4accfdc3751dc66e715242d91b8df588c52c74",
-  "inference_parent_dir": "/root/.orx/runs/261e903a-6380-4c56-8dbf-ca6f90d98ae4/repo/results/uniform_threshold_comparison_20261016",
-  "inference_parent_manifest_sha256": "555cd62bf09bcf62ad91d4422219164b00fa3a6b07b485ab9384a86540a22536",
-  "inference_repeats": 9,
-  "inference_warmup": 2,
-  "data_dir": "/root/hasboost_compactness_20260928/data",
-  "environment_lock": "/root/hasboost_compactness_20260928/environment.json",
-  "datasets": ["yeast", "mediamill", "helena"],
-  "seeds_by_dataset": {
+  "absolute_seeds": {
+    "yeast": [1304,1314,1324,1334,1344],
+    "mediamill": [1104,1114,1124,1134,1144],
+    "helena": [1204,1214,1224,1234,1244],
+    "birds": [2204,2214,2224,2234,2244],
+    "scene": [2104,2114,2124,2134,2144],
+    "bibtex": [2304,2314,2324,2334,2344],
+    "mnist": [3104,3114,3124,3134,3144],
+    "rt_iot2022": [3204,3214,3224,3234,3244]
+  },
+  "cumulative_development_manifest": "/root/.orx/runs/ed171ae3-5338-44b3-94b4-db5a3c25750d/repo/results/horizon_reserve_validation_20261021/cumulative_development_manifest.json",
+  "cumulative_development_manifest_sha256": "48fb4d2c48b3163d79bbd31d30ff3dd46817b1ca1dc60c6057e0e50e3041e4aa",
+  "hypothesis": "H-VAL independent40case frozen choices and actual compact feedback audit, separate new and immutable reused tree ledgers; requires completed development SHA before run; no fits or reselection",
+  "output_dir": "results/held_budget_warning_20261021",
+  "cumulative_roles_manifest": "/root/.orx/runs/c869ca47-6f98-4459-8d60-3b68c1e8c46e/repo/results/absolute_roles_preflight_20261021/absolute_roles_manifest.json",
+  "cumulative_roles_manifest_sha256": "835b86d1f26d86c90e85ff15c1867836ee6b74fae6f3843c7468dc67070f2fdd",
+  "bounded_tree_execution": true,
+  "cumulative_datasets": [
+    "yeast",
+    "mediamill",
+    "helena"
+  ],
+  "cumulative_seeds": {
+    "yeast": [
+      1304
+    ],
     "mediamill": [
-      1104,
-      1114,
-      1124,
-      1134,
-      1144
+      1104
     ],
     "helena": [
-      1204,
-      1214,
-      1224,
-      1234,
-      1244
-    ],
-    "yeast": [
-      1304,
-      1314,
-      1324,
-      1334,
-      1344
+      1204
     ]
   },
-  "source_dir": "/root/.orx/runs/7244bd7d-883e-4ef2-904c-e20123bd422a/repo/results/shared_leaf_basis_hlr1_20261015",
-  "previous_dir": "/root/.orx/runs/15da0f29-387a-49e4-ae5f-6b42664c2d82/repo/results/tiny_residual_calibration_20261016",
-  "previous_manifest_sha256": "3c518485366d66f4dcab96dc6509b56f1dd8efe8e5d1c9c7fba7df559fb700b1",
-  "budget_kinds": ["parameters", "memory", "joint"],
-  "budget_fractions": [0.5, 0.65, 0.75],
-  "base_rank_fractions": [0.5, 0.75, 0.9],
-  "residual_capacity_fractions": [0.25, 0.5, 1.0],
+  "cumulative_absolute_bytes": {
+    "yeast": 131072,
+    "mediamill": 1048576,
+    "helena": 1048576
+  },
+  "cumulative_methods": [
+    "cumulative_reserve"
+  ],
+  "cumulative_pilot_tree_cap": 7200,
+  "expanded_manifest": "/root/.orx/runs/01962da6-5ebe-4528-a0fc-0a0580e90b28/repo/results/expanded_budget_data_20261020/manifest.json",
+  "expanded_manifest_sha256": "3d18ed6e5949470b8158a4b14071c9a7dd4db9e1ce1a31fc025d7573d19fe429",
+  "environment_lock": "/root/hasboost_compactness_20260928/environment.json",
+  "expected_environment_sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+  "data_dir": "/root/hasboost_compactness_20260928/data",
+  "own_pool_limit_bytes": 17179869184,
+  "decision_grid": [
+    0,
+    0.25,
+    -0.25,
+    0.5,
+    -0.5,
+    1,
+    -1,
+    2,
+    -2
+  ],
+  "decision_shrinkage": [
+    0.25,
+    0.5,
+    1
+  ],
   "margin_scale": 0.5,
-  "tiny_selectors": ["balanced_mse", "balanced_margin"],
-  "decision_grid": [0, 0.25, -0.25, 0.5, -0.5, 1, -1, 2, -2],
-  "decision_shrinkage": [0.25, 0.5, 1.0],
   "lr": 0.1,
   "ntrees": 200,
   "max_depth": 5,
-  "lambda_l2": 1.0,
-  "walltime_seconds": 5400,
-  "output_dir": "results/traversal_schemes_20261020"
+  "lambda_l2": 1
 }

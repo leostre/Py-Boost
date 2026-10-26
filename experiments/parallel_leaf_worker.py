@@ -30,7 +30,8 @@ def fit_increment(request):
         arguments.update(lr=request['lr'],subsample=request.get('subsample',.8),
                          colsample=request.get('colsample',.8))
         model = ContinuationLeafBoosting(**arguments,initial_train=initial,
-            initial_validation=[validation],task=request['task'])
+            initial_validation=[validation],task=request['task'],
+            pool_limit_bytes=request.get('own_pool_limit_bytes'))
         cp.cuda.get_current_stream().synchronize()
         started = time.perf_counter()
         fit_started_ns = time.time_ns()

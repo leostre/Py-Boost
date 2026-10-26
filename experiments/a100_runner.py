@@ -114,6 +114,9 @@ def build_model(method, task, n_outputs, config, seed, depth, regularization, tr
                      max_bin=128, es=0, seed=seed, verbose=200, callbacks=callbacks)
     if method == 'full':
         model = GradientBoosting(**arguments)
+    elif method == 'sketchboost_proj_half':
+        model = SketchBoost(**arguments, sketch_method='proj',
+                            sketch_outputs=max(1,int(np.ceil(n_outputs*.5))),use_hess=False)
     elif method.startswith('sketchboost_topk_'):
         fractions = {'half': .5, 'quarter': .25, 'threequarters': .75}
         fraction = fractions[method.removeprefix('sketchboost_topk_')]
@@ -301,7 +304,82 @@ def main():
               'model_cost': 'reachable leaf coefficients plus base score; thresholds and padding reported separately'}
     emit('configuration', **report)
     with threadpool_limits(limits=8):
-        if config['phase'] == 'traversal_preflight':
+        if config['phase'] == 'held_budget_event':
+            from experiments.held_budget_event_study import held_budget_event_study
+            held_budget_event_study(config, report, output)
+        elif config['phase'] == 'reserve_validation_training':
+            from experiments.absolute_reserve_validation import reserve_validation_training
+            reserve_validation_training(config, report, output)
+        elif config['phase'] == 'absolute_variant_training':
+            from experiments.absolute_variant_study import absolute_variant_training
+            absolute_variant_training(config, report, output)
+        elif config['phase'] == 'absolute_history_training':
+            from experiments.absolute_history_study import absolute_history_training
+            absolute_history_training(config, report, output)
+        elif config['phase'] == 'absolute_roles_preflight':
+            from experiments.absolute_history_study import prepare_absolute_roles
+            prepare_absolute_roles(config, report, output)
+        elif config['phase'] == 'direct_leaf_solver':
+            from experiments.direct_leaf_study import direct_leaf_study
+            direct_leaf_study(config, report, output)
+        elif config['phase'] == 'cumulative_final_test':
+            from experiments.cumulative_budget_audit import cumulative_final_test
+            cumulative_final_test(config, report, output)
+        elif config['phase'] == 'cumulative_training':
+            from experiments.cumulative_budget_study import cumulative_training
+            cumulative_training(config, report, output)
+        elif config['phase'] == 'cumulative_preflight':
+            from experiments.cumulative_budget_study import cumulative_preflight
+            cumulative_preflight(config, report, output)
+        elif config['phase'] == 'bank_allocation':
+            from experiments.bank_allocation_study import bank_allocation_study
+            bank_allocation_study(config, report, output)
+        elif config['phase'] == 'model_bank_capacity':
+            from experiments.model_bank_capacity import model_bank_capacity
+            model_bank_capacity(config, report, output)
+        elif config['phase'] == 'model_bank_inventory':
+            from experiments.model_bank_study import model_bank_inventory
+            model_bank_inventory(config, report, output)
+        elif config['phase'] == 'birds_selection_development':
+            from experiments.birds_selection_study import birds_selection_development
+            birds_selection_development(config, report, output)
+        elif config['phase'] == 'birds_selection_test':
+            from experiments.birds_selection_study import birds_selection_test
+            birds_selection_test(config, report, output)
+        elif config['phase'] == 'guard_evidence':
+            from experiments.guard_evidence import guard_evidence
+            guard_evidence(config, report, output)
+        elif config['phase'] == 'guard_budget_audit':
+            from experiments.guard_budget_audit import guard_budget_audit
+            guard_budget_audit(config, report, output)
+        elif config['phase'] == 'guard_budget_loop':
+            from experiments.guard_budget_study import guard_budget_study
+            guard_budget_study(config, report, output)
+        elif config['phase'] == 'prefix_budget_control':
+            from experiments.prefix_budget_study import prefix_budget_study
+            prefix_budget_study(config, report, output)
+        elif config['phase'] == 'closed_budget_loop':
+            from experiments.closed_budget_study import closed_budget_study
+            closed_budget_study(config, report, output)
+        elif config['phase'] == 'leaf_geometry':
+            from experiments.leaf_geometry_study import leaf_geometry_study
+            leaf_geometry_study(config, report, output)
+        elif config['phase'] == 'joint_budget_audit':
+            from experiments.joint_budget_audit import joint_budget_audit
+            joint_budget_audit(config, report, output)
+        elif config['phase'] == 'joint_budget_map':
+            from experiments.joint_budget_study import joint_budget_study
+            joint_budget_study(config, report, output)
+        elif config['phase'] == 'budget_preflight':
+            from experiments.leaf_budget_runtime import budget_preflight
+            budget_preflight(config, report, output)
+        elif config['phase'] == 'expanded_budget_data':
+            from experiments.expanded_budget_data import expanded_budget_data
+            expanded_budget_data(config, report, output)
+        elif config['phase'] == 'rank_residual_map':
+            from experiments.rank_residual_map_study import rank_residual_map_study
+            rank_residual_map_study(config, report, output)
+        elif config['phase'] == 'traversal_preflight':
             from experiments.traversal_preflight import traversal_preflight
             traversal_preflight(config, report, output)
         elif config['phase'] == 'parallel_leaf_study':
