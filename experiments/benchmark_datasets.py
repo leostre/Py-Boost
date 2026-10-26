@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -153,6 +154,39 @@ DATASETS: Dict[str, DatasetSpec] = {
         article_reported_features=120,
         representation="LIBSVM Tools original MediaMill train/test",
     ),
+    "moa": DatasetSpec(
+        name="moa",
+        task=Task.MULTILABEL,
+        source=(
+            "SketchBoost public datasets archive: Google Drive "
+            "1JBoyc5neSZExcs5qcpk73We9wOvPbXs4"
+        ),
+        data_id=None,
+        expected_features=875,
+        expected_outputs=206,
+        default_max_samples=12_000,
+        default_sketch_outputs=52,
+        loader="moa",
+        article_reported_samples=23_814,
+        article_reported_features=876,
+        representation=(
+            "Exact SketchBoost LISH MoA train_features/train_targets_scored; "
+            "sig_id removed"
+        ),
+    ),
+    "dionis": DatasetSpec(
+        name="dionis",
+        task=Task.MULTICLASS,
+        source="OpenML:41167 (file id 19335690)",
+        data_id=41167,
+        expected_features=60,
+        expected_outputs=355,
+        default_max_samples=12_000,
+        default_sketch_outputs=89,
+        article_reported_samples=416_188,
+        article_reported_features=60,
+        representation="OpenML Dionis numeric tabular features",
+    ),
     "rt_iot2022": DatasetSpec(
         name="rt_iot2022",
         task=Task.MULTICLASS,
@@ -283,6 +317,113 @@ def _atomic_npz(path: Path, **arrays: np.ndarray) -> None:
     temporary = path.with_name(f"{path.stem}.tmp.npz")
     np.savez_compressed(temporary, **arrays)
     temporary.replace(path)
+
+
+MOA_ARCHIVE_SHA256 = (
+    "c6c5fe9499464c42453e042d9ae92f5aad849bf6093056933608208461d2d678"
+)
+MOA_FILE_SHA256 = {
+    "train_features.csv": (
+        "890c6c9a043e97228bc937b643e515bc3e03c889e02910acc435e10326aeb15b"
+    ),
+    "train_targets_scored.csv": (
+        "c4f5d4739ac0db400596367c56674743214ab3eb6ceb5e8615287ab96b436811"
+    ),
+}
+
+
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _prepare_moa(
+    features_frame: pd.DataFrame,
+    target_frame: pd.DataFrame,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Apply the exact SketchBoost preprocessing to aligned LISH MoA rows."""
+
+    required = {"sig_id", "cp_type", "cp_time", "cp_dose"}
+    missing = required - set(features_frame.columns)
+    if missing:
+        raise ValueError(f"MoA features miss columns: {sorted(missing)}")
+    if "sig_id" not in target_frame.columns:
+        raise ValueError("MoA targets miss sig_id")
+    if features_frame["sig_id"].duplicated().any():
+        raise ValueError("MoA features contain duplicate sig_id values")
+    if target_frame["sig_id"].duplicated().any():
+        raise ValueError("MoA targets contain duplicate sig_id values")
+
+    data = features_frame.copy()
+    data["cp_type"] = data["cp_type"] == "ctl_vehicle"
+    data["cp_dose"] = data["cp_dose"] == "D1"
+    features = data.drop("sig_id", axis=1).to_numpy(dtype=np.float32, copy=True)
+    aligned = target_frame.set_index("sig_id").reindex(data["sig_id"].to_numpy())
+    if aligned.isnull().any().any():
+        raise ValueError("MoA targets do not align one-to-one with feature sig_id values")
+    target = aligned.to_numpy(dtype=np.float32, copy=True)
+    return features, target
+
+
+def _load_moa(cache_dir: Path) -> Tuple[np.ndarray, np.ndarray]:
+    """Load the exact public SketchBoost MoA files and cache normalized arrays."""
+
+    cache_path = cache_dir / "moa" / "sketchboost_lish_moa_scored_v1.npz"
+    source_dir = cache_dir / "sketchboost-source" / "data" / "lish_moa"
+    paths = {name: source_dir / name for name in MOA_FILE_SHA256}
+    missing = [str(path) for path in paths.values() if not path.exists()]
+    if missing:
+        raise FileNotFoundError(
+            "Exact SketchBoost MoA source files are missing: " + ", ".join(missing)
+        )
+    for name, path in paths.items():
+        actual = _file_sha256(path)
+        if actual != MOA_FILE_SHA256[name]:
+            raise ValueError(
+                f"MoA source checksum mismatch for {name}: {actual}"
+            )
+
+    if cache_path.exists():
+        with np.load(cache_path, allow_pickle=False) as cached:
+            metadata_matches = all(
+                key in cached.files
+                and str(cached[key]) == expected
+                for key, expected in (
+                    ("features_source_sha256", MOA_FILE_SHA256["train_features.csv"]),
+                    ("targets_source_sha256", MOA_FILE_SHA256["train_targets_scored.csv"]),
+                )
+            )
+            if metadata_matches:
+                return cached["features"].copy(), cached["target"].copy()
+
+    features, target = _prepare_moa(
+        pd.read_csv(paths["train_features.csv"]),
+        pd.read_csv(paths["train_targets_scored.csv"]),
+    )
+    spec = DATASETS["moa"]
+    expected_shape = (spec.article_reported_samples, spec.expected_features)
+    if features.shape != expected_shape:
+        raise ValueError(f"MoA features have shape {features.shape}; expected {expected_shape}")
+    if target.shape != (spec.article_reported_samples, spec.expected_outputs):
+        raise ValueError(
+            f"MoA targets have shape {target.shape}; expected "
+            f"{(spec.article_reported_samples, spec.expected_outputs)}"
+        )
+    _atomic_npz(
+        cache_path,
+        features=features,
+        target=target,
+        features_source_sha256=np.asarray(
+            MOA_FILE_SHA256["train_features.csv"]
+        ),
+        targets_source_sha256=np.asarray(
+            MOA_FILE_SHA256["train_targets_scored.csv"]
+        ),
+    )
+    return features, target
 
 
 def _load_age_prediction(cache_dir: Path) -> Tuple[np.ndarray, np.ndarray]:
@@ -457,6 +598,8 @@ def load_benchmark_dataset(
         raw_features, raw_target = _load_age_prediction(cache_dir)
     elif spec.loader == "uci_rt_iot":
         raw_features, raw_target = _load_rt_iot(cache_dir)
+    elif spec.loader == "moa":
+        raw_features, raw_target = _load_moa(cache_dir)
     else:
         raise ValueError(
             f"unsupported loader {spec.loader!r} for dataset: {name}"
