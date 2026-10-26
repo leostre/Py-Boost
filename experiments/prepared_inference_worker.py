@@ -45,6 +45,9 @@ def build(source, path, backend):
     if path == 'unified':
         from experiments.unified_leaf_gpu import UnifiedLeafGpu
         return UnifiedLeafGpu(source)
+    if path in ('warp', 'groups', 'tiled'):
+        from experiments.traversal_leaf_gpu import TraversalLeafGpu
+        return TraversalLeafGpu(source, path)
     raise ValueError('unknown GPU inference path')
 
 
@@ -110,7 +113,7 @@ def timing(job, cp=None):
                 actual = out.get() if mode == 'device' else out
                 expected = sources[key[0]].predict(host)
                 error = float(np.max(np.abs(expected-actual)))
-                np.testing.assert_allclose(actual, expected, atol=2e-5, rtol=0)
+                np.testing.assert_allclose(actual, expected, atol=job.get('parity_atol',2e-5), rtol=0)
                 differences = int(np.count_nonzero(calibrated_decisions(actual, sources[key[0]]) !=
                                                    calibrated_decisions(expected, sources[key[0]])))
                 if differences:
@@ -141,6 +144,39 @@ def timing(job, cp=None):
                 records.append({'role': role, 'path': path, 'batch': n,
                     'batch_scope': 'all' if n == len(x) else str(n), 'mode': mode,
                     **timing_summary(samples[role, path], n), 'orders': orders})
+        if cp and job.get('kernel_profile'):
+            from experiments.traversal_leaf_gpu import baseline_launch_into
+            outputs={key:cp.empty((n,models[key].outputs),cp.float64) for key in keys}
+            workspaces={key:models[key].workspace(n) if key[1] != 'unified' else None for key in keys}
+            def launch(key):
+                if key[1]=='unified':
+                    baseline_launch_into(models[key],device,outputs[key])
+                else:
+                    models[key].launch_into(device,outputs[key],workspace=workspaces[key])
+            for key in keys:
+                for _ in range(job['warmup']): launch(key)
+            sync()
+            samples={key:[] for key in keys}
+            orders=[]
+            start_event,end_event=cp.cuda.Event(),cp.cuda.Event()
+            for _ in range(job['repeats']):
+                order=rng.permutation(len(keys)).tolist()
+                orders.append([list(keys[i]) for i in order])
+                for i in order:
+                    key=keys[i]
+                    start_event.record()
+                    launch(key)
+                    end_event.record()
+                    end_event.synchronize()
+                    samples[key].append(float(cp.cuda.get_elapsed_time(start_event,end_event)))
+            for role,path in keys:
+                # This is a CUDA stream interval on shared hardware, not a
+                # claim of isolated kernel execution time or a Nsight trace.
+                records.append({'role':role,'path':path,'batch':n,
+                    'batch_scope':'all' if n==len(x) else str(n),'mode':'kernel_stream',
+                    **timing_summary(samples[role,path],n),'orders':orders,
+                    'validation_allocation_transfer_excluded':True})
+            del outputs,workspaces
     return {'timings': records, 'parity': parity, 'setup': setup, 'threadpools': threadpool_info()}
 
 

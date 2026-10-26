@@ -301,7 +301,28 @@ def main():
               'model_cost': 'reachable leaf coefficients plus base score; thresholds and padding reported separately'}
     emit('configuration', **report)
     with threadpool_limits(limits=8):
-        if config['phase'] == 'gpu_stage_profile':
+        if config['phase'] == 'traversal_preflight':
+            from experiments.traversal_preflight import traversal_preflight
+            traversal_preflight(config, report, output)
+        elif config['phase'] == 'parallel_leaf_study':
+            from experiments.parallel_leaf_study import parallel_leaf_study
+            parallel_leaf_study(config, report, output)
+        elif config['phase'] == 'parallel_leaf_preflight':
+            from experiments.parallel_leaf_preflight import parallel_leaf_preflight
+            parallel_leaf_preflight(config, report, output)
+        elif config['phase'] == 'history_basis_study':
+            from experiments.history_basis_study import history_basis_study
+            history_basis_study(config, report, output)
+        elif config['phase'] == 'history_basis_preflight':
+            from experiments.history_basis_preflight import history_basis_preflight
+            history_basis_preflight(config, report, output)
+        elif config['phase'] == 'online_leaf_study':
+            from experiments.online_leaf_study import online_leaf_study
+            online_leaf_study(config, report, output)
+        elif config['phase'] == 'online_leaf_preflight':
+            from experiments.online_leaf_preflight import online_leaf_preflight
+            online_leaf_preflight(config, report, output)
+        elif config['phase'] == 'gpu_stage_profile':
             from experiments.gpu_stage_profile import gpu_stage_study
             gpu_stage_study(config, report, output)
         elif config['phase'] == 'prepared_inference':
