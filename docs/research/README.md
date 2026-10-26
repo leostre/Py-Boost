@@ -4,22 +4,22 @@
 
 ## Пакеты
 
-| Код | Содержание | Основной исходный коммит | Задача для ревью | PR |
-|---|---|---|---|---|
-| HBP-01 | [Исправить семантику скетчинга и пересчёта листьев](01-semantics.md) | `410b56659fb8` | [Описание задачи](issues/HBP-01.md) | [#3](https://github.com/leostre/Py-Boost/pull/3) |
-| HBP-02 | [Зафиксировать историю оптимизации и измерительный контур](02-measurement-history.md) | `e9290a87c494` | [Описание задачи](issues/HBP-02.md) | [#4](https://github.com/leostre/Py-Boost/pull/4) |
-| HBP-03 | [Сохранить точные GPU-редукции и диагностику разбиений](03-deterministic-gpu.md) | `2c782756a09d` | [Описание задачи](issues/HBP-03.md) | [#5](https://github.com/leostre/Py-Boost/pull/5) |
-| HBP-04 | [Зафиксировать спектральные гипотезы и событийный планировщик](04-spectral-events.md) | `b71ef5e5d9f5` | [Описание задачи](issues/HBP-04.md) | [#6](https://github.com/leostre/Py-Boost/pull/6) |
-| HBP-05 | [Добавить общий базис листьев, остатки и отбор по качеству](05-low-rank-residual.md) | `6c90c71e2f69` | [Описание задачи](issues/HBP-05.md) | [#7](https://github.com/leostre/Py-Boost/pull/7) |
-| HBP-06 | [Сохранить CPU/CUDA-инференс AB + L и схемы обхода](06-inference.md) | `f52e972037a8` | [Описание задачи](issues/HBP-06.md) | [#8](https://github.com/leostre/Py-Boost/pull/8) |
-| HBP-07 | [Добавить обучение сжатого ансамбля, историю G/H и ветви](07-compact-training.md) | `dd43c5e83000` | [Описание задачи](issues/HBP-07.md) | [#9](https://github.com/leostre/Py-Boost/pull/9) |
-| HBP-08 | [Зафиксировать совместный бюджет и размещение нескольких моделей](08-joint-budget.md) | `2f0c9c50896f` | [Описание задачи](issues/HBP-08.md) | [#10](https://github.com/leostre/Py-Boost/pull/10) |
-| HBP-09 | [Добавить внешние контроли и сравнение с TabPFN](09-external-controls.md) | `843ab81fdf9a` | [Описание задачи](issues/HBP-09.md) | [#11](https://github.com/leostre/Py-Boost/pull/11) |
-| HBP-10 | [Зафиксировать кривые бюджета и экономную калибровку](10-calibration.md) | `e84744be78ea` | [Описание задачи](issues/HBP-10.md) | [#12](https://github.com/leostre/Py-Boost/pull/12) |
+| Код | Содержание | Основной исходный коммит | Задача для ревью | PR | Issue |
+|---|---|---|---|---|---|
+| HBP-01 | [Исправить семантику скетчинга и пересчёта листьев](01-semantics.md) | `410b56659fb8` | [Описание задачи](issues/HBP-01.md) | [#3](https://github.com/leostre/Py-Boost/pull/3) | [#14](https://github.com/leostre/Py-Boost/issues/14) |
+| HBP-02 | [Зафиксировать историю оптимизации и измерительный контур](02-measurement-history.md) | `e9290a87c494` | [Описание задачи](issues/HBP-02.md) | [#4](https://github.com/leostre/Py-Boost/pull/4) | [#15](https://github.com/leostre/Py-Boost/issues/15) |
+| HBP-03 | [Сохранить точные GPU-редукции и диагностику разбиений](03-deterministic-gpu.md) | `2c782756a09d` | [Описание задачи](issues/HBP-03.md) | [#5](https://github.com/leostre/Py-Boost/pull/5) | [#16](https://github.com/leostre/Py-Boost/issues/16) |
+| HBP-04 | [Зафиксировать спектральные гипотезы и событийный планировщик](04-spectral-events.md) | `b71ef5e5d9f5` | [Описание задачи](issues/HBP-04.md) | [#6](https://github.com/leostre/Py-Boost/pull/6) | [#17](https://github.com/leostre/Py-Boost/issues/17) |
+| HBP-05 | [Добавить общий базис листьев, остатки и отбор по качеству](05-low-rank-residual.md) | `6c90c71e2f69` | [Описание задачи](issues/HBP-05.md) | [#7](https://github.com/leostre/Py-Boost/pull/7) | [#18](https://github.com/leostre/Py-Boost/issues/18) |
+| HBP-06 | [Сохранить CPU/CUDA-инференс AB + L и схемы обхода](06-inference.md) | `f52e972037a8` | [Описание задачи](issues/HBP-06.md) | [#8](https://github.com/leostre/Py-Boost/pull/8) | [#19](https://github.com/leostre/Py-Boost/issues/19) |
+| HBP-07 | [Добавить обучение сжатого ансамбля, историю G/H и ветви](07-compact-training.md) | `dd43c5e83000` | [Описание задачи](issues/HBP-07.md) | [#9](https://github.com/leostre/Py-Boost/pull/9) | [#20](https://github.com/leostre/Py-Boost/issues/20) |
+| HBP-08 | [Зафиксировать совместный бюджет и размещение нескольких моделей](08-joint-budget.md) | `2f0c9c50896f` | [Описание задачи](issues/HBP-08.md) | [#10](https://github.com/leostre/Py-Boost/pull/10) | [#21](https://github.com/leostre/Py-Boost/issues/21) |
+| HBP-09 | [Добавить внешние контроли и сравнение с TabPFN](09-external-controls.md) | `843ab81fdf9a` | [Описание задачи](issues/HBP-09.md) | [#11](https://github.com/leostre/Py-Boost/pull/11) | [#22](https://github.com/leostre/Py-Boost/issues/22) |
+| HBP-10 | [Зафиксировать кривые бюджета и экономную калибровку](10-calibration.md) | `e84744be78ea` | [Описание задачи](issues/HBP-10.md) | [#12](https://github.com/leostre/Py-Boost/pull/12) | [#23](https://github.com/leostre/Py-Boost/issues/23) |
 
 PR следует проверять и сливать последовательно: каждый следующий направлен в ветку предыдущего. До слияния следующего PR его базу нужно перевести на `master`, когда предыдущие изменения уже вошли туда. Не удаляйте промежуточную ветку, пока на неё направлен следующий PR. Для слияния цепочки следует сохранять её коммиты. При squash/rebase оставшиеся ветки нужно отдельно пересобрать; одной смены базы недостаточно. Автоматического слияния нет. Прежний PR #2 с вариантами MDOB сохраняет собственную историю и в эту цепочку не включён.
 
-Раздел Issues в репозитории отключён, а у публикующего пользователя нет административных прав. Поэтому здесь сохранены готовые описания HBP-01–HBP-10 и общего реестра. Они не выдаются за созданные GitHub Issues. После включения Issues администратором их можно перенести и добавить ссылки в PR.
+Раздел Issues включён владельцем репозитория. Созданы [общий реестр #13](https://github.com/leostre/Py-Boost/issues/13) и десять задач для ревью; двусторонние ссылки приведены в PR и описаниях задач. [Визуализации методов и результатов](figures/README.md) дополняют текстовые протоколы.
 
 ## Состояние гипотез
 

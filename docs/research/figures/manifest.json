@@ -1,0 +1,950 @@
+{
+  "generated_in_this_task": false,
+  "scientific_runs_started": 0,
+  "transfer_checks": [
+    "source/destination SHA-256",
+    "PNG chunk CRC and dimensions",
+    "SVG XML parsing",
+    "relative Markdown links"
+  ],
+  "source_notes": [
+    {
+      "source_path": "Визуализации актуальных гипотез 2026-10-20/Актуальные гипотезы — механизмы и проверки.md",
+      "sha256": "4b4fc997dbf1378c92125b56d8a77b432c7b461ee6ee32fbb078672316873009"
+    },
+    {
+      "source_path": "70_labs/figures/hasboost_shared_leaf_basis_2026-10-15/visual-redesign-v2/visual-registry.csv",
+      "sha256": "ba53d0d365a4720360db6a4f955ba4cd29eee2889fcaafe896dfd034a288a14a"
+    },
+    {
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/Описание рисунков.md",
+      "sha256": "6c43e1309785300e9559712558ee0462d9fc70b65c34700adb9b174ac093af74"
+    },
+    {
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/Описание рисунков.md",
+      "sha256": "0e7fc4605c8616484726b92414f2fbf176b1a68839e078dd9f8c556c39f82f26"
+    }
+  ],
+  "assets": [
+    {
+      "id": "rmt-output-subspace",
+      "kind": "conceptual",
+      "source_path": "80_assets/hasboost-hypothesis-review/gpt-image-v1/hasboost-rmt-output-subspace-v1.png",
+      "published_path": "docs/research/figures/methods/rmt-output-subspace.png",
+      "sha256": "aa6bf8123ba19f82c14a8d490f2a641fbe7dc7fd033187710e7fec92045a2410",
+      "bytes": 1538015,
+      "dimensions": [
+        1692,
+        929
+      ],
+      "stages": [
+        1,
+        2
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "scheduler-risk",
+      "kind": "conceptual",
+      "source_path": "80_assets/hasboost-hypothesis-review/gpt-image-v1/hasboost-scheduler-risk-v1.png",
+      "published_path": "docs/research/figures/methods/scheduler-risk.png",
+      "sha256": "eecde22daa03cfa17efcf275b8eba6f8aabad7adb86bca73a8310b2ebb1b5669",
+      "bytes": 1532005,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        4
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "shared-leaf-basis",
+      "kind": "conceptual",
+      "source_path": "80_assets/hasboost_shared_leaf_basis_2026-10-15/gpt-image-v1/h-lr1-shared-leaf-basis.png",
+      "published_path": "docs/research/figures/methods/shared-leaf-basis.png",
+      "sha256": "d9a5178943607c89e1a2fd4e2057ece393f7a4da22dac48cfe0caee6789d81d9",
+      "bytes": 1653617,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        5
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "functional-geometry-v2",
+      "kind": "conceptual",
+      "source_path": "80_assets/hasboost_shared_leaf_basis_2026-10-15/gpt-image-v2/h-lr2-functional-geometry.png",
+      "published_path": "docs/research/figures/methods/functional-geometry-v2.png",
+      "sha256": "89d7a3428a7d7cee1d94af2fa702b87c599079de5279ebc5ba4b67c0fdda489c",
+      "bytes": 1800427,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        5,
+        8
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "matched-budget-v2",
+      "kind": "conceptual",
+      "source_path": "80_assets/hasboost_shared_leaf_basis_2026-10-15/gpt-image-v2/h-lr3-matched-budget.png",
+      "published_path": "docs/research/figures/methods/matched-budget-v2.png",
+      "sha256": "7bca7aa1aa812afe441476c5974cb1bcb93f2adcb8e54996819dfb946ac2da10",
+      "bytes": 1895489,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        8
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "sparse-corrections",
+      "kind": "conceptual",
+      "source_path": "80_assets/hasboost_shared_leaf_basis_2026-10-15/gpt-image-v1/h-lr4-low-rank-sparse-corrections.png",
+      "published_path": "docs/research/figures/methods/sparse-corrections.png",
+      "sha256": "1541ccc14f3ad2fe3b90d4449f84fd7fcbe3e330341275434564f222d3630d64",
+      "bytes": 1811632,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        5
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "traversal-v2",
+      "kind": "conceptual",
+      "source_path": "Визуализации актуальных гипотез 2026-10-20/01-traversal-v2.png",
+      "published_path": "docs/research/figures/methods/traversal-v2.png",
+      "sha256": "f5d8cf1407a0d770485113b500b442b4b810909f20b6e0735771d3facfde994c",
+      "bytes": 1968854,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        6
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "joint-budget-v2",
+      "kind": "conceptual",
+      "source_path": "Визуализации актуальных гипотез 2026-10-20/02-budget-v2.png",
+      "published_path": "docs/research/figures/methods/joint-budget-v2.png",
+      "sha256": "007c4cfddf62d63b942c195b4c74ba45209223bbf5e912c55cfdacead00db67d",
+      "bytes": 1710142,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "stages": [
+        8
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "online-training-v2",
+      "kind": "conceptual",
+      "source_path": "Визуализации актуальных гипотез 2026-10-20/03-online-v2.png",
+      "published_path": "docs/research/figures/methods/online-training-v2.png",
+      "sha256": "4bb6a0ccfb65d0ed85cf82abd864e5661a8bcbaa63263be882e5cfb236aa2b3b",
+      "bytes": 1707155,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        7
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "history-v2",
+      "kind": "conceptual",
+      "source_path": "Визуализации актуальных гипотез 2026-10-20/04-history-v2.png",
+      "published_path": "docs/research/figures/methods/history-v2.png",
+      "sha256": "f87c92b2edc08c8d5c4069f1705495e9f089f6ebb6813e4f969a0e61e5f30e32",
+      "bytes": 1761729,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        7
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "parallel-branches-v2",
+      "kind": "conceptual",
+      "source_path": "Визуализации актуальных гипотез 2026-10-20/05-branches-v2.png",
+      "published_path": "docs/research/figures/methods/parallel-branches-v2.png",
+      "sha256": "64425babed1916eb8f5f98bfb34692392b4b922943e596fb65604f59f611fc44",
+      "bytes": 1756286,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        7
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "serving-memory-v2",
+      "kind": "conceptual",
+      "source_path": "Визуализации актуальных гипотез 2026-10-20/06-serving-v2.png",
+      "published_path": "docs/research/figures/methods/serving-memory-v2.png",
+      "sha256": "25a9ec55c4bc74ec95de5dda68271c9ea35c6c2fa325b4ec73a809d7b84ee8e5",
+      "bytes": 1907664,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "stages": [
+        6,
+        9
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/banknote_4204-development.png",
+      "published_path": "docs/research/figures/qb1/banknote_4204-development.png",
+      "sha256": "083d4c9d296eaf5f70558b44badcf2d028f410c88173ca2f2ee108306fead627",
+      "bytes": 71295,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/banknote_4204-development.svg",
+      "published_path": "docs/research/figures/qb1/banknote_4204-development.svg",
+      "sha256": "8fa5e96fc1a506eb579a2184be5c9cee97b9c71616f813e0f85658511d5cb26b",
+      "bytes": 73102,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/banknote_4204-native-test.png",
+      "published_path": "docs/research/figures/qb1/banknote_4204-native-test.png",
+      "sha256": "402415bd5c81ece7913c5acab1f16d23bbed8976e322c19a9e3b40203a7f6f50",
+      "bytes": 80233,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/banknote_4204-native-test.svg",
+      "published_path": "docs/research/figures/qb1/banknote_4204-native-test.svg",
+      "sha256": "9bcb937e95f5388bb1a37970c8e85d0102334f67af28ef40837c7b0918e18b4a",
+      "bytes": 39269,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/banknote_4204-pyboost-test.png",
+      "published_path": "docs/research/figures/qb1/banknote_4204-pyboost-test.png",
+      "sha256": "20afa77057b47941f15f5bd78f9dd03cfbaae383ea2ce6609f60947250cbffb6",
+      "bytes": 67027,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/banknote_4204-pyboost-test.svg",
+      "published_path": "docs/research/figures/qb1/banknote_4204-pyboost-test.svg",
+      "sha256": "4e1739b8da50ed946dd6d8f0d811ca0e73677abaa0d30e6f87bbd7a9fc9ad308",
+      "bytes": 49156,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/helena_1204-development.png",
+      "published_path": "docs/research/figures/qb1/helena_1204-development.png",
+      "sha256": "6e4955f18bc7e7f9a92e4bda171e8bb5fdeb74db94628a9bed4ea097c537f8d7",
+      "bytes": 70995,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/helena_1204-development.svg",
+      "published_path": "docs/research/figures/qb1/helena_1204-development.svg",
+      "sha256": "6546a15bb8e76947cc3d2e9dbfe8a30bd103317feb39b90e0961bf8e850e2abd",
+      "bytes": 72413,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/helena_1204-native-test.png",
+      "published_path": "docs/research/figures/qb1/helena_1204-native-test.png",
+      "sha256": "ebf16195d37717888b8594824b001a15044616c4f435b5ec9d60d86f659b5735",
+      "bytes": 65208,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/helena_1204-native-test.svg",
+      "published_path": "docs/research/figures/qb1/helena_1204-native-test.svg",
+      "sha256": "ca9fd8ffb6ef1e9e7c25a89d6aecc405110ab8d6d47fb3b71a0887158d27586d",
+      "bytes": 36944,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/helena_1204-pyboost-test.png",
+      "published_path": "docs/research/figures/qb1/helena_1204-pyboost-test.png",
+      "sha256": "cea36b9b57cdf93f5c053c69befec34aa9041f13ab654a501d7cf4fc1a5adc3d",
+      "bytes": 60360,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/helena_1204-pyboost-test.svg",
+      "published_path": "docs/research/figures/qb1/helena_1204-pyboost-test.svg",
+      "sha256": "47956d3f41e4342f9366589c7986fa4bc17d21b43b14f40371ef496462c1759c",
+      "bytes": 48416,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/mnist_3104-development.png",
+      "published_path": "docs/research/figures/qb1/mnist_3104-development.png",
+      "sha256": "0ef43eb90d68d44a322d73b0102cfb522bbccccd71875df6c85635e0a714f996",
+      "bytes": 70402,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/mnist_3104-development.svg",
+      "published_path": "docs/research/figures/qb1/mnist_3104-development.svg",
+      "sha256": "341e1981a04d028c3a6c442ebfad16a907c2212716b679418102c8f22daca89a",
+      "bytes": 74617,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/mnist_3104-native-test.png",
+      "published_path": "docs/research/figures/qb1/mnist_3104-native-test.png",
+      "sha256": "2432d23f358af9a32fdb92a8aa1b5b0b4c552452862f8567247322533cf598cc",
+      "bytes": 71083,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/mnist_3104-native-test.svg",
+      "published_path": "docs/research/figures/qb1/mnist_3104-native-test.svg",
+      "sha256": "29c0213479266cf1bc4c8b8db29c3c1cc2dc5510c75f04cff03a98e8a3352522",
+      "bytes": 36772,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/mnist_3104-pyboost-test.png",
+      "published_path": "docs/research/figures/qb1/mnist_3104-pyboost-test.png",
+      "sha256": "ae78b1450753dbb207954f48eb511018fb488e2562f00ee5aababd6119ff5121",
+      "bytes": 81980,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/mnist_3104-pyboost-test.svg",
+      "published_path": "docs/research/figures/qb1/mnist_3104-pyboost-test.svg",
+      "sha256": "6ea03e3576b324cb3310dad773994a463ccf1a98b78531c8b5fcfd47b966e4c3",
+      "bytes": 49131,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/rt_iot2022_3204-development.png",
+      "published_path": "docs/research/figures/qb1/rt_iot2022_3204-development.png",
+      "sha256": "bd9d473788b8b7f9dc8856cbf195463a57db23a9db3c7d62163c6268f875ae91",
+      "bytes": 68258,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/rt_iot2022_3204-development.svg",
+      "published_path": "docs/research/figures/qb1/rt_iot2022_3204-development.svg",
+      "sha256": "b861bf6053ae13cb30be22d9e24103b43205e82be5cd56d4980a171855ee9465",
+      "bytes": 68582,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/rt_iot2022_3204-native-test.png",
+      "published_path": "docs/research/figures/qb1/rt_iot2022_3204-native-test.png",
+      "sha256": "8aa2c13ef9981c1c013530e21ee2edb83c05048e510abb95d6a8297307aa4e36",
+      "bytes": 81234,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/rt_iot2022_3204-native-test.svg",
+      "published_path": "docs/research/figures/qb1/rt_iot2022_3204-native-test.svg",
+      "sha256": "b6fd3d641e42c5d2dc504239ca740c1655ee664c0a00d0015c95a9bb9ffca077",
+      "bytes": 40542,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/rt_iot2022_3204-pyboost-test.png",
+      "published_path": "docs/research/figures/qb1/rt_iot2022_3204-pyboost-test.png",
+      "sha256": "3bab710fc23fb063e5925485471f1440cbdfb9bc34e9d4a62ace12173ce60d36",
+      "bytes": 70020,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/rt_iot2022_3204-pyboost-test.svg",
+      "published_path": "docs/research/figures/qb1/rt_iot2022_3204-pyboost-test.svg",
+      "sha256": "98e68bb05e1089d9c7a4a1d5ca5135b88a52d505ca7956e028696fd5be97e2c3",
+      "bytes": 47708,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/wdbc_4104-development.png",
+      "published_path": "docs/research/figures/qb1/wdbc_4104-development.png",
+      "sha256": "f4b30bdb3bca1aa8ce15c0e4a4f430addb19e97aa69e6b031420475a3d1928e3",
+      "bytes": 49816,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-development",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/wdbc_4104-development.svg",
+      "published_path": "docs/research/figures/qb1/wdbc_4104-development.svg",
+      "sha256": "bf0bda6dc67bf88eaf8ed9593ef077c3633e2c486dc69e130ebaac183fdc3cbe",
+      "bytes": 64346,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/wdbc_4104-native-test.png",
+      "published_path": "docs/research/figures/qb1/wdbc_4104-native-test.png",
+      "sha256": "56434fef73fced9070a2dd25f9b1b92bd0142485f8cd2228cf69821ad6241a9b",
+      "bytes": 65699,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-native-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/wdbc_4104-native-test.svg",
+      "published_path": "docs/research/figures/qb1/wdbc_4104-native-test.svg",
+      "sha256": "7be965fdf705b21e7ae8651ad5a022f3d834f5995c7e96a6ca3eb63999a08ac6",
+      "bytes": 37510,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/wdbc_4104-pyboost-test.png",
+      "published_path": "docs/research/figures/qb1/wdbc_4104-pyboost-test.png",
+      "sha256": "93320fb7e3f1455327b2fd65f63cce199c4f1c5fcf36ebe2aba5c4ce853549f1",
+      "bytes": 48051,
+      "dimensions": [
+        1350,
+        580
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-pyboost-test",
+      "kind": "empirical",
+      "source_path": "Результаты качества и бюджета H-QB1 2026-10-22/figures/wdbc_4104-pyboost-test.svg",
+      "published_path": "docs/research/figures/qb1/wdbc_4104-pyboost-test.svg",
+      "sha256": "6ab16a4fc857489b2f8cc18b61b7662fda2fb4ff108a124e745a9d3cde3df2e1",
+      "bytes": 46210,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/banknote_4204-budget-selection.png",
+      "published_path": "docs/research/figures/cal1/banknote_4204-budget-selection.png",
+      "sha256": "0cf689f4716edcae91498d96165251226393d7d8d2b595e37685d63de0925108",
+      "bytes": 103450,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/banknote_4204-budget-selection.svg",
+      "published_path": "docs/research/figures/cal1/banknote_4204-budget-selection.svg",
+      "sha256": "f5ec8b78387186c1c7ce20387def32658e5ddd3a7787dfdd9dabb849090a15bb",
+      "bytes": 56890,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/banknote_4204-fixed-calibration.png",
+      "published_path": "docs/research/figures/cal1/banknote_4204-fixed-calibration.png",
+      "sha256": "c539651a6e474d8ccfc898f5e60c99b58a5c14f23921cceddcf515f0c4257657",
+      "bytes": 90031,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "banknote_4204-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/banknote_4204-fixed-calibration.svg",
+      "published_path": "docs/research/figures/cal1/banknote_4204-fixed-calibration.svg",
+      "sha256": "6242ffde409d581168c70e6c58c5e741495103b7a79ac36d34fa2600c2f35b8f",
+      "bytes": 41084,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/helena_1204-budget-selection.png",
+      "published_path": "docs/research/figures/cal1/helena_1204-budget-selection.png",
+      "sha256": "47ae489064301f44712387ee0c42ce2ea345572c8d868ba35a3ff50f2f9503fc",
+      "bytes": 101944,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/helena_1204-budget-selection.svg",
+      "published_path": "docs/research/figures/cal1/helena_1204-budget-selection.svg",
+      "sha256": "aa5ffb5d8d1ea88228160ea04dfe458674058c9854a1a2d46d30d3cb183d9337",
+      "bytes": 56187,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/helena_1204-fixed-calibration.png",
+      "published_path": "docs/research/figures/cal1/helena_1204-fixed-calibration.png",
+      "sha256": "f116c6a49230eaaeed9867618d39d541b1201121d110bd280e33c26ae64edc9a",
+      "bytes": 63184,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "helena_1204-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/helena_1204-fixed-calibration.svg",
+      "published_path": "docs/research/figures/cal1/helena_1204-fixed-calibration.svg",
+      "sha256": "00dcfd19852bfb16e5193db907252e6c1954727f3dac313e749e5c53fc153333",
+      "bytes": 38864,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/mnist_3104-budget-selection.png",
+      "published_path": "docs/research/figures/cal1/mnist_3104-budget-selection.png",
+      "sha256": "4126b1ed1627cb15d047cfbf87ac0811e1a53633111cf365a4a9d706ef8a7746",
+      "bytes": 100864,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/mnist_3104-budget-selection.svg",
+      "published_path": "docs/research/figures/cal1/mnist_3104-budget-selection.svg",
+      "sha256": "9c9feb2f415eff26f49d12605837623da693a27968c070aab26cdfb464babf26",
+      "bytes": 55490,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/mnist_3104-fixed-calibration.png",
+      "published_path": "docs/research/figures/cal1/mnist_3104-fixed-calibration.png",
+      "sha256": "639ce02904ccec192fea34ba272747968651a8b19a9c68aa78c15da8080cd3de",
+      "bytes": 76866,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "mnist_3104-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/mnist_3104-fixed-calibration.svg",
+      "published_path": "docs/research/figures/cal1/mnist_3104-fixed-calibration.svg",
+      "sha256": "20490a0fd621490c0faf2fde37d08e9c1add126eaeb8af2f3b8bca350bc38c21",
+      "bytes": 39979,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/rt_iot2022_3204-budget-selection.png",
+      "published_path": "docs/research/figures/cal1/rt_iot2022_3204-budget-selection.png",
+      "sha256": "4160c0a3da5bcb8d6b86f38a8cd39961edea9012ea6d68f314e1476464761690",
+      "bytes": 84862,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/rt_iot2022_3204-budget-selection.svg",
+      "published_path": "docs/research/figures/cal1/rt_iot2022_3204-budget-selection.svg",
+      "sha256": "23160dc4cc3b82e7ad3d77e7202f4b4d284192c24746ba206f318278686274c7",
+      "bytes": 55517,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/rt_iot2022_3204-fixed-calibration.png",
+      "published_path": "docs/research/figures/cal1/rt_iot2022_3204-fixed-calibration.png",
+      "sha256": "2b0a5081c6b5fbf697eb1f910ff4d523289e152b8a062cb7db14a4d083ea73fb",
+      "bytes": 67375,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "rt_iot2022_3204-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/rt_iot2022_3204-fixed-calibration.svg",
+      "published_path": "docs/research/figures/cal1/rt_iot2022_3204-fixed-calibration.svg",
+      "sha256": "ea43a746f5aa0c8340d14e3bf77394da4cf64c2905e2cc065198aeb365c09d4b",
+      "bytes": 39958,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/wdbc_4104-budget-selection.png",
+      "published_path": "docs/research/figures/cal1/wdbc_4104-budget-selection.png",
+      "sha256": "98ae971a0987d140f6d74a50a3752dbb064f6dcec08ecb13892f87d2f709fefe",
+      "bytes": 93748,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-budget-selection",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/wdbc_4104-budget-selection.svg",
+      "published_path": "docs/research/figures/cal1/wdbc_4104-budget-selection.svg",
+      "sha256": "cc0c3b8ef7e296557ce79d44a499729964e896f83026ba98d25859edde92e2d6",
+      "bytes": 54842,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/wdbc_4104-fixed-calibration.png",
+      "published_path": "docs/research/figures/cal1/wdbc_4104-fixed-calibration.png",
+      "sha256": "d55666e4ef671293458adbe1e22a9c97e39d3ab3a8bf199354319f7db761195a",
+      "bytes": 85001,
+      "dimensions": [
+        1485,
+        683
+      ],
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    },
+    {
+      "id": "wdbc_4104-fixed-calibration",
+      "kind": "empirical",
+      "source_path": "Результаты калибровки H-CAL1 2026-10-23/figures/wdbc_4104-fixed-calibration.svg",
+      "published_path": "docs/research/figures/cal1/wdbc_4104-fixed-calibration.svg",
+      "sha256": "7629ded1277ce94666468edaa29894495d407e59c94282ff93cafdf99b9a7f4c",
+      "bytes": 37621,
+      "dimensions": null,
+      "stages": [
+        10
+      ],
+      "unchanged_copy": true
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# Preserve exported scientific figures exactly, including XML formatting.
+*.svg -text -whitespace
+*.png binary

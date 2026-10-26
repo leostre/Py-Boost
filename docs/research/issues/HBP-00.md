@@ -10,7 +10,6 @@
 
 - Проверить HBP-01–HBP-10 в порядке зависимостей.
 - Сверить реализацию, тесты, происхождение файлов и границы научных выводов.
-- После включения Issues перенести подготовленные описания и связать их с PR.
 - Принимать решение о слиянии каждого PR отдельно.
 
 ## Критерии готовности
@@ -18,7 +17,7 @@
 - [x] Накопленные изменения разделены по содержательным этапам.
 - [x] Исходные коммиты и публикационные адаптации указаны явно.
 - [x] Локальные CPU-проверки отделены от исторических GPU-измерений.
-- [ ] Созданы связанные GitHub Issues после включения раздела администратором.
+- [x] Все десять задач созданы; ссылки на них и PR приведены ниже.
 - [ ] Выполнено ревью PR; решение о слиянии зафиксировано отдельно.
 
 ## Границы
@@ -37,3 +36,18 @@
 - [ ] HBP-08: [PR #10](https://github.com/leostre/Py-Boost/pull/10) — Зафиксировать совместный бюджет и размещение нескольких моделей.
 - [ ] HBP-09: [PR #11](https://github.com/leostre/Py-Boost/pull/11) — Добавить внешние контроли и сравнение с TabPFN.
 - [ ] HBP-10: [PR #12](https://github.com/leostre/Py-Boost/pull/12) — Зафиксировать кривые бюджета и экономную калибровку.
+
+## Связанные задачи
+
+- [ ] [HBP-01: #14](https://github.com/leostre/Py-Boost/issues/14) · [PR #3](https://github.com/leostre/Py-Boost/pull/3) — ревью и решение о слиянии.
+- [ ] [HBP-02: #15](https://github.com/leostre/Py-Boost/issues/15) · [PR #4](https://github.com/leostre/Py-Boost/pull/4) — ревью и решение о слиянии.
+- [ ] [HBP-03: #16](https://github.com/leostre/Py-Boost/issues/16) · [PR #5](https://github.com/leostre/Py-Boost/pull/5) — ревью и решение о слиянии.
+- [ ] [HBP-04: #17](https://github.com/leostre/Py-Boost/issues/17) · [PR #6](https://github.com/leostre/Py-Boost/pull/6) — ревью и решение о слиянии.
+- [ ] [HBP-05: #18](https://github.com/leostre/Py-Boost/issues/18) · [PR #7](https://github.com/leostre/Py-Boost/pull/7) — ревью и решение о слиянии.
+- [ ] [HBP-06: #19](https://github.com/leostre/Py-Boost/issues/19) · [PR #8](https://github.com/leostre/Py-Boost/pull/8) — ревью и решение о слиянии.
+- [ ] [HBP-07: #20](https://github.com/leostre/Py-Boost/issues/20) · [PR #9](https://github.com/leostre/Py-Boost/pull/9) — ревью и решение о слиянии.
+- [ ] [HBP-08: #21](https://github.com/leostre/Py-Boost/issues/21) · [PR #10](https://github.com/leostre/Py-Boost/pull/10) — ревью и решение о слиянии.
+- [ ] [HBP-09: #22](https://github.com/leostre/Py-Boost/issues/22) · [PR #11](https://github.com/leostre/Py-Boost/pull/11) — ревью и решение о слиянии.
+- [ ] [HBP-10: #23](https://github.com/leostre/Py-Boost/issues/23) · [PR #12](https://github.com/leostre/Py-Boost/pull/12) — ревью и решение о слиянии.
+
+[Визуализации методов и результатов](https://github.com/leostre/Py-Boost/blob/hasboost/20261026/pr10-calibration/docs/research/figures/README.md).

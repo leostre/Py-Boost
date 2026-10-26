@@ -33,7 +33,7 @@ python -X utf8 tools/hasboost_cpu_tests.py tests -q
 
 ## Зависимости
 
-Предыдущий пакет: HBP-08.
+Предыдущий пакет: #21 (HBP-08).
 Общий реестр: `docs/research/README.md`. Порядок слияния совпадает с номерами пакетов.
 
 ## Границы
@@ -41,3 +41,7 @@ python -X utf8 tools/hasboost_cpu_tests.py tests -q
 Код уже реализован; повторное обучение ради публикации не требуется. Полезность гипотезы и корректность реализации рассматриваются раздельно. Данные, веса, сохранённые модели, закрытые ключи и личное согласие с лицензией в PR не передаются.
 
 Связанный черновой PR: https://github.com/leostre/Py-Boost/pull/11.
+
+Общий реестр: #13 (https://github.com/leostre/Py-Boost/issues/13).
+
+[Визуализации методов и результатов](https://github.com/leostre/Py-Boost/blob/hasboost/20261026/pr10-calibration/docs/research/figures/README.md).
