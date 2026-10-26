@@ -6,11 +6,12 @@ from experiments.online_leaf_core import compact_topology,stitch
 
 
 class ContinuationLeafBoosting(GradientBoosting):
-    def __init__(self,*,initial_train,initial_validation,task,**arguments):
+    def __init__(self,*,initial_train,initial_validation,task,pool_limit_bytes=None,**arguments):
         super().__init__(**arguments)
         self.initial_train = np.asarray(initial_train,np.float32)
         self.initial_validation = [np.asarray(a,float) for a in initial_validation]
         self.study_task = task
+        self.pool_limit_bytes = pool_limit_bytes
 
     def _fit(self,builder,build_info):
         train,valid = build_info['data']['train'],build_info['data']['valid']
@@ -26,6 +27,8 @@ class ContinuationLeafBoosting(GradientBoosting):
         def tracked(size):
             pointer = allocator(size)
             self.training_pool_peak = max(self.training_pool_peak,pool.used_bytes())
+            if self.pool_limit_bytes is not None and self.training_pool_peak > self.pool_limit_bytes:
+                raise MemoryError('continuation pool exceeded explicit resource cap')
             return pointer
         with cp.cuda.using_allocator(tracked):
             super()._fit(builder,build_info)

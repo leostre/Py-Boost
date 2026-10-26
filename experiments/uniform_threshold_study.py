@@ -24,7 +24,7 @@ CAPS = {'sparse_01': 1, 'sparse_02': 2, 'sparse_05': 5}
 
 def uniform_plan(dense, reference, mean, basis, train_leaves, train_target,
                  calibration_leaves, calibration_target, selection_leaves, selection_target,
-                 reference_cost, config, progress=None):
+                 reference_cost, config, progress=None, build_selections=True):
     """Development-only pure planner: test rows, labels and metrics cannot enter."""
     m, c = dense.coefficients.shape
     designs = {k: leaf_design(v, m) for k, v in
@@ -62,7 +62,7 @@ def uniform_plan(dense, reference, mean, basis, train_leaves, train_target,
     rank_costs = {r: Cost((m+c)*r+2*c, dense.payload_bytes-4*m*c+4*(m+c)*r+4*c)
                   for r in range(1, basis.shape[1]+1)}
     allowed = [r for r, cost in rank_costs.items() if any(b.allows(cost) for b in budgets)]
-    if not allowed:
+    if not allowed and build_selections:
         raise RuntimeError('no calibrated rank fits the fixed budgets')
     for rank in allowed:
         base = base_at_rank(dense, mean, basis, rank, full)
@@ -75,7 +75,9 @@ def uniform_plan(dense, reference, mean, basis, train_leaves, train_target,
     for budget in budgets:
         feasible = [r for r in allowed if budget.allows(rank_costs[r])]
         if not feasible:
-            raise RuntimeError('no calibrated rank fits a requested budget')
+            if build_selections:
+                raise RuntimeError('no calibrated rank fits a requested budget')
+            continue
         maximum = max(feasible)
         sparse_ranks.update(max(1, int(maximum*f)) for f in config['base_rank_fractions'])
         sparse_ranks.add(maximum)
@@ -115,7 +117,7 @@ def uniform_plan(dense, reference, mean, basis, train_leaves, train_target,
         if progress:
             progress('sparse', rank, len(rows))
     selections = []
-    for budget in budgets:
+    for budget in (budgets if build_selections else []):
         for family in FAMILIES:
             candidates = [r for r in rows if family_allows(r, family, reference_cost.parameters)]
             chosen, passed = select_candidate(candidates, validation_reference, budget)
