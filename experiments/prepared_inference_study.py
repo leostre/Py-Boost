@@ -31,6 +31,8 @@ def summarize(timings):
                 controls = ('reference', 'prepared', 'compiled' if backend == 'cpu' else 'fused')
                 if path == 'unified':
                     controls += ('accumulated',)
+                if path in ('warp', 'groups', 'tiled'):
+                    controls += ('unified',)
                 for control in controls:
                     if control in paths and control != path:
                         comparisons.append((path, role, control, f'{path}_vs_{control}'))
@@ -99,6 +101,8 @@ def prepared_inference_study(config, report, output):
                 common = {k: case[k] for k in ('dataset', 'seed', 'data_file', 'split_file', 'models')}
                 common.update(paths=config.get(f'inference_{backend}_paths', ['reference', 'prepared']),
                               gpu_policy=report['gpu_policy'],
+                              kernel_profile=config.get('inference_kernel_profile', False),
+                              parity_atol=config.get('inference_parity_atol', 2e-5),
                               gpu_minimum_free_mib=config.get('inference_gpu_minimum_free_mib', 2048))
                 tags = {k: case[k] for k in ('dataset', 'seed')}
                 measured = worker({**common, 'kind': 'timing', 'backend': backend,

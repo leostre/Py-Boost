@@ -1,12 +1,31 @@
 {
   "phase": "prepared_inference",
-  "hypothesis": "H-K3 one main CUDA kernel for full/rank/hybrid, no global latent or separate residual; paired versus frozen accumulated H-K2, no fitting",
+  "online_sources": {
+    "yeast": "/root/.orx/runs/c0c10c72-ef22-4c3f-b879-234d5ef584b3/repo/results/online_leaf_yeast_20261019",
+    "mediamill": "/root/.orx/runs/26ffce9f-3678-498a-ac7f-39f6cabc7bf1/repo/results/online_leaf_mediamill_20261019",
+    "helena": "/root/.orx/runs/f2484a8d-791c-4d78-993a-ee6653aa5e0e/repo/results/online_leaf_helena_20261019"
+  },
+  "online_report_hashes": {
+    "yeast": "e6208df4f153ed3ee55e7c29635707c9dfd6a0008474437817ff13c3c10adfd5",
+    "mediamill": "1ce99ef2072d670e0dae4adcf4ed7c34ec90c45749e2d6833288a99c2fec8ab4",
+    "helena": "2d7964ca848f9d417f1f7cb5f6fb333a2093accd5d1663bb83bb60afcd6364a9"
+  },
+  "expected_environment_sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+  "hypothesis": "H-K4 paired comparison of four traversal schedules on45 frozen models after passed numerical gate; no fitting or test labels",
+  "history_beta": 0.8,
+  "history_basis_period": 20,
+  "history_observation_period": 5,
+  "online_warmup": 20,
+  "online_rank_fraction": 0.5,
+  "online_residual_fraction": 0.05,
   "inference_backends": ["gpu"],
   "inference_cpu_paths": ["compiled", "accumulated"],
-  "inference_gpu_paths": ["accumulated", "unified"],
+  "inference_gpu_paths": ["unified", "warp", "groups", "tiled"],
+  "inference_kernel_profile": true,
+  "inference_parity_atol": 2e-12,
   "inference_gpu_policy": "shared",
   "inference_gpu_minimum_free_mib": 2048,
-  "inference_protocol": "experiments/unified_inference_protocol.md",
+  "inference_protocol": "experiments/traversal_protocol.md",
   "prepared_source_manifest": "/root/.orx/runs/b32b8c19-030f-42a7-85af-0357418523bd/repo/results/inference_benchmark_20261016/benchmark_manifest.json",
   "prepared_source_manifest_sha256": "1715d70919d7d042801dddca3f4accfdc3751dc66e715242d91b8df588c52c74",
   "inference_parent_dir": "/root/.orx/runs/261e903a-6380-4c56-8dbf-ca6f90d98ae4/repo/results/uniform_threshold_comparison_20261016",
@@ -15,11 +34,7 @@
   "inference_warmup": 2,
   "data_dir": "/root/hasboost_compactness_20260928/data",
   "environment_lock": "/root/hasboost_compactness_20260928/environment.json",
-  "datasets": [
-    "mediamill",
-    "helena",
-    "yeast"
-  ],
+  "datasets": ["yeast", "mediamill", "helena"],
   "seeds_by_dataset": {
     "mediamill": [
       1104,
@@ -59,5 +74,5 @@
   "max_depth": 5,
   "lambda_l2": 1.0,
   "walltime_seconds": 5400,
-  "output_dir": "results/unified_gpu_inference_20261019"
+  "output_dir": "results/traversal_schemes_20261020"
 }
