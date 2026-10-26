@@ -301,7 +301,16 @@ def main():
               'model_cost': 'reachable leaf coefficients plus base score; thresholds and padding reported separately'}
     emit('configuration', **report)
     with threadpool_limits(limits=8):
-        if config['phase'] == 'preflight':
+        if config['phase'] == 'gpu_stage_profile':
+            from experiments.gpu_stage_profile import gpu_stage_study
+            gpu_stage_study(config, report, output)
+        elif config['phase'] == 'prepared_inference':
+            from experiments.prepared_inference_study import prepared_inference_study
+            prepared_inference_study(config, report, output)
+        elif config['phase'] == 'inference_benchmark':
+            from experiments.inference_benchmark_study import inference_benchmark_study
+            inference_benchmark_study(config, report, output)
+        elif config['phase'] == 'preflight':
             preflight(config, report)
         elif config['phase'] in ('h1_headroom', 'h2_static'):
             h1(config, report, output)
@@ -323,15 +332,6 @@ def main():
         elif config['phase'] == 'uniform_threshold_comparison':
             from experiments.uniform_threshold_study import uniform_threshold_study
             uniform_threshold_study(config, report, output)
-        elif config['phase'] == 'minimum_budget_comparison':
-            from experiments.minimum_budget_study import minimum_budget_study
-            minimum_budget_study(config, report, output)
-        elif config['phase'] == 'stable_budget_comparison':
-            from experiments.stable_budget_study import stable_budget_study
-            stable_budget_study(config, report, output)
-        elif config['phase'] == 'coverage_calibration_comparison':
-            from experiments.coverage_calibration_study import coverage_calibration_study
-            coverage_calibration_study(config, report, output)
         else:
             raise ValueError(f'unknown phase {config["phase"]}')
     write_report(output / 'report.json', report)
