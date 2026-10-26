@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Dict, Optional, Tuple
 
 import numpy as np
+import pandas as pd
 import requests
 from scipy import sparse
 from sklearn.datasets import fetch_openml
@@ -33,6 +34,10 @@ class DatasetSpec:
     expected_outputs: int
     default_max_samples: Optional[int]
     default_sketch_outputs: int
+    loader: str = "openml"
+    article_reported_samples: Optional[int] = None
+    article_reported_features: Optional[int] = None
+    representation: str = ""
 
 
 @dataclass(frozen=True)
@@ -43,6 +48,7 @@ class LoadedDataset:
     features: np.ndarray
     target: np.ndarray
     sample_indices: Optional[np.ndarray] = None
+    source_shape: Optional[Tuple[int, int]] = None
 
     @property
     def n_outputs(self) -> int:
@@ -61,6 +67,9 @@ DATASETS: Dict[str, DatasetSpec] = {
         expected_outputs=100,
         default_max_samples=12_000,
         default_sketch_outputs=25,
+        article_reported_samples=None,
+        article_reported_features=None,
+        representation="OpenML Helena, numeric tabular features",
     ),
     "birds": DatasetSpec(
         name="birds",
@@ -71,6 +80,9 @@ DATASETS: Dict[str, DatasetSpec] = {
         expected_outputs=19,
         default_max_samples=None,
         default_sketch_outputs=5,
+        article_reported_samples=645,
+        article_reported_features=264,
+        representation="OpenML Birds v3; 260 model features",
     ),
     "yeast": DatasetSpec(
         name="yeast",
@@ -81,6 +93,51 @@ DATASETS: Dict[str, DatasetSpec] = {
         expected_outputs=14,
         default_max_samples=None,
         default_sketch_outputs=5,
+        article_reported_samples=2_417,
+        article_reported_features=103,
+        representation="OpenML Yeast v1",
+    ),
+    "genbase": DatasetSpec(
+        name="genbase",
+        task=Task.MULTILABEL,
+        source="OpenML:40591 (genbase v2)",
+        data_id=40591,
+        expected_features=1_185,
+        expected_outputs=27,
+        default_max_samples=None,
+        default_sketch_outputs=8,
+        article_reported_samples=662,
+        article_reported_features=1_186,
+        representation="OpenML GenBase v2; protein identifier ignored",
+    ),
+    "mnist": DatasetSpec(
+        name="mnist",
+        task=Task.MULTICLASS,
+        source="OpenML:554 (mnist_784 v1)",
+        data_id=554,
+        expected_features=784,
+        expected_outputs=10,
+        default_max_samples=12_000,
+        default_sketch_outputs=5,
+        article_reported_samples=70_000,
+        article_reported_features=784,
+        representation="OpenML MNIST 784 raw pixels",
+    ),
+    "age_prediction": DatasetSpec(
+        name="age_prediction",
+        task=Task.MULTICLASS,
+        source="local article asset: experiments/data/age_pred/fold_0",
+        data_id=None,
+        expected_features=64,
+        expected_outputs=4,
+        default_max_samples=12_000,
+        default_sketch_outputs=4,
+        loader="age_prediction",
+        article_reported_samples=150_000,
+        article_reported_features=128,
+        representation=(
+            "available local CoLES-64 asset; union of fold_0 train and test"
+        ),
     ),
     "mediamill": DatasetSpec(
         name="mediamill",
@@ -91,6 +148,26 @@ DATASETS: Dict[str, DatasetSpec] = {
         expected_outputs=101,
         default_max_samples=10_000,
         default_sketch_outputs=25,
+        loader="mediamill",
+        article_reported_samples=43_907,
+        article_reported_features=120,
+        representation="LIBSVM Tools original MediaMill train/test",
+    ),
+    "rt_iot2022": DatasetSpec(
+        name="rt_iot2022",
+        task=Task.MULTICLASS,
+        source="UCI:942",
+        data_id=942,
+        expected_features=81,
+        expected_outputs=12,
+        default_max_samples=12_000,
+        default_sketch_outputs=6,
+        loader="uci_rt_iot",
+        article_reported_samples=123_117,
+        article_reported_features=83,
+        representation=(
+            "UCI RT-IoT2022 with id.orig_p and id.resp_p removed before encoding"
+        ),
     ),
 }
 
@@ -160,28 +237,29 @@ def _iterative_indices(
     return next(splitter.split(dummy, target))
 
 
-def _subsample(
-    features: np.ndarray,
+def _subsample_indices(
     target: np.ndarray,
     task: Task,
     max_samples: Optional[int],
     seed: int,
-) -> Tuple[np.ndarray, np.ndarray]:
-    if not max_samples or max_samples >= features.shape[0]:
-        return features, target
+) -> np.ndarray:
+    """Return deterministic source-relative rows for one benchmark subset."""
+
+    if not max_samples or max_samples >= target.shape[0]:
+        return np.arange(target.shape[0], dtype=np.int64)
     if max_samples < 2:
         raise ValueError("max_samples must be at least 2")
 
     if task is Task.MULTICLASS:
         selected, _ = train_test_split(
-            np.arange(features.shape[0]),
+            np.arange(target.shape[0]),
             train_size=max_samples,
             random_state=seed,
             stratify=target,
         )
     else:
         selected, _ = _iterative_indices(target, max_samples, seed)
-    return features[selected], target[selected]
+    return np.asarray(selected, dtype=np.int64)
 
 
 def _load_openml(spec: DatasetSpec, cache_dir: Path) -> Tuple[np.ndarray, np.ndarray]:
@@ -195,6 +273,94 @@ def _load_openml(spec: DatasetSpec, cache_dir: Path) -> Tuple[np.ndarray, np.nda
         target = LabelEncoder().fit_transform(np.asarray(dataset.target)).astype(np.int32)
     else:
         target = _binary_targets(np.asarray(dataset.target))
+    return features, target
+
+
+def _atomic_npz(path: Path, **arrays: np.ndarray) -> None:
+    """Write a local dataset cache without publishing partial content."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f"{path.stem}.tmp.npz")
+    np.savez_compressed(temporary, **arrays)
+    temporary.replace(path)
+
+
+def _load_age_prediction(cache_dir: Path) -> Tuple[np.ndarray, np.ndarray]:
+    """Load the exact local CoLES asset that accompanied the article code."""
+
+    cache_path = cache_dir / "age_prediction" / "coles64_fold0_union.npz"
+    if cache_path.exists():
+        cached = np.load(cache_path, allow_pickle=False)
+        return cached["features"], cached["target"]
+
+    repository_root = cache_dir.resolve().parents[1]
+    source_dir = repository_root / "experiments" / "data" / "age_pred" / "fold_0"
+    parts = []
+    for filename in ("emb_train.csv", "emb_test.csv"):
+        path = source_dir / filename
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Age Prediction article asset is missing: {path}"
+            )
+        parts.append(pd.read_csv(path))
+    frame = pd.concat(parts, ignore_index=True)
+    feature_columns = sorted(
+        column for column in frame.columns if column.startswith("emb_")
+    )
+    if len(feature_columns) != DATASETS["age_prediction"].expected_features:
+        raise ValueError(
+            "Age Prediction local asset has "
+            f"{len(feature_columns)} embedding columns; expected "
+            f"{DATASETS['age_prediction'].expected_features}"
+        )
+    if frame["client_id"].duplicated().any():
+        raise ValueError("Age Prediction fold_0 union contains duplicate clients")
+    features = frame[feature_columns].to_numpy(dtype=np.float32, copy=True)
+    target = LabelEncoder().fit_transform(frame["bins"].to_numpy()).astype(np.int32)
+    _atomic_npz(cache_path, features=features, target=target)
+    return features, target
+
+
+def _load_rt_iot(cache_dir: Path) -> Tuple[np.ndarray, np.ndarray]:
+    """Load and cache RT-IoT2022 with the legacy leakage guard applied."""
+
+    cache_path = cache_dir / "rt_iot2022" / "uci942_without_endpoint_ports.npz"
+    if cache_path.exists():
+        cached = np.load(cache_path, allow_pickle=False)
+        return cached["features"], cached["target"]
+
+    try:
+        from ucimlrepo import fetch_ucirepo
+    except ImportError as exc:
+        raise RuntimeError("ucimlrepo is required for RT-IoT2022") from exc
+
+    dataset = fetch_ucirepo(id=DATASETS["rt_iot2022"].data_id)
+    features, target = _prepare_rt_iot(
+        dataset.data.features,
+        dataset.data.targets,
+    )
+    _atomic_npz(cache_path, features=features, target=target)
+    return features, target
+
+
+def _prepare_rt_iot(
+    frame: pd.DataFrame,
+    target_values,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Apply the registered RT-IoT leakage guard and deterministic encoding."""
+
+    frame = frame.copy()
+    dropped = ("id.orig_p", "id.resp_p")
+    missing = [column for column in dropped if column not in frame.columns]
+    if missing:
+        raise ValueError(
+            "RT-IoT2022 no longer exposes the registered endpoint columns: "
+            + ", ".join(missing)
+        )
+    frame = frame.drop(columns=list(dropped))
+    features = _numeric_features(frame.to_numpy())
+    target_values = np.asarray(target_values).reshape(-1)
+    target = LabelEncoder().fit_transform(target_values).astype(np.int32)
     return features, target
 
 
@@ -283,12 +449,18 @@ def load_benchmark_dataset(
         raise ValueError(f"unknown dataset: {name}") from exc
 
     cache_dir.mkdir(parents=True, exist_ok=True)
-    if spec.data_id is not None:
+    if spec.loader == "openml":
         raw_features, raw_target = _load_openml(spec, cache_dir)
-    elif name == "mediamill":
+    elif spec.loader == "mediamill":
         raw_features, raw_target = _load_mediamill(cache_dir)
+    elif spec.loader == "age_prediction":
+        raw_features, raw_target = _load_age_prediction(cache_dir)
+    elif spec.loader == "uci_rt_iot":
+        raw_features, raw_target = _load_rt_iot(cache_dir)
     else:
-        raise ValueError(f"no loader configured for dataset: {name}")
+        raise ValueError(
+            f"unsupported loader {spec.loader!r} for dataset: {name}"
+        )
 
     target = (
         np.asarray(raw_target)
@@ -296,33 +468,17 @@ def load_benchmark_dataset(
         else _binary_targets(raw_target.toarray() if hasattr(raw_target, "toarray") else raw_target)
     )
     sample_indices = np.arange(raw_features.shape[0], dtype=np.int64)
+    source_shape = (int(raw_features.shape[0]), int(raw_features.shape[1]))
     sample_limit = spec.default_max_samples if max_samples is None else max_samples
 
-    # Sparse MediaMill features are subset before densification.
-    if hasattr(raw_features, "shape") and sample_limit and sample_limit < raw_features.shape[0]:
-        if spec.task is Task.MULTILABEL:
-            selected, _ = _iterative_indices(target, sample_limit, dataset_seed)
-        else:
-            selected, _ = train_test_split(
-                np.arange(raw_features.shape[0]),
-                train_size=sample_limit,
-                random_state=dataset_seed,
-                stratify=target,
-            )
-        raw_features = raw_features[selected]
-        target = target[selected]
-        sample_indices = sample_indices[selected]
-        sample_limit = None
+    # Select source-relative rows before densifying sparse features.
+    selected = _subsample_indices(target, spec.task, sample_limit, dataset_seed)
+    raw_features = raw_features[selected]
+    target = target[selected]
+    sample_indices = sample_indices[selected]
 
     features = raw_features.toarray() if hasattr(raw_features, "toarray") else raw_features
     features = _numeric_features(features)
-    features, target = _subsample(
-        features,
-        target,
-        spec.task,
-        sample_limit,
-        dataset_seed,
-    )
 
     if features.shape[1] != spec.expected_features:
         raise ValueError(
@@ -331,7 +487,13 @@ def load_benchmark_dataset(
     n_outputs = int(np.unique(target).size) if spec.task is Task.MULTICLASS else target.shape[1]
     if n_outputs != spec.expected_outputs:
         raise ValueError(f"{name} has {n_outputs} outputs; expected {spec.expected_outputs}")
-    return LoadedDataset(spec=spec, features=features, target=target, sample_indices=sample_indices)
+    return LoadedDataset(
+        spec=spec,
+        features=features,
+        target=target,
+        sample_indices=sample_indices,
+        source_shape=source_shape,
+    )
 
 
 def split_benchmark_indices(dataset: LoadedDataset, seed: int, test_size: float = 0.2):

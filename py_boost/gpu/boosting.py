@@ -33,6 +33,9 @@ class GradientBoosting(Ensemble):
                  multioutput_sketch=None,
                  use_hess=True,
                  full_leaf_values=False,
+                 deterministic_leaf_values=False,
+                 deterministic_histogram=False,
+                 deterministic_histogram_layout='hybrid',
 
                  quantization='Quantile',
                  quant_sample=2000000,
@@ -59,8 +62,7 @@ class GradientBoosting(Ensemble):
             gd_steps: int > 0, number of gradient steps while computing leaf values
 
             max_depth: int > 0, maximum tree depth. Setting it to large values (>12) may cause OOM for wide datasets
-            min_data_in_leaf: int, minimal leaf size. Note - for some loss fn leaf size is approximated
-                with hessian values to speed up training
+            min_data_in_leaf: int, inclusive minimum number of training rows in each child leaf
             colsample: float or Callable, sumsample of columns to construct trees or callable - custom sampling
             subsample: float or Callable, sumsample of rows to construct trees or callable - custom sampling
             quant_sample: int, subsample to quantize features
@@ -70,6 +72,9 @@ class GradientBoosting(Ensemble):
                 in multioutput case. If None full scoring function is used
             use_hess: If True hessians will be used in tree structure search
             full_leaf_values: If True leaf values are estimated from all training rows
+            deterministic_leaf_values: If True leaf statistics use a fixed-order GPU reduction
+            deterministic_histogram: If True split histograms use a fixed-order GPU reduction
+            deterministic_histogram_layout: ``perf1`` or node-count-based ``hybrid`` layout
 
             quantization: str or Quantizer, method for quantizatrion. One of 'Quantile', 'Uniform',
                 'Uniquant' or custom implementation
@@ -107,6 +112,9 @@ class GradientBoosting(Ensemble):
             'multioutput_sketch': multioutput_sketch,
             'use_hess': use_hess,
             'full_leaf_values': full_leaf_values,
+            'deterministic_leaf_values': deterministic_leaf_values,
+            'deterministic_histogram': deterministic_histogram,
+            'deterministic_histogram_layout': deterministic_histogram_layout,
 
             'quantization': quantization,
             'quant_sample': quant_sample,
@@ -136,6 +144,11 @@ class GradientBoosting(Ensemble):
         self.min_data_in_leaf = self.params['min_data_in_leaf']
         self.use_hess = self.params['use_hess']
         self.full_leaf_values = self.params['full_leaf_values']
+        self.deterministic_leaf_values = self.params['deterministic_leaf_values']
+        self.deterministic_histogram = self.params['deterministic_histogram']
+        self.deterministic_histogram_layout = self.params[
+            'deterministic_histogram_layout'
+        ]
 
         self.colsample = self.params['colsample']
         if type(self.params['colsample']) in [float, int]:
@@ -311,6 +324,9 @@ class GradientBoosting(Ensemble):
                                        target_splitter=self.target_splitter,
                                        multioutput_sketch=self.multioutput_sketch,
                                        full_leaf_values=self.full_leaf_values,
+                                       deterministic_leaf_values=self.deterministic_leaf_values,
+                                       deterministic_histogram=self.deterministic_histogram,
+                                       deterministic_histogram_layout=self.deterministic_histogram_layout,
                                        gd_steps=self.gd_steps,
                                        lr=self.lr,
                                        min_gain_to_split=self.min_gain_to_split,

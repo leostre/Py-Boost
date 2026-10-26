@@ -137,6 +137,15 @@ def build_model(
         "seed": seed,
         "verbose": max(1, args.verbose),
         "use_hess": True,
+        "deterministic_leaf_values": bool(
+            getattr(args, "deterministic_leaf_values", False)
+        ),
+        "deterministic_histogram": bool(
+            getattr(args, "deterministic_histogram", False)
+        ),
+        "deterministic_histogram_layout": str(
+            getattr(args, "deterministic_histogram_layout", "hybrid")
+        ),
         "callbacks": [] if trajectory_recorder is None else [trajectory_recorder],
     }
     if case.variant is Variant.FULL:
@@ -222,6 +231,27 @@ def build_model(
         )
     if getattr(args, 'research_shadow_budgets', None):
         model.params['multioutput_sketch'].research_shadow_budgets = tuple(args.research_shadow_budgets)
+    if getattr(args, 'split_candidate_output_profiles', False):
+        model.params['multioutput_sketch'].split_candidate_output_profiles = True
+    if getattr(args, 'split_refinement_shadow', False):
+        sketch = model.params['multioutput_sketch']
+        sketch.split_refinement_shadow = True
+        sketch.split_refinement_apply = bool(
+            getattr(args, 'split_refinement_apply', False)
+        )
+        sketch.split_refinement_determinism_capture = bool(
+            getattr(args, 'split_refinement_determinism_capture', False)
+        )
+        sketch.split_refinement_shortlists = {
+            int(budget): int(size)
+            for budget, size in args.split_refinement_shortlists.items()
+        }
+        sketch.split_refinement_failure_diagnostics = bool(
+            getattr(args, 'split_refinement_failure_diagnostics', False)
+        )
+        sketch.split_refinement_severe_error_threshold = float(
+            getattr(args, 'split_refinement_severe_error_threshold', 1.0)
+        )
     model.optimization_trajectory_recorder = trajectory_recorder
     return model
 
@@ -357,6 +387,23 @@ def _quality_metrics(
     }
 
 
+def _model_structure_fingerprint(model) -> str:
+    """Fingerprint the compact inference structure retained after reformatting."""
+
+    structure_arrays = []
+    for tree in model.models:
+        for attribute in ('test_format', 'test_format_offsets'):
+            values = getattr(tree, attribute)
+            if values is None:
+                raise RuntimeError(
+                    f'cannot fingerprint tree structure: {attribute} is unavailable'
+                )
+            if isinstance(values, cp.ndarray):
+                values = values.get()
+            structure_arrays.append(np.asarray(values))
+    return array_fingerprint(*structure_arrays)
+
+
 def evaluate_run(
     run: PlannedRun,
     args: argparse.Namespace,
@@ -455,6 +502,19 @@ def evaluate_run(
             _split_diagnostics_enabled(run.case, args)
         ),
         "split_output_attribution": args.split_output_attribution,
+        "split_candidate_output_profiles": bool(
+            getattr(sketch, 'split_candidate_output_profiles', False)
+        ),
+        "split_refinement_shadow": bool(
+            getattr(sketch, 'split_refinement_shadow', False)
+        ),
+        "split_refinement_apply": bool(
+            getattr(sketch, 'split_refinement_apply', False)
+        ),
+        "split_refinement_determinism_capture": bool(
+            getattr(sketch, 'split_refinement_determinism_capture', False)
+        ),
+        "split_diagnostics_top_k": int(args.split_top_k),
         "spectral_window": args.spectral_window,
         "spectral_null_permutations": args.spectral_null_permutations,
         "spectral_null_rows": args.spectral_null_rows,
@@ -465,6 +525,15 @@ def evaluate_run(
         "base_row_subsample": model.params["subsample"],
         "history_row_subsample": model.params.get("history_subsample"),
         "full_leaf_values": model.params.get("full_leaf_values", False),
+        "deterministic_leaf_values": model.params.get(
+            "deterministic_leaf_values", False
+        ),
+        "deterministic_histogram": model.params.get(
+            "deterministic_histogram", False
+        ),
+        "deterministic_histogram_layout": model.params.get(
+            "deterministic_histogram_layout", "hybrid"
+        ),
         "cupy_pool_total_before_mib": pool_total_before / 2**20,
         "cupy_pool_used_before_mib": pool_used_before / 2**20,
         "cupy_pool_total_after_fit_mib": pool_total_after_fit / 2**20,
@@ -479,6 +548,8 @@ def evaluate_run(
         ) / 2**20,
     }
     record.update(_quality_metrics(dataset.spec.task, y_test, probabilities))
+    record['prediction_fingerprint'] = array_fingerprint(probabilities)
+    record['model_structure_fingerprint'] = _model_structure_fingerprint(model)
     record.update(_timing_fields(timing_data))
     record['control_timings'] = dict(getattr(sketch, 'control_timings', {}))
     if isinstance(sketch, GradHessHistory):
@@ -549,6 +620,8 @@ def evaluate_run(
         record["trajectory_snapshots"] = 0
 
     if isinstance(sketch, GradHessHistory) and sketch.split_diagnostics_trace:
+        from experiments.split_diagnostic_artifact import write_split_diagnostic_artifact
+
         split_path = (
             args.output_dir
             / "artifacts"
@@ -556,14 +629,45 @@ def evaluate_run(
             / "split_diagnostics"
             / f"{artifact_stem}.json"
         )
-        split_path.parent.mkdir(parents=True, exist_ok=True)
-        with split_path.open("w", encoding="utf-8") as stream:
-            json.dump(sketch.split_diagnostics_trace, stream, indent=2)
+        for diagnostic_record in sketch.split_diagnostics_trace:
+            diagnostic_record.update(
+                dataset=dataset.spec.name,
+                model_seed=run.seed,
+                split_seed=record['split_seed'],
+                lambda_l2=float(model.params['lambda_l2']),
+                min_gain_to_split=float(model.params['min_gain_to_split']),
+            )
+        profile_path = write_split_diagnostic_artifact(
+            sketch.split_diagnostics_trace,
+            split_path,
+        )
         record["split_diagnostics_path"] = str(split_path.resolve())
+        record["split_diagnostics_profiles_path"] = (
+            str(profile_path.resolve()) if profile_path is not None else None
+        )
         record["split_diagnostic_nodes"] = len(sketch.split_diagnostics_trace)
     else:
         record["split_diagnostics_path"] = None
+        record["split_diagnostics_profiles_path"] = None
         record["split_diagnostic_nodes"] = 0
+
+    refinement_trace = getattr(sketch, 'split_refinement_trace', None)
+    if refinement_trace:
+        refinement_path = (
+            args.output_dir
+            / 'artifacts'
+            / args.run_id
+            / 'split_refinement'
+            / f'{artifact_stem}.json'
+        )
+        refinement_path.parent.mkdir(parents=True, exist_ok=True)
+        with refinement_path.open('w', encoding='utf-8') as stream:
+            json.dump(refinement_trace, stream, indent=2)
+        record['split_refinement_path'] = str(refinement_path.resolve())
+        record['split_refinement_batches'] = len(refinement_trace)
+    else:
+        record['split_refinement_path'] = None
+        record['split_refinement_batches'] = 0
 
     scheduler_trace = getattr(sketch, "scheduler_trace", None)
     if scheduler_trace and run.case.scheduler_mode is SchedulerMode.ADAPTIVE_BUDGET:
