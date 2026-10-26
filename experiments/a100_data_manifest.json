@@ -1,0 +1,85 @@
+{
+  "helena": {
+    "sha256": "0d368f8fcc95b5272f9b2070242c6fc0a90eaa15c1dfbba6644b18ac84015c58",
+    "task": "multiclass",
+    "source": "OpenML:41169",
+    "representation": "OpenML Helena, numeric tabular features",
+    "features_shape": [
+      12000,
+      27
+    ],
+    "target_shape": [
+      12000
+    ],
+    "source_shape": [
+      65196,
+      27
+    ],
+    "dataset_seed": 42,
+    "policy": "fixed public benchmark subset; new 60/20/20 splits"
+  },
+  "mediamill": {
+    "sha256": "8c7e727ecdd529dab604adc437aec91b196b17b186e4b6c53f53565a11d55241",
+    "task": "multilabel",
+    "source": "LIBSVM Tools MediaMill train/test (original MediaMill data)",
+    "representation": "LIBSVM Tools original MediaMill train/test",
+    "features_shape": [
+      12000,
+      120
+    ],
+    "target_shape": [
+      12000,
+      101
+    ],
+    "source_shape": [
+      43907,
+      120
+    ],
+    "dataset_seed": 42,
+    "policy": "fixed public benchmark subset; new 60/20/20 splits"
+  },
+  "yeast": {
+    "sha256": "cb09c4bd8ac7397e2526dce88c59c9d7a296156cb658283fd112492fa3290c20",
+    "task": "multilabel",
+    "source": "OpenML:40597",
+    "representation": "OpenML Yeast v1",
+    "features_shape": [
+      2417,
+      103
+    ],
+    "target_shape": [
+      2417,
+      14
+    ],
+    "source_shape": [
+      2417,
+      103
+    ],
+    "dataset_seed": 42,
+    "policy": "fixed public benchmark subset; new 60/20/20 splits"
+  },
+  "birds": {
+    "sha256": "42924994037aa51471135a652a3701ccafad5c38315b5f7efb25f59c1fe68274",
+    "task": "multilabel", "source": "OpenML:40588",
+    "representation": "OpenML Birds v3; 260 model features",
+    "features_shape": [645, 260], "target_shape": [645, 19],
+    "source_shape": [645, 260], "dataset_seed": 42,
+    "policy": "new transfer task; fixed60/20/20 splits"
+  },
+  "mnist": {
+    "sha256": "e9ba7507f8c90d345fab1ce2b53513e19abe7fd6b0c79f1804691ccc441ec414",
+    "task": "multiclass", "source": "OpenML:554 (mnist_784 v1)",
+    "representation": "OpenML MNIST 784 raw pixels",
+    "features_shape": [12000, 784], "target_shape": [12000],
+    "source_shape": [70000, 784], "dataset_seed": 42,
+    "policy": "GenBase replacement before H5 training; fixed12000 subset"
+  },
+  "rt_iot2022": {
+    "sha256": "e878d1b01c902edf3c13fd36dde8cd955b51d841e2e6c6211f771fe0382366d0",
+    "task": "multiclass", "source": "UCI:942",
+    "representation": "UCI RT-IoT2022 without id.orig_p and id.resp_p",
+    "features_shape": [12000, 81], "target_shape": [12000],
+    "source_shape": [123117, 81], "dataset_seed": 42,
+    "policy": "new transfer task; fixed12000 subset"
+  }
+}

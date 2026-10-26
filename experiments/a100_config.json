@@ -1,0 +1,60 @@
+{
+  "phase": "coverage_calibration_comparison",
+  "hypothesis": "H-LR4 S0-S3 support and cross-threshold comparison on five frozen MediaMill splits",
+  "stable_control_dir": "/root/.orx/runs/55f47cf6-c3ec-4e1b-8315-5045e9324bda/repo/results/stable_budget_comparison_20261016",
+  "stable_control_manifest_sha256": "c30202dd7b418324dbfaaa1e7bd4de74e8883a74422ac46c41f2ca5d8468f127",
+  "support_quota": 5,
+  "support_seconds": 60,
+  "minimum_control_dir": "/root/.orx/runs/59cfd614-00df-42ad-9514-a0415295aa99/repo/results/minimum_budget_comparison_20261016",
+  "minimum_control_manifest_sha256": "bd580bd4503f2a6d200d05fbe084af6a7d28b6bf1b709367224c163ef3f942db",
+  "bootstrap_repeats": 500,
+  "minimum_bootstrap_successes": 450,
+  "quality_tolerance": 0.05,
+  "bootstrap_seed_base": 202610160000,
+  "minimum_parent_dir": "/root/.orx/runs/261e903a-6380-4c56-8dbf-ca6f90d98ae4/repo/results/uniform_threshold_comparison_20261016",
+  "data_dir": "/root/hasboost_compactness_20260928/data",
+  "environment_lock": "/root/hasboost_compactness_20260928/environment.json",
+  "datasets": [
+    "mediamill"
+  ],
+  "seeds_by_dataset": {
+    "mediamill": [
+      1104,
+      1114,
+      1124,
+      1134,
+      1144
+    ],
+    "helena": [
+      1204,
+      1214,
+      1224,
+      1234,
+      1244
+    ],
+    "yeast": [
+      1304,
+      1314,
+      1324,
+      1334,
+      1344
+    ]
+  },
+  "source_dir": "/root/.orx/runs/7244bd7d-883e-4ef2-904c-e20123bd422a/repo/results/shared_leaf_basis_hlr1_20261015",
+  "previous_dir": "/root/.orx/runs/15da0f29-387a-49e4-ae5f-6b42664c2d82/repo/results/tiny_residual_calibration_20261016",
+  "previous_manifest_sha256": "3c518485366d66f4dcab96dc6509b56f1dd8efe8e5d1c9c7fba7df559fb700b1",
+  "budget_kinds": ["parameters", "memory", "joint"],
+  "budget_fractions": [0.5, 0.65, 0.75],
+  "base_rank_fractions": [0.5, 0.75, 0.9],
+  "residual_capacity_fractions": [0.25, 0.5, 1.0],
+  "margin_scale": 0.5,
+  "tiny_selectors": ["balanced_mse", "balanced_margin"],
+  "decision_grid": [0, 0.25, -0.25, 0.5, -0.5, 1, -1, 2, -2],
+  "decision_shrinkage": [0.25, 0.5, 1.0],
+  "lr": 0.1,
+  "ntrees": 200,
+  "max_depth": 5,
+  "lambda_l2": 1.0,
+  "walltime_seconds": 3600,
+  "output_dir": "results/coverage_calibration_20261016"
+}
