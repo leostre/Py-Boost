@@ -122,4 +122,3 @@ def safe_predict(model, X_test, batch_size: int = 1000):
         predictions.append(pred_batch)
 
     return np.concatenate(predictions)
-

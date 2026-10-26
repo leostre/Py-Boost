@@ -102,6 +102,16 @@ class GradHessHistory(GradSketch):
         self.split_output_attribution = bool(
             kwargs.get('split_output_attribution', False)
         )
+        self.split_refinement_shadow = bool(
+            kwargs.get('split_refinement_shadow', False)
+        )
+        self.split_refinement_apply = bool(
+            kwargs.get('split_refinement_apply', False)
+        )
+        self.split_refinement_shortlists = {
+            int(budget): int(size)
+            for budget, size in kwargs.get('split_refinement_shortlists', {}).items()
+        }
         self.split_diagnostics_control_interval = int(
             kwargs.get('split_diagnostics_control_interval', 5)
         )
@@ -163,6 +173,7 @@ class GradHessHistory(GradSketch):
         self.decision_trace = []
         self.shadow_decision_trace = []
         self.split_diagnostics_trace = []
+        self.split_refinement_trace = []
         self.control_timings = {}
         self._robust_state = RobustSchedulerState()
         self._adaptive_config = None
@@ -196,6 +207,7 @@ class GradHessHistory(GradSketch):
         self.decision_trace = []
         self.shadow_decision_trace = []
         self.split_diagnostics_trace = []
+        self.split_refinement_trace = []
         self.control_timings = {}
         self._robust_state = RobustSchedulerState()
         self._adaptive_config = None
@@ -432,6 +444,16 @@ class GradHessHistory(GradSketch):
                     **record,
                 }
             )
+
+    def record_split_refinement(self, group: int, depth: int, entry) -> None:
+        """Store one exact-refinement batch for an active depth."""
+
+        self.split_refinement_trace.append({
+            'iteration': self._curr_iteration,
+            'group': int(group),
+            'depth': int(depth),
+            **entry,
+        })
 
     def get_indexers(self, tensor: cp.ndarray, random_state=None, output_budget=None):
         """Apply configured sketch to select row and output indices
