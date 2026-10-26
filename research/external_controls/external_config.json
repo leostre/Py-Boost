@@ -1,0 +1,104 @@
+{
+  "phase": "publication",
+  "bank_batches": [
+    1,
+    32,
+    256,
+    1024
+  ],
+  "bank_requests": 32,
+  "original_bank_requests": 128,
+  "repair_authorized": "2026-10-22: third attempt; old128 prefix32; cached first; durable per-request checkpoints; unchanged models/env/5percent",
+  "specialist_extra_bytes": [
+    131072,
+    1048576,
+    4194304
+  ],
+  "bank_sources": {
+    "external": {
+      "path": "/root/.orx/runs/57823532-bb26-4092-9ef7-970bedc5a294/repo/results/external_quality_development_20261021/development_manifest.json",
+      "sha256": "53648b31d4f44bd3573ad940f7c58015267a6fb10d8354a766043d9ce8930d52"
+    },
+    "native": {
+      "path": "/root/.orx/runs/ac3db739-8eac-403d-914d-cc963333b8e4/repo/results/matched_boost_development_20261021/development_manifest.json",
+      "sha256": "f939092bcd5ed29af9a045c47421f6d937d147d0b18fcfc9ebf00438e0cb7f9b"
+    },
+    "validation": {
+      "path": "/root/.orx/runs/74212256-0d1f-471e-92aa-ee6c89c589eb/repo/results/absolute_validation_20261021/cumulative_development_manifest.json",
+      "sha256": "5313c6252b8d19818b3861dbc1646c02b48306239e78b0943c5407a910adc0f2"
+    },
+    "reserve": {
+      "path": "/root/.orx/runs/163dde15-fca8-47df-818f-27916d912b1b/repo/results/horizon_reserve_pilot_20261021/cumulative_development_manifest.json",
+      "sha256": "24dc9ed83535428b76d7ea8a821e97ada02e2d22d97778f20fa0a8b68387d120"
+    },
+    "reinvest": {
+      "path": "/root/.orx/runs/0f82a3fe-7c78-41d1-b9d3-aa23ae80ad33/repo/results/reinvest_budget_development_20261021/cumulative_development_manifest.json",
+      "sha256": "399eb6e1903f06e8eee7d33a68c9827a7ec88bfc72bef8cc610c87393094f47c"
+    }
+  },
+  "quality_development_manifest": "/root/.orx/runs/57823532-bb26-4092-9ef7-970bedc5a294/repo/results/external_quality_development_20261021/development_manifest.json",
+  "quality_development_sha256": "53648b31d4f44bd3573ad940f7c58015267a6fb10d8354a766043d9ce8930d52",
+  "matched_manifest": "/root/.orx/runs/aa670309-fc3a-4ca5-bf10-7492b80042d7/repo/results/matched_tasks_20261021/matched_tasks_manifest.json",
+  "matched_manifest_sha256": "8aeb5a4b1860e2d4386e8d7dcd4adfc2f50f3a6a0309c51992713b9ad294d5d2",
+  "quality_cases": [
+    "helena_1204",
+    "mnist_3104",
+    "rt_iot2022_3204",
+    "wdbc_4104",
+    "banknote_4204"
+  ],
+  "quality_families": [
+    "catboost",
+    "xgboost",
+    "tabpfn_auto",
+    "tabpfn_1"
+  ],
+  "depths": [
+    3,
+    4,
+    5
+  ],
+  "rounds": 200,
+  "prefixes": [
+    40,
+    80,
+    120,
+    160,
+    200
+  ],
+  "minimum_free_bytes": 8589934592,
+  "torch_memory_fraction": 0.4,
+  "worker_timeout_seconds": 3600,
+  "decision_grid": [
+    0,
+    0.25,
+    -0.25,
+    0.5,
+    -0.5,
+    1,
+    -1,
+    2,
+    -2
+  ],
+  "decision_shrinkage": [
+    0.25,
+    0.5,
+    1
+  ],
+  "absolute_roles_manifest": "/root/.orx/runs/c869ca47-6f98-4459-8d60-3b68c1e8c46e/repo/results/absolute_roles_preflight_20261021/absolute_roles_manifest.json",
+  "absolute_roles_manifest_sha256": "835b86d1f26d86c90e85ff15c1867836ee6b74fae6f3843c7468dc67070f2fdd",
+  "external_environment_sha256": "34588579bac49b4f49adf00f22459b84040c799c9bcd2d21b78c4821c139cbb7",
+  "weights_repo": "Prior-Labs/tabpfn_3_5",
+  "weights_revision": "06bf2ba35c80a92a3b9abb436b99cf49e7a0365e",
+  "weights_filename": "tabpfn-v3.5-20260909.safetensors",
+  "weights_bytes": 876027932,
+  "weights_sha256": "ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3",
+  "environment_root": "/root/hasboost_external_20261021",
+  "python_version": "3.12.12",
+  "uv_version": "0.13.4",
+  "frozen_hasboost_environment": "/root/hasboost_compactness_20260928/environment.json",
+  "frozen_hasboost_sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+  "tabpfn_weights_authorized": false,
+  "output_dir": "results/tfm_bank_serving_short_20261022",
+  "publication_source_phase": "tfm_bank_serving"
+}
