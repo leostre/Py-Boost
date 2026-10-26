@@ -32,6 +32,7 @@ class GradientBoosting(Ensemble):
                  target_splitter='Single',
                  multioutput_sketch=None,
                  use_hess=True,
+                 full_leaf_values=False,
 
                  quantization='Quantile',
                  quant_sample=2000000,
@@ -68,6 +69,7 @@ class GradientBoosting(Ensemble):
             multioutput_sketch: None or Callable. Defines the sketching strategy to simplify scoring function
                 in multioutput case. If None full scoring function is used
             use_hess: If True hessians will be used in tree structure search
+            full_leaf_values: If True leaf values are estimated from all training rows
 
             quantization: str or Quantizer, method for quantizatrion. One of 'Quantile', 'Uniform',
                 'Uniquant' or custom implementation
@@ -104,6 +106,7 @@ class GradientBoosting(Ensemble):
             'target_splitter': target_splitter,
             'multioutput_sketch': multioutput_sketch,
             'use_hess': use_hess,
+            'full_leaf_values': full_leaf_values,
 
             'quantization': quantization,
             'quant_sample': quant_sample,
@@ -132,6 +135,7 @@ class GradientBoosting(Ensemble):
         self.max_depth = self.params['max_depth']
         self.min_data_in_leaf = self.params['min_data_in_leaf']
         self.use_hess = self.params['use_hess']
+        self.full_leaf_values = self.params['full_leaf_values']
 
         self.colsample = self.params['colsample']
         if type(self.params['colsample']) in [float, int]:
@@ -306,6 +310,7 @@ class GradientBoosting(Ensemble):
                                        subsampler=self.subsample,
                                        target_splitter=self.target_splitter,
                                        multioutput_sketch=self.multioutput_sketch,
+                                       full_leaf_values=self.full_leaf_values,
                                        gd_steps=self.gd_steps,
                                        lr=self.lr,
                                        min_gain_to_split=self.min_gain_to_split,

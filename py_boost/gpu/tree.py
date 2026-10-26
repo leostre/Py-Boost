@@ -9,6 +9,11 @@ import numpy as np
 from .utils import apply_values, depthwise_grow_tree, get_tree_node, set_leaf_values, calc_node_values
 from .utils import tree_prediction_leaves_typed_kernels, tree_prediction_leaves_typed_kernels_f
 from .utils import tree_prediction_values_kernel
+from ..multioutput.sketch_decision import (
+    apply_output_indices,
+    resolve_leaf_row_indices,
+    resolve_structure_indexers,
+)
 
 
 class Tree:
@@ -452,6 +457,7 @@ class DepthwiseTreeBuilder:
                  subsampler=None,
                  target_splitter=None,
                  multioutput_sketch=None,
+                 full_leaf_values=False,
                  gd_steps=1,
                  **tree_params
                  ):
@@ -463,6 +469,7 @@ class DepthwiseTreeBuilder:
             subsampler: Callable or None, rows sampling strategy
             target_splitter: Callable or None, target grouping strategy
             multioutput_sketch: Callable or None, multioutput sketching strategy
+            full_leaf_values: estimate leaf values on all rows, independently of structure sampling
             **tree_params: other tree building parameters
         """
         self.borders = borders
@@ -481,6 +488,7 @@ class DepthwiseTreeBuilder:
         self.subsampler = subsampler
         self.target_grouper = target_splitter
         self.multioutput_sketch = multioutput_sketch
+        self.full_leaf_values = full_leaf_values
         self.gd_steps = gd_steps
 
     def build_tree(self, X, grad, hess, sample_weight=None, grad_fn=None, *val_arrays):
@@ -528,6 +536,13 @@ class DepthwiseTreeBuilder:
 
         group_index = cp.zeros(grad.shape[1], dtype=cp.uint64)
 
+        decision_maker = getattr(self.multioutput_sketch, 'make_decision', None)
+        if callable(decision_maker) and len(output_groups) != 1:
+            raise ValueError(
+                "History-based row/output sketching requires target_splitter='Single'"
+            )
+
+        structure_row_indexer = row_indexer
         for n_grp, grp_indexer in enumerate(output_groups):
             G = grad[:, grp_indexer]
             # if output group len eq. 1, we have single output tree, use hess for structure search
@@ -541,12 +556,18 @@ class DepthwiseTreeBuilder:
                 else:
                     H = sample_weight if sample_weight is not None else cp.ones((G.shape[0], 1), dtype=cp.float32)
                 if self.multioutput_sketch is not None:
-                    G, H = self.multioutput_sketch(G, H)
+                    if callable(decision_maker):
+                        decision = decision_maker(G, H)
+                        indexers = resolve_structure_indexers(row_indexer, col_indexer, decision)
+                        structure_row_indexer = indexers.row_indices
+                        G, H = apply_output_indices(G, H, indexers.output_indices)
+                    else:
+                        G, H = self.multioutput_sketch(G, H)
 
             group_index[grp_indexer] = n_grp
             # grow single group of the tree and get nodes index
             train_nodes, valid_nodes = depthwise_grow_tree(tree, n_grp, X, G, H,
-                                                           row_indexer, col_indexer, self.params,
+                                                           structure_row_indexer, col_indexer, self.params,
                                                            valid_arrs=val_arrays)
             # update nodes group
             nodes_group[:, n_grp] = train_nodes
@@ -562,7 +583,13 @@ class DepthwiseTreeBuilder:
         val_leaves = [apply_values(x, leaves_grp, leaves_idx) for x in valid_nodes_group]
 
         # perform multiple grad steps
-        values = calc_node_values(grad, hess, leaves, row_indexer, group_index, max_leaves, self.params['lr'],
+        all_row_indexer = cp.arange(X.shape[0], dtype=cp.uint64)
+        leaf_row_indexer = resolve_leaf_row_indices(
+            structure_row_indexer,
+            all_row_indexer,
+            self.full_leaf_values,
+        )
+        values = calc_node_values(grad, hess, leaves, leaf_row_indexer, group_index, max_leaves, self.params['lr'],
                                   lambda_l2=self.params['lambda_l2'])
         pred = apply_values(leaves, group_index, values)
 
@@ -570,7 +597,7 @@ class DepthwiseTreeBuilder:
 
         for i in range(1, self.gd_steps):
             grad, hess = grad_fn(pred)
-            values += calc_node_values(grad, hess, leaves, row_indexer, group_index, max_leaves, self.params['lr'],
+            values += calc_node_values(grad, hess, leaves, leaf_row_indexer, group_index, max_leaves, self.params['lr'],
                                        lambda_l2=self.params['lambda_l2'])
             pred = apply_values(leaves, group_index, values)
 
