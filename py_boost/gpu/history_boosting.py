@@ -12,7 +12,7 @@ class HistoryBasedBoostingModel(GradientBoosting):
         boosting_kwargs = dict(kwargs)
         boosting_kwargs['subsample'] = 1.0
         boosting_kwargs['multioutput_sketch'] = sketch
-        boosting_kwargs['full_leaf_values'] = True
+        boosting_kwargs['full_leaf_values'] = kwargs.get('full_leaf_values', True)
         super().__init__(**boosting_kwargs)
 
         self.params['history_subsample'] = history_subsample

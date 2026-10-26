@@ -151,6 +151,8 @@ mlruns/
 
 # Hydra outputs
 outputs/
+results/diagnostics/
+results/spectral/
 
 .venv/
 results/

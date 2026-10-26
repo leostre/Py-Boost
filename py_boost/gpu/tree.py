@@ -542,9 +542,10 @@ class DepthwiseTreeBuilder:
                 "History-based row/output sketching requires target_splitter='Single'"
             )
 
-        structure_row_indexer = row_indexer
         for n_grp, grp_indexer in enumerate(output_groups):
             G = grad[:, grp_indexer]
+            structure_row_indexer = row_indexer
+            split_diagnostic_context = None
             # if output group len eq. 1, we have single output tree, use hess for structure search
             if G.shape[1] == 1:
                 H = hess if hess.shape[1] == 1 else hess[:, grp_indexer]
@@ -557,10 +558,72 @@ class DepthwiseTreeBuilder:
                     H = sample_weight if sample_weight is not None else cp.ones((G.shape[0], 1), dtype=cp.float32)
                 if self.multioutput_sketch is not None:
                     if callable(decision_maker):
+                        full_G, full_H = G, H
                         decision = decision_maker(G, H)
-                        indexers = resolve_structure_indexers(row_indexer, col_indexer, decision)
-                        structure_row_indexer = indexers.row_indices
-                        G, H = apply_output_indices(G, H, indexers.output_indices)
+                        if decision is not None:
+                            indexers = resolve_structure_indexers(row_indexer, col_indexer, decision)
+                            structure_row_indexer = indexers.row_indices
+                            G, H = apply_output_indices(G, H, indexers.output_indices)
+
+                        needs_diagnostics = getattr(
+                            self.multioutput_sketch,
+                            'needs_split_diagnostics',
+                            None,
+                        )
+                        if callable(needs_diagnostics) and needs_diagnostics():
+                            diagnostic_decision = decision
+                            if diagnostic_decision is None:
+                                shadow_maker = getattr(
+                                    self.multioutput_sketch,
+                                    'make_shadow_decision',
+                                    None,
+                                )
+                                if callable(shadow_maker):
+                                    diagnostic_decision = shadow_maker(full_G, full_H)
+                            if diagnostic_decision is not None:
+                                diagnostic_indexers = resolve_structure_indexers(
+                                    row_indexer,
+                                    col_indexer,
+                                    diagnostic_decision,
+                                )
+                                diagnostic_G, diagnostic_H = apply_output_indices(
+                                    full_G,
+                                    full_H,
+                                    diagnostic_indexers.output_indices,
+                                )
+                                split_diagnostic_context = {
+                                    'timings': {},
+                                    'callback': self.multioutput_sketch.record_split_diagnostics,
+                                    'diagnostic_grad': diagnostic_G,
+                                    'diagnostic_hess': diagnostic_H,
+                                    'diagnostic_rows': diagnostic_indexers.row_indices,
+                                    'full_grad': full_G,
+                                    'full_hess': full_H,
+                                    'top_k': self.multioutput_sketch.split_diagnostics_top_k,
+                                    'output_attribution': (
+                                        self.multioutput_sketch.split_output_attribution
+                                    ),
+                                    'diagnostic_output_budget': int(diagnostic_G.shape[1]),
+                                }
+                                if self.multioutput_sketch.scheduler_mode == 'adaptive_budget':
+                                    probe = self.multioutput_sketch.make_shadow_decision(
+                                        full_G, full_H,
+                                        output_budget=self.multioutput_sketch._adaptive_probe_budget)
+                                    probe_G, probe_H = apply_output_indices(
+                                        full_G, full_H, probe.output_indices)
+                                    split_diagnostic_context['probe'] = {
+                                        'grad': probe_G, 'hess': probe_H,
+                                        'rows': probe.row_indices,
+                                        'budget': int(probe_G.shape[1]),
+                                    }
+                                research_probes = []
+                                for budget in getattr(self.multioutput_sketch, 'research_shadow_budgets', ()):
+                                    probe = self.multioutput_sketch.make_shadow_decision(
+                                        full_G, full_H, output_budget=budget)
+                                    probe_G, probe_H = apply_output_indices(full_G, full_H, probe.output_indices)
+                                    research_probes.append({'grad': probe_G, 'hess': probe_H,
+                                                            'rows': probe.row_indices, 'budget': int(probe_G.shape[1])})
+                                split_diagnostic_context['research_probes'] = research_probes
                     else:
                         G, H = self.multioutput_sketch(G, H)
 
@@ -568,7 +631,12 @@ class DepthwiseTreeBuilder:
             # grow single group of the tree and get nodes index
             train_nodes, valid_nodes = depthwise_grow_tree(tree, n_grp, X, G, H,
                                                            structure_row_indexer, col_indexer, self.params,
-                                                           valid_arrs=val_arrays)
+                                                           valid_arrs=val_arrays,
+                                                           split_diagnostics=split_diagnostic_context)
+            if split_diagnostic_context is not None:
+                for kind, seconds in split_diagnostic_context['timings'].items():
+                    previous = self.multioutput_sketch.control_timings.get(kind, 0.0)
+                    self.multioutput_sketch.control_timings[kind] = previous + seconds
             # update nodes group
             nodes_group[:, n_grp] = train_nodes
             for vn, vp in zip(valid_nodes_group, valid_nodes):
