@@ -1,21 +1,24 @@
 {
-  "phase": "coverage_calibration_comparison",
-  "hypothesis": "H-LR4 S0-S3 support and cross-threshold comparison on five frozen MediaMill splits",
-  "stable_control_dir": "/root/.orx/runs/55f47cf6-c3ec-4e1b-8315-5045e9324bda/repo/results/stable_budget_comparison_20261016",
-  "stable_control_manifest_sha256": "c30202dd7b418324dbfaaa1e7bd4de74e8883a74422ac46c41f2ca5d8468f127",
-  "support_quota": 5,
-  "support_seconds": 60,
-  "minimum_control_dir": "/root/.orx/runs/59cfd614-00df-42ad-9514-a0415295aa99/repo/results/minimum_budget_comparison_20261016",
-  "minimum_control_manifest_sha256": "bd580bd4503f2a6d200d05fbe084af6a7d28b6bf1b709367224c163ef3f942db",
-  "bootstrap_repeats": 500,
-  "minimum_bootstrap_successes": 450,
-  "quality_tolerance": 0.05,
-  "bootstrap_seed_base": 202610160000,
-  "minimum_parent_dir": "/root/.orx/runs/261e903a-6380-4c56-8dbf-ca6f90d98ae4/repo/results/uniform_threshold_comparison_20261016",
+  "phase": "prepared_inference",
+  "hypothesis": "H-K3 one main CUDA kernel for full/rank/hybrid, no global latent or separate residual; paired versus frozen accumulated H-K2, no fitting",
+  "inference_backends": ["gpu"],
+  "inference_cpu_paths": ["compiled", "accumulated"],
+  "inference_gpu_paths": ["accumulated", "unified"],
+  "inference_gpu_policy": "shared",
+  "inference_gpu_minimum_free_mib": 2048,
+  "inference_protocol": "experiments/unified_inference_protocol.md",
+  "prepared_source_manifest": "/root/.orx/runs/b32b8c19-030f-42a7-85af-0357418523bd/repo/results/inference_benchmark_20261016/benchmark_manifest.json",
+  "prepared_source_manifest_sha256": "1715d70919d7d042801dddca3f4accfdc3751dc66e715242d91b8df588c52c74",
+  "inference_parent_dir": "/root/.orx/runs/261e903a-6380-4c56-8dbf-ca6f90d98ae4/repo/results/uniform_threshold_comparison_20261016",
+  "inference_parent_manifest_sha256": "555cd62bf09bcf62ad91d4422219164b00fa3a6b07b485ab9384a86540a22536",
+  "inference_repeats": 9,
+  "inference_warmup": 2,
   "data_dir": "/root/hasboost_compactness_20260928/data",
   "environment_lock": "/root/hasboost_compactness_20260928/environment.json",
   "datasets": [
-    "mediamill"
+    "mediamill",
+    "helena",
+    "yeast"
   ],
   "seeds_by_dataset": {
     "mediamill": [
@@ -55,6 +58,6 @@
   "ntrees": 200,
   "max_depth": 5,
   "lambda_l2": 1.0,
-  "walltime_seconds": 3600,
-  "output_dir": "results/coverage_calibration_20261016"
+  "walltime_seconds": 5400,
+  "output_dir": "results/unified_gpu_inference_20261019"
 }

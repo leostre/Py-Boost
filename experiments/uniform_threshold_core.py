@@ -74,6 +74,16 @@ class ThresholdModel:
         design = leaf_design(self.base.leaf_indices(features), len(self.base.coefficients))
         return probabilities(self.raw_from_design(design), self.base.task)
 
+    def prepare_inference(self):
+        """Return an owned direct-gather snapshot; keep the reference API intact."""
+        from experiments.prepared_leaf_inference import PreparedLeafInference
+        return PreparedLeafInference.prepare(self)
+
+    def prepare_compiled_inference(self):
+        """Explicit single-thread JIT preparation; original predict is unchanged."""
+        from experiments.compiled_leaf_inference import CompiledLeafInference
+        return CompiledLeafInference.prepare(self)
+
     def predict_labels(self, features):
         design = leaf_design(self.base.leaf_indices(features), len(self.base.coefficients))
         return labels_from_raw(self.raw_from_design(design), self.base.task, self.decision_shifts)
