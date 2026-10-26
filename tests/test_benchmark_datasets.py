@@ -10,6 +10,7 @@ from experiments.benchmark_datasets import (
     _binary_targets,
     _labels_to_indicator,
     _load_age_prediction,
+    _prepare_moa,
     _prepare_rt_iot,
     _subsample_indices,
 )
@@ -24,6 +25,10 @@ def test_dataset_registry_has_expected_tasks_and_output_dimensions():
     assert DATASETS["mnist"].expected_outputs == 10
     assert DATASETS["age_prediction"].expected_features == 64
     assert DATASETS["mediamill"].expected_outputs == 101
+    assert DATASETS["moa"].expected_features == 875
+    assert DATASETS["moa"].expected_outputs == 206
+    assert DATASETS["dionis"].data_id == 41167
+    assert DATASETS["dionis"].expected_outputs == 355
     assert DATASETS["rt_iot2022"].expected_features == 81
     assert DATASETS["rt_iot2022"].expected_outputs == 12
 
@@ -95,3 +100,44 @@ def test_rt_iot_preparation_removes_endpoint_ports_and_encodes_categories():
     assert features.dtype == np.float32
     assert target.dtype == np.int32
     assert target.tolist() == [1, 0, 1]
+
+
+def test_moa_preparation_matches_sketchboost_encoding_and_target_order():
+    features_frame = pd.DataFrame({
+        "sig_id": ["b", "a"],
+        "cp_type": ["trt_cp", "ctl_vehicle"],
+        "cp_time": [24, 72],
+        "cp_dose": ["D2", "D1"],
+        "g-0": [1.5, -2.0],
+    })
+    target_frame = pd.DataFrame({
+        "sig_id": ["a", "b"],
+        "target_0": [1, 0],
+        "target_1": [0, 1],
+    })
+
+    features, target = _prepare_moa(features_frame, target_frame)
+
+    assert features.dtype == np.float32
+    assert target.dtype == np.float32
+    np.testing.assert_array_equal(
+        features,
+        np.array([[0, 24, 0, 1.5], [1, 72, 1, -2.0]], dtype=np.float32),
+    )
+    np.testing.assert_array_equal(
+        target,
+        np.array([[0, 1], [1, 0]], dtype=np.float32),
+    )
+
+
+def test_moa_preparation_rejects_unmatched_targets():
+    features_frame = pd.DataFrame({
+        "sig_id": ["a", "b"],
+        "cp_type": ["trt_cp", "trt_cp"],
+        "cp_time": [24, 48],
+        "cp_dose": ["D1", "D2"],
+    })
+    target_frame = pd.DataFrame({"sig_id": ["a", "c"], "target_0": [1, 0]})
+
+    with pytest.raises(ValueError, match="align"):
+        _prepare_moa(features_frame, target_frame)
