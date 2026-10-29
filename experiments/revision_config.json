@@ -1,0 +1,140 @@
+{
+  "phase": "rmt_followup",
+  "rmt_report": "results/imported/hasboost_revision_2026-09-18/rmt_validation/rmt_validation_20260918T144213Z.json",
+  "rmt_report_sha256": "cda5470d23310149ae8d06d4a39b8b7dbec49a8969882c40c5f20b6369fd1f35",
+  "followup_protocol": {
+    "seed": 20260919,
+    "alpha": 0.05,
+    "permutations": 100,
+    "noise_replicates_per_kind": 24,
+    "noise_rows": 1024,
+    "noise_outputs": 64,
+    "noise_window": 16,
+    "ar_rho": 0.9,
+    "forest_trees": 300,
+    "forest_min_leaf": 5,
+    "forest_seed": 20260902,
+    "functional_rows": 4096,
+    "functional_outputs": 64,
+    "functional_epochs": 50,
+    "functional_end": 48,
+    "functional_window": 16,
+    "structure_budget": 8,
+    "l2": 1.0,
+    "quota_scenarios": [
+      {
+        "budget": 50,
+        "share": 0.1,
+        "primary": false
+      },
+      {
+        "budget": 50,
+        "share": 0.3,
+        "primary": true
+      },
+      {
+        "budget": 50,
+        "share": 0.5,
+        "primary": false
+      },
+      {
+        "budget": 75,
+        "share": 0.2,
+        "primary": false
+      },
+      {
+        "budget": 75,
+        "share": 0.6,
+        "primary": true
+      },
+      {
+        "budget": 75,
+        "share": 0.9,
+        "primary": false
+      }
+    ]
+  },
+  "forecast_report": "results/imported/hasboost_revision_2026-09-18/causal_forecast/forecast_analysis_20260918T142032Z.json",
+  "forecast_report_sha256": "1012dde41e6d3fa87da0dadce8385c1bc7f055311193fb4586a998b07edd6334",
+  "rmt_protocol": {
+    "window": 16,
+    "null_permutations": 20,
+    "sensitivity_permutations": [
+      20,
+      50,
+      100
+    ],
+    "control_ends": [
+      16,
+      48,
+      96
+    ],
+    "fixed_ranks": [
+      2,
+      4,
+      8
+    ],
+    "seed": 20260918,
+    "null_quantile": 0.95,
+    "relative_tolerance": 1e-06,
+    "absolute_tolerance": 1e-07,
+    "synthetic_rows": 4096,
+    "synthetic_outputs": 64,
+    "synthetic_epochs": 50,
+    "synthetic_control_ends": [
+      16,
+      32,
+      48
+    ]
+  },
+  "source_receipt": "results/imported/hasboost_revision_2026-09-18/causal_forecast/recovered_training_receipt.json",
+  "source_receipt_sha256": "c676bbd809bcf8f58b1b604e975f6455827610d4f118428f480b37e123109e69",
+  "datasets": [
+    "helena",
+    "mediamill"
+  ],
+  "dataset_seed": 42,
+  "max_samples": 12000,
+  "ntrees": 100,
+  "max_depth": 5,
+  "model_seeds": [
+    204,
+    214,
+    224
+  ],
+  "split_seeds": [
+    132,
+    142,
+    152
+  ],
+  "selected_simple": {
+    "helena": {
+      "fixed_budget": 50,
+      "energy_fraction": 0.95,
+      "fixed_calibration_eligible": false,
+      "energy_calibration_eligible": true,
+      "calibration_split_seed": 1140,
+      "calibration_model_seed": 104
+    },
+    "mediamill": {
+      "fixed_budget": 50,
+      "energy_fraction": 0.9,
+      "fixed_calibration_eligible": true,
+      "energy_calibration_eligible": true,
+      "calibration_split_seed": 1140,
+      "calibration_model_seed": 104
+    }
+  },
+  "energy_candidates": [
+    0.8,
+    0.9,
+    0.95
+  ],
+  "fixed_candidates": [
+    50,
+    75
+  ],
+  "quality_tolerance": 0.002,
+  "minimum_time_saving": 0.1,
+  "cache_dir": "results/imported/benchmarks"
+}
