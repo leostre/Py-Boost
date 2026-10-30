@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "source_repository": "HASBoost-A100-External",
+  "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+  "previous_publication_source": "e84744be78ea6d0a2ee3092de0d72a2ad55d8da2",
+  "publication_base": "c2511a2200aac74f0d1cbdeb201360972557b3af",
+  "historical_runs": {
+    "S0T2": {
+      "experiment": "00215402-918a-4fe0-9d4c-2df16270392f",
+      "run": "214c9683-ad10-4848-923d-15502c1e8b71",
+      "commit": "c1f437c81faa59f5813b7184e8d3f4639b233d5f",
+      "original_report_sha256": "8a43436ef21da8ecdfa4e55adbd12ae90ea05cb5cce96deaa345cd88b11eee22"
+    },
+    "S1": {
+      "experiment": "4e268b31-f3ef-4a55-837a-989733a565c6",
+      "run": "3868a42e-1458-4199-b27e-a2400ab964c8",
+      "commit": "c478b0236f5ef9a555da53d3723aa99631797435",
+      "original_report_sha256": "d3469de9eb3e5c888f7528ac876c3671c1a0518ce2d6abc3b519998029531732"
+    },
+    "B1": {
+      "experiment": "4bf60986-5db4-49c8-b182-4b47aa125509",
+      "run": "5d1a9539-a361-4332-b871-59b2f4197f7f",
+      "commit": "63d8c7caeef04be668a7460ce210993a804a616e",
+      "original_report_sha256": "92c43e71dac886c000b22c4f6f8b8a4453a10952ba12df3ec7b7b743ac37f74d"
+    },
+    "F2": {
+      "experiment": "05da8f24-5ae2-4a60-9ede-fc2a4f443c9e",
+      "run": "abc58a1b-b733-402a-9f46-cd700b66a98c",
+      "commit": "18d9f5ef01ee4ab3129238efcebe8fcf41f452b0",
+      "original_report_sha256": "d349d60618f22725bd02ea5b728b253589f64dc12d29e059aff42fd7684ef24c"
+    },
+    "F3": {
+      "experiment": "34de9be7-c1f4-47c9-93bd-5e06ef4302d8",
+      "run": "0d9ae62b-42e0-4a37-bddb-5ebeb0ea8e4a",
+      "commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "original_report_sha256": "2be8ed8150268b4db9b6cec4c8d57e463ce6ec83e3421cfc0b0b9ae7235f9e3e"
+    }
+  },
+  "original_final_report_sha256": "2be8ed8150268b4db9b6cec4c8d57e463ce6ec83e3421cfc0b0b9ae7235f9e3e",
+  "original_export_manifest_sha256": "6a17d74fd50606dc32a00b100248946dee4e544d02a9fa885ecef89dead206cf",
+  "original_frozen_selection_sha256": "b8639994541b93475572b5640e142618271bac5ab5dc14cc0c465d8cdd8b8005",
+  "historical_verification": {
+    "case_audits": 36,
+    "maximum_CPU_GPU_error": 7.105427357601002e-15,
+    "maximum_OOF_metric_error": 0.0,
+    "local_table_audit": "passed"
+  },
+  "data_omissions": "Raw features, labels, split row IDs, weights, saved models, runtime environments and private machine configuration are not distributed.",
+  "publication_note": "No research training or GPU benchmark was rerun for this PR. Published CSVs are byte-identical to the verified export; report-only links adapted.",
+  "figure_source": "research/external_controls/two_direction_figs/plot_results.py",
+  "infographic": {
+    "path": "figures/hasboost-results-infographic-v1.png",
+    "sha256": "7d1b8982a038f597aa7069be9f0ac1b0d3b23ecd77d72cad52bc9d027f484b78",
+    "tool": "built-in image_gen",
+    "kind": "AI-generated presentation summary; diagrams illustrative; numeric claims audited"
+  }
+}

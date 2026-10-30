@@ -3,3 +3,9 @@
 # Legacy datasets remain in Git/on disk, but are not needed by A100 snapshots.
 # The registered experiment reads fingerprinted data from its fixed server path.
 experiments/data export-ignore
+
+# Preserve audited evidence bytes; collapse generated files in code review.
+docs/research/2026-10-29/** -text whitespace=cr-at-eol
+docs/research/2026-10-29/figures/*.svg linguist-generated=true -whitespace
+docs/research/2026-10-29/figures/*.pdf linguist-generated=true
+docs/research/2026-10-29/data/*.csv linguist-generated=true

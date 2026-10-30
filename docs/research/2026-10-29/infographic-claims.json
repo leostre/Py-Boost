@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-29",
+  "scope": {
+    "multilabel_datasets": 12,
+    "train_D_splits": 36,
+    "representations": 4941,
+    "paid_new_trees": 38904
+  },
+  "quality_at_same_cap": {
+    "direct_AB": {
+      "mean_macroF1_gain_pp": 0.7679015624940336,
+      "positive_task_means": 10,
+      "tasks": 12,
+      "cap_ratio_B0": 0.25
+    },
+    "direct_ABL": {
+      "mean_macroF1_gain_pp": 0.6823713441690425,
+      "positive_task_means": 10,
+      "tasks": 12,
+      "cap_ratio_B0": 0.25
+    }
+  },
+  "same_function_ABL_executor_comparison": {
+    "1": {
+      "request_p95_speedup_median": 1.9377169277471582,
+      "peak_pool_reduction_percent_median": 4.628143392188338,
+      "datasets": 12
+    },
+    "1024": {
+      "request_p95_speedup_median": 1.2726037811729318,
+      "peak_pool_reduction_percent_median": 40.365116262908785,
+      "datasets": 12
+    }
+  },
+  "bank_scenario": {
+    "models": 12,
+    "batch": 1024,
+    "distribution": "uniform",
+    "backend": "packed",
+    "ordinary70": {
+      "device_array_bytes": "9030648",
+      "peak_pool_used_bytes": "20167168",
+      "mean_task_f1": "0.3225269273744608",
+      "request_p95_ms": "4.37753075"
+    },
+    "mixed2470": {
+      "device_array_bytes": "5450748",
+      "peak_pool_used_bytes": "16595456",
+      "mean_task_f1": "0.3252859577060656",
+      "request_p95_ms": "3.55153625"
+    },
+    "model_array_reduction_percent": 39.641673554323006
+  },
+  "limitations": [
+    "B0 is analytic; not actual full-model bytes",
+    "Three train/D splits share one test",
+    "Bank scenario uses one split per task",
+    "Paired A100 timings; not a production SLA",
+    "No universal benefit of residuals; no claim of end-to-end training speedup"
+  ]
+}

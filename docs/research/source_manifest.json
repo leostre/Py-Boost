@@ -6,11 +6,12 @@
       "source_commit": "2f0c9c50896fed575aa5be2dd01b02af898c2a5e",
       "source_path": ".gitignore",
       "source_sha256": "9b46e4a118c91b3d09417a1cf849f6542048897dbe30c1d0e1ef9f8c751caea0",
-      "published_sha256": "a11d6748f5214428955d24940db58b4cec94ae8cb11a1e5954d207f51b9ced8e",
+      "published_sha256": "0bdb719efc92632cf3016f097504c21ed51f26b382f7ef92efa65187d49a84ad",
       "adaptations": [
         "ignore only newly generated results, model files and test caches",
         "ignore only newly generated results, model files and test caches",
-        "ignore only newly generated results, model files and test caches"
+        "ignore only newly generated results, model files and test caches",
+        "whitelist only reviewed aggregate CSVs and the publication CPU log"
       ]
     },
     "experiments/README.md": {
@@ -1734,8 +1735,11 @@
       "source_commit": "2f0c9c50896fed575aa5be2dd01b02af898c2a5e",
       "source_path": ".gitattributes",
       "source_sha256": "e203d2ed4197402de985d0bef10a177fdeab03f1c79a5c6f9efd9767d7b00e26",
-      "published_sha256": "e203d2ed4197402de985d0bef10a177fdeab03f1c79a5c6f9efd9767d7b00e26",
-      "adaptations": []
+      "published_sha256": "d600066235cfd88b17342dad9c347e9ea97b469885446981c862ba69f23856f4",
+      "adaptations": [
+        "collapse generated evidence in GitHub code review without hiding source code",
+        "preserve exact audited CSV, log and figure bytes; disable whitespace checks only for generated SVG"
+      ]
     },
     "experiments/H1_A100_protocol.md": {
       "source_repository": "Py-Boost-HASBoost-A100",
