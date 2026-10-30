@@ -22,7 +22,7 @@ def main():
     cfg=json.loads((source/'external_config.json').read_text(encoding='utf-8'))
     if cfg.get('phase')=='publication':
         print(json.dumps(dict(status='publication_only', experiments_started=False,
-            note='Restore an explicitly authorized local configuration before a research run.')), flush=True)
+            note='Restore the documented frozen inputs and an explicitly authorized configuration before running research.')), flush=True)
         return
     old=Path(cfg['frozen_hasboost_environment'])
     if digest(old)!=cfg['frozen_hasboost_sha256']:
@@ -38,7 +38,7 @@ def main():
              HF_HOME=str(root/'hf-cache'),MPLCONFIGDIR=str(root/'mpl'),
              OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2',MKL_NUM_THREADS='2')
     lock=root/'environment.json'
-    if cfg['phase'] in ('weights_readiness','sharing_readiness','matched_data','quality_development','quality_final','bank_selection','tfm_bank_serving','budget_quality','budget_quality_analysis','budget_quality_matched_policy','calibration_pilot','calibration_pilot_audit'):
+    if cfg['phase'] in ('weights_readiness','sharing_readiness','matched_data','quality_development','quality_final','bank_selection','tfm_bank_serving','budget_quality','budget_quality_analysis','budget_quality_matched_policy','calibration_pilot','calibration_pilot_audit','abl_quality_preflight','abl_quality_study','abl_quality_audit','abl_serving','abl_numerical_diagnostic','abl_width','abl_width_audit','abl_training_pilot','abl_training_development','abl_training_final','abl_protected_pilot','abl_protected_development','abl_protected_final','abl_increment_diagnostic','abl_stop_rule_replay','abl_stop_rule_continuation','abl_budget_revision','unified_recalibration','unified_training','unified_history','unified_history_diagnostic','unified_transfer_data','unified_serving','unified_external_serving','unified_final','unified_product','adaptive_saved','adaptive_training','direct_preflight','direct_training','adaptive_fresh','adaptive_final','adaptive_external','adaptive_matched','saved_banks','window_reserve','reserve_precision','residual_gate','broad_data','broad_training','wide_serving','broad_final','broad_audit','broad_analysis'):
         if not cfg['tabpfn_weights_authorized'] or digest(lock)!=cfg['external_environment_sha256']:
             raise RuntimeError('licensed weights or frozen runtime gate missing')
         frozen=json.loads(lock.read_text(encoding='utf-8'))
@@ -53,13 +53,36 @@ def main():
                 'tfm_bank_serving':'tfm_bank_worker.py','budget_quality':'budget_quality_worker.py',
                 'budget_quality_analysis':'audit_stage1.py','budget_quality_matched_policy':'matched_policy_worker.py',
                 'calibration_pilot':'calibration_pilot_worker.py',
-                'calibration_pilot_audit':'audit_calibration_pilot.py'}[cfg['phase']]
+                'calibration_pilot_audit':'audit_calibration_pilot.py',
+                'abl_quality_preflight':'abl_quality_worker.py',
+                'abl_quality_study':'abl_quality_worker.py',
+                'abl_quality_audit':'audit_abl_quality.py',
+                'abl_serving':'abl_serving_study.py',
+                'abl_numerical_diagnostic':'abl_stability_study.py',
+                'abl_width':'abl_width_study.py',
+                'abl_width_audit':'audit_abl_width.py',
+                'abl_training_pilot':'abl_training_study.py',
+                'abl_training_development':'abl_training_study.py',
+                'abl_training_final':'abl_training_final.py',
+                'abl_protected_pilot':'abl_protected_study.py',
+                'abl_protected_development':'abl_protected_study.py',
+                'abl_protected_final':'abl_protected_final.py',
+                'abl_increment_diagnostic':'abl_increment_diagnostic.py',
+                'abl_stop_rule_replay':'abl_stop_rule_replay.py',
+                'abl_stop_rule_continuation':'abl_stop_continuation.py',
+                'abl_budget_revision':'abl_budget_revision.py','unified_recalibration':'unified_recalibration.py','unified_training':'unified_training.py','unified_history':'unified_history_training.py','unified_history_diagnostic':'unified_history_diagnostic.py','unified_transfer_data':'unified_transfer_data.py','unified_serving':'unified_serving.py','unified_external_serving':'unified_external_serving.py','unified_final':'unified_final_evaluation.py','unified_product':'unified_product_extensions.py','adaptive_saved':'adaptive_saved.py','adaptive_training':'adaptive_training.py','direct_preflight':'direct_leaf_worker.py','direct_training':'direct_training.py','adaptive_fresh':'adaptive_fresh_training.py','adaptive_final':'adaptive_fresh_evaluate.py','adaptive_external':'adaptive_external.py','adaptive_matched':'adaptive_matched_serving.py','saved_banks':'saved_bank_study.py','window_reserve':'window_reserve_study.py','reserve_precision':'reserve_precision_study.py','residual_gate':'residual_gate_study.py','broad_data':'broad_data.py','broad_training':'broad_training.py','wide_serving':'wide_serving.py','broad_final':'broad_final.py','broad_audit':'broad_development_audit.py','broad_analysis':'two_direction_analysis.py'}[cfg['phase']]
+        if cfg['phase']=='abl_quality_preflight':
+            run([root/'venv/bin/python','-m','pytest','-q',source/'tests/test_abl_quality_core.py',
+                 source/'tests/test_abl_quality_properties.py',source/'tests/test_abl_quality_boundary.py',
+                 '--basetemp',output/'pytest-tmp'],env=env,cwd=source,timeout=300)
         if cfg['phase']=='calibration_pilot':
             run([root/'venv/bin/python','-m','pytest','-q',source/'tests/test_budget_quality_core.py',
                  source/'tests/test_calibration_pilot_core.py',source/'tests/test_calibration_pilot_properties.py',
                  '--basetemp',output/'pytest-tmp'],env=env,cwd=source,timeout=180)
-        run([root/'venv/bin/python',source/worker,source/'external_config.json',output],
-            env=env,timeout=21600 if cfg['phase'] in ('quality_development','quality_final','tfm_bank_serving','budget_quality','calibration_pilot') else (1200 if cfg['phase']=='weights_readiness' else 6000))
+        native_phase=cfg['phase'] in ('abl_training_final','abl_protected_pilot','abl_protected_development','abl_protected_final','abl_increment_diagnostic','abl_stop_rule_replay','abl_stop_rule_continuation','abl_budget_revision','unified_recalibration','unified_training','unified_history','unified_history_diagnostic','unified_transfer_data','unified_serving','unified_final','unified_product','adaptive_saved','adaptive_training','direct_preflight','direct_training','adaptive_fresh','adaptive_final','adaptive_matched','saved_banks','window_reserve','reserve_precision','residual_gate','broad_data','broad_training','wide_serving','broad_final','broad_audit','broad_analysis')
+        worker_python=Path(json.loads(old.read_text())['executable']) if native_phase else root/'venv/bin/python'
+        run([worker_python,source/worker,source/'external_config.json',output,*(['--native'] if native_phase else [])],
+            env=env,timeout=21600 if cfg['phase'] in ('quality_development','quality_final','tfm_bank_serving','budget_quality','calibration_pilot','abl_quality_study','abl_serving','abl_width','abl_training_pilot','abl_training_development','abl_stop_rule_continuation','abl_budget_revision','unified_recalibration','unified_training','unified_history','unified_history_diagnostic','unified_transfer_data','unified_serving','unified_external_serving','unified_final','unified_product','adaptive_saved','adaptive_training','direct_preflight','direct_training','adaptive_fresh','adaptive_final','adaptive_external','adaptive_matched','saved_banks','window_reserve','reserve_precision','residual_gate','broad_data','broad_training','wide_serving','broad_final','broad_audit','broad_analysis') else (1200 if cfg['phase']=='weights_readiness' else 6000))
         if digest(old)!=cfg['frozen_hasboost_sha256'] or digest(lock)!=cfg['external_environment_sha256']:
             raise RuntimeError('environment descriptor changed during weight preparation')
         return

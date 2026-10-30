@@ -1,0 +1,10 @@
+{
+  "url": "https://www.uco.es/grupos/kdis/MLLResources/ucobigfiles/Datasets/Original/Enron.zip",
+  "archive_sha256": "a5ad72abce3b4f03629c2260d05e6506d073e78788a2e96d57df57ccab64293c",
+  "files": [
+    {
+      "name": "ENRON-F.arff",
+      "sha256": "76199cc991b6116f07b61fac2e1d76930cfa5522a6e45f6ddd2cf53bee422c2d"
+    }
+  ]
+}

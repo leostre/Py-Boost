@@ -161,3 +161,8 @@ results/
 *.tar.gz
 *.npz
 *.safetensors
+
+# Reviewed aggregate evidence, never raw dataset rows or model files.
+!docs/research/2026-10-29/data/
+!docs/research/2026-10-29/data/*.csv
+!docs/research/2026-10-29/checks/publication-cpu.log

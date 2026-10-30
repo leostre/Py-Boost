@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "source_repository": "HASBoost-A100-External",
+  "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+  "previous_publication_source": "e84744be78ea6d0a2ee3092de0d72a2ad55d8da2",
+  "publication_base": "c2511a2200aac74f0d1cbdeb201360972557b3af",
+  "historical_runs": {
+    "S0T2": {
+      "experiment": "00215402-918a-4fe0-9d4c-2df16270392f",
+      "run": "214c9683-ad10-4848-923d-15502c1e8b71",
+      "commit": "c1f437c81faa59f5813b7184e8d3f4639b233d5f",
+      "original_report_sha256": "8a43436ef21da8ecdfa4e55adbd12ae90ea05cb5cce96deaa345cd88b11eee22"
+    },
+    "S1": {
+      "experiment": "4e268b31-f3ef-4a55-837a-989733a565c6",
+      "run": "3868a42e-1458-4199-b27e-a2400ab964c8",
+      "commit": "c478b0236f5ef9a555da53d3723aa99631797435",
+      "original_report_sha256": "d3469de9eb3e5c888f7528ac876c3671c1a0518ce2d6abc3b519998029531732"
+    },
+    "B1": {
+      "experiment": "4bf60986-5db4-49c8-b182-4b47aa125509",
+      "run": "5d1a9539-a361-4332-b871-59b2f4197f7f",
+      "commit": "63d8c7caeef04be668a7460ce210993a804a616e",
+      "original_report_sha256": "92c43e71dac886c000b22c4f6f8b8a4453a10952ba12df3ec7b7b743ac37f74d"
+    },
+    "F2": {
+      "experiment": "05da8f24-5ae2-4a60-9ede-fc2a4f443c9e",
+      "run": "abc58a1b-b733-402a-9f46-cd700b66a98c",
+      "commit": "18d9f5ef01ee4ab3129238efcebe8fcf41f452b0",
+      "original_report_sha256": "d349d60618f22725bd02ea5b728b253589f64dc12d29e059aff42fd7684ef24c"
+    },
+    "F3": {
+      "experiment": "34de9be7-c1f4-47c9-93bd-5e06ef4302d8",
+      "run": "0d9ae62b-42e0-4a37-bddb-5ebeb0ea8e4a",
+      "commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "original_report_sha256": "2be8ed8150268b4db9b6cec4c8d57e463ce6ec83e3421cfc0b0b9ae7235f9e3e"
+    }
+  },
+  "original_final_report_sha256": "2be8ed8150268b4db9b6cec4c8d57e463ce6ec83e3421cfc0b0b9ae7235f9e3e",
+  "original_export_manifest_sha256": "6a17d74fd50606dc32a00b100248946dee4e544d02a9fa885ecef89dead206cf",
+  "original_frozen_selection_sha256": "b8639994541b93475572b5640e142618271bac5ab5dc14cc0c465d8cdd8b8005",
+  "historical_verification": {
+    "case_audits": 36,
+    "maximum_CPU_GPU_error": 7.105427357601002e-15,
+    "maximum_OOF_metric_error": 0.0,
+    "local_table_audit": "passed"
+  },
+  "data_omissions": "Raw features, labels, split row IDs, weights, saved models, runtime environments and private machine configuration are not distributed.",
+  "publication_note": "No research training or GPU benchmark was rerun for this PR. Published CSVs are byte-identical to the verified export; report-only links adapted.",
+  "figure_source": "research/external_controls/two_direction_figs/plot_results.py",
+  "infographic": {
+    "path": "figures/hasboost-results-infographic-v1.png",
+    "sha256": "7d1b8982a038f597aa7069be9f0ac1b0d3b23ecd77d72cad52bc9d027f484b78",
+    "tool": "built-in image_gen",
+    "kind": "AI-generated presentation summary; diagrams illustrative; numeric claims audited"
+  },
+  "interactive_dashboard": {
+    "file": "hasboost-results-interactive.html",
+    "sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc",
+    "snapshot_sha256": "e968809c1eecdc847f06428a1d049a9e3e6ce164a0bd717b43c0307d141d140d",
+    "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
+    "basis": "Published result tables and the same sealed bank choices; no new model fitting or GPU runs.",
+    "bank_choices": {
+      "file": "data/bank_choices.csv",
+      "rows": 72,
+      "sha256": "d7ddbc40a4da0ea0b8cc4ae494ced273d1dac00cda3df1baa942e4056d1b9da5",
+      "derivation": "Zip cases, choices and per_model_array_bytes from each of the six B1 reports; join (case, uid) to all_quality_points.csv. No choice uses test metrics.",
+      "inputs": [
+        {
+          "file": "B1-probes/full200-legacy/report.json",
+          "sha256": "de64d16bf99ea134caefb6b3266a659f3d00cf6eca2b9d6545398e0cc40149ca"
+        },
+        {
+          "file": "B1-probes/full200-packed/report.json",
+          "sha256": "83a90096582812924a5eb8ddc81fec9274ef89b7075eb88f80438a6966a56c51"
+        },
+        {
+          "file": "B1-probes/mixed2470-legacy/report.json",
+          "sha256": "dfe8fb9c0f1535be34b52d359b7fe669a9e14c850550336679c3bfa40eedd614"
+        },
+        {
+          "file": "B1-probes/mixed2470-packed/report.json",
+          "sha256": "022fc28aba2397522ba5b5fffa335eb463d6f88e34a0b01b6d5ae41bd1a388af"
+        },
+        {
+          "file": "B1-probes/ordinary70-legacy/report.json",
+          "sha256": "f814c8a0a9acc5cb296e31b0c65223aad92a7a0575c6bf8a1a45a3cbba0b9fdf"
+        },
+        {
+          "file": "B1-probes/ordinary70-packed/report.json",
+          "sha256": "b99c542ead9f0f63a022e93b250f0f77da1f3d994eb3cbd8508a3df72dae56d2"
+        }
+      ]
+    },
+    "build": "Canonical prebuilt Data runtime; compiled and integrity-verified under WSL Ubuntu / Node 24.19.0 because native Windows rejects its own path separators. Protected runtime unchanged.",
+    "node_linux_archive_sha256": "14b342e71204f811bde6153be8e04b62aef63c236fef92b55f9c83154b409647",
+    "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
+    "explanatory_revision": {
+      "date": "2026-10-30",
+      "source_code_commit": "058f4cfdd85f6688949ab7e5f4b49aa8934d6ace",
+      "mechanism_catalog_sha256": "53f17532b843a34edb6a013bc2a0ab8730b3477d42ce7afe30511f51cafd12bd",
+      "original_reviewed_queries_unchanged": 9,
+      "methods": 7,
+      "executors": 2,
+      "scope": "Authoring diagrams and explicit baseline/UID joins only. No new fit or GPU timings. Legacy is an already optimized block executor; packed fuses all blocks and controls.",
+      "previous_export": {
+        "file": "hasboost-results-interactive.html",
+        "sha256": "096317988fcd877b7bdfa2d46439f9fa10f3bed072e76e0d0405c3c82d8a4230",
+        "snapshot_sha256": "18c5f8ab16b79cf2150542c4289c10d58585c175e8a8271df687bd2f530d9a06"
+      }
+    },
+    "native_inference_revision": {
+      "date": "2026-10-30",
+      "baseline_commit": "b2842af472e21c7332d9487d8c83e53cb48d1486",
+      "run": "8d178a2d-3f3a-4ac1-bdbe-dda44b5020dc",
+      "summary_run": "df0c28d4-4b11-47b4-b4b2-b9f53470ed98",
+      "report_sha256": "c8715eb7012af54321b5b17ffe91a77a3fbf9a4b8c9af4cecdd936d1104ff10e",
+      "csv_sha256": "3026cd58ba21f77ed75d8f6f44bf1d894d280c2742501ae3ac28ef53d514e0a2",
+      "previous_export": {
+        "file": "hasboost-results-interactive.html",
+        "sha256": "2d93aa3e7f0bda5991f49c877368cd1bd757e6b72bb2374c0e7998978fdd894e",
+        "snapshot_sha256": "10ba6765ca63b4ebdfd00a71922d86b513cc03921e098ef9f8ad1a1bb6602edc"
+      },
+      "original_reviewed_measurement_queries_unchanged": 9,
+      "methods": 7,
+      "executors": 3,
+      "mechanism_catalog_sha256": "aeeb7394f4144213b4207e7c91bd82e348ceabb5f57310a029473ee99d2d1927"
+    }
+  }
+}

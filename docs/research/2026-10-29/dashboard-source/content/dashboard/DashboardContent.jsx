@@ -1,0 +1,207 @@
+import React from 'react';
+import { EvidenceChart as NativeEvidenceChart, chartConfigEntries, DataComponent, DataTable, MetricCard, SectionHeader, Dropdown, SegmentedControl, SortableRegion, SortableItem, useDataApp, useDashboardTabs } from '../../data-app-public.jsx';
+import hero from '../assets/hasboost-results-infographic-v1.png';
+import {DATASETS,NEW_DATASETS,FAMILIES,LABELS,COLORS,METRICS,ROLES,BANKS,finite,mean,median,groupBy,withinCohort,valid,metricDelta,deltaUnit,deltaDefinition,pairModels,summarizePairs,selectedCurves,sameFunctionExample,representationTimes,exportCSV} from './analytics.js';
+import {MethodsView,InferenceComparison,ExecutorDiagram,BACKENDS} from './Explainers.jsx';
+import './hasboost.css';
+
+function EvidenceChart({id,title,rows,spec,height,...rest}) {const chartRows=rows.map(r=>Object.fromEntries(Object.entries(r).filter(([,v])=>v==null||['string','number','boolean'].includes(typeof v)).map(([k,v])=>[k,v??null])));const physical={...spec};const horizontal=spec.type==='horizontalBar';if(horizontal){delete physical.xLabel;delete physical.yLabel;physical.showXAxisLabel=false;physical.showYAxisLabel=false;}const [chart]=chartConfigEntries({id,title,rows:chartRows,spec:physical,height});return <NativeEvidenceChart {...chart} {...rest}>{horizontal&&<p className='hasboost-chart-caption'>{spec.xLabel}</p>}{rest.children}</NativeEvidenceChart>;}
+const f=(v,n=3)=>finite(v)?v.toLocaleString('ru-RU',{maximumFractionDigits:n,minimumFractionDigits:n}):'—';
+const signed=(v,n=2)=>finite(v)?(v>0?'+':'')+f(v,n):'—';
+const mib=v=>finite(v)?f(v/1048576,2):'—';
+const int=v=>finite(v)?v.toLocaleString('ru-RU',{maximumFractionDigits:0}):'—';
+const choicesCohort={all:'Все 12',new:'Четыре новых',historical:'Восемь прежних'};
+const ratioLabels={'0.25':'0,25 B0','0.5':'0,50 B0','0.7':'0,70 B0','1':'1,00 B0'};
+const palette=Object.fromEntries(FAMILIES.map(k=>[LABELS[k],COLORS[k]]));
+const colors={...COLORS,...palette};
+const C=(field,label,renderCell)=>({field,label,...(renderCell?{renderCell}: {})});
+const number=C('value','Значение',v=>f(v));
+function usePrefs(id,defaults) {const {sectionViews,setSectionView}=useDataApp();const values={...defaults,...sectionViews[id]};return [values,(k,v)=>setSectionView(id,{...values,[k]:v})];}
+function Select({label,value,items,onChange}) {return <Dropdown label={label} showLabel value={String(value)} choices={Array.isArray(items)?items:Object.keys(items)} choiceLabels={Array.isArray(items)?undefined:items} allLabel={Array.isArray(items)?undefined:items.all} onChange={onChange}/>;}
+function ControlBar({children}) {return <div className="hasboost-controls">{children}</div>;}
+function Note({children,tone=''}) {return <div className={`hasboost-note ${tone}`}>{children}</div>;}
+function Table({id,queryId,title,rows,sourceRows,columns,onRowSelect,description,queryIds,sourceRowsByQuery}) {return <DataComponent id={id} queryId={queryId} queryIds={queryIds} sourceRowsByQuery={sourceRowsByQuery} title={title} kind="table" sourceRows={sourceRows??rows} displayRows={rows} description={description} headerControls={<button className="hasboost-export" onClick={()=>exportCSV(rows,`${id}.csv`)}>Скачать CSV</button>}><DataTable rows={rows} columns={columns} compactNumbers={false} rowKey={onRowSelect?'dataset':'case'} onRowSelect={onRowSelect} rowActionLabel={onRowSelect?r=>`Подробнее: ${r.dataset}`:undefined} searchable={rows.length>12} label={title}/></DataComponent>;}
+function Stat({id,queryId='selected_quality',title,value,sourceRows,description}) {return <MetricCard id={id} queryId={queryId} title={title} value={value} sourceRows={sourceRows} description={description}/>;}
+function DeltaChart({id,rows,sourceRows,title,metric,queryId='selected_quality',onDataset}) {return <EvidenceChart id={id} queryId={queryId} title={title} rows={rows} sourceRows={sourceRows} height={Math.max(270,rows.length*30+80)} description={`Среднее по доступным разбиениям; отрезок — минимум и максимум, не доверительный интервал. ${deltaDefinition(metric)}`} chartOptions={onDataset?{getMarkActions:({row})=>row?.dataset?[{label:`Открыть ${row.dataset}`,onSelect:()=>onDataset(row.dataset)}]:[]}:undefined} spec={{type:'horizontalBar',x:'delta',y:'dataset',xLabel:`Δ ${METRICS[metric]}, ${deltaUnit(metric)} · положительное лучше для A`,showXAxisLabel:true,uncertainty:{lower:'lo',upper:'hi',style:'bars',label:'Минимум — максимум разбиений'},referenceLines:[{axis:'x',value:0,label:'Равно'}],valueFormat:{style:'decimal',maximumFractionDigits:metric.startsWith('f1_')?2:4},colors:{delta:'#008d9b'}}}/>;}
+function Overview({q,go}) {
+  const {exploreDashboard,setSectionView}=useDataApp();
+  const [v,set]=usePrefs('hb-overview',{family:'direct_AB',ratio:'0.25',cohort:'all',metric:'f1_macro'});
+  const pairs=pairModels(q.selected_quality.rows,v.family,'ordinary',v.ratio,v.metric,v.cohort),sums=summarizePairs(pairs),complete=pairs.filter(p=>p.complete);
+  const source=q.selected_quality.rows.filter(r=>r.ratio===Number(v.ratio)&&[v.family,'ordinary'].includes(r.family)&&withinCohort(r,v.cohort));
+  const profiles=q.dataset_profiles.rows.filter(r=>withinCohort(r,v.cohort));
+  const dsRows=DATASETS.filter(d=>withinCohort({dataset:d},v.cohort)).map(dataset=>{const ps=profiles.filter(r=>r.dataset===dataset),s=sums.find(r=>r.dataset===dataset);return {dataset,cohort:NEW_DATASETS.has(dataset)?'Новый':'Прежний',rows:ps[0]?.rows,features:ps[0]?.features,outputs:ps[0]?.outputs,density:mean(ps.map(r=>r.label_density)),delta:s?.delta??null,pairs:s?.pairs??0};});
+  const matrix=FAMILIES.filter(k=>k!=='ordinary').flatMap(k=>summarizePairs(pairModels(q.selected_quality.rows,k,'ordinary',v.ratio,v.metric,v.cohort)).map(r=>({...r,family:LABELS[k]})));
+  const maxColor=Math.max(0.01,...matrix.map(r=>Math.abs(r.delta)));
+  return <>
+    <SectionHeader id="overview-heading" title="Где сжатие помогает качеству?" filters={<ControlBar><Select label="Метод A" value={v.family} items={Object.fromEntries(FAMILIES.filter(k=>k!=='ordinary').map(k=>[k,LABELS[k]]))} onChange={x=>set('family',x)}/><Select label="Потолок памяти" value={v.ratio} items={ratioLabels} onChange={x=>set('ratio',x)}/><Select label="Наборы" value={v.cohort} items={choicesCohort} onChange={x=>set('cohort',x)}/><Select label="Метрика" value={v.metric} items={METRICS} onChange={x=>set('metric',x)}/></ControlBar>}/>
+    <button className="hb-method-link" onClick={()=>{setSectionView('hb-methods',{family:v.family,step:0});exploreDashboard('methods');}}>Схема: как работает {LABELS[v.family]} →</button>
+    <div className="hasboost-kpis">
+      <Stat id="overview-datasets" title="Наборы с парой" value={`${sums.length} / ${dsRows.length}`} sourceRows={source} description="Каждый набор имеет одинаковый вес в общем среднем."/>
+      <Stat id="overview-coverage" title="Полные пары" value={`${complete.length} / ${pairs.length}`} sourceRows={source} description="Одна пара: тот же набор, то же разбиение и тот же потолок памяти."/>
+      <Stat id="overview-delta" title={`Δ ${METRICS[v.metric]} к обычному`} value={`${signed(mean(sums.map(r=>r.delta)),v.metric.startsWith('f1_')?2:4)} ${deltaUnit(v.metric)}`} sourceRows={source} description={deltaDefinition(v.metric)}/>
+      <Stat id="overview-wins" title="Положительное среднее" value={`${sums.filter(r=>r.delta>0).length} / ${sums.length}`} sourceRows={source} description="Число наборов с положительным средним. Это описание результата, не проверка статистической значимости."/>
+    </div>
+    <Note>A — {LABELS[v.family]}; B — обычный бустинг. Один потолок B0 не означает одинаковое число фактически занятых байт. Кандидаты выбраны на D до просмотра теста. При 0,25 B0 прямые AB и AB + L выигрывают в среднем на 10 из 12 наборов; на больших бюджетах картина менее однородна.</Note>
+    <SortableRegion id="overview-evidence" className="hasboost-stack">
+      <SortableItem id="overview-delta-chart-block"><DeltaChart id="overview-delta-chart" title={`${LABELS[v.family]} против обычного бустинга · ${ratioLabels[v.ratio]}`} rows={sums} sourceRows={source} metric={v.metric} onDataset={go}/></SortableItem>
+      <SortableItem id="overview-matrix-block"><EvidenceChart id="overview-matrix" queryId="selected_quality" title="Все методы при одном потолке" rows={matrix} sourceRows={q.selected_quality.rows.filter(r=>r.ratio===Number(v.ratio)&&withinCohort(r,v.cohort))} height={430} description={`Цвет — средняя ориентированная разница с обычным бустингом. ${deltaDefinition(v.metric)} Масштаб симметричен относительно нуля.`} spec={{type:'heatmap',x:'family',y:'dataset',value:'delta',showValues:true,colorDomain:[-maxColor,maxColor],missingValues:'gap',valueFormat:{style:'decimal',maximumFractionDigits:v.metric.startsWith('f1_')?2:4}}}/></SortableItem>
+      <SortableItem id="overview-datasets-block"><Table id="overview-datasets-table" queryId="dataset_profiles" queryIds={['dataset_profiles','selected_quality']} sourceRowsByQuery={{dataset_profiles:profiles,selected_quality:source}} title="Наборы и условия · нажмите строку для деталей" rows={dsRows} sourceRows={profiles} onRowSelect={r=>go(r.dataset)} columns={[C('dataset','Набор'),C('cohort','Группа'),C('rows','Объекты',int),C('features','Признаки',int),C('outputs','Метки',int),C('density','Плотность меток',v=>f(v,4)),C('delta',`Δ, ${deltaUnit(v.metric)}`,v=>signed(v)),C('pairs','Пары',int)]}/></SortableItem>
+    </SortableRegion>
+  </>;
+}
+function DatasetView({q,dataset,setDataset}) {
+  const [v,set]=usePrefs('hb-dataset',{seed:'all',metric:'f1_macro',ratio:'0.7'});
+  const profiles=q.dataset_profiles.rows.filter(r=>r.dataset===dataset),seeds=profiles.map(r=>String(r.seed));
+  const seed=seeds.includes(v.seed)?v.seed:'all';
+  const include=r=>r.dataset===dataset&&(seed==='all'||String(r.seed)===seed);
+  const raw=q.all_quality_points.rows.filter(include),selected=q.selected_quality.rows.filter(include),curves=selectedCurves(selected,v.metric),sel=selected.filter(r=>r.ratio===Number(v.ratio));
+  const scatter=raw.filter(r=>valid(r,v.metric)).map(r=>({...r,family:LABELS[r.family]??r.family,name:`${r.case} · ${r.uid}`,value:r[v.metric]}));
+  const ps=profiles.filter(r=>seed==='all'||String(r.seed)===seed);
+  const consts=q.constant_diagnostics.rows.filter(include);
+  return <>
+    <SectionHeader id="dataset-heading" title={`Подробно: ${dataset}`} filters={<ControlBar><Select label="Набор данных" value={dataset} items={DATASETS} onChange={setDataset}/><Select label="Разбиение" value={seed} items={{all:'Все три',...Object.fromEntries(seeds.map(s=>[s,s]))}} onChange={x=>set('seed',x)}/><Select label="Метрика" value={v.metric} items={METRICS} onChange={x=>set('metric',x)}/><Select label="Таблица: потолок" value={v.ratio} items={ratioLabels} onChange={x=>set('ratio',x)}/></ControlBar>}/>
+    <div className="hasboost-kpis">
+      <Stat id="dataset-shape" queryId="dataset_profiles" title="Объекты × признаки × метки" value={`${int(profiles[0].rows)} × ${int(profiles[0].features)} × ${int(profiles[0].outputs)}`} sourceRows={ps} description="Размер фактически использованной выборки, включая подвыборки крупных наборов."/>
+      <Stat id="dataset-points" queryId="all_quality_points" title="Сохранённые представления" value={int(raw.length)} sourceRows={raw} description="Все доступные точки; график не отбирает лучшие модели по тесту."/>
+      <Stat id="dataset-threshold" queryId="all_quality_points" title="Медианный эффект порогов" value={`${signed(median(raw.map(r=>r.threshold_gain_pp)))} п.п.`} sourceRows={raw} description="macro-F1 после OOF-настройки порогов минус macro-F1 до настройки. Не изменение вероятностной калибровки."/>
+    </div>
+    <Note>Точки — все сохранённые кандидаты; линии — только заранее выбранные на D модели. Тест здесь используется для оценки. Три разбиения обучения и D используют один тестовый набор. {NEW_DATASETS.has(dataset)?'Этот набор относится к четырём новым проверкам.':'Этот набор уже изучался раньше: оценка исследовательская.'}</Note>
+    <div className="hasboost-two">
+      <EvidenceChart id="dataset-scatter" queryId="all_quality_points" title="Граница памяти и качества · все кандидаты" rows={scatter} sourceRows={raw} height={400} description="По горизонтали — подготовленный размер модели относительно B0. Наведите на точку для идентификатора; это не поиск лучшего кандидата по тесту." spec={{type:'scatter',x:'cost_ratio_B0',y:'value',series:'family',xScale:'log',xLabel:'Фактическая память / B0 · логарифмическая шкала',yLabel:METRICS[v.metric],showXAxisLabel:true,showYAxisLabel:true,colors:palette,startAtZero:false}}/>
+      <EvidenceChart id="dataset-curves" queryId="selected_quality" title="Что выбрал отбор до теста" rows={curves} sourceRows={selected} height={400} description="Среднее доступных разбиений для каждого семейства и потолка. Отсутствующая модель не заменяется нулём; число разбиений указано в источнике." spec={{type:'line',x:'ratio',y:'value',series:'family',xScale:'linear',xLabel:'Потолок памяти / B0',yLabel:METRICS[v.metric],showXAxisLabel:true,showYAxisLabel:true,startAtZero:false,colors:palette}}/>
+    </div>
+    <Table id="dataset-selected" queryId="selected_quality" title={`Выбранные модели · ${ratioLabels[v.ratio]}`} rows={sel} sourceRows={sel} description="family — семейство отбора; model_family — фактическое представление. Смешанный отбор может выбрать обычную модель." columns={[C('seed','Разбиение',int),C('family','Семейство отбора',v=>LABELS[v]),C('model_family','Представление',v=>LABELS[v]??v??'Нет модели'),C(v.metric,METRICS[v.metric],v=>f(v,4)),C('cost_bytes','Память, байт',int),C('uid','UID',v=>v??'Не поместилась'),C('trees','Деревья',int),C('leaves','Листья',int),C('rank','Ранг',int),C('nnz','Поправки, nnz',int),C('raw_f1_macro','F1 до порогов',v=>f(v,4)),C('threshold_gain_pp','Эффект порогов, п.п.',v=>signed(v))]}/>
+    <details className="hasboost-details"><summary>Состав выборки, поддержка меток и постоянные решения</summary>
+      <Table id="dataset-profile" queryId="dataset_profiles" title="Условия каждого разбиения" rows={ps} columns={[C('seed','Разбиение',int),C('train_rows','Обучение',int),C('D_rows','Выборка D',int),C('test_rows','Тест',int),C('train_zero_support_labels','Без примеров в обучении',int),C('D_grid_unreachable_positive_labels','Недостижимы сеткой порогов D',int),C('rank90','Ранг 90% энергии',int),C('rank90_lower_bound','Нижняя граница ранга 90%',int),C('top64_energy_fraction','Энергия первых 64',v=>f(v,4))]}/>
+      <Table id="dataset-constant" queryId="constant_diagnostics" title="Диагностика постоянных решений" rows={consts} columns={[C('seed','Разбиение',int),C('baseline','Решение',v=>({train_prior_raw:'Частота меток обучения',all_positive:'Все метки положительные',all_negative:'Все метки отрицательные'})[v]??v),C('f1_macro','macro-F1',v=>f(v,4)),C('loss','NLL',v=>f(v,4)),C('delta_full_pp','Полная − конст., п.п.',v=>signed(v)),C('delta_ordinary100_pp','Обыч. 1 B0 − конст., п.п.',v=>signed(v))]}/>
+      <Note>Постоянные решения служат диагностикой и не участвовали в выборе моделей. Для CAL500 решение «все метки положительные» сильнее части обученных моделей: абсолютную полезность следует оценивать вместе со сжатием.</Note>
+    </details>
+  </>;
+}
+function PairedView({q,go}) {
+  const [v,set]=usePrefs('hb-paired',{a:'direct_ABL',b:'ordinary',ratio:'0.25',metric:'f1_macro',cohort:'all',dataset:'all'});
+  const pairs=pairModels(q.selected_quality.rows,v.a,v.b,v.ratio,v.metric,v.cohort,v.dataset),sums=summarizePairs(pairs),complete=pairs.filter(r=>r.complete);
+  const source=q.selected_quality.rows.filter(r=>[v.a,v.b].includes(r.family)&&r.ratio===Number(v.ratio)&&withinCohort(r,v.cohort)&&(v.dataset==='all'||r.dataset===v.dataset));
+  const rows=pairs.map(p=>({...p,status:p.complete?'Есть пара':'Нет подходящей модели',model_A:p.A?.model_family??null,model_B:p.B?.model_family??null}));
+  return <>
+    <SectionHeader id="paired-heading" title="Парные сравнения · один набор и одно разбиение" filters={<ControlBar><Select label="A" value={v.a} items={LABELS} onChange={x=>set('a',x)}/><Select label="B" value={v.b} items={LABELS} onChange={x=>set('b',x)}/><Select label="Потолок" value={v.ratio} items={ratioLabels} onChange={x=>set('ratio',x)}/><Select label="Метрика" value={v.metric} items={METRICS} onChange={x=>set('metric',x)}/><Select label="Группа" value={v.cohort} items={choicesCohort} onChange={x=>set('cohort',x)}/><Select label="Набор" value={v.dataset} items={{all:'Все',...Object.fromEntries(DATASETS.map(d=>[d,d]))}} onChange={x=>set('dataset',x)}/></ControlBar>}/>
+    <div className="hasboost-kpis"><Stat id="paired-count" title="Полные пары" value={`${complete.length} / ${pairs.length}`} sourceRows={source}/><Stat id="paired-delta" title={`Средняя Δ ${METRICS[v.metric]}`} value={`${signed(mean(sums.map(r=>r.delta)),v.metric.startsWith('f1_')?2:4)} ${deltaUnit(v.metric)}`} sourceRows={source} description="Сначала среднее внутри набора, затем равный вес наборов."/><Stat id="paired-memory" title="Медиана байт A / B" value={finite(median(complete.map(r=>r.bytes_A/r.bytes_B)))?`${f(median(complete.map(r=>r.bytes_A/r.bytes_B)),3)}×`:'—'} sourceRows={source} description="Отношение фактически подготовленных размеров внутри пары. Потолок памяти у обоих одинаковый."/></div>
+    <Note>{deltaDefinition(v.metric)} Дефицит модели при данном потолке отображается как отсутствие пары. Сравнение AB и AB + L включает различия траектории обучения: оно не изолирует причинный эффект остатка.</Note>
+    {sums.length?<DeltaChart id="paired-dataset-chart" title="Разница качества по наборам" metric={v.metric} rows={sums} sourceRows={source} onDataset={go}/>:<Note tone="warning">Для этой комбинации нет полных пар. Выберите другой набор, группу или потолок.</Note>}
+    <Table id="paired-exact-table" queryId="selected_quality" title="Точные пары · метрики и фактические байты" rows={rows} sourceRows={source} columns={[C('dataset','Набор'),C('seed','Разбиение',int),C('status','Покрытие'),C('value_A',`A · ${METRICS[v.metric]}`,v=>f(v,5)),C('value_B',`B · ${METRICS[v.metric]}`,v=>f(v,5)),C('delta',`Δ, ${deltaUnit(v.metric)}`,v=>signed(v,3)),C('bytes_A','A, байт',int),C('bytes_B','B, байт',int),C('model_A','A · представление',v=>LABELS[v]??v??'—'),C('model_B','B · представление',v=>LABELS[v]??v??'—'),C('uid_A','UID A'),C('uid_B','UID B')]}/>
+  </>;
+}
+function AdvancedInferenceView({q}) {
+  const [v,set]=usePrefs('hb-inference',{mode:'executor',role:'direct_ABL200',batch:'1024',dataset:'all',reference:'full'});
+  const roles=v.mode==='executor'?ROLES:Object.fromEntries(Object.keys(ROLES).filter(k=>k.startsWith('direct_')||['posthoc70','controller70','mixed2470'].includes(k)).map(k=>[k,ROLES[k]]));
+  const role=roles[v.role]?v.role:Object.keys(roles)[0];
+  React.useEffect(()=>{if(role!==v.role)set('role',role);},[role,v.role]);
+  const referenceRole=v.reference==='full'?'full200':'ordinary70';
+  const common=r=>r.batch===Number(v.batch)&&(v.dataset==='all'||(r.dataset??r.case.replace(/_\d+$/,''))===v.dataset);
+  const executor=q.executor_pairs.rows.filter(r=>common(r)&&(r.roles||[]).includes(role));
+  const timings=q.inference_summary.rows.filter(r=>common(r)&&(r.roles||[]).includes(role));
+  const reps=q.representation_comparison.rows.filter(r=>common(r)&&r.role===role);
+  const repTimings=q.inference_summary.rows.filter(r=>common(r)&&r.backend==='packed'&&((r.roles||[]).includes(role)||(r.roles||[]).includes(referenceRole)));
+  const sameRows=executor.map(r=>({...r,dataset:r.case.replace(/_\d+$/,''),name:r.case,value:r.request_p95_speedup,lo:Math.min(...r.request_session_ratios),hi:Math.max(...r.request_session_ratios)}));
+  const repRows=representationTimes(reps,q.inference_summary.rows,referenceRole);
+  const example=sameFunctionExample(executor,timings);
+  const outputs=v.dataset==='all'?null:q.dataset_profiles.rows.find(r=>r.dataset===v.dataset)?.outputs;
+  return <>
+    <SectionHeader id="inference-heading" title="Что меняем: код исполнения или саму модель?" filters={<ControlBar>
+      <SegmentedControl ariaLabel="Тип сравнения инференса" value={v.mode} options={[{value:'executor',label:'1 · Меняем только код'},{value:'representation',label:'2 · Меняем модель'}]} onChange={x=>set('mode',x)}/>
+      <Select label="Модель A" value={role} items={roles} onChange={x=>set('role',x)}/>
+      <Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/>
+      <Select label="Набор" value={v.dataset} items={{all:'Все 12',...Object.fromEntries(DATASETS.map(d=>[d,d]))}} onChange={x=>set('dataset',x)}/>
+      {v.mode==='representation'&&<Select label="Ориентир B · packed" value={v.reference} items={{full:'Полная · 200 деревьев',ordinary:'Обычная · 0,70 B0'}} onChange={x=>set('reference',x)}/>}</ControlBar>}/>
+    <InferenceComparison mode={v.mode} role={role} referenceRole={referenceRole} example={example} sourceRows={v.mode==='executor'?timings:repTimings}/>
+    {v.mode==='executor'?<>
+      <div className="hasboost-kpis">
+        <Stat id="inf-speed" queryId="executor_pairs" title="p95 запроса · legacy / packed" value={`${f(median(executor.map(r=>r.request_p95_speedup)),2)}×`} sourceRows={executor} description="Одна модель, два исполнителя. Медиана по наборам от медиан трёх парных отношений времени. Это не p95 общего потока запросов."/>
+        <Stat id="inf-gpu" queryId="executor_pairs" title="GPU p50 · legacy / packed" value={`${f(median(executor.map(r=>r.gpu_speedup)),2)}×`} sourceRows={executor}/>
+        <Stat id="inf-memory" queryId="executor_pairs" title="Пик пула · снижение от legacy" value={`${f(median(executor.map(r=>r.peak_reduction_percent)),1)}%`} sourceRows={executor} description="Собственный пул CuPy; сторонняя память GPU в этот показатель не входит."/>
+      </div>
+      <Note>Модель для всех показателей: {ROLES[role]}. Сравниваются её legacy и packed. Отрезки на графике — разброс трёх сеансов. Сторонний бездействовавший контекст занимал около 20 ГиБ перед частью замеров; показан собственный пул процесса.</Note>
+      <EvidenceChart id="inf-executor-chart" queryId="executor_pairs" title={`${ROLES[role]} · p95 legacy / packed`} rows={sameRows} sourceRows={executor} height={430} description="Для одного case/UID и батча. Отношение времени legacy / packed; отрезки — минимум и максимум отношений трёх сессий, не доверительный интервал." spec={{type:'horizontalBar',x:'value',y:'dataset',xLabel:'legacy / packed, × · больше 1: packed быстрее',showXAxisLabel:true,uncertainty:{lower:'lo',upper:'hi',style:'bars',label:'Разброс трёх сессий'},referenceLines:[{axis:'x',value:1,label:'Одинаковое время'}],valueFormat:{style:'decimal',maximumFractionDigits:2},colors:{value:'#008d9b'}}}/>
+      <Table id="inf-timings" queryId="inference_summary" title="Одна модель: абсолютные времена двух исполнителей" rows={timings} columns={[C('dataset','Набор'),C('backend','Исполнитель',v=>BACKENDS[v]),C('request_p50_ms','p50 запроса, мс',v=>f(v,4)),C('request_p95_ms','p95 запроса, мс',v=>f(v,4)),C('gpu_p50_ms','GPU p50, мс',v=>f(v,4)),C('objects_per_second','Объекты/с',int),C('resident_device_array_bytes','Массивы GPU, МиБ',mib),C('peak_pool_used_bytes','Пик своего пула, МиБ',mib),C('uid','Один и тот же UID')]}/>
+    </>:<>
+      <div className="hasboost-kpis">
+        <Stat id="rep-speed" queryId="representation_comparison" title="p95 запроса · ориентир B / A" value={`${f(median(repRows.map(r=>r.speed)),2)}×`} sourceRows={reps}/>
+        <Stat id="rep-quality" queryId="representation_comparison" title="macro-F1 · модель A − ориентир B" value={`${signed(median(repRows.map(r=>r.delta)))} п.п.`} sourceRows={reps}/>
+        <Stat id="rep-memory" queryId="representation_comparison" title="Память · модель A / ориентир B" value={`${f(median(repRows.map(r=>r.memory)),3)}×`} sourceRows={reps}/>
+      </div>
+      <Note>Ориентир B: {ROLES[referenceRole]}. Модель A: {ROLES[role]}. Обе работают на packed; карточки показывают медианы по выбранным наборам. Варианты «200 деревьев» и «отбор при 0,70 B0» отвечают на разные вопросы.</Note>
+      <EvidenceChart id="inf-representation-chart" queryId="representation_comparison" title={`Скорость и качество A относительно «${ROLES[referenceRole]}»`} rows={repRows} sourceRows={reps} height={370} description="Одна точка на набор. Больше 1× по горизонтали — A быстрее ориентира B; положительная Δ macro-F1 — A качественнее B. Обе стороны на packed." spec={{type:'scatter',x:'speed',y:'delta',series:'dataset',xLabel:'p95 ориентира B / p95 модели A, ×',yLabel:'macro-F1(A) − macro-F1(B), п.п.',showXAxisLabel:true,showYAxisLabel:true,startAtZero:false}}/>
+      <Table id="inf-representation-table" queryId="representation_comparison" queryIds={['representation_comparison','inference_summary']} sourceRowsByQuery={{representation_comparison:reps,inference_summary:repTimings}} title={`A против «${ROLES[referenceRole]}»: обе модели на packed`} rows={repRows} sourceRows={reps} description="В этом режиме ускорение равно p95(B) / p95(A) из объединённых запросов трёх сеансов. Затем карточка показывает медиану по выбранным наборам." columns={[C('dataset','Набор'),C('actual_family','A · представление',v=>LABELS[v]??v),C('request_p95_B','B · p95, мс',v=>f(v,4)),C('request_p95_A','A · p95, мс',v=>f(v,4)),C('speed','p95 B / A, ×',v=>f(v,3)),C('gpu_p50_B','B · GPU p50, мс',v=>f(v,4)),C('gpu_p50_A','A · GPU p50, мс',v=>f(v,4)),C('delta','F1 A − B, п.п.',v=>signed(v,3)),C('memory','Память A / B',v=>f(v,3)),C('uid','UID модели A'),C('uid_B','UID ориентира B')]}/>
+    </>}
+  </>;
+}
+
+function InferenceView({q}) {
+  const [v,set]=usePrefs('hb-native-inference',{role:'full200',batch:'1024',dataset:'all',metric:'request'});
+  const all=q.native_inference_summary?.rows??[];
+  const common=r=>r.batch===Number(v.batch)&&(v.dataset==='all'||r.dataset===v.dataset);
+  const source=all.filter(r=>common(r)&&(r.role===v.role||r.backend==='native'));
+  const rows=source.filter(r=>r.role===v.role&&r.backend!=='native');
+  const metric=v.metric==='gpu'?'speed_gpu_p50':'speed_request_p95';
+  const chart=rows.map(r=>({...r,executor:BACKENDS[r.backend],speed:r[metric]}));
+  const label=v.metric==='gpu'?'GPU p50':'p95 запроса';
+  const outputs=v.dataset==='all'?null:q.dataset_profiles.rows.find(r=>r.dataset===v.dataset)?.outputs;
+  const compact=v.role!=='full200';
+  return <>
+    <SectionHeader id="native-inference-heading" title="Ускорение относительно исходного Py-Boost" filters={<ControlBar>
+      <Select label="Измеряемая модель" value={v.role} items={Object.fromEntries(['full200','direct_AB200','direct_ABL200'].map(k=>[k,ROLES[k]]))} onChange={x=>set('role',x)}/>
+      <Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/>
+      <Select label="Набор" value={v.dataset} items={{all:'Все 12',...Object.fromEntries(DATASETS.map(d=>[d,d]))}} onChange={x=>set('dataset',x)}/>
+      <SegmentedControl ariaLabel="Граница времени нового сравнения" value={v.metric} options={[{value:'request',label:'Весь запрос · p95'},{value:'gpu',label:'На GPU · p50'}]} onChange={x=>set('metric',x)}/>
+    </ControlBar>}/>
+    <div className="hb-native-anchor"><span className="hb-native-tag">Общий ориентир · 1×</span><strong>Обычный Py-Boost · полная модель · 200 деревьев</strong><span>Исходный <a href="https://github.com/leostre/Py-Boost/commit/b2842af472e21c7332d9487d8c83e53cb48d1486" target="_blank" rel="noreferrer">master @ b2842af</a>. При переключении AB / AB + L ориентир остаётся тем же.</span></div>
+    <div className="hasboost-kpis">
+      {['legacy','packed'].map(backend=><Stat key={backend} id={'native-speed-'+backend} queryId="native_inference_summary" title={`${label} · Py-Boost / ${backend}`} value={`${f(median(rows.filter(r=>r.backend===backend).map(r=>r[metric])),2)}×`} sourceRows={source} description="Сначала медиана трёх парных отношений внутри набора, затем медиана по выбранным наборам. Больше 1× означает ускорение. Это не p95 смешанного потока."/>)}
+      <Stat id="native-quality" queryId="native_inference_summary" title="macro-F1 · модель − полная, п.п." value={signed(median(rows.filter(r=>r.backend==='packed').map(r=>r.test_delta_full_pp)),3)} sourceRows={source} description="Качество перенесено из прежнего финального отчёта, без нового доступа к тесту. Native использует float32; прогнозы проверены отдельно на D и входе с NaN."/>
+    </div>
+    <Note>{compact?'AB / AB + L — другие обученные модели: здесь совмещены эффект сжатого представления и оптимизации исполнения. Разница качества показана рядом.':'Полная модель: одни деревья и значения листьев на трёх исполнителях. Здесь измеряется оптимизация исполнения; исходный Py-Boost сохраняет штатные суммы float32, legacy/packed используют float64.'} Для каждой пары ориентир измерен заново в тех же трёх сеансах на свободной A100.</Note>
+    <EvidenceChart id="native-executor-speed-chart" queryId="native_inference_summary" title={`${ROLES[v.role]} · ${label} Py-Boost / исполнитель`} rows={chart} sourceRows={source} height={540} description="Два столбца на набор: legacy и packed относительно одной полной модели на исходном Py-Boost. Медианы трёх парных отношений времени. Размеры моделей и пороги фиксированы; обучения и настройки по тесту нет." spec={{type:'horizontalBar',x:'speed',y:'dataset',series:'executor',stackable:false,xLabel:`${label} исходного Py-Boost / ${label} исполнителя, × · 1× = без ускорения`,valueFormat:{style:'decimal',maximumFractionDigits:2},colors:{[BACKENDS.legacy]:'#bb8025',[BACKENDS.packed]:'#008d9b'}}}/>
+    <Table id="native-absolute-times" queryId="native_inference_summary" title="Абсолютные времена и общий знаменатель" rows={rows} sourceRows={source} description="p50/p95 времени — по объединённым 96 запросам. Ускорение — медиана трёх отношений сеансов; оно может отличаться от отношения этих объединённых квантилей. Разброс отношений доступен в CSV и Sources." columns={[C('dataset','Набор'),C('backend','Исполнитель',v=>BACKENDS[v]),C('native_request_p95_ms','Py-Boost p95, мс',v=>f(v,4)),C('request_p95_ms','Исполнитель p95, мс',v=>f(v,4)),C('speed_request_p95','Py-Boost / исп., ×',v=>f(v,2)),C('native_gpu_p50_ms','Py-Boost GPU p50, мс',v=>f(v,4)),C('gpu_p50_ms','Исп. GPU p50, мс',v=>f(v,4)),C('speed_gpu_p50','GPU ускорение, ×',v=>f(v,2)),C('test_delta_full_pp','Δ macro-F1, п.п.',v=>signed(v,3)),C('uid','UID модели')]}/>
+    <div id="hb-executor-scheme"><ExecutorDiagram q={q} outputs={outputs}/></div>
+    <details className="hasboost-details"><summary>Как измерено сравнение с исходным Py-Boost</summary><p>12 прежних наборов, первое сохранённое разбиение каждого. Четыре размера батча, три сеанса по 32 запроса; порядок исполнителей перемешивается. Кэш CUDA прогрет. Признаки D используются для инференса, метки не нужны. Деревья, модели, пороги и окружения сохранены.</p><p>Исходный код Ensemble.predict и Tree.predict не изменён. Полная сохранённая модель переведена в штатные структуры Tree без обучения. Загрузчик пропускает только необязательные экспорты пакета и поиск метаданных установленного дистрибутива.</p><p>Полный запрос: CPU → GPU, прогноз, прежние пороги, вероятности и метки → CPU. Для исходного Py-Boost добавлена только обёртка порогов и обмена данными; штатные выделения памяти и синхронизация сохранены. GPU-время измерено CUDA-событиями при входе на GPU; в него входят паузы отправки ядер. Числа не означают чистое время арифметики CUDA-ядер.</p><p>Новый замер памяти не проводился. Старое сравнение собственного пула legacy/packed доступно ниже; оно относится к отдельной серии. Изменение точности исходного Py-Boost учитывается численной проверкой прогнозов, а не выдаётся за побитовое равенство.</p></details>
+    <details className="hasboost-details"><summary>Дополнительные сравнения прежней серии: legacy → packed и разные модели на packed</summary><AdvancedInferenceView q={q}/></details>
+  </>;
+}
+
+function BankView({q}) {
+  const [v,set]=usePrefs('hb-bank',{backend:'packed',distribution:'uniform',batch:'1024'});
+  const rows=q.bank_summary.rows.filter(r=>r.backend===v.backend&&r.distribution===v.distribution&&r.batch===Number(v.batch));
+  const choices=q.bank_choices.rows.filter(r=>r.backend===v.backend);
+  const memory=rows.map(r=>({bank:BANKS[r.bank],'Массивы GPU':r.device_array_bytes/1048576,'Пик своего пула':r.peak_pool_used_bytes/1048576}));
+  const speeds=rows.map(r=>({bank:BANKS[r.bank],p95:r.request_p95_ms}));
+  const tasks=DATASETS.map(dataset=>{const rs=choices.filter(r=>r.dataset===dataset),a=rs.find(r=>r.bank==='mixed2470'),b=rs.find(r=>r.bank==='ordinary70'),full=rs.find(r=>r.bank==='full200');return {dataset,f1_mixed:a?.f1_macro,f1_ordinary:b?.f1_macro,f1_full:full?.f1_macro,delta:a&&b?100*(a.f1_macro-b.f1_macro):null,bytes_mixed:a?.device_array_bytes,bytes_ordinary:b?.device_array_bytes,bytes_full:full?.device_array_bytes,family:a?.family,uid:a?.uid,rank:a?.rank,nnz:a?.nnz};});
+  const mixed=rows.find(r=>r.bank==='mixed2470'),ordinary=rows.find(r=>r.bank==='ordinary70');
+  return <>
+    <SectionHeader id="bank-heading" title="Двенадцать моделей в одном процессе" filters={<ControlBar><Select label="Исполнитель" value={v.backend} items={BACKENDS} onChange={x=>set('backend',x)}/><Select label="Поток запросов" value={v.distribution} items={{uniform:'Равномерный',hot_wide:'Чаще широкий набор'}} onChange={x=>set('distribution',x)}/><Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/></ControlBar>}/>
+    <div className="hasboost-kpis"><Stat id="bank-arrays" queryId="bank_summary" title="Снижение памяти массивов" value={`${f(100*(1-mixed.device_array_bytes/ordinary.device_array_bytes),1)}%`} sourceRows={rows} description="Смешанный банк против обычного банка 0,70 B0. Сумма фактических массивов 12 одновременно размещённых моделей."/><Stat id="bank-speed" queryId="bank_summary" title="Ускорение p95 банка" value={`${f(ordinary.request_p95_ms/mixed.request_p95_ms,2)}×`} sourceRows={rows}/><Stat id="bank-quality" queryId="bank_summary" title="Δ средней macro-F1" value={`${signed(100*(mixed.mean_task_f1-ordinary.mean_task_f1))} п.п.`} sourceRows={rows} description="Каждая задача имеет одинаковый вес. В таблице есть и среднее, взвешенное частотой запросов."/></div>
+    <Note>Один сохранённый вариант разбиения на задачу, 96 запросов на сценарий. Малоранговых моделей в смешанном банке: {mixed.lowrank_models}; выбор обычной модели тоже допустим. Это демонстрация размещения, а не предел вместимости A100. Сравнение с TabPFN в эту серию не входит.</Note>
+    <div className="hasboost-two"><EvidenceChart id="bank-memory-chart" queryId="bank_summary" title="Память одновременно размещённых моделей" rows={memory} sourceRows={rows} height={330} description="Массивы и пик своего пула показаны рядом: пик уже включает массивы, складывать их нельзя." spec={{type:'bar',x:'bank',y:['Массивы GPU','Пик своего пула'],yLabel:'МиБ',showYAxisLabel:true,colors:{'Массивы GPU':'#008d9b','Пик своего пула':'#9baabd'}}}/><EvidenceChart id="bank-speed-chart" queryId="bank_summary" title="p95 всего потока запросов" rows={speeds} sourceRows={rows} height={330} description="Прямое измерение сценария банка, миллисекунды. Меньше — быстрее." spec={{type:'bar',x:'bank',y:'p95',yLabel:'мс',showYAxisLabel:true,colors:{p95:'#c28514'}}}/></div>
+    <Table id="bank-exact" queryId="bank_summary" title="Измеренный сценарий целиком" rows={rows.map(r=>({...r,name:BANKS[r.bank]}))} sourceRows={rows} columns={[C('name','Банк'),C('model_count','Модели',int),C('device_array_bytes','Массивы, МиБ',mib),C('peak_pool_used_bytes','Пик пула, МиБ',mib),C('request_p50_ms','p50, мс',v=>f(v,4)),C('request_p95_ms','p95, мс',v=>f(v,4)),C('objects_per_second','Объекты/с',int),C('mean_task_f1','Средняя macro-F1',v=>f(v,5)),C('request_weighted_f1','F1 по частоте запросов',v=>f(v,5))]}/>
+    <Table id="bank-tasks" queryId="bank_choices" title="За счёт каких моделей складывается выигрыш" rows={tasks} sourceRows={choices} description="Разница качества — смешанный минус обычный банк. Память каждой модели — фактические массивы GPU." columns={[C('dataset','Задача'),C('family','Выбор смешанного банка',v=>LABELS[v]??v),C('f1_mixed','F1 смешанная',v=>f(v,4)),C('f1_ordinary','F1 обычная',v=>f(v,4)),C('f1_full','F1 полная',v=>f(v,4)),C('delta','Δ смеш. − обыч., п.п.',v=>signed(v)),C('bytes_mixed','Смеш., МиБ',mib),C('bytes_ordinary','Обыч., МиБ',mib),C('bytes_full','Полная, МиБ',mib),C('rank','Ранг',int),C('nnz','Поправки, nnz',int),C('uid','UID смешанной')]}/>
+  </>;
+}
+export function DashboardContent() {
+  const {activeTabId}=useDashboardTabs([{id:'overview',label:'Обзор'},{id:'methods',label:'Методы и схемы'},{id:'dataset',label:'Датасет'},{id:'paired',label:'Парные сравнения'},{id:'inference',label:'Инференс'},{id:'bank',label:'Банк моделей'}]);
+  const {queries:q,exploreDashboard,viewFocus,setDashboardFocus,canReturnFromExploration,returnFromExploration}=useDataApp();
+  const [p,set]=usePrefs('hb-current-dataset',{dataset:'birds'});
+  const dataset=DATASETS.includes(viewFocus?.dataset)?viewFocus.dataset:p.dataset;
+  const choose=d=>{set('dataset',d);setDashboardFocus({dataset:d});};
+  const go=d=>exploreDashboard('dataset',{focus:{dataset:d}});
+  return <article className="hasboost-dashboard">
+    {(!activeTabId||activeTabId==='overview')&&<div className="hasboost-hero"><img src={hero} alt="HASBoost. Компактное обучение и быстрый инференс: 12 наборов, 36 разбиений, 4941 представление модели. Общий базис AB и разреженные поправки L."/></div>}
+      <div className="hasboost-status"><span className="hasboost-dot"/> {activeTabId==='inference'?'Инференс Py-Boost · 30 октября 2026 · 12 прежних наборов':'Срез 29 октября 2026 · 12 многометочных наборов · сохранённые результаты'} <span className="hasboost-status-right"><a href="https://github.com/leostre/Py-Boost/pull/24" target="_blank" rel="noreferrer">Код и PR #24 ↗</a></span></div>
+    {['dataset','methods'].includes(activeTabId)&&canReturnFromExploration&&<button className="hasboost-back" onClick={returnFromExploration}>← Вернуться к сравнению</button>}
+    {(!activeTabId||activeTabId==='overview')&&<Overview q={q} go={go}/>}
+    {activeTabId==='dataset'&&<DatasetView q={q} dataset={dataset} setDataset={choose}/>}
+    {activeTabId==='methods'&&<MethodsView q={q}/>}
+    {activeTabId==='paired'&&<PairedView q={q} go={go}/>}
+    {activeTabId==='inference'&&<InferenceView q={q}/>}
+    {activeTabId==='bank'&&<BankView q={q}/>}
+    <details className="hasboost-details hasboost-methods"><summary>Как читать результаты и проверить источники</summary><div className="hasboost-method-grid"><div><h3>Качество</h3><p>Общее среднее даёт каждому набору один голос. Три разбиения — разные обучение и D с одним общим тестом; диапазон минимум–максимум не является доверительным интервалом. Четыре новых набора: Enron, CAL500, Corel5k и Delicious.</p><p>Модели и пороги выбирались на D до теста. Для каждого семейства ограничено число запросов к D. Пороги получены из двухчастных OOF-прогнозов; T = 1 для многометочной серии. Порог меняет метку, но не вероятности.</p></div><div><h3>Память и скорость</h3><p>B0 — аналитическая координата бюджета. Подготовленная память модели и массивы GPU — разные величины. Пик своего пула включает массивы; это не полная память процесса из nvidia-smi.</p><p>Проверки CUDA отделены от различий обученных моделей. Медиана отношений p95 по сессиям или наборам не равна p95 смешанного потока. Последний измерен отдельно в банке.</p></div><div><h3>Источники</h3><p>Откройте меню любого графика, показателя или таблицы → Sources: там доступны исходные строки и описание обработки. «Скачать CSV» сохраняет текущую таблицу с её фильтрами. Данные встроены в HTML; новые вычислительные эксперименты не выполняются.</p><p><a href="https://github.com/leostre/Py-Boost/tree/hasboost/20261030/budget-serving-results/docs/research/2026-10-29" target="_blank" rel="noreferrer">Таблицы, методика и контрольные суммы в репозитории ↗</a></p></div></div></details>
+  </article>;
+}

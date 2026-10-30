@@ -1,0 +1,22 @@
+{
+  "url": "https://www.uco.es/grupos/kdis/MLLResources/ucobigfiles/Datasets/Original/Delicious.zip",
+  "archive_sha256": "e4ff7f5cf2d65605e0c1c6790594798ceb1b3ebcba5365b430c7fd6735d4a6ed",
+  "files": [
+    {
+      "name": "delicious.arff",
+      "sha256": "b944de0bca910050c11d97eed57d17b073110ea3646a587f3d15d127cf581aab"
+    },
+    {
+      "name": "delicious.xml",
+      "sha256": "895a02309299386dac2a0dd6cd02c344e36ecd5e6c0067af37fdb400d29cd195"
+    },
+    {
+      "name": "delicious-test.arff",
+      "sha256": "2dfb01723a819914b0ca83361177ed413ce3f2169851d9f228d4692915d63944"
+    },
+    {
+      "name": "delicious-train.arff",
+      "sha256": "030186cdb542ebdd32052fcdbb1ebe30115b3a22518c1b4b198c45eb827aebe1"
+    }
+  ]
+}

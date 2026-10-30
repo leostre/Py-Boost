@@ -1,0 +1,74 @@
+{
+  "emotions": {
+    "archive": "emotions.rar",
+    "archive_sha256": "0501053829a00b3c368b150b55bbbfcd2ddb153b8eba788021b521e764c4739f",
+    "members": {
+      "emotions-train.arff": {
+        "bytes": 252080,
+        "sha256": "bbe704106c79bb8fb99c1d1d2e9bde081d6a2daeb01f100862f11fd91a3c1f98"
+      },
+      "emotions-test.arff": {
+        "bytes": 132007,
+        "sha256": "f13d4b746b7b5c8eb484bd751d6ac463d4560dff998a93516a5c1fe35daf6c8f"
+      },
+      "emotions.xml": {
+        "bytes": 332,
+        "sha256": "b20042828c32a6ca0a871c10a298c1b7b17fd2c453e944c1673d9e9b9bda1e68"
+      }
+    }
+  },
+  "medical": {
+    "archive": "medical.rar",
+    "archive_sha256": "7b773528f58a918dc82c1f71cc30c036949f691fd6c4ad02e836448f511dbfa1",
+    "members": {
+      "medical-train.arff": {
+        "bytes": 69680,
+        "sha256": "c764f45756ab1c553b8b4eaaf5605a5610a43bbbcf37492d0f1a12bf9c9e2244"
+      },
+      "medical-test.arff": {
+        "bytes": 99124,
+        "sha256": "6be472e75a6c0b0916187f343a398011b1b26f8f0ddc682c575312ad3532f6c4"
+      },
+      "medical.xml": {
+        "bytes": 1865,
+        "sha256": "c8d92eaab5adc877a8dfcd7132ce8c7498c5d518abe82e5778f993ea7e63bed9"
+      }
+    }
+  },
+  "pendigits": {
+    "archive": "pendigits.zip",
+    "archive_sha256": "1e02bea023613c2b11c9492f6f34caf975420455934f3527d270cee9a1f03b64",
+    "members": {
+      "pendigits.tra": {
+        "bytes": 502098,
+        "sha256": "e2b9eb9f0d0467e2b64a4816a3420edf2b8043447576f4b84337aba44a9f97d3"
+      },
+      "pendigits.tes": {
+        "bytes": 234366,
+        "sha256": "8bd03229c5c5291fefe43e45465dd948d2645bf23328b9d993e0b777666b2015"
+      },
+      "pendigits.names": {
+        "bytes": 4953,
+        "sha256": "a90a76e1edac6f1b50f4b44db80587d7b92601fcbb153c83c2c3210c21b34f60"
+      }
+    }
+  },
+  "satimage": {
+    "archive": "satimage.zip",
+    "archive_sha256": "7c54e0e11c872a1b0b647da370d596dcb06746159cce4121d92ccd70b7d7ce3c",
+    "members": {
+      "sat.trn": {
+        "bytes": 525830,
+        "sha256": "e896dc88a960fa2404160fc4c3cb3dc53fcf4afd80ba920bf2d261bd42d12613"
+      },
+      "sat.tst": {
+        "bytes": 236745,
+        "sha256": "4b9167b8a92baafafed7c8809aef86d0683a5e685c19d98d119fa6974f0f2479"
+      },
+      "sat.doc": {
+        "bytes": 5254,
+        "sha256": "07f0312277b3bc4600548a0b75a848d72f1c88d9de416711b05cc2535d961dac"
+      }
+    }
+  }
+}

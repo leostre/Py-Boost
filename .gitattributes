@@ -3,3 +3,15 @@
 # Legacy datasets remain in Git/on disk, but are not needed by A100 snapshots.
 # The registered experiment reads fingerprinted data from its fixed server path.
 experiments/data export-ignore
+
+# Preserve audited evidence bytes; collapse generated files in code review.
+docs/research/2026-10-29/** -text whitespace=cr-at-eol
+docs/research/2026-10-29/figures/*.svg linguist-generated=true -whitespace
+docs/research/2026-10-29/figures/*.pdf linguist-generated=true
+docs/research/2026-10-29/data/*.csv linguist-generated=true
+
+# Review the editable dashboard source; retain the exported bundle byte-for-byte.
+docs/research/2026-10-29/hasboost-results-interactive.html linguist-generated=true -diff
+
+# Raw native benchmark samples stay available; review the derived CSV and code.
+docs/research/2026-10-29/native_inference_report.json linguist-generated=true -diff

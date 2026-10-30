@@ -1,0 +1,40 @@
+{
+  "artifact": "hasboost-results-interactive.html",
+  "artifact_sha256": "096317988fcd877b7bdfa2d46439f9fa10f3bed072e76e0d0405c3c82d8a4230",
+  "artifact_bytes": 9560138,
+  "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
+  "build_status": "complete",
+  "snapshot_sha256": "18c5f8ab16b79cf2150542c4289c10d58585c175e8a8271df687bd2f530d9a06",
+  "build": {
+    "canonical_prebuilt_runtime": true,
+    "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
+    "compiler_sha256": "ec65601079c80bef7210f2c9760ff7f2db6adef28516ffff280d4c86f91d4078",
+    "protected_runtime_changed": false,
+    "execution": "WSL Ubuntu, isolated Node 24.19.0; native Windows path-validation error avoided without changing or bypassing integrity checks",
+    "external_required_asset_count": 0,
+    "canonical_export_offline": true,
+    "reconstructed_snapshot_equals_delivered": true
+  },
+  "analysis_checks": {"passed": 8, "failed": 0, "log": "interactive-analytics.log"},
+  "browser_checks": {
+    "all_five_tabs_rendered": true,
+    "painted_bar_heatmap_scatter_line_marks_inspected": true,
+    "dataset_drilldown_birds_and_return": true,
+    "cohort_new_then_all": true,
+    "single_split_then_all": true,
+    "missing_posthoc_budget_025_pairs": "30 / 36; remaining models stay null",
+    "empty_cohort_dataset_intersection": "explicit message, no fabricated values",
+    "loss_metric_orientation": "NLL: B minus A; metric-specific units",
+    "source_scope": "paired posthoc vs ordinary at .25: 72 original rows including 6 missing-model records",
+    "csv_download": "3 complete rows for packed / hot_wide / batch 1024, reconciled from downloaded CSV",
+    "inference_dataset_then_all": true,
+    "inference_modes": "same function vs different representations; batch 1 p95 1.94x, batch 1024 p95 1.27x",
+    "bank_distribution_filter": true,
+    "diagnostics_expand": true,
+    "normal_and_390px_width": "cards remain contained; charts visible, tables scroll internally; body 375px at 390px viewport",
+    "portable_export_opened_via_http": true,
+    "final_export_new_console_errors_observed": 0,
+    "file_protocol_browser_test": "not run; self-contained asset structure and canonical offline export verified"
+  },
+  "scientific_scope": "Existing saved results only; no model fitting, selection on test or new GPU timing. Browser checks validate the presentation, not a new independent scientific replication."
+}

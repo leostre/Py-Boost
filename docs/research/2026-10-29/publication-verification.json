@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+  "source_python_AST_matches": 158,
+  "declared_python_adaptations": [
+    "publication-only launcher guard",
+    "GenBase integration skip when external data absent"
+  ],
+  "copied_source_files": 182,
+  "excluded_frozen_inputs": [
+    {
+      "path": "abl_serving_receipt_20261026.json",
+      "reason": "frozen run input/receipt; restore by recorded source SHA, not a portable default"
+    },
+    {
+      "path": "br_protocol_registry.json",
+      "reason": "frozen run input/receipt; restore by recorded source SHA, not a portable default"
+    },
+    {
+      "path": "broad_audit_snapshot.json",
+      "reason": "frozen run input/receipt; restore by recorded source SHA, not a portable default"
+    }
+  ],
+  "current_cpu_tests": {
+    "passed": 439,
+    "skipped": 1,
+    "skip_reason": "GenBase ARFF/XML is intentionally not redistributed",
+    "log": "checks/publication-cpu.log",
+    "log_sha256": "e2fb72297217f92edcaa60fc216bfa8278fbe78e99593302038dfc1d40411a8b"
+  },
+  "safe_default": {
+    "status": "publication_only",
+    "experiments_started": false,
+    "note": "Restore the documented frozen inputs and an explicitly authorized configuration before running research."
+  },
+  "new_research_fits": 0,
+  "new_GPU_benchmarks": 0,
+  "source_GPU_results": "Historical 2026-10-29 runs only; numerical and timing receipts in provenance.json"
+}

@@ -6,11 +6,12 @@
       "source_commit": "2f0c9c50896fed575aa5be2dd01b02af898c2a5e",
       "source_path": ".gitignore",
       "source_sha256": "9b46e4a118c91b3d09417a1cf849f6542048897dbe30c1d0e1ef9f8c751caea0",
-      "published_sha256": "a11d6748f5214428955d24940db58b4cec94ae8cb11a1e5954d207f51b9ced8e",
+      "published_sha256": "0bdb719efc92632cf3016f097504c21ed51f26b382f7ef92efa65187d49a84ad",
       "adaptations": [
         "ignore only newly generated results, model files and test caches",
         "ignore only newly generated results, model files and test caches",
-        "ignore only newly generated results, model files and test caches"
+        "ignore only newly generated results, model files and test caches",
+        "whitelist only reviewed aggregate CSVs and the publication CPU log"
       ]
     },
     "experiments/README.md": {
@@ -1734,8 +1735,11 @@
       "source_commit": "2f0c9c50896fed575aa5be2dd01b02af898c2a5e",
       "source_path": ".gitattributes",
       "source_sha256": "e203d2ed4197402de985d0bef10a177fdeab03f1c79a5c6f9efd9767d7b00e26",
-      "published_sha256": "e203d2ed4197402de985d0bef10a177fdeab03f1c79a5c6f9efd9767d7b00e26",
-      "adaptations": []
+      "published_sha256": "d600066235cfd88b17342dad9c347e9ea97b469885446981c862ba69f23856f4",
+      "adaptations": [
+        "collapse generated evidence in GitHub code review without hiding source code",
+        "preserve exact audited CSV, log and figure bytes; disable whitespace checks only for generated SVG"
+      ]
     },
     "experiments/H1_A100_protocol.md": {
       "source_repository": "Py-Boost-HASBoost-A100",
@@ -3574,12 +3578,14 @@
     },
     "research/external_controls/external_config.json": {
       "source_repository": "HASBoost-A100-External",
-      "source_commit": "e84744be78ea6d0a2ee3092de0d72a2ad55d8da2",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
       "source_path": "external_config.json",
-      "source_sha256": "2f7ea42a17b96b38ae5538b2e236820e1d18669c50458b956e4c6933df7a045e",
-      "published_sha256": "b6bff579b929b6461daadd5f63756fd3771cf395132ac8722d79b18b38080c65",
+      "source_sha256": "24c9c684185862eb31c9ee62e72b4ecd2d58ff3c5318ba86c0d7c92e8773961f",
+      "published_sha256": "3ab84633e916ce0453f21bcf5a4e7bb8d4d29240ab43ebee767caff35c1ac667",
       "adaptations": [
-        "no implicit personal license acceptance; safe publication phase"
+        "LF publication text; original SHA retained",
+        "safe publication-only default; no license delegation",
+        "artifact/runtime roots are explicit restoration placeholders"
       ]
     },
     "research/external_controls/external_quality_core.py": {
@@ -3592,12 +3598,14 @@
     },
     "research/external_controls/external_runner.py": {
       "source_repository": "HASBoost-A100-External",
-      "source_commit": "e84744be78ea6d0a2ee3092de0d72a2ad55d8da2",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
       "source_path": "external_runner.py",
-      "source_sha256": "289da84d633c5cef161e92d34915dd3cd5d46a7d59535a4611420c7422cd14c8",
-      "published_sha256": "ada344133b2742f4745fd039ac60380e33eb10e9072c1ca414258e0c068df09d",
+      "source_sha256": "9d54f8cd7034ced04caf8f117b2d9fbd1327527d2bf16a847aa0ab3960350d6f",
+      "published_sha256": "64c0c3b363b7b2c0d2e3e7f152d9ee56db0a0bed5ef0bb7d3796b59116ab1396",
       "adaptations": [
-        "publication entry point cannot install packages, fetch weights or run experiments"
+        "LF publication text; original SHA retained",
+        "preserve previous fail-closed publication entry point",
+        "trim redundant terminal blank lines; AST unchanged"
       ]
     },
     "research/external_controls/matched_data.py": {
@@ -3872,6 +3880,1840 @@
       "source_path": "tests/test_calibration_pilot_properties.py",
       "source_sha256": "b54f5045a9dcadc13207b055938195a20b4bf42cf33f694c1b228f194eda3707",
       "published_sha256": "b54f5045a9dcadc13207b055938195a20b4bf42cf33f694c1b228f194eda3707",
+      "adaptations": []
+    },
+    "research/external_controls/BR0_IMPLEMENTATION.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "BR0_IMPLEMENTATION.md",
+      "source_sha256": "7e973093a69eaf882fb21b939bb334e079e9a910435bf8bbc4e868822cefab44",
+      "published_sha256": "ce38d8721b21109ee6e78c035efe649a8321267bec0040949e0fd5f646eccaa4",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/UNIFIED_EXECUTION_PROTOCOL.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "UNIFIED_EXECUTION_PROTOCOL.md",
+      "source_sha256": "63c2737e1d24de9c61f2336c21ae06a78e4f041645fd54d695f91646026fdc83",
+      "published_sha256": "27badee5e5eec0e1b59895b87ea4f82f3d6ceea5e2f1b060a85d30b0fe210bd4",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_budget_revision.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_budget_revision.py",
+      "source_sha256": "19988d905254720d79485abaa56f3334c7a6ce1f5b6fc3c62004a92d042d565a",
+      "published_sha256": "c454776901ca63e7f79f09aec942b58282165dcb24fe40880f9f8b261837026c",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_budget_revision_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_budget_revision_core.py",
+      "source_sha256": "45c989ac2dae565dac53b519dd2019ffcef3ce995d407d85bfafea3340852aaf",
+      "published_sha256": "d616c5d37a1b039e0589397aab492c6d2e8f8adceac2de862b40f816754b3519",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_history_state_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_history_state_audit.py",
+      "source_sha256": "a1a403512247c0246117d108462cc4f5a8048275b2ce4c9f355d24c42c20707f",
+      "published_sha256": "21291246b8d312ed9f13fc52815d5c829d41f19586d4ec7b793da312dff63ace",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_increment_diagnostic.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_increment_diagnostic.py",
+      "source_sha256": "82d8af422b12d0c16f9d5dd09d22d60b5a364310c393328a6a33068345efaf65",
+      "published_sha256": "8e42ad240f70e9492c03e70475a6714f5189462159177bc5d51f2cc7f67b51fa",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_increment_diagnostic_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_increment_diagnostic_core.py",
+      "source_sha256": "b3c3de64fde522549682b17814f57590d029285c216bbd2f93aa73a0519ebbea",
+      "published_sha256": "84015dc566746d83028da0d29ba4188400e0f147381454800837f3d5f0e0ad4b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_increment_diagnostic_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_increment_diagnostic_protocol.md",
+      "source_sha256": "a55ba83510e1d6b2fd2295d49ca00d0284da208d8f1cc57197dba902a8c59931",
+      "published_sha256": "2aac664db936e550e21fd1929853941ee5b0eb3ceed72859c6c96e7d44c054a2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_protected_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_protected_core.py",
+      "source_sha256": "6c5e908539196eed7a86a76436ef0436fb16f117d6b04b4aee393f615cc55b69",
+      "published_sha256": "9057e18abfc0c166a0a6cc6fd2719b45d811dce0b52af422265e2b0bbee9b65a",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_protected_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_protected_final.py",
+      "source_sha256": "8e883609c8357ec1fa28adbcb14278756de012b8d698bcb421ea1b0764cd024c",
+      "published_sha256": "f39594770ed01710d9ccd737a668f0dfa723b1a17ed52cd140d9916ed7f1d6ab",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_protected_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_protected_protocol.md",
+      "source_sha256": "5abe331d3a9cbadd8d0c1aa0e4fa0e2a5c669ca12b582a652649460da575e2d4",
+      "published_sha256": "552cdb3e5603454ca465d783fe79587b95c0cd5d9b371692acb7176f57af6f32",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_protected_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_protected_study.py",
+      "source_sha256": "0ffb76db7a2b2dba78e7d4e9faef0e74a7c2a3887287d170f1f8582a05c9d87f",
+      "published_sha256": "7c14e208fb1e6be701d391bf978202f030684230c44e50418d82c80f9e5867a3",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_protected_worker.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_protected_worker.py",
+      "source_sha256": "adfb5beffa21dd53fb6ed4ab1c50bd95498dab4a11fdecf8283967cbb8888b7d",
+      "published_sha256": "0270d14bb470dd204ddbbe263b8ce104c1b84d549acd9f5215566be22f0a4ebb",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_quality_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_quality_core.py",
+      "source_sha256": "52061a237c0d6a5fc50e1cc71b699b4e8afdebb2f24ad95c762a7484e0f952ee",
+      "published_sha256": "71c9664d1ecdf1d87097e0868ed0712d6acae865f92e26b349bd66f9a73f3282",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_quality_evaluation.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_quality_evaluation.py",
+      "source_sha256": "5d384dd766c9b70633c8ea8b90e5b3bd78ce9bfd3d223648509a069a71d3923e",
+      "published_sha256": "fdd98c423b02800609aa80706850eedc3a53c56ff1341e5d7e9ce48a1842eaec",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_quality_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_quality_protocol.md",
+      "source_sha256": "6f2072d341f56ef335f195fb4b2acf5fda92c7cc079458744c33b77a8e8e3ac7",
+      "published_sha256": "7180e661dc75579a73760f9548b465dca6765d519c8261b77640b3d0a207f439",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_quality_worker.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_quality_worker.py",
+      "source_sha256": "77e347340186e4a5f038c40dcb06ed85a72ff1329098a81db969cdd08356be4d",
+      "published_sha256": "dcebe082b1cff7398db7f319de752a273e2bfec2a0874d7f7a71f83605ca5f06",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_serving_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_serving_core.py",
+      "source_sha256": "06cb43c3e3b54eb3f426a9716f3e822097f5e6d67aa62302b2b6aef70745b8f2",
+      "published_sha256": "6f62ba9068621797062313d84a6dabdca1dcebe53ddad58cec623dca10e0048b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_serving_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_serving_protocol.md",
+      "source_sha256": "f7fcb7a694e6625a8ddde3be29a7e0557bbd6474bc1d26b805276ad667b6f047",
+      "published_sha256": "4a6d9af4fad44e940948d87de028c7280840ae85830a3be0b8ae2cf7a1511a9f",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_serving_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_serving_study.py",
+      "source_sha256": "956a994327165c2856055aeaea1b177c491a29e9b3987440a74883f76202f666",
+      "published_sha256": "32f242f9f3d4123c24e76ad521bab243660410128cb01077db25abbac1ff8f97",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_serving_worker.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_serving_worker.py",
+      "source_sha256": "10f646704b884232fe207e28f3038cfdb31c78bf1e20b64d5b2ab66f7dd25b00",
+      "published_sha256": "8f2d6b33ee6219549ee9cae811863111a99cb4d559eb45c3a8e6a16d7c8797d6",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stability_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stability_core.py",
+      "source_sha256": "c7226dbc5229889a72cacb656a52f1aecfae4c2026de716b74a6201c0f5a08ee",
+      "published_sha256": "fc96fff54962d1d43ae62b5a36274afad85719e6a7be7e60056c2dfb84cd1003",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stability_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stability_study.py",
+      "source_sha256": "717c2c6d90735ede1e7251fc22c1636b73c5c1372c36a1eb3cca15db462765c6",
+      "published_sha256": "f1d18ec0adaff2486465bcef67f0861d1a08f8859cbf90317d75cc3290de1a2e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stop_continuation.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stop_continuation.py",
+      "source_sha256": "ddd45d4dee61df6af7f0b19b32c527e8eca7c6570681476862fef6df514e6fc7",
+      "published_sha256": "e590b1873195d3aed73193f69f0853be8a23ee005efe79657ece107a08af0b7b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stop_continuation_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stop_continuation_core.py",
+      "source_sha256": "cabdd490ff6e2f64aedbd78ac83267b8254503671beeb65a5945a54e519e6cdc",
+      "published_sha256": "0f44d6233613ef7d28da29b9158bb81b99cbd15d30f0ff51454f35a94a926b45",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stop_continuation_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stop_continuation_protocol.md",
+      "source_sha256": "26ac7efbaea9112f28ac4e4fb36fc1ad32a3a7172c0aa4c6ec2a55d060e2263a",
+      "published_sha256": "7279258f05bf9e4f99ae283d1778353be7b82f6dfac487de1217ed7805d826ff",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stop_rule_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stop_rule_core.py",
+      "source_sha256": "86145ec983abd854df8e2a4ff111c97c9225b5e9d3e65cdcc4716e0193f210f3",
+      "published_sha256": "aa1973f63cee501c70659d2998f26cbae826fd90808727daab1c16174ff6c69d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stop_rule_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stop_rule_protocol.md",
+      "source_sha256": "de3cac58b7423ab5b9e02f5e788f1a7ceecd4f235ad6a1c53280ac785c4ac84c",
+      "published_sha256": "3aa2d8f95bc508a6da36ae3ceadde455a071841d718e2437470f917db655d140",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_stop_rule_replay.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_stop_rule_replay.py",
+      "source_sha256": "42ef253d120b59d39d77f5de0937cb4a131760461d9d872f3dbdc81cc1c0a53a",
+      "published_sha256": "5f7637778f84894061ae9c7ce0ed6b423cc4b688267fc5e3bda8c7c084b00fd1",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_core.py",
+      "source_sha256": "d2dbadaba82b63a065f216ca3ba9626b35078accdf31abd8fb416ee6f82212f9",
+      "published_sha256": "fbf2e2f849892981a47af032ce61389e91730c90ba8190cdc6e0b3ea8806cc61",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_development_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_development_audit.py",
+      "source_sha256": "69af2d2396198247f47956050f911c5ff1234c809f26e5c13078dfad0dfc64d3",
+      "published_sha256": "5c6c99d8e2a790717cc70e0d57e8237542dcf4764b2143e8d06697691fbf44db",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_final.py",
+      "source_sha256": "fbc40e178cae760451c531e8862ef470acf900ec372909e15dc8fc34940af405",
+      "published_sha256": "c36622bf15c90f1bff8fee5f9f55c4ad9047e64b466a09dcca53b1f011336d81",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_increment.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_increment.py",
+      "source_sha256": "29c8632001ef6f5bc6b9920341600599d5d0a2dc7a95b91023403bfccaa8c2e7",
+      "published_sha256": "52ad207ccf61ab973e012786a33d3bf45a100537f6b2550fafb2cdb9be5caa4b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_projection.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_projection.py",
+      "source_sha256": "719ba77feb6798611e8c8123ced27729ba041ae06f97ed59fac4eb58c38df3e3",
+      "published_sha256": "9c45b0ec2bef3af47c9b19dba49ed3001a8d289d30dcd51c0d246d6d450ea5d2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_protocol.md",
+      "source_sha256": "be15a800f058982e27647be1a50ba8da96470270e84e0f4358983fc6d0fead56",
+      "published_sha256": "3cc50b9ea70a2d4ed23a5cdd1db9a52f0e1947d096693906ad50faf626f4043d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_study.py",
+      "source_sha256": "a039e48c1342f7334e2302bb2a37a430fc6b35c920e655586b4b294698420b5a",
+      "published_sha256": "ea4dfa7b4a93ceeb97bb921c363cc27cc49b30d0a697d642054f6a0add96e1ef",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_training_worker.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_training_worker.py",
+      "source_sha256": "632161ba7fb9227c2ab65c765812d52925191e6545069557f7ad02d9dcebd8d9",
+      "published_sha256": "7598a7f17ba3230784c9b5e4f6cb56b9cb3888132f944ac20a644d28e5374867",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_transfer_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_transfer_final.py",
+      "source_sha256": "a48ee1f8e750523f41fb1ecd9dc25c4fcc52a0637121537605f1c7120490de6b",
+      "published_sha256": "fd3e246bae92c6e1de0e88761ab65f64f23641a6ec581a32d4ba650498e94232",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_transfer_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_transfer_study.py",
+      "source_sha256": "89b83013bd07067af483a71017dc31c138ae0a6b55f424c0eb26e5de4204ba88",
+      "published_sha256": "6cb4c7aacaa37de5682a9e8b4ff16e755adb5f1c81e45c12c99a5d6d78225745",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_width_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_width_protocol.md",
+      "source_sha256": "96eee80ce3e7daa2719d42367770461cde1dfe04a61f0ca5ff71dec99c36c694",
+      "published_sha256": "ae007780d561201610af87306070f1d03faf7f7e7563e7b361b7044403477c5c",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_width_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_width_study.py",
+      "source_sha256": "f99a27879775076443416919fa2c799f4fc40be71f3c00d6d209cf6feccabc10",
+      "published_sha256": "8a74dcf4fff4a97a97220b1e2ed9ef09cbeb4d61a171b09448d55c8a862905c1",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/abl_width_worker.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "abl_width_worker.py",
+      "source_sha256": "d76122c02c245f539f4d810b8bf3cd33dad87c3ca1aa4f3101c01af42a704144",
+      "published_sha256": "4545ded1787a5949052f0706c326a717308c2a43eae195a5b079d0e652221ec8",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_basis_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_basis_core.py",
+      "source_sha256": "5b2f54fd4a3fa7e9587c3014ea06b9ae82162c35262cd12a3348c1596d2c1cd2",
+      "published_sha256": "766b057acc81f86f9ea782e89d290b0d006425d72e7dd66ba54a5bcd05d5466e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_controller_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_controller_core.py",
+      "source_sha256": "5de17e3fbb56a075af9e761fb947a04469f5522e63a0a999bf32ec661b257388",
+      "published_sha256": "fe9c94291e4803df18316edce0f9fcc23d0101fa738aa8e0fb60e65f3c41408b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_data.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_data.py",
+      "source_sha256": "e6c03ccde89c2c530e23e10cb6bfc6e20b95c707b224a1c7e576abbb71e7df07",
+      "published_sha256": "58c7dfe4c9edcee383d0bfbcbe1d97727a680686efb83e9a84c6dee07deef673",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_data_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_data_core.py",
+      "source_sha256": "c5315e6941d820ac20e03313b715855430591421ff272a4089814ab9d7003861",
+      "published_sha256": "608fb610fb8759dbbb306ea94ba77f58cf0462cb0e62e8ee76310545b30654eb",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_external.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_external.py",
+      "source_sha256": "563e00cc3ced70db0fc05691df85c9dd32c94c8eda1f32ce155a842a7d996707",
+      "published_sha256": "5e747ac359f9835a33fae0a6f6190be72bfbb7e3b427d1bdf57083882749a495",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_fresh_evaluate.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_fresh_evaluate.py",
+      "source_sha256": "3dce2c901a31fcb5b379165eed690b5e85b5ab4de597347743ffa2255d2d85a8",
+      "published_sha256": "3492d549d743f02d2dffe1bd8352a322c8b2a4100254362aceb95cc6cbae6006",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_fresh_training.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_fresh_training.py",
+      "source_sha256": "665d96511e61c7514ced59e58ba05350be03cd3c5dfd68a28e800ff01c7d0450",
+      "published_sha256": "fe6813306b16c6ea7bcf302a03304b78adcd189203abe9250b801a32acda45ea",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_matched_serving.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_matched_serving.py",
+      "source_sha256": "398a4de3f7ddbab3754d05c44a5dde03e6b5435290c444fa52ea0cbf1f568d35",
+      "published_sha256": "006ab27dd318aa47f2a483fc90d9b703d970dada095416ccdc9e8d56bcdebf1f",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_raw/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_raw/source.json",
+      "source_sha256": "fa61bc29418a23d37a468f306062c984b1f8243f313af0bfbad5d97a2973b78d",
+      "published_sha256": "e8357181d0f5a9f37f8744cb09d37472e8403e65b8a55b0767b96fc443022a65",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_saved.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_saved.py",
+      "source_sha256": "b3c9493085060213bddec41dfdc81d0df0aed8a6603ae33f57738bb89310119a",
+      "published_sha256": "b320c9f4a02e7a57be753ddc06fb2b7ab09f32599db6ee2c45a4777f60b26d17",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/adaptive_training.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "adaptive_training.py",
+      "source_sha256": "adc0e340bce2191781634f326caa8693098e40c285282bc732cc22947cedb8aa",
+      "published_sha256": "ae837ec5f017f25819e55893f413880dd9abc26b641b97918a3b4b51bba30dde",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/analyze_unified_frontiers.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "analyze_unified_frontiers.py",
+      "source_sha256": "121384d8e3a3cba8e1a58bca8359de227a57a7f8443d5037cce4305943e749a4",
+      "published_sha256": "b94c9c3e5be3061fca3e5fc0a60a66eae4e63c0ca0b54c62e86db7a325b9607d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/analyze_unified_history.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "analyze_unified_history.py",
+      "source_sha256": "0180ddd66b39dab0b4b6e51b196dbb6e157f55d3e5b71ec0908cdbb690d8b217",
+      "published_sha256": "d66a90650cb46422e1027eb311450fc128dd0855f9ca85de4426fb2dc05edb2f",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_budget_revision.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_budget_revision.py",
+      "source_sha256": "91f2d464a8f63cb8db507441e412ca312980df1b152904ade589e350173b2ea6",
+      "published_sha256": "3c346e4c4c571fe1e18002d33fa23aa92010bef3077dda18692153ab1641791a",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_increment_diagnostic.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_increment_diagnostic.py",
+      "source_sha256": "a7e67a7a4242ca063b7ccaebaadee9d6e05da2ef26d98a1c437930d034919059",
+      "published_sha256": "c50811b918af7c3a907abd728d73511436f72b1c9c9444ba121c417f4894123c",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_protected.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_protected.py",
+      "source_sha256": "5db1445751de2c899c887408435a41bef5dc558dc7aee9c46b70f52f99e53ebf",
+      "published_sha256": "85e9d6539bc25b182155028e6ad6fa7d8a4d1152cfb5d2cba7d51b1d67a6a8ea",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_protected_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_protected_final.py",
+      "source_sha256": "d06701bfd882a2f0a1866a38a57f7bf94575eac1d703f99383dfe12ce2229c76",
+      "published_sha256": "ccc342d5acae35f5574b18c37a88419a91b5be663560b24642426b3375007f68",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_quality.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_quality.py",
+      "source_sha256": "25a5656bfc847d8d02f22843b11a9d938e3a53064619b548ec8ccf26187e9bfc",
+      "published_sha256": "0b3f7b26401f68d7f2177436b87b4e0d2888a61d87f61b2a95d5f5884bf84c3d",
+      "adaptations": [
+        "LF publication text; original SHA retained",
+        "trim redundant terminal blank lines; AST unchanged"
+      ]
+    },
+    "research/external_controls/audit_abl_serving.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_serving.py",
+      "source_sha256": "27c0986f0effaf8856874d24718c897e4a514e754e2be1fc5d84af761a22a3f7",
+      "published_sha256": "21719f70713a5058f3c98587dbdfe536235edad346397671e8a4a9638d404512",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_stop_continuation.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_stop_continuation.py",
+      "source_sha256": "e430dd927ed177fa1ccd88ceec8abec178a1e0fb2e5d88ba999f9ed6f5124e81",
+      "published_sha256": "c70b95a819a88ed7ac8f9df710a36f6f03648b07a552d704570571716628de64",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_stop_rule.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_stop_rule.py",
+      "source_sha256": "0a1e0ae49c43d6d4e54101533270a8cd610708989e2ac95918023aea47cc724c",
+      "published_sha256": "a5385d728dc139d592a1745f6d389a062b44da7aa48a7a1e8305c0f2c364d55d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_training_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_training_final.py",
+      "source_sha256": "31ae164c5412fa46ea94a24bf45fcb010ed8f22282a8f163658a6b710816e9e4",
+      "published_sha256": "ecb9fc67934149ddacf7c7df8ebe58ae230f0bdb2f9c28a8fbd104d84194cee6",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_transfer.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_transfer.py",
+      "source_sha256": "e04d0b81f63ea3f7f61d06f3e9ff7947bef75996e28d42fcc426f75d27a2f166",
+      "published_sha256": "b2fb7f6e2164fa499a290cbc919255ff91243a8b5e1d026fb3b4228143d5ba70",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_abl_width.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_abl_width.py",
+      "source_sha256": "38ee81f9dabb0cd3c954812668e4e80c37e5c31a8df6223673ad25b7d1cfd042",
+      "published_sha256": "ff97f06dc4d7ff369b9d79bab11780c91f722b3ee2d2f102dea41b7e24c42afc",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_residual_gate.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_residual_gate.py",
+      "source_sha256": "4291153786f522d14d6fcbec26abafdfa52b5f22b06be7f9d9abb20871c9024d",
+      "published_sha256": "51a5b3a807ca7d161e9fe1645038fc52927d2bf5fca4f9df68ee5ccbe6e429c4",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/audit_saved_bank.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "audit_saved_bank.py",
+      "source_sha256": "49435aab2a50539a8303b33ab97df04ebd7a1ba14acbc5259e717ca0f5aa03c3",
+      "published_sha256": "5547f5755b34337117f89140fad55256c99169a5a1dcf87be57ed4e028e2fb6f",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_core.py",
+      "source_sha256": "b1557e5f1ccdb6d5688a67fdfd0857825bf0593f444dac667f99c6b2dc120fd7",
+      "published_sha256": "0304b9e196cd3402dddbae5b0cd10da765612e12900e091e4e1e9c03fbd42cb3",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_data.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_data.py",
+      "source_sha256": "63c69fb585d02e9ba7b197bce0a39e16ea109af6e9fb04c08fb2454bc5fc0b2d",
+      "published_sha256": "21640c1f2f4ab4e9ca05fed4d48e6c78287a06077d8507764f2834982d35b016",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_development_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_development_audit.py",
+      "source_sha256": "a590eeb6708829858a3d4c24199f944a7fe813f6ddf3c256a3d422afffb0d15f",
+      "published_sha256": "de8db0a0001c251571d39d788f2a2d7c72b2feadec89d4110980f4dd6f527639",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_final.py",
+      "source_sha256": "78cf87af6022dfd104674d9ca9527ce38e1a236d51b6e41e8aad6223f4bd399f",
+      "published_sha256": "60898c90eb11aa0a945853ea731469ab60f9ea9611a9e0c650072b13a326e8e0",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_raw/CAL500/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_raw/CAL500/source.json",
+      "source_sha256": "f664febb8b8740f706bf96d1f5407ccab17e6c8af085ecf92bd667b92ebdd78b",
+      "published_sha256": "3ad9904059dc82b8ff2a0c2981e00c8cea06e33b5262f20eab2b1f08939c2551",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_raw/corel5k/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_raw/corel5k/source.json",
+      "source_sha256": "e434e4dcb4e1c535e01409e57ab5aa6b33b9bad77213abbed616710d11ba0bf8",
+      "published_sha256": "20f549ac4919bdcf70d7faa53f57d345e68ea86f7c3ae31626f73af6a06d07b9",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_raw/delicious/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_raw/delicious/source.json",
+      "source_sha256": "ee3aad86eb220b1241f46ad7e5df6c60195ecc7573508abffcf3e829976aaf94",
+      "published_sha256": "5d90ba205e7a2603c3285800b55246214989e01be8e9594d440f476a3f36182d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_raw/enron/full_source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_raw/enron/full_source.json",
+      "source_sha256": "c73dc0c05e702190973bc0550571d5da11e775287facc158dafe1aa0157d5a71",
+      "published_sha256": "a278676592dcb44b469306f1a1f0b3bdb873053b7da02d1339ed0aeb50f4c772",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_raw/enron/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_raw/enron/source.json",
+      "source_sha256": "519f08c9d477fcf1f3343197b7c0543d2d56222dee7b8f900eb57ec77d15a7fb",
+      "published_sha256": "ad69f83cda0c0f94d65d083abeb36e16507821ebd975afb36b20020c970962c8",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/broad_training.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "broad_training.py",
+      "source_sha256": "97f227993ee26f1df591137a6b5a8e4adc74dd43795bd91e70daf6c66ba0e5a1",
+      "published_sha256": "63419ec6fa86ed862dae0248e1ab09f9e4fd62a38b93df0251bc27c8dc86bcae",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/direct_leaf_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "direct_leaf_core.py",
+      "source_sha256": "fa7e1916df30c3c4488afd4f11147647c287ab382eebc72db901f7161ee69d41",
+      "published_sha256": "a95c2a9e9a71a3b7c093b8ce6b4c136939dadda100dc66e508e792a83c513e7f",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/direct_leaf_gpu.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "direct_leaf_gpu.py",
+      "source_sha256": "b0569a02af06838106e78a359d4aaf6260be6a009d7caf53d5c3e74b1cc756b8",
+      "published_sha256": "603339266603c3147fb3835507dbed6918d80b215ab3d57bad0c4ee6195f0d72",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/direct_leaf_worker.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "direct_leaf_worker.py",
+      "source_sha256": "4025633d195bfbc11922db2cab8543bb5acf418586b6105344d9f692d4eaf3c5",
+      "published_sha256": "4da9fe82aff99a7545f5a45a1ec7fde41d2bb8647c8362e76e35836d06015608",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/direct_training.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "direct_training.py",
+      "source_sha256": "f4b6bd307ce0570609ca2dbadd43556b1499442e08460217dcca1ada95b79c69",
+      "published_sha256": "7ab0d1b5938fe776f6d0a83b4f202a40dbb22959ecaf56840b1f2e502540db99",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/docs/br0_protocol_0.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "docs/br0_protocol_0.md",
+      "source_sha256": "8e55f2e97a019c2439be62dc7767572e6e1b9716dc01f8502501d8979a1e651c",
+      "published_sha256": "7f70135b8d673cba076bd724bdb82888db139284eef08df5d89d85066172e908",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/docs/br0_protocol_1.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "docs/br0_protocol_1.md",
+      "source_sha256": "09edefd8f65ee5568e6748ed51afc2478531993b2a0992fba93429096a4ec036",
+      "published_sha256": "a3a7cb1b42b3f6e991510f5847686dc214581c095175a05531f8f65b3c5612e3",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/docs/br0_protocol_2.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "docs/br0_protocol_2.md",
+      "source_sha256": "014755c440e38c3d7555101338245ac5955b8668042cb26325d0496ed1b1b084",
+      "published_sha256": "be80a884294264a5f54c478882c2cd140545f5f96c481402ae78ca88ff4edd94",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/export_unified_metadata.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "export_unified_metadata.py",
+      "source_sha256": "ebda42316b1f07d8d8bf796c8e276bc604f4989a3260d11b83ba93ef85757fdf",
+      "published_sha256": "cc08462f5986e5cae8e4c9c1d1c0ac8ef1988b54174399730f733ac10f2df4e0",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/packed_preflight.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "packed_preflight.py",
+      "source_sha256": "14812db9ebd25ce166fbd0b89c036810d1edac06085353b368329c3cac1259bc",
+      "published_sha256": "d6a49ba769261f1096831052a8aa1b42f772851837b1a9950b51ea2bf4ce2b18",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/packed_serving_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "packed_serving_core.py",
+      "source_sha256": "46e048a2cb74e00069aed5b51099b0779de8cb94525922662fcf1129c8f55c8e",
+      "published_sha256": "14afdfbfe1b827821aff670ae7e1ee1eeea4553274f5ba247289e22667466f50",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/packed_serving_gpu.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "packed_serving_gpu.py",
+      "source_sha256": "60cf8453996134222ca296f2b0e8258203ea6b3ed7c33688375e35174e614885",
+      "published_sha256": "07d54b0ae9078a68ccc1c8f6bfcc5c0e73f85fbde0c888bc5a2bb58ae379c2c3",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/reserve_precision_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "reserve_precision_core.py",
+      "source_sha256": "020d8b2160879ad53c3430860b8c36b0678087c80f2731ad12ab2e0fd312cda7",
+      "published_sha256": "5651cca65d4f335473c7712686d33061c14155169a13bb57049805c5479f61cb",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/reserve_precision_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "reserve_precision_study.py",
+      "source_sha256": "428c4fab9b8489631eb86b2d0168600e0a42da8e154698f23a377c791b113df2",
+      "published_sha256": "c339259df72025c64c4e9a0fa875fd0ca464886c863a6f92554952b3facd3a90",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/residual_gate_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "residual_gate_core.py",
+      "source_sha256": "01d77507b9f1aab3187f344c87b5f3fba7de1b12e7ca1131cb811f92c5ced55c",
+      "published_sha256": "e12df6bf9c0dd119ce04c120fac2f534af76ec4b97310bdaf1a129fb421c7890",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/residual_gate_protocol.md": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "residual_gate_protocol.md",
+      "source_sha256": "346efbdf5e7f4ba1a76443f4127c18c0a52e127684b73af87b8bd52445266d8e",
+      "published_sha256": "df2884c5f4bb7811d279f1eba8044de823343c55cb6bed220014cc932b366d13",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/residual_gate_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "residual_gate_study.py",
+      "source_sha256": "26acf9776af8f8a3fd395f3e679af2c9775bbb96946aa01df4a17bdf9cbadff2",
+      "published_sha256": "e90368e1cb24863a6394ca1814718eeb3f546d7c5aec6cf2b05fa89605879900",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/saved_bank_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "saved_bank_core.py",
+      "source_sha256": "069cbc04189242786cf8c890ccb9fe0080e0dc085f4b47e23ed878b6954fb53a",
+      "published_sha256": "3840001fbde4a8fe5e60fccc064816dc599868bc9cc379b6c8885669134e83c2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/saved_bank_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "saved_bank_study.py",
+      "source_sha256": "454a27e9574a9cb28b276de36d9b95d64306206c41ba592fdad03d8fa5930ec4",
+      "published_sha256": "29f105a3d0828ab79494ffe762d7cb4314c6354732d8f0afc204f6655e19770d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_budget_revision.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_budget_revision.py",
+      "source_sha256": "4650914672cc8cb790f6dbee8ac70b0e5367d95add9233d8847c2062f0a95dcf",
+      "published_sha256": "778551e6c7f3b0803380e30fa5d41ad9deab446016811e9b04176d19700a0624",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_followup.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_followup.py",
+      "source_sha256": "3b7e7d88e7a76846ae6f7db7d4cfdb9c023a3b8cbd517e2d48446d0ec16ca4a9",
+      "published_sha256": "a84092c91e0568f9d41058ccbd7f763a6d8a82b8115645b892e9ea6d80d678f9",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_history_state_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_history_state_audit.py",
+      "source_sha256": "e78d6c536c2d154111ee38719859064ae5670453f1059ad8c011ca4d5317adcc",
+      "published_sha256": "bb43a9a7804f1df688ba6a031ad4efd29cc15b9366ee05071ef5eef6cc9f54a9",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_increment_diagnostic.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_increment_diagnostic.py",
+      "source_sha256": "6f45208b6a98cd508f153775ea99973bc26c9f65f2de3ca7e1788cd1e6ab307d",
+      "published_sha256": "c3aa20d7a16234203df3f5cd9c6ee26c26423dfbe52e0e07b1832aee848a6087",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_protected_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_protected_core.py",
+      "source_sha256": "b358271db2872305be59dceabd53b0832902c56b32b8ab51f4d94d99c18609ff",
+      "published_sha256": "f55d78a9aae156c551aae823e2dddbfb2048e2653313be88ec1395d50b77342a",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_protected_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_protected_final.py",
+      "source_sha256": "0569caf4a81ae7b9c4a353775c407934dc197209dec70aaa17bd096a0797e597",
+      "published_sha256": "3ef09c6115398dc0a3bef64b749364bc2d78248e0867e42ee8e1b3ca78aa1ce2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_protected_selection.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_protected_selection.py",
+      "source_sha256": "855c783a1d5cd436a579fb8501d065b05bd55234d0bf682c29c64107a9734bdc",
+      "published_sha256": "a4bb74bac8cb15fc0671e52589e4bd48540e463f7a56c170410cc36f8a9e21d4",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_quality_boundary.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_quality_boundary.py",
+      "source_sha256": "f6a3f2665e190f8020714be4d3c64fd9d4e56ad61f47794cb0e77aa1a5d219a1",
+      "published_sha256": "e6463a031b01f45dbb1519a017aa5f4644e573cf15a6c9105ce5476fd221b40d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_quality_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_quality_core.py",
+      "source_sha256": "baa9df37a9c3277dc6042fac7cb6df499714cb5c7a4532808c17188a397ffcd1",
+      "published_sha256": "8a473dc0dceb1cdd7a935af40121e04851b3e71c83352c5f80c64688375b8c12",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_quality_evaluation.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_quality_evaluation.py",
+      "source_sha256": "8df54ee2604d975770c17f688efa11b589beaabb55c80f1d15165b78a7acdee0",
+      "published_sha256": "854728fe1b0615f8e4a7ecb98aad65ec7a9d16fd27bbb78ca4f35e8f012f3a8b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_quality_properties.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_quality_properties.py",
+      "source_sha256": "7de03032df318c12977f50ac1441c1bf7fade35c6468f55306a07baba8ae0d2a",
+      "published_sha256": "bff7b74dd56fbc06da161978059371a6bd2472265e9eb9e7d278b9fd1c098e74",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_stability.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_stability.py",
+      "source_sha256": "87066356399df187f4c7fa32106ac68848cd13bc76059866958280c131609da4",
+      "published_sha256": "10879893baf4befeae4218f88c5847290449b4b3de1469696a158d46636c0dc9",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_stop_continuation.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_stop_continuation.py",
+      "source_sha256": "905334eb877b615f584a10e4991b14888a4d168f6fbb24c4773e5ed283aeb08e",
+      "published_sha256": "4c3f97dc246b0233544240e6e56b30e6b67a83b3d3be176eb564e6a0565c3380",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_stop_rule.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_stop_rule.py",
+      "source_sha256": "de27a5c0a082cde54680ee3c54a2570457413b1a95f960da7e83c46aa29813d3",
+      "published_sha256": "e802dfd677a080b8efd0a3321fc29a4c04a0fd7876652bba7681d5b7bc98a7aa",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_training.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_training.py",
+      "source_sha256": "a61fd64c2efb15c81f361f821908a6fb5a9078420e38382ce787ed980dfd3674",
+      "published_sha256": "58118a0a4290e8aca11c0be423ea2160a803e9f3b4f12add275c39f26b78ec1c",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_training_final.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_training_final.py",
+      "source_sha256": "ba5f1f879833abe6a2d893c34279a07dd19507ae2011ece997c582c33db6017c",
+      "published_sha256": "20aa0a1d1ac0bc96d20d0a7804eb784b15f50dffaed2882a56c110ff51479f9b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_training_selection.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_training_selection.py",
+      "source_sha256": "1641388db9f4d30df51edc89dd9b32adc176e9009889b4507a69db1bb627c25b",
+      "published_sha256": "00b672e71f42e34c48d6231e057366a22e074a974e787dba4f11e06b82a37220",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_training_shell.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_training_shell.py",
+      "source_sha256": "6a4edf12e7702fe27cba1bd458f927c4ab66d422540e65b3c7c605ca57f6dbb8",
+      "published_sha256": "8b50f873e1da2b255b5bffff346f27f364d4a76bd95a71f45abd2fc7161d425e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_width.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_width.py",
+      "source_sha256": "de3a488ebf2c3dfe92704ee2e89950a75e5fff1009345cd064d9ad51309e705e",
+      "published_sha256": "54e3f55209a5ab44442aa8b84b18214d30d48f4ecf961171856a72da7bc82f74",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_abl_width_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_abl_width_audit.py",
+      "source_sha256": "a0a01ccd85ce6b0665c49f5194d2cb90db202b1fdef58ef2f8d13a4aaac09d60",
+      "published_sha256": "5993c3f4ab597ae404f9159cf8d04eb280d90cf44fde42c4f607e8c93ae3b325",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_adaptive_basis_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_adaptive_basis_core.py",
+      "source_sha256": "81e478a1ccc1282770040eae21b5fa7877f6b05798328e1f3956c83ac88db340",
+      "published_sha256": "7174f4e98baeb549040b9fc6d41f467de2bcd08db22abfe2b078a5e7c19d7f74",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_adaptive_controller_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_adaptive_controller_core.py",
+      "source_sha256": "36a695f7beaf389aab9a0633bd553ec20dbf398e4d8688dd62357ac5128872c6",
+      "published_sha256": "da693f7bc608f12490b591a3db8153648e0edc52d866545e776944a017550f22",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_adaptive_data_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_adaptive_data_core.py",
+      "source_sha256": "1224d9282cd00807436cd000b8953d9ef81857565dbb96a19243c1461c97bbea",
+      "published_sha256": "f35c6af7552b3aa7f5fe0041b3c3cfe45c36c84af3ed4c10cdc84063cde1a198",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_broad_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_broad_core.py",
+      "source_sha256": "f988a62275e2a8dcf9cd77e9ef16fe666e7c5ffd10b1dda1c88857d0043e2f14",
+      "published_sha256": "3c84fd128f9f538b29b0ad74bd329809bad73930827ba6e4bef7018fff00b722",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_broad_final_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_broad_final_audit.py",
+      "source_sha256": "d5ac1af65855cddc98e158634de684fec0ede8391c3c7deb061ea5a77d8df754",
+      "published_sha256": "e0c96af9621d667e3c7e327fb355617fcf7be3530f0c0663509dc6a1aededbc5",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_broad_numerical_contracts.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_broad_numerical_contracts.py",
+      "source_sha256": "fcf17d827cfa2f23fb8e4a936cc158145367b97c37918c778c57001ffc3a114b",
+      "published_sha256": "cd3e85436c6e186d8efd94a86c812ea01796a24194b3f9c854c4a4b153a270c0",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_broad_workflow.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_broad_workflow.py",
+      "source_sha256": "6eebeca5830710eb52b85a0ff06252b3636e2da0e03126ab005f4bb8aecc0a3b",
+      "published_sha256": "ce57b8d5e11db6c6d11e9f58ca95a3c46642b1879efaa54e36280122910755f4",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_direct_leaf_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_direct_leaf_core.py",
+      "source_sha256": "25cb69ef41cd2acc06c43e6c1c9841ba1c69474b19f3a35ae56ede2a10955187",
+      "published_sha256": "b303ce96e2e273bbecd282b5a8c4b9e748b3bbeaa412f2df01582265ebd3565e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_packed_serving_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_packed_serving_core.py",
+      "source_sha256": "573cb3cab6b31b2368ad2c55e54c67244ba26bc5ac32af832990a48a0618aca0",
+      "published_sha256": "f1947de8fe112e8537d1665a6e57d5d6f03a9bdc303b8bbcabb0ae5cb3b5d6a9",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_reserve_precision_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_reserve_precision_core.py",
+      "source_sha256": "7f0b2cd7c9ef3b35ff79a03d2bac9b524ffbe46d991410b8b70fc0ad3d561b7c",
+      "published_sha256": "63b2b2077ea5fd5eae434839424cafb024317a564c1aaafcd5ce793c18fca42a",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_residual_gate_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_residual_gate_core.py",
+      "source_sha256": "7ce16f402bbfd8bdae4a856d645491999343509b1e7d7ff816122664140643a0",
+      "published_sha256": "1cdf6f0c600f12068bba6b1b35ab4160f21835170acc316316e7a8ea48c2867d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_saved_bank_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_saved_bank_core.py",
+      "source_sha256": "3f10bbcdeedf8537dd8fd929826a3a8f00244082066905d1cdbe04507e46c874",
+      "published_sha256": "e2dc58db79592822ef0b55930eaa7cc11c1672cf074dedcb94625cf648970499",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_two_direction_analysis.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_two_direction_analysis.py",
+      "source_sha256": "f7743487ada385934fc3961dc3a180b746f103966f017eb6c068bb61c49129e1",
+      "published_sha256": "950f0e85b296d11aa5566ed071e709d50c8fea0fa99364ef716a028564c77fca",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_allocation_replay.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_allocation_replay.py",
+      "source_sha256": "972171d0f843323bdaed2c9965fc3d96394c1cbc6bae8cd7e344aef54dd17bf2",
+      "published_sha256": "10c2ee40d670d4b9df5b2b9450e1c1e1e5b744aed1c87eaac072926560ee311e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_data_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_data_core.py",
+      "source_sha256": "6c340530b1ad7b8508d99a52a39ddd89d377da804d097804ec55fc7c65a0684a",
+      "published_sha256": "8e21a89501c8f1513c992b08866fcfa8c0e50de35f9ce3133d80dac6f39587bc",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_deep_coarsening.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_deep_coarsening.py",
+      "source_sha256": "8901d3eee96df6331a888edba1f4104182af866207b4c0f8e562c7ad3d5bec6f",
+      "published_sha256": "13eaa0f8503d7fc668621cbee99ad92c4e59527c4215a4568634a1fcbe76bc5b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_evaluation_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_evaluation_audit.py",
+      "source_sha256": "f25bdfabd37bde2fcd9d9b5aa55a58f9fa4493f6176202e068410ef30e80a8ed",
+      "published_sha256": "b86617a9d8f2ab40eeb5f1d027eeec427d981f4ba727781ce5f6ff16a484bb6b",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_external_imports.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_external_imports.py",
+      "source_sha256": "35d66a43c7257a931f3f169238bca8d460cf787877610ec0ac4bcbc870a9e47f",
+      "published_sha256": "fd3eb4edc9e001ee6a0ae4d10d4ff335dc1a0f105ca3e4233224316f5de40c52",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_final_boundary.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_final_boundary.py",
+      "source_sha256": "e7f9d07fd9abd99a2002a2c501046a9608f94501150d4e7e7a48947dcd17d7da",
+      "published_sha256": "adb002734c543a16e6d263d7c7ee40b9875d959c07a7cb7fde4324d3c6c6cb8e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_frontier_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_frontier_core.py",
+      "source_sha256": "7c7494ca8a1cfd4a34e079b2e56318f09afb97b98f3eac30f00f268c464d2885",
+      "published_sha256": "6b17f66e9364a5a4af2dacba8829d7b69f790806f26a2445cdff2900843ad5bf",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_gpu_ownership.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_gpu_ownership.py",
+      "source_sha256": "353d8d820e459d640c656906b7d99ef4d752275807975dd6197649cec5dae589",
+      "published_sha256": "ae096114f55b82fea1a04fe2d90a52bb505f9b4200553263869f18cde76a1349",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_history_boundary.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_history_boundary.py",
+      "source_sha256": "51e95635c5a49bd143922a59096f381c7e350f7217f9dc61e0420b126babfd96",
+      "published_sha256": "da80189346adf8770a0af29602a4a40baae535145e603327307ecb49d3ea71a7",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_history_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_history_core.py",
+      "source_sha256": "7f9e4df8fefbc0c4986402e7efa1453c6a919110a2c910e4f7fe35143b36610f",
+      "published_sha256": "c493a276c2370740294c355485d6a3a058fce509cc1956b240bbf9406dda7f7d",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_history_diagnostic_boundary.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_history_diagnostic_boundary.py",
+      "source_sha256": "2c986f7df33494a161b5e58040bed2b1403cb070614bdb8599c9fe256f0f88bb",
+      "published_sha256": "022fe625f504769429b1b62070ca8bc5dcf689788a0629cbd02a19a56ababa20",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_meta_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_meta_core.py",
+      "source_sha256": "81c3b316286a0e0a34d9752077675722f23867a4fbead2e0c826095f3889905b",
+      "published_sha256": "261b962ec25c70f2843091ad708207c014447e86833a86cedb7a9a94eb58e9dc",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_product_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_product_core.py",
+      "source_sha256": "22f40a4c11e3ba3c12f9af507407c58c60e752dce017a349748ebbf0b9d33aab",
+      "published_sha256": "e893a0586767f6f86d73c6b535b2cab1f6698d6b585cbc7b5d908807f0392803",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_pruning_cache.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_pruning_cache.py",
+      "source_sha256": "4e22a410f6247b34c34e55b4d56a409124dbc6f0773a030856fddc789eb76bd9",
+      "published_sha256": "4813bc11b27ec389ac9320b514df36a74c34ae4d83c7b98fe418c3776febfe91",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_serving_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_serving_core.py",
+      "source_sha256": "6c4a54824c8ca4ceb6ec646e32d48b2ba9bdee7e457607858dadb048b3916705",
+      "published_sha256": "3834b790eaa7f1e2424bebbd76b590ec6a5c432bedb656a3a6814b4647a378f8",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_short_controls.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_short_controls.py",
+      "source_sha256": "fa0ac9dc97c4b5dc17395aca640a0c6bd79934a79fb1eef0c80c2ebc48caf5b2",
+      "published_sha256": "4440f0d9d332f53352756aa138bc9fa12e991d9896f2dacd48c95ff81cba111c",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_training_boundary.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_training_boundary.py",
+      "source_sha256": "c8302dec57c93c0f3f1e51538fbd9e34aca7c8ff5306f05b7398f17fca52325d",
+      "published_sha256": "3de00272309581118dad269da5871cf099b5c9e6594b6fdbabb0bfafc74e5fb1",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_training_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_training_core.py",
+      "source_sha256": "dae629918af88409aa5edea17effefd21fd76bfb16141bdfab71f14d9b7084a6",
+      "published_sha256": "e6fd409037cf0ae02835c41f6d49a8947d477e1ceb71a0ed8074fcdca240a0bd",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_unified_transfer_data.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_unified_transfer_data.py",
+      "source_sha256": "0dc7db847d65f98dc650da30ab498a241a2c3914a64e8496a498266cf517c7e4",
+      "published_sha256": "2ab6b5e17895bb47ebf0b588e89c63421626ca95a6ca6bd5e92ac2925918021d",
+      "adaptations": [
+        "LF publication text; original SHA retained",
+        "explicit skip of the original GenBase data integration check when non-distributed ARFF/XML is absent"
+      ]
+    },
+    "research/external_controls/tests/test_wide_banks.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_wide_banks.py",
+      "source_sha256": "b0190d067a2bdf9f581633c783e84ffa56f867dfed1e7bb12f5cb34eb699981e",
+      "published_sha256": "b976ee972bc7e207b8216ad89592f9eb20fd5dd42a33b453aa29db07f07fcf2e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_window_reserve_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_window_reserve_core.py",
+      "source_sha256": "1c0eba720ad78ebe3470772060f49b1c04df56d0570cb6053d48382534a53abb",
+      "published_sha256": "139a7ba8873e523ff7e34d2d772daf6e5e71c67299ff1ae4a6cc63b2a926b825",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/tests/test_window_reserve_deployment.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "tests/test_window_reserve_deployment.py",
+      "source_sha256": "f4359519c0b4baff3dfb716fd1bdf2feb53b9ccd3eed933f1195714e9284e4f2",
+      "published_sha256": "a569361ebd44aeaeddad64965cd3e9f45ddaac99cad92cbf75ac30dd788fb699",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/two_direction_analysis.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "two_direction_analysis.py",
+      "source_sha256": "ebfcc57bf7ac4eccbfd4c816ea1213e0923322c7de4c5eda419e3f0d9f8f96cb",
+      "published_sha256": "00c3f1e8d21668c190184f9ada859b21047f1ef154baa15e72b0091c8edba3be",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/two_direction_figs/orx_figstyle.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "two_direction_figs/orx_figstyle.py",
+      "source_sha256": "7a4b9fcd62ac14728998c590ba08da395333d3e210c9fec0cf7119d741d44e75",
+      "published_sha256": "9372d4ebbc32c9fdbb364adf76fdcf2b0708a4c50490fc639f06c9af360a61d9",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/two_direction_figs/plot_results.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "two_direction_figs/plot_results.py",
+      "source_sha256": "38736049032e7f773e8fc1e257944685660e81f3172180279c9c15e0542a633d",
+      "published_sha256": "fb4a27ea055cebb832f60d957749e4771e3c8c87996bc5b34f5b5335daef8028",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_calibration_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_calibration_core.py",
+      "source_sha256": "1fcacf08a68223c6093956babc511df3a5dc5be5dd528e164fa0f30f8c9ac67e",
+      "published_sha256": "4dae90d768cf374f1562300dd5b237055220cdaee51e03b1225eca3f2f2b9a5f",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_data_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_data_core.py",
+      "source_sha256": "58f13b636c9dea3a050882829fa2603fcc969074d32e7668749615a5310a8424",
+      "published_sha256": "7f350cc300dcdfe3752fa86df6023f9ca77ba859558da310bf124eef1235c7a7",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_evaluation_audit.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_evaluation_audit.py",
+      "source_sha256": "56e28ef00bea69d0587c06a2f5dd4ee0ce640482f05e30c04fcca952118780d8",
+      "published_sha256": "eb60c3c4022dffee54904c4419b4cf95c86f82e0eb7236ad666a04e66997c1e2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_external_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_external_core.py",
+      "source_sha256": "8f470315f8db47a61a669ceb9c16594f861c6dc55ef0efb0f05a8fb207e21a1a",
+      "published_sha256": "41f984d0673ac17396fc5020ec8205981d3a4db32fb365a9533f40fea61c7ebc",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_external_serving.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_external_serving.py",
+      "source_sha256": "d111e7d7a9c73669678dbd112a485c3166f372b0e99f25929d639de08f7d284b",
+      "published_sha256": "00b2817362b6248515515bc865474ed110f03d21cf6560393c71f39b9a055392",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_final_evaluation.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_final_evaluation.py",
+      "source_sha256": "68677aac5a52b1122275787691d449f582cb2d4aa6308f1583629000b0854d65",
+      "published_sha256": "3996ec2b0fd519a605af5855910d786b658f27f4a86e77ead24daf30adde31b0",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_frontier_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_frontier_core.py",
+      "source_sha256": "a831fa42ce119bfd4c848c26a63e9339d5c5b92347d07bb5459610d1aa031c83",
+      "published_sha256": "43e1210faac32a528cd1203e8d003d0b13b0642503bf03ab087c5a67a0606c7f",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_gpu_ownership.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_gpu_ownership.py",
+      "source_sha256": "4632cdc7d2412a19fec9dc8b4946d285064f4c6d705fe3f329264db325132fbf",
+      "published_sha256": "b7e37f280e456225390782b796ef95119301dc8e60409615ff17052fa67831d3",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_history_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_history_core.py",
+      "source_sha256": "65b5c05f3cf11a52e3bdb2537bb2b541b11846653e48b087f48af4a51c516342",
+      "published_sha256": "fe86db565b9330d88707697398ed5b503619ce0bfe063895d317b46b4f9e6bb2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_history_diagnostic.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_history_diagnostic.py",
+      "source_sha256": "8edade45f662b16fe0ec33575faee193f548a527ace23ed24f1efaca3572024f",
+      "published_sha256": "8d283bca9f055971ddac8cb4961f11daee7381daaea5e9a27638358e81de03f5",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_history_training.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_history_training.py",
+      "source_sha256": "a3c016a5a57788337b0f59352b606ccaea40fab21d284b5bc0a60a206ba070fa",
+      "published_sha256": "05caacc86b126098d9f2fd1a6bd0c71f44b9841888aa6133725faf186aebcf5c",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_meta_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_meta_core.py",
+      "source_sha256": "2cfd63ddce05147f25b06c3303f18d7656f1ff0384133288cde1af7fe0783390",
+      "published_sha256": "dda7760defdfde5a870e6530ad8efe985e2c082b8f10596d88dc3ef2b85dd3f2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_product_extensions.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_product_extensions.py",
+      "source_sha256": "f83bb1836e50f84c6dd6e47439cf421afb3338a9cdeae12c189460174d3a59ff",
+      "published_sha256": "447655cf02dc98f7105b2cb98db5dfbd3e57a9dad8a8f272774ecd7d0d4d37a7",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_raw_genbase/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_raw_genbase/source.json",
+      "source_sha256": "428cef1fdcbaf15c9451b5602b47309e90b28ad7454bb0f97ba6adf1ab2ac356",
+      "published_sha256": "0d4f7c102fbfbc1f82d4058d22613b50be9c9916575a27bbbf57cd2d8e60c880",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_recalibration.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_recalibration.py",
+      "source_sha256": "6bf995a3e69c5577635f490e84473243d143f01e46f6f9b7e008eaa026a48bf6",
+      "published_sha256": "47a5c8ab64cfb5e7580d22067afb92eaea27736df2e3e6644cc6ce3143b26346",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_serving.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_serving.py",
+      "source_sha256": "8f3da0fe789d58956095a018826b8b32a37225600ed5737a8980854b4c51a81f",
+      "published_sha256": "ee940102951e2ba696ddd7bf4d7bb944e04da5e2aaf1c201c2b2644ea476f527",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_serving_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_serving_core.py",
+      "source_sha256": "f22cf239e6275e100d30e018ae41e7eb0a46858daedd844dcba6a99d0abe04c2",
+      "published_sha256": "d37fc9259470d0943b778f7075473028291544e13f9923f6be6fe20549f69d51",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_serving_gpu.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_serving_gpu.py",
+      "source_sha256": "990d7ffb3576c495fb34a14c2015b29831f22e345135eba677f96515fd4386cd",
+      "published_sha256": "4ec910261ea4140e02bfe2467b58d184d1cb3e437a326415fda76f8e100f5c1c",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_training.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_training.py",
+      "source_sha256": "0dafb8aa253c1b4417cce782892b57dca88aa4439939676911e40d1d2f2725e3",
+      "published_sha256": "e1be41bb2816e621560a15c63921123da1241594d2596a2205f6ddac808438e0",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_training_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_training_core.py",
+      "source_sha256": "2dfae78c7ef228d9a6baa042f5910898ced908c6afbead345cf2b4632b155085",
+      "published_sha256": "54291eb9f1f00cc9b73f17f286b90455888c45f42782096b6bfd53a4cadcebde",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/unified_transfer_data.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "unified_transfer_data.py",
+      "source_sha256": "dfab6f4afd5bda1a796983e95eb843e48a553e5b102b7026bd2844ca3f0b3d9a",
+      "published_sha256": "8a6254b2254c06e028ee3369026f034d083afc3c1387d81dfc3181d35aa547b2",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/wide_bank_probe.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "wide_bank_probe.py",
+      "source_sha256": "6b96d7be4f3adf70199dd53be7cafa9434dfdc43347f17f982dc08e33cea20d4",
+      "published_sha256": "f8dc1542c8a1d34d60a70ecdf614b6fdaaaee94780ecdd2c26104cbe69614cbe",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/wide_probe.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "wide_probe.py",
+      "source_sha256": "293005c1e706999fc345f4b8499e9e8e8c0e39f58ef637ebfc9699fbe5f503e4",
+      "published_sha256": "f4a89694fe8a000776a0ac69cf086aebba73ee45b3c157a25307117ed8a7da6e",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/wide_serving.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "wide_serving.py",
+      "source_sha256": "5d5bece13d1abeec4a07ca76a81a36b436343098d38485a301ac1053fe5c7687",
+      "published_sha256": "d9efe1f527e44091d3879c95e7cc33cca8666683ce9e7e19a70f2a01762127dd",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/window_reserve_core.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "window_reserve_core.py",
+      "source_sha256": "02bd99790a6f95e8087c673120ca20fa78f357a12bea47f03ff3f44ed340da24",
+      "published_sha256": "5510337383b0dcabcc35ebfc4e6f584b827aacc5c5ac91c02678ed437180fd46",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/window_reserve_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "d339851c2ab943a967dd3123ce64460fb85e8baf",
+      "source_path": "window_reserve_study.py",
+      "source_sha256": "3e9a05e60ae72f1c86243f823581f3f075ea43b9351797bbd7f70b98f41db5fe",
+      "published_sha256": "2ee656de92403a39a5027c26a6d3a392520c2a9bae607981d3ea6d85e17319dc",
+      "adaptations": [
+        "LF publication text; original SHA retained"
+      ]
+    },
+    "research/external_controls/native_inference_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
+      "source_path": "native_inference_study.py",
+      "source_sha256": "bef72af2c79ceb3bacf8e27146117fc75a122739a2facee044468043ffda1dc5",
+      "published_sha256": "bef72af2c79ceb3bacf8e27146117fc75a122739a2facee044468043ffda1dc5",
+      "adaptations": []
+    },
+    "research/external_controls/native_pyboost_adapter.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
+      "source_path": "native_pyboost_adapter.py",
+      "source_sha256": "aab2abc9e99b5a2e6ee9b5ec7168eb06cccfd879f1fcaf7da56b1be49fb37d85",
+      "published_sha256": "aab2abc9e99b5a2e6ee9b5ec7168eb06cccfd879f1fcaf7da56b1be49fb37d85",
+      "adaptations": []
+    },
+    "research/external_controls/native_measurement_summary.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "289eeae760cc62ae4e91e67ea864a65999302e3b",
+      "source_path": "native_measurement_summary.py",
+      "source_sha256": "86f3d8ec3b778bf384ceb3febce9fb488c4a6f95a03827cc9dd0d37451cd961d",
+      "published_sha256": "86f3d8ec3b778bf384ceb3febce9fb488c4a6f95a03827cc9dd0d37451cd961d",
+      "adaptations": []
+    },
+    "research/external_controls/original_pyboost/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
+      "source_path": "original_pyboost/source.json",
+      "source_sha256": "84be06282e444ceef807afdd0306c5d75009fce8c81482753c8c1ca5753adff9",
+      "published_sha256": "84be06282e444ceef807afdd0306c5d75009fce8c81482753c8c1ca5753adff9",
       "adaptations": []
     }
   }
