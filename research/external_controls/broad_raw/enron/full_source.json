@@ -1,0 +1,14 @@
+{
+  "url": "https://www.uco.es/grupos/kdis/MLLResources/ucobigfiles/Datasets/Full/Enron_Mulan.zip",
+  "archive_sha256": "af3f5387045c172e7c82c869dc48237aebbf4fc898269fe50430a54e3d874e06",
+  "files": [
+    {
+      "name": "Enron.arff",
+      "sha256": "c36dfd2c74be2b977b29bb883f7e3e17c250c2026ef19ea9f8511619871a9a46"
+    },
+    {
+      "name": "Enron.xml",
+      "sha256": "8e4691bd52314d3689944f6a23bc2d23fddc2908844bf089a89cb81c05941ffa"
+    }
+  ]
+}

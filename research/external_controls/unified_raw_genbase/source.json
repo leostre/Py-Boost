@@ -1,0 +1,15 @@
+{
+  "url": "https://downloads.sourceforge.net/project/mulan/datasets/genbase.rar",
+  "source_page": "https://mulan.sourceforge.net/datasets-mlc.html",
+  "archive_sha256": "e325d4a711a18ee486670c385de90a59e757d0d2f53d42bae96abff79e88188e",
+  "members": {
+    "genbase.arff": {
+      "bytes": 3240153,
+      "sha256": "6dc772b94eac079eb9d6d6009915a1062612ced1cb5ed77004ae758737aec7fe"
+    },
+    "genbase.xml": {
+      "bytes": 992,
+      "sha256": "198e8a1d7070e9603119e02e626cedc589db7577339b307b06f5192047b69eb9"
+    }
+  }
+}

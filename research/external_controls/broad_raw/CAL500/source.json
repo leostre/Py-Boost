@@ -1,0 +1,14 @@
+{
+  "url": "https://www.uco.es/grupos/kdis/MLLResources/ucobigfiles/Datasets/Original/CAL500.zip",
+  "archive_sha256": "f746be8051bb994d31112fa42cbb2d0f8308b3d17fe89d2f11b04e9e7d2c95a8",
+  "files": [
+    {
+      "name": "CAL500.arff",
+      "sha256": "cfe6097ba5fd6e8584e54911ab9783dcab34e898446b7c9370c71d477eae56d3"
+    },
+    {
+      "name": "CAL500.xml",
+      "sha256": "d39a693b6029e97f2e93b8bc480a45b06e06545e2fd88fc5ca7467a1b6f04bca"
+    }
+  ]
+}

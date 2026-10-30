@@ -1,0 +1,22 @@
+{
+  "url": "https://www.uco.es/grupos/kdis/MLLResources/ucobigfiles/Datasets/Original/Corel5k.zip",
+  "archive_sha256": "a9bb32d26875dfb6109669beb4c78aeefdfd076091fbf984c5b5032bf151c8c2",
+  "files": [
+    {
+      "name": "Corel5k.arff",
+      "sha256": "1c1a6055ca5dda024c8e88a00c68710b9f0acd54a0c1df7f2406ee2ea56565dd"
+    },
+    {
+      "name": "Corel5k.xml",
+      "sha256": "54ef6a6ccb7ca9b77524052b34b306d5d501661a5609b9d1cc7085b2b597679d"
+    },
+    {
+      "name": "Corel5k-test.arff",
+      "sha256": "1907f52eb64cac755e24265990c6674ca209ebd868a967d9d0a36ef42e888cac"
+    },
+    {
+      "name": "Corel5k-train.arff",
+      "sha256": "d285b9e44171c3e760a7cb7fbceb68d7212fe6d0ffe3cd249f0e03cc55fe0b39"
+    }
+  ]
+}
