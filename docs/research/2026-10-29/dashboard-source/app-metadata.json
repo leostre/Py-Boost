@@ -1,0 +1,13 @@
+{
+  "surface": "dashboard",
+  "title": "HASBoost · результаты экспериментов",
+  "status": "reviewed",
+  "buildStatus": "complete",
+  "generatedAt": "2026-10-29T22:36:00+03:00",
+  "filters": [],
+  "id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
+  "exportPreferences": {
+    "selected": null,
+    "destinations": []
+  }
+}

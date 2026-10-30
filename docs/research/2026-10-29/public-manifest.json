@@ -1,12 +1,52 @@
 {
   "files": [
     {
+      "path": "checks/interactive-analytics.log",
+      "sha256": "173202f4c70c64fb1b174e74f6e60f4a07fcd164b2d87d4f554cddde286ee710"
+    },
+    {
+      "path": "checks/interactive-dashboard.json",
+      "sha256": "8069e54666cd6053689ac7d4343208fbe9e6a1de7c7430dcfc0b0a0478dbc69a"
+    },
+    {
       "path": "checks/publication-cpu.log",
       "sha256": "e2fb72297217f92edcaa60fc216bfa8278fbe78e99593302038dfc1d40411a8b"
     },
     {
+      "path": "dashboard-source/app-metadata.json",
+      "sha256": "da518165dfb29c3ede7ac871b8327b3b32d5e76b58084ee7759b6afac4c9cbed"
+    },
+    {
+      "path": "dashboard-source/content/dashboard/analytics.js",
+      "sha256": "f6af17df431e1d081c5e7f2e6c6055591cf0a6e95caa032f296e2bcafb4bfa56"
+    },
+    {
+      "path": "dashboard-source/content/dashboard/analytics.test.mjs",
+      "sha256": "458acd5a781100fdec8e186f0f2af9e434967ac68d399d46a81ceac2108b9ed9"
+    },
+    {
+      "path": "dashboard-source/content/dashboard/DashboardContent.jsx",
+      "sha256": "e7382cbb83b0496b67ae12a59587be76f8ff1cd0f40744803df4a1fe94336159"
+    },
+    {
+      "path": "dashboard-source/content/dashboard/hasboost.css",
+      "sha256": "52e34f57edc57827da3cd22f5675e33ebfc50337470234e90b44f972f6e4e24a"
+    },
+    {
+      "path": "dashboard-source/make_dashboard_snapshot.py",
+      "sha256": "d8148524af7817c4f5ff074eb8e5f029227365938a38892e9f88dfd4369e120c"
+    },
+    {
+      "path": "dashboard-source/README.md",
+      "sha256": "a7ed162ccae736781a68053a69a82f718109d629471e4de22d073d3a86469227"
+    },
+    {
       "path": "data/all_quality_points.csv",
       "sha256": "87b733b92a73625e853cf2d0a30c085c644412c25eb4b1d6b7965f474010ffba"
+    },
+    {
+      "path": "data/bank_choices.csv",
+      "sha256": "d7ddbc40a4da0ea0b8cc4ae494ced273d1dac00cda3df1baa942e4056d1b9da5"
     },
     {
       "path": "data/bank_summary.csv",
@@ -145,6 +185,10 @@
       "sha256": "de3718151cfd27704e60dd511429d0b7e54fe17689f3358e3665ac0c41fad654"
     },
     {
+      "path": "figures/hasboost-interactive-preview.png",
+      "sha256": "4a134dd419cbe29b03238f7527ba2c339068bf485d133dbdf0a25ea78b2d1afb"
+    },
+    {
       "path": "figures/hasboost-results-infographic-v1.png",
       "sha256": "7d1b8982a038f597aa7069be9f0ac1b0d3b23ecd77d72cad52bc9d027f484b78"
     },
@@ -161,6 +205,10 @@
       "sha256": "535931173244f52bdc67b99f8a60ffc4a73849ffcbf71d425584b81c49ca356d"
     },
     {
+      "path": "hasboost-results-interactive.html",
+      "sha256": "096317988fcd877b7bdfa2d46439f9fa10f3bed072e76e0d0405c3c82d8a4230"
+    },
+    {
       "path": "inference_pairs.json",
       "sha256": "7cd01342863da88d6bc52fe1d34d35f60aeab3d20fe9aa71eedfaa386eac4a1a"
     },
@@ -170,7 +218,7 @@
     },
     {
       "path": "provenance.json",
-      "sha256": "abc62e9c5a92b0bfa8505665f25353fdfad01977f2f82b5e0be1e09c23c23d9a"
+      "sha256": "2b3aef06b8a1981cc54a6576bc9198e4a39b53588bb1efc760bc467558aa6cc0"
     },
     {
       "path": "publication-verification.json",
@@ -182,7 +230,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "c787aebfc08f717420f259065c79872c086504fa7fe25b6287426182ebc478d6"
+      "sha256": "c5f45ba27a33be9f78c420621cff411ef417e1d3cbe9d44afcb870e6b6c2e0f8"
     },
     {
       "path": "review.md",
