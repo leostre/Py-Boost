@@ -56,8 +56,8 @@
   },
   "interactive_dashboard": {
     "file": "hasboost-results-interactive.html",
-    "sha256": "096317988fcd877b7bdfa2d46439f9fa10f3bed072e76e0d0405c3c82d8a4230",
-    "snapshot_sha256": "18c5f8ab16b79cf2150542c4289c10d58585c175e8a8271df687bd2f530d9a06",
+    "sha256": "2d93aa3e7f0bda5991f49c877368cd1bd757e6b72bb2374c0e7998978fdd894e",
+    "snapshot_sha256": "10ba6765ca63b4ebdfd00a71922d86b513cc03921e098ef9f8ad1a1bb6602edc",
     "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
     "basis": "Published result tables and the same sealed bank choices; no new model fitting or GPU runs.",
     "bank_choices": {
@@ -94,6 +94,20 @@
     },
     "build": "Canonical prebuilt Data runtime; compiled and integrity-verified under WSL Ubuntu / Node 24.19.0 because native Windows rejects its own path separators. Protected runtime unchanged.",
     "node_linux_archive_sha256": "14b342e71204f811bde6153be8e04b62aef63c236fef92b55f9c83154b409647",
-    "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51"
+    "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
+    "explanatory_revision": {
+      "date": "2026-10-30",
+      "source_code_commit": "058f4cfdd85f6688949ab7e5f4b49aa8934d6ace",
+      "mechanism_catalog_sha256": "53f17532b843a34edb6a013bc2a0ab8730b3477d42ce7afe30511f51cafd12bd",
+      "original_reviewed_queries_unchanged": 9,
+      "methods": 7,
+      "executors": 2,
+      "scope": "Authoring diagrams and explicit baseline/UID joins only. No new fit or GPU timings. Legacy is an already optimized block executor; packed fuses all blocks and controls.",
+      "previous_export": {
+        "file": "hasboost-results-interactive.html",
+        "sha256": "096317988fcd877b7bdfa2d46439f9fa10f3bed072e76e0d0405c3c82d8a4230",
+        "snapshot_sha256": "18c5f8ab16b79cf2150542c4289c10d58585c175e8a8271df687bd2f530d9a06"
+      }
+    }
   }
 }

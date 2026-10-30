@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {DATASETS,FAMILIES,pairModels,summarizePairs,selectedCurves,mean,median} from './analytics.js';
+import {DATASETS,FAMILIES,pairModels,summarizePairs,selectedCurves,mean,median,sameFunctionExample,representationTimes} from './analytics.js';
 const snapshot=JSON.parse(await readFile(new URL('../../data.json',import.meta.url),'utf8'));
 const q=snapshot.queries,selected=q.selected_quality.rows;
 const near=(a,b,eps=1e-9)=>assert.ok(Math.abs(a-b)<eps,`${a} != ${b}`);
@@ -51,4 +51,24 @@ test('resident bank per-task bytes and F1 reconcile to measured aggregate',()=>{
 });
 test('constant diagnostic deltas use the full-minus-constant orientation',()=>{
   for(const r of q.constant_diagnostics.rows){near(r.delta_full_pp,100*(r.full200_f1-r.f1_macro));near(r.delta_ordinary100_pp,100*(r.ordinary100_f1-r.f1_macro));}
+});
+test('the executor example compares one UID and the same recorded session',()=>{
+  const pairs=q.executor_pairs.rows.filter(r=>r.batch===1024&&r.roles.includes('direct_ABL200'));
+  const example=sameFunctionExample(pairs,q.inference_summary.rows);assert.ok(example);
+  near(example.ratio,pairs[0].request_session_ratios[0]);
+  assert.equal(example.uid,pairs[0].uid);
+  assert.equal(sameFunctionExample(pairs,[]),null);
+});
+test('representation baseline is explicit, packed and paired by case/batch',()=>{
+  for(const reference of ['full200','ordinary70']){
+    const joined=representationTimes(q.representation_comparison.rows,q.inference_summary.rows,reference);
+    assert.equal(joined.length,336);assert.ok(joined.every(r=>r.uid_B&&r.request_p95_A>0&&r.request_p95_B>0));
+    for(const r of joined){
+      const b=q.inference_summary.rows.find(t=>t.case===r.case&&t.batch===r.batch&&t.backend==='packed'&&t.roles.includes(reference));
+      assert.equal(r.uid_B,b.uid);assert.equal(r.request_p95_B,b.request_p95_ms);
+      near(r.speed,reference==='full200'?r.request_vs_full_speedup:r.request_vs_small_ordinary_speedup);
+      near(r.speed,r.request_p95_B/r.request_p95_A);
+    }
+  }
+  assert.ok(representationTimes(q.representation_comparison.rows,[],'full200').every(r=>r.uid_B===null));
 });

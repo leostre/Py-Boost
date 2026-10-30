@@ -28,6 +28,28 @@ export function summarizePairs(pairs) {
 export function selectedCurves(rows,metric) {
   return Object.values(groupBy(rows,r=>`${r.family}|${r.ratio}`)).map(rs=>{const vs=rs.filter(r=>valid(r,metric)).map(r=>r[metric]);return {family:LABELS[rs[0].family],ratio:rs[0].ratio,value:mean(vs),min:vs.length?Math.min(...vs):null,max:vs.length?Math.max(...vs):null,splits:vs.length};});
 }
+export function sameFunctionExample(pairs,timings) {
+  for(const pair of pairs){
+    const rows=timings.filter(r=>r.case===pair.case&&r.uid===pair.uid&&r.batch===pair.batch);
+    const legacy=rows.find(r=>r.backend==='legacy'),packed=rows.find(r=>r.backend==='packed');
+    const legacyMs=legacy?.request_session_p95_ms?.[0],packedMs=packed?.request_session_p95_ms?.[0];
+    if(finite(legacyMs)&&finite(packedMs)&&packedMs>0)return {dataset:pair.case.replace(/_\d+$/,''),uid:pair.uid,legacyMs,packedMs,ratio:legacyMs/packedMs};
+  }
+  return null;
+}
+export function representationTimes(rows,timings,referenceRole) {
+  const full=referenceRole==='full200';
+  return rows.map(r=>{
+    const scoped=timings.filter(t=>t.case===r.case&&t.batch===r.batch&&t.backend==='packed');
+    const a=scoped.find(t=>t.uid===r.uid),b=scoped.find(t=>(t.roles??[]).includes(referenceRole));
+    return {...r,name:r.case,speed:full?r.request_vs_full_speedup:r.request_vs_small_ordinary_speedup,
+      gpu_speed:full?r.gpu_vs_full_speedup:r.gpu_vs_small_ordinary_speedup,
+      delta:full?r.test_delta_full_pp:r.test_delta_ordinary70_pp,
+      memory:full?r.model_bytes_ratio_full:r.model_bytes_ratio_ordinary70,
+      request_p95_A:a?.request_p95_ms??null,request_p95_B:b?.request_p95_ms??null,
+      gpu_p50_A:a?.gpu_p50_ms??null,gpu_p50_B:b?.gpu_p50_ms??null,uid_B:b?.uid??null,reference_role:referenceRole};
+  });
+}
 export function exportCSV(rows,filename) {
   if(!rows.length)return;
   const keys=Object.keys(rows[0]).filter(k=>!['A','B'].includes(k));

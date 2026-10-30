@@ -1,7 +1,8 @@
 import React from 'react';
 import { EvidenceChart as NativeEvidenceChart, chartConfigEntries, DataComponent, DataTable, MetricCard, SectionHeader, Dropdown, SegmentedControl, SortableRegion, SortableItem, useDataApp, useDashboardTabs } from '../../data-app-public.jsx';
 import hero from '../assets/hasboost-results-infographic-v1.png';
-import {DATASETS,NEW_DATASETS,FAMILIES,LABELS,COLORS,METRICS,ROLES,BANKS,finite,mean,median,groupBy,withinCohort,valid,metricDelta,deltaUnit,deltaDefinition,pairModels,summarizePairs,selectedCurves,exportCSV} from './analytics.js';
+import {DATASETS,NEW_DATASETS,FAMILIES,LABELS,COLORS,METRICS,ROLES,BANKS,finite,mean,median,groupBy,withinCohort,valid,metricDelta,deltaUnit,deltaDefinition,pairModels,summarizePairs,selectedCurves,sameFunctionExample,representationTimes,exportCSV} from './analytics.js';
+import {MethodsView,InferenceComparison,ExecutorDiagram,BACKENDS} from './Explainers.jsx';
 import './hasboost.css';
 
 function EvidenceChart({id,title,rows,spec,height,...rest}) {const chartRows=rows.map(r=>Object.fromEntries(Object.entries(r).filter(([,v])=>v==null||['string','number','boolean'].includes(typeof v)).map(([k,v])=>[k,v??null])));const physical={...spec};const horizontal=spec.type==='horizontalBar';if(horizontal){delete physical.xLabel;delete physical.yLabel;physical.showXAxisLabel=false;physical.showYAxisLabel=false;}const [chart]=chartConfigEntries({id,title,rows:chartRows,spec:physical,height});return <NativeEvidenceChart {...chart} {...rest}>{horizontal&&<p className='hasboost-chart-caption'>{spec.xLabel}</p>}{rest.children}</NativeEvidenceChart>;}
@@ -23,6 +24,7 @@ function Table({id,queryId,title,rows,sourceRows,columns,onRowSelect,description
 function Stat({id,queryId='selected_quality',title,value,sourceRows,description}) {return <MetricCard id={id} queryId={queryId} title={title} value={value} sourceRows={sourceRows} description={description}/>;}
 function DeltaChart({id,rows,sourceRows,title,metric,queryId='selected_quality',onDataset}) {return <EvidenceChart id={id} queryId={queryId} title={title} rows={rows} sourceRows={sourceRows} height={Math.max(270,rows.length*30+80)} description={`Среднее по доступным разбиениям; отрезок — минимум и максимум, не доверительный интервал. ${deltaDefinition(metric)}`} chartOptions={onDataset?{getMarkActions:({row})=>row?.dataset?[{label:`Открыть ${row.dataset}`,onSelect:()=>onDataset(row.dataset)}]:[]}:undefined} spec={{type:'horizontalBar',x:'delta',y:'dataset',xLabel:`Δ ${METRICS[metric]}, ${deltaUnit(metric)} · положительное лучше для A`,showXAxisLabel:true,uncertainty:{lower:'lo',upper:'hi',style:'bars',label:'Минимум — максимум разбиений'},referenceLines:[{axis:'x',value:0,label:'Равно'}],valueFormat:{style:'decimal',maximumFractionDigits:metric.startsWith('f1_')?2:4},colors:{delta:'#008d9b'}}}/>;}
 function Overview({q,go}) {
+  const {exploreDashboard,setSectionView}=useDataApp();
   const [v,set]=usePrefs('hb-overview',{family:'direct_AB',ratio:'0.25',cohort:'all',metric:'f1_macro'});
   const pairs=pairModels(q.selected_quality.rows,v.family,'ordinary',v.ratio,v.metric,v.cohort),sums=summarizePairs(pairs),complete=pairs.filter(p=>p.complete);
   const source=q.selected_quality.rows.filter(r=>r.ratio===Number(v.ratio)&&[v.family,'ordinary'].includes(r.family)&&withinCohort(r,v.cohort));
@@ -32,6 +34,7 @@ function Overview({q,go}) {
   const maxColor=Math.max(0.01,...matrix.map(r=>Math.abs(r.delta)));
   return <>
     <SectionHeader id="overview-heading" title="Где сжатие помогает качеству?" filters={<ControlBar><Select label="Метод A" value={v.family} items={Object.fromEntries(FAMILIES.filter(k=>k!=='ordinary').map(k=>[k,LABELS[k]]))} onChange={x=>set('family',x)}/><Select label="Потолок памяти" value={v.ratio} items={ratioLabels} onChange={x=>set('ratio',x)}/><Select label="Наборы" value={v.cohort} items={choicesCohort} onChange={x=>set('cohort',x)}/><Select label="Метрика" value={v.metric} items={METRICS} onChange={x=>set('metric',x)}/></ControlBar>}/>
+    <button className="hb-method-link" onClick={()=>{setSectionView('hb-methods',{family:v.family,step:0});exploreDashboard('methods');}}>Схема: как работает {LABELS[v.family]} →</button>
     <div className="hasboost-kpis">
       <Stat id="overview-datasets" title="Наборы с парой" value={`${sums.length} / ${dsRows.length}`} sourceRows={source} description="Каждый набор имеет одинаковый вес в общем среднем."/>
       <Stat id="overview-coverage" title="Полные пары" value={`${complete.length} / ${pairs.length}`} sourceRows={source} description="Одна пара: тот же набор, то же разбиение и тот же потолок памяти."/>
@@ -90,30 +93,50 @@ function PairedView({q,go}) {
 }
 function InferenceView({q}) {
   const [v,set]=usePrefs('hb-inference',{mode:'executor',role:'direct_ABL200',batch:'1024',dataset:'all',reference:'full'});
-  const common=r=>r.batch===Number(v.batch)&&(v.dataset==='all'||(r.dataset??r.case.replace(/_\d+$/,''))===v.dataset);
-  const executor=q.executor_pairs.rows.filter(r=>common(r)&&(r.roles||[]).includes(v.role));
-  const timings=q.inference_summary.rows.filter(r=>common(r)&&(r.roles||[]).includes(v.role));
-  const reps=q.representation_comparison.rows.filter(r=>common(r)&&r.role===v.role);
-  const sameRows=executor.map(r=>({...r,dataset:r.case.replace(/_\d+$/,''),name:r.case,value:r.request_p95_speedup,lo:Math.min(...r.request_session_ratios),hi:Math.max(...r.request_session_ratios)}));
   const roles=v.mode==='executor'?ROLES:Object.fromEntries(Object.keys(ROLES).filter(k=>k.startsWith('direct_')||['posthoc70','controller70','mixed2470'].includes(k)).map(k=>[k,ROLES[k]]));
   const role=roles[v.role]?v.role:Object.keys(roles)[0];
   React.useEffect(()=>{if(role!==v.role)set('role',role);},[role,v.role]);
-  const repRows=reps.map(r=>({...r,name:r.case,speed:v.reference==='full'?r.request_vs_full_speedup:r.request_vs_small_ordinary_speedup,delta:v.reference==='full'?r.test_delta_full_pp:r.test_delta_ordinary70_pp,memory:v.reference==='full'?r.model_bytes_ratio_full:r.model_bytes_ratio_ordinary70}));
+  const referenceRole=v.reference==='full'?'full200':'ordinary70';
+  const common=r=>r.batch===Number(v.batch)&&(v.dataset==='all'||(r.dataset??r.case.replace(/_\d+$/,''))===v.dataset);
+  const executor=q.executor_pairs.rows.filter(r=>common(r)&&(r.roles||[]).includes(role));
+  const timings=q.inference_summary.rows.filter(r=>common(r)&&(r.roles||[]).includes(role));
+  const reps=q.representation_comparison.rows.filter(r=>common(r)&&r.role===role);
+  const repTimings=q.inference_summary.rows.filter(r=>common(r)&&r.backend==='packed'&&((r.roles||[]).includes(role)||(r.roles||[]).includes(referenceRole)));
+  const sameRows=executor.map(r=>({...r,dataset:r.case.replace(/_\d+$/,''),name:r.case,value:r.request_p95_speedup,lo:Math.min(...r.request_session_ratios),hi:Math.max(...r.request_session_ratios)}));
+  const repRows=representationTimes(reps,q.inference_summary.rows,referenceRole);
+  const example=sameFunctionExample(executor,timings);
+  const outputs=v.dataset==='all'?null:q.dataset_profiles.rows.find(r=>r.dataset===v.dataset)?.outputs;
   return <>
-    <SectionHeader id="inference-heading" title="Инференс: исполнитель или представление?" filters={<ControlBar><SegmentedControl ariaLabel="Тип сравнения инференса" value={v.mode} options={[{value:'executor',label:'Та же функция модели'},{value:'representation',label:'Разные модели'}]} onChange={x=>set('mode',x)}/><Select label="Модель" value={role} items={roles} onChange={x=>set('role',x)}/><Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/><Select label="Набор" value={v.dataset} items={{all:'Все 12',...Object.fromEntries(DATASETS.map(d=>[d,d]))}} onChange={x=>set('dataset',x)}/>{v.mode==='representation'&&<Select label="Ориентир" value={v.reference} items={{full:'Оптимизированная полная · 200',ordinary:'Оптимизированная обычная · 0,70 B0'}} onChange={x=>set('reference',x)}/>}</ControlBar>}/>
+    <SectionHeader id="inference-heading" title="Что меняем: код исполнения или саму модель?" filters={<ControlBar>
+      <SegmentedControl ariaLabel="Тип сравнения инференса" value={v.mode} options={[{value:'executor',label:'1 · Меняем только код'},{value:'representation',label:'2 · Меняем модель'}]} onChange={x=>set('mode',x)}/>
+      <Select label="Модель A" value={role} items={roles} onChange={x=>set('role',x)}/>
+      <Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/>
+      <Select label="Набор" value={v.dataset} items={{all:'Все 12',...Object.fromEntries(DATASETS.map(d=>[d,d]))}} onChange={x=>set('dataset',x)}/>
+      {v.mode==='representation'&&<Select label="Ориентир B · packed" value={v.reference} items={{full:'Полная · 200 деревьев',ordinary:'Обычная · 0,70 B0'}} onChange={x=>set('reference',x)}/>}</ControlBar>}/>
+    <InferenceComparison mode={v.mode} role={role} referenceRole={referenceRole} example={example} sourceRows={v.mode==='executor'?timings:repTimings}/>
     {v.mode==='executor'?<>
-      <div className="hasboost-kpis"><Stat id="inf-speed" queryId="executor_pairs" title="Ускорение p95 запроса" value={`${f(median(executor.map(r=>r.request_p95_speedup)),2)}×`} sourceRows={executor} description="Медиана по наборам от медиан трёх парных отношений времени. Это не p95 общего потока запросов."/><Stat id="inf-gpu" queryId="executor_pairs" title="Ускорение GPU" value={`${f(median(executor.map(r=>r.gpu_speedup)),2)}×`} sourceRows={executor}/><Stat id="inf-memory" queryId="executor_pairs" title="Снижение пика своего пула" value={`${f(median(executor.map(r=>r.peak_reduction_percent)),1)}%`} sourceRows={executor} description="Собственный пул CuPy; сторонняя память GPU в этот показатель не входит."/></div>
-      <Note>Legacy и packed вычисляют одну функцию сохранённой модели. Ускорение больше 1× означает выигрыш packed. Разброс показывает три измерительные сессии. Сторонний бездействовавший контекст занимал около 20 ГиБ перед частью замеров; показан собственный пул процесса.</Note>
-      <EvidenceChart id="inf-executor-chart" queryId="executor_pairs" title="Ускорение p95 запроса по наборам" rows={sameRows} sourceRows={executor} height={430} description="Отношение legacy / packed. Отрезки — минимум и максимум отношений трёх сессий, не доверительный интервал." spec={{type:'horizontalBar',x:'value',y:'dataset',xLabel:'Ускорение, ×',showXAxisLabel:true,uncertainty:{lower:'lo',upper:'hi',style:'bars',label:'Разброс трёх сессий'},referenceLines:[{axis:'x',value:1,label:'Равно'}],valueFormat:{style:'decimal',maximumFractionDigits:2},colors:{value:'#008d9b'}}}/>
-      <Table id="inf-timings" queryId="inference_summary" title="Абсолютные времена и память" rows={timings} columns={[C('dataset','Набор'),C('backend','Исполнитель'),C('request_p50_ms','p50 запроса, мс',v=>f(v,4)),C('request_p95_ms','p95 запроса, мс',v=>f(v,4)),C('gpu_p50_ms','GPU p50, мс',v=>f(v,4)),C('objects_per_second','Объекты/с',int),C('resident_device_array_bytes','Массивы GPU, МиБ',mib),C('peak_pool_used_bytes','Пик своего пула, МиБ',mib),C('uid','UID')]}/>
+      <div className="hasboost-kpis">
+        <Stat id="inf-speed" queryId="executor_pairs" title="p95 запроса · legacy / packed" value={`${f(median(executor.map(r=>r.request_p95_speedup)),2)}×`} sourceRows={executor} description="Одна модель, два исполнителя. Медиана по наборам от медиан трёх парных отношений времени. Это не p95 общего потока запросов."/>
+        <Stat id="inf-gpu" queryId="executor_pairs" title="GPU p50 · legacy / packed" value={`${f(median(executor.map(r=>r.gpu_speedup)),2)}×`} sourceRows={executor}/>
+        <Stat id="inf-memory" queryId="executor_pairs" title="Пик пула · снижение от legacy" value={`${f(median(executor.map(r=>r.peak_reduction_percent)),1)}%`} sourceRows={executor} description="Собственный пул CuPy; сторонняя память GPU в этот показатель не входит."/>
+      </div>
+      <Note>Модель для всех показателей: {ROLES[role]}. Сравниваются её legacy и packed. Отрезки на графике — разброс трёх сеансов. Сторонний бездействовавший контекст занимал около 20 ГиБ перед частью замеров; показан собственный пул процесса.</Note>
+      <EvidenceChart id="inf-executor-chart" queryId="executor_pairs" title={`${ROLES[role]} · p95 legacy / packed`} rows={sameRows} sourceRows={executor} height={430} description="Для одного case/UID и батча. Отношение времени legacy / packed; отрезки — минимум и максимум отношений трёх сессий, не доверительный интервал." spec={{type:'horizontalBar',x:'value',y:'dataset',xLabel:'legacy / packed, × · больше 1: packed быстрее',showXAxisLabel:true,uncertainty:{lower:'lo',upper:'hi',style:'bars',label:'Разброс трёх сессий'},referenceLines:[{axis:'x',value:1,label:'Одинаковое время'}],valueFormat:{style:'decimal',maximumFractionDigits:2},colors:{value:'#008d9b'}}}/>
+      <Table id="inf-timings" queryId="inference_summary" title="Одна модель: абсолютные времена двух исполнителей" rows={timings} columns={[C('dataset','Набор'),C('backend','Исполнитель',v=>BACKENDS[v]),C('request_p50_ms','p50 запроса, мс',v=>f(v,4)),C('request_p95_ms','p95 запроса, мс',v=>f(v,4)),C('gpu_p50_ms','GPU p50, мс',v=>f(v,4)),C('objects_per_second','Объекты/с',int),C('resident_device_array_bytes','Массивы GPU, МиБ',mib),C('peak_pool_used_bytes','Пик своего пула, МиБ',mib),C('uid','Один и тот же UID')]}/>
     </>:<>
-      <div className="hasboost-kpis"><Stat id="rep-speed" queryId="representation_comparison" title="Медианное ускорение p95" value={`${f(median(repRows.map(r=>r.speed)),2)}×`} sourceRows={reps}/><Stat id="rep-quality" queryId="representation_comparison" title="Медианная Δ macro-F1" value={`${signed(median(repRows.map(r=>r.delta)))} п.п.`} sourceRows={reps}/><Stat id="rep-memory" queryId="representation_comparison" title="Медиана памяти / ориентир" value={`${f(median(repRows.map(r=>r.memory)),3)}×`} sourceRows={reps}/></div>
-      <Note>Обе модели используют packed. Это разные обученные функции, поэтому ускорение читается вместе с изменением качества и памяти. Варианты «200 деревьев» и «отбор при 0,70 B0» отвечают на разные вопросы.</Note>
-      <EvidenceChart id="inf-representation-chart" queryId="representation_comparison" title="Цена ускорения в качестве" rows={repRows} sourceRows={reps} height={370} description="Одна точка на набор: по горизонтали — ускорение p95 запроса; по вертикали — изменение macro-F1 относительно выбранного ориентира." spec={{type:'scatter',x:'speed',y:'delta',series:'dataset',xLabel:'Ускорение p95, ×',yLabel:'Δ macro-F1, п.п.',showXAxisLabel:true,showYAxisLabel:true,startAtZero:false}}/>
-      <Table id="inf-representation-table" queryId="representation_comparison" title="Разные представления · скорость, качество и память" rows={repRows} sourceRows={reps} columns={[C('dataset','Набор'),C('actual_family','Представление',v=>LABELS[v]??v),C('speed','Ускорение p95, ×',v=>f(v,3)),C('delta','Δ macro-F1, п.п.',v=>signed(v,3)),C('memory','Память / ориентир',v=>f(v,3)),C('is_lowrank','Малоранговая',v=>v?'Да':'Нет'),C('nnz','Поправки, nnz',int),C('uid','UID')]}/>
+      <div className="hasboost-kpis">
+        <Stat id="rep-speed" queryId="representation_comparison" title="p95 запроса · ориентир B / A" value={`${f(median(repRows.map(r=>r.speed)),2)}×`} sourceRows={reps}/>
+        <Stat id="rep-quality" queryId="representation_comparison" title="macro-F1 · модель A − ориентир B" value={`${signed(median(repRows.map(r=>r.delta)))} п.п.`} sourceRows={reps}/>
+        <Stat id="rep-memory" queryId="representation_comparison" title="Память · модель A / ориентир B" value={`${f(median(repRows.map(r=>r.memory)),3)}×`} sourceRows={reps}/>
+      </div>
+      <Note>Ориентир B: {ROLES[referenceRole]}. Модель A: {ROLES[role]}. Обе работают на packed; карточки показывают медианы по выбранным наборам. Варианты «200 деревьев» и «отбор при 0,70 B0» отвечают на разные вопросы.</Note>
+      <EvidenceChart id="inf-representation-chart" queryId="representation_comparison" title={`Скорость и качество A относительно «${ROLES[referenceRole]}»`} rows={repRows} sourceRows={reps} height={370} description="Одна точка на набор. Больше 1× по горизонтали — A быстрее ориентира B; положительная Δ macro-F1 — A качественнее B. Обе стороны на packed." spec={{type:'scatter',x:'speed',y:'delta',series:'dataset',xLabel:'p95 ориентира B / p95 модели A, ×',yLabel:'macro-F1(A) − macro-F1(B), п.п.',showXAxisLabel:true,showYAxisLabel:true,startAtZero:false}}/>
+      <Table id="inf-representation-table" queryId="representation_comparison" queryIds={['representation_comparison','inference_summary']} sourceRowsByQuery={{representation_comparison:reps,inference_summary:repTimings}} title={`A против «${ROLES[referenceRole]}»: обе модели на packed`} rows={repRows} sourceRows={reps} description="В этом режиме ускорение равно p95(B) / p95(A) из объединённых запросов трёх сеансов. Затем карточка показывает медиану по выбранным наборам." columns={[C('dataset','Набор'),C('actual_family','A · представление',v=>LABELS[v]??v),C('request_p95_B','B · p95, мс',v=>f(v,4)),C('request_p95_A','A · p95, мс',v=>f(v,4)),C('speed','p95 B / A, ×',v=>f(v,3)),C('gpu_p50_B','B · GPU p50, мс',v=>f(v,4)),C('gpu_p50_A','A · GPU p50, мс',v=>f(v,4)),C('delta','F1 A − B, п.п.',v=>signed(v,3)),C('memory','Память A / B',v=>f(v,3)),C('uid','UID модели A'),C('uid_B','UID ориентира B')]}/>
     </>}
+    <div id="hb-executor-scheme"><ExecutorDiagram q={q} outputs={outputs}/></div>
   </>;
 }
+
 function BankView({q}) {
   const [v,set]=usePrefs('hb-bank',{backend:'packed',distribution:'uniform',batch:'1024'});
   const rows=q.bank_summary.rows.filter(r=>r.backend===v.backend&&r.distribution===v.distribution&&r.batch===Number(v.batch));
@@ -123,7 +146,7 @@ function BankView({q}) {
   const tasks=DATASETS.map(dataset=>{const rs=choices.filter(r=>r.dataset===dataset),a=rs.find(r=>r.bank==='mixed2470'),b=rs.find(r=>r.bank==='ordinary70'),full=rs.find(r=>r.bank==='full200');return {dataset,f1_mixed:a?.f1_macro,f1_ordinary:b?.f1_macro,f1_full:full?.f1_macro,delta:a&&b?100*(a.f1_macro-b.f1_macro):null,bytes_mixed:a?.device_array_bytes,bytes_ordinary:b?.device_array_bytes,bytes_full:full?.device_array_bytes,family:a?.family,uid:a?.uid,rank:a?.rank,nnz:a?.nnz};});
   const mixed=rows.find(r=>r.bank==='mixed2470'),ordinary=rows.find(r=>r.bank==='ordinary70');
   return <>
-    <SectionHeader id="bank-heading" title="Двенадцать моделей в одном процессе" filters={<ControlBar><Select label="Исполнитель" value={v.backend} items={{packed:'Packed',legacy:'Legacy'}} onChange={x=>set('backend',x)}/><Select label="Поток запросов" value={v.distribution} items={{uniform:'Равномерный',hot_wide:'Чаще широкий набор'}} onChange={x=>set('distribution',x)}/><Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/></ControlBar>}/>
+    <SectionHeader id="bank-heading" title="Двенадцать моделей в одном процессе" filters={<ControlBar><Select label="Исполнитель" value={v.backend} items={BACKENDS} onChange={x=>set('backend',x)}/><Select label="Поток запросов" value={v.distribution} items={{uniform:'Равномерный',hot_wide:'Чаще широкий набор'}} onChange={x=>set('distribution',x)}/><Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/></ControlBar>}/>
     <div className="hasboost-kpis"><Stat id="bank-arrays" queryId="bank_summary" title="Снижение памяти массивов" value={`${f(100*(1-mixed.device_array_bytes/ordinary.device_array_bytes),1)}%`} sourceRows={rows} description="Смешанный банк против обычного банка 0,70 B0. Сумма фактических массивов 12 одновременно размещённых моделей."/><Stat id="bank-speed" queryId="bank_summary" title="Ускорение p95 банка" value={`${f(ordinary.request_p95_ms/mixed.request_p95_ms,2)}×`} sourceRows={rows}/><Stat id="bank-quality" queryId="bank_summary" title="Δ средней macro-F1" value={`${signed(100*(mixed.mean_task_f1-ordinary.mean_task_f1))} п.п.`} sourceRows={rows} description="Каждая задача имеет одинаковый вес. В таблице есть и среднее, взвешенное частотой запросов."/></div>
     <Note>Один сохранённый вариант разбиения на задачу, 96 запросов на сценарий. Малоранговых моделей в смешанном банке: {mixed.lowrank_models}; выбор обычной модели тоже допустим. Это демонстрация размещения, а не предел вместимости A100. Сравнение с TabPFN в эту серию не входит.</Note>
     <div className="hasboost-two"><EvidenceChart id="bank-memory-chart" queryId="bank_summary" title="Память одновременно размещённых моделей" rows={memory} sourceRows={rows} height={330} description="Массивы и пик своего пула показаны рядом: пик уже включает массивы, складывать их нельзя." spec={{type:'bar',x:'bank',y:['Массивы GPU','Пик своего пула'],yLabel:'МиБ',showYAxisLabel:true,colors:{'Массивы GPU':'#008d9b','Пик своего пула':'#9baabd'}}}/><EvidenceChart id="bank-speed-chart" queryId="bank_summary" title="p95 всего потока запросов" rows={speeds} sourceRows={rows} height={330} description="Прямое измерение сценария банка, миллисекунды. Меньше — быстрее." spec={{type:'bar',x:'bank',y:'p95',yLabel:'мс',showYAxisLabel:true,colors:{p95:'#c28514'}}}/></div>
@@ -132,7 +155,7 @@ function BankView({q}) {
   </>;
 }
 export function DashboardContent() {
-  const {activeTabId}=useDashboardTabs([{id:'overview',label:'Обзор'},{id:'dataset',label:'Датасет'},{id:'paired',label:'Парные сравнения'},{id:'inference',label:'Инференс'},{id:'bank',label:'Банк моделей'}]);
+  const {activeTabId}=useDashboardTabs([{id:'overview',label:'Обзор'},{id:'methods',label:'Методы и схемы'},{id:'dataset',label:'Датасет'},{id:'paired',label:'Парные сравнения'},{id:'inference',label:'Инференс'},{id:'bank',label:'Банк моделей'}]);
   const {queries:q,exploreDashboard,viewFocus,setDashboardFocus,canReturnFromExploration,returnFromExploration}=useDataApp();
   const [p,set]=usePrefs('hb-current-dataset',{dataset:'birds'});
   const dataset=DATASETS.includes(viewFocus?.dataset)?viewFocus.dataset:p.dataset;
@@ -141,9 +164,10 @@ export function DashboardContent() {
   return <article className="hasboost-dashboard">
     {(!activeTabId||activeTabId==='overview')&&<div className="hasboost-hero"><img src={hero} alt="HASBoost. Компактное обучение и быстрый инференс: 12 наборов, 36 разбиений, 4941 представление модели. Общий базис AB и разреженные поправки L."/></div>}
     <div className="hasboost-status"><span className="hasboost-dot"/> Срез 29 октября 2026 · 12 многометочных наборов · сохранённые результаты <span className="hasboost-status-right"><a href="https://github.com/leostre/Py-Boost/pull/24" target="_blank" rel="noreferrer">Код и PR #24 ↗</a></span></div>
-    {activeTabId==='dataset'&&canReturnFromExploration&&<button className="hasboost-back" onClick={returnFromExploration}>← Вернуться к сравнению</button>}
+    {['dataset','methods'].includes(activeTabId)&&canReturnFromExploration&&<button className="hasboost-back" onClick={returnFromExploration}>← Вернуться к сравнению</button>}
     {(!activeTabId||activeTabId==='overview')&&<Overview q={q} go={go}/>}
     {activeTabId==='dataset'&&<DatasetView q={q} dataset={dataset} setDataset={choose}/>}
+    {activeTabId==='methods'&&<MethodsView q={q}/>}
     {activeTabId==='paired'&&<PairedView q={q} go={go}/>}
     {activeTabId==='inference'&&<InferenceView q={q}/>}
     {activeTabId==='bank'&&<BankView q={q}/>}

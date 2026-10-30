@@ -20,6 +20,22 @@ def read_csv(p):
         result.append(out)
     return result
 
+def explanatory_queries(catalog_path):
+    catalog=json.loads(catalog_path.read_text(encoding='utf8'))
+    labels={'ordinary':'Обычный бустинг','direct_AB':'AB · прямое обучение','direct_ABL':'AB + L · прямое обучение','posthoc':'Сжатие после обучения','controller':'Регулятор бюджета','sketch':'Sketch','mixed24':'Смешанный отбор'}
+    assert {m['id'] for m in catalog['methods']}==set(labels)
+    paths=sorted({f for m in catalog['methods']+catalog['executors'] for f in m['sources']}|{'research/external_controls/wide_probe.py'})
+    links=[dict(label=f,url=f"https://github.com/leostre/Py-Boost/blob/{catalog['source_commit']}/{f}") for f in paths]
+    source=dict(label='Пояснения, сверенные с реализацией',provider='Код опубликованного исследовательского снимка',links=links,
+        filters=['Концептуальные схемы фактически проверенных вариантов; не новые результаты и не обещание выигрыша.'],
+        metricDefinitions=[dict(label='Схемы',definition='Количество ячеек и узлов на рисунках условно; численные замеры находятся в отдельных таблицах.'),
+            dict(label='Два сравнения',definition='Исполнители: время legacy той же модели / время packed. Модели: время выбранного ориентира на packed / время измеряемой модели на packed.')],
+        evidenceFlow=[dict(title='Снимок кода',detail=catalog['source_commit']),
+            dict(title='Сверка',detail='broad_training/core: обучение и отбор; direct_leaf_gpu: AB/L; unified_serving_gpu, packed_serving_gpu, wide_probe: исполнение и границы замера.')])
+    methods=[dict(id=m['id'],title=labels[m['id']],category=m['category'],summary=m['summary'],storage=m['storage'],scope=m['scope'],difference=m['difference'],source_files='; '.join(m['sources'])) for m in catalog['methods']]
+    executors=[dict(id=e['id'],title=e['title'],mechanism=e['mechanism'],source_files='; '.join(e['sources'])) for e in catalog['executors']]
+    return dict(method_mechanisms=dict(rows=methods,source=source),executor_mechanisms=dict(rows=executors,source=source))
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--evidence',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--metadata',type=Path);a=p.parse_args()
     queries={};files=[]
@@ -38,6 +54,8 @@ def main():
     pairs=json.loads((a.evidence/'inference_pairs.json').read_text())['pairs']
     queries['executor_pairs']=dict(rows=pairs,source=dict(label='Парные сеансы исполнителей',files=['inference_pairs.json'],metricDefinitions=definitions,
         evidenceFlow=[dict(title='Парное отношение',detail='Одинаковые case, uid и batch; прежний / новый исполнитель. Медиана трёх отношений сеансов. Данные взяты из опубликованного inference_pairs.json.')]))
+    catalog=Path(__file__).parent/'content/dashboard/mechanisms.json'
+    if catalog.exists():queries.update(explanatory_queries(catalog))
     assert len(queries['all_quality_points']['rows'])==4941 and len(queries['selected_quality']['rows'])==1008
     meta=dict(files=files,as_of='2026-10-29',new_datasets=['enron','cal500','corel5k','delicious'],
         limitations=['Три train/D-разбиения используют общий тест.', 'Восемь тестов уже использовались при разработке.', 'Окончательный выбор всех моделей выполнен по D до теста.',
