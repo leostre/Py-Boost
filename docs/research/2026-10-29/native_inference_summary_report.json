@@ -1,0 +1,254 @@
+{
+  "status": "native_summary_complete",
+  "source": {
+    "path": "/root/.orx/runs/8d178a2d-3f3a-4ac1-bdbe-dda44b5020dc/repo/results/native_S2_20261030/report.json",
+    "sha256": "c8715eb7012af54321b5b17ffe91a77a3fbf9a4b8c9af4cecdd936d1104ff10e"
+  },
+  "summary": [
+    {
+      "batch": 1,
+      "role": "full200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.7146462081402327,
+      "gpu_p50_speedup_median": 24.841683706267546,
+      "request_speedup_min": 1.6951651740228033,
+      "request_speedup_max": 11.85849664589786
+    },
+    {
+      "batch": 1,
+      "role": "full200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.765433523108084,
+      "gpu_p50_speedup_median": 44.539891453304314,
+      "request_speedup_min": 3.4549570955497924,
+      "request_speedup_max": 21.38494536580159
+    },
+    {
+      "batch": 1,
+      "role": "direct_AB200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.625852317058272,
+      "gpu_p50_speedup_median": 21.74600079033689,
+      "request_speedup_min": 1.176586884981865,
+      "request_speedup_max": 10.17454945508662
+    },
+    {
+      "batch": 1,
+      "role": "direct_AB200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.7816208869869206,
+      "gpu_p50_speedup_median": 43.4441626592411,
+      "request_speedup_min": 3.5752964758599117,
+      "request_speedup_max": 21.695483209379873
+    },
+    {
+      "batch": 1,
+      "role": "direct_ABL200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.611382161993899,
+      "gpu_p50_speedup_median": 20.890079252273658,
+      "request_speedup_min": 1.1497908861204722,
+      "request_speedup_max": 10.023976293080635
+    },
+    {
+      "batch": 1,
+      "role": "direct_ABL200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.744279385370284,
+      "gpu_p50_speedup_median": 37.45528654662587,
+      "request_speedup_min": 3.508477695555355,
+      "request_speedup_max": 21.821829678775906
+    },
+    {
+      "batch": 32,
+      "role": "full200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.6644464539190524,
+      "gpu_p50_speedup_median": 27.888934583403895,
+      "request_speedup_min": 1.7308508842593264,
+      "request_speedup_max": 11.486498909620451
+    },
+    {
+      "batch": 32,
+      "role": "full200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.809950517254419,
+      "gpu_p50_speedup_median": 49.74631009439782,
+      "request_speedup_min": 3.543787347412156,
+      "request_speedup_max": 19.622608799356332
+    },
+    {
+      "batch": 32,
+      "role": "direct_AB200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.658841952101932,
+      "gpu_p50_speedup_median": 23.4451995778167,
+      "request_speedup_min": 1.2216870960482773,
+      "request_speedup_max": 9.571208859520121
+    },
+    {
+      "batch": 32,
+      "role": "direct_AB200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.762320834505087,
+      "gpu_p50_speedup_median": 48.856258751507966,
+      "request_speedup_min": 3.5897860249838596,
+      "request_speedup_max": 20.342596009476537
+    },
+    {
+      "batch": 32,
+      "role": "direct_ABL200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.6373637332214024,
+      "gpu_p50_speedup_median": 22.908158112099628,
+      "request_speedup_min": 1.1842938096891285,
+      "request_speedup_max": 9.73103928740635
+    },
+    {
+      "batch": 32,
+      "role": "direct_ABL200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.770946844500517,
+      "gpu_p50_speedup_median": 41.534281791208045,
+      "request_speedup_min": 3.6549829079504033,
+      "request_speedup_max": 18.40610302150796
+    },
+    {
+      "batch": 256,
+      "role": "full200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.6960791520057876,
+      "gpu_p50_speedup_median": 28.46075929452956,
+      "request_speedup_min": 1.7959012127460408,
+      "request_speedup_max": 10.096264197943592
+    },
+    {
+      "batch": 256,
+      "role": "full200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.82696678387119,
+      "gpu_p50_speedup_median": 52.54739650303388,
+      "request_speedup_min": 3.599881171946449,
+      "request_speedup_max": 15.383336072606705
+    },
+    {
+      "batch": 256,
+      "role": "direct_AB200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.7047034796403633,
+      "gpu_p50_speedup_median": 24.24364071191355,
+      "request_speedup_min": 1.2287519318224414,
+      "request_speedup_max": 8.493484045827955
+    },
+    {
+      "batch": 256,
+      "role": "direct_AB200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.8579357921467836,
+      "gpu_p50_speedup_median": 51.92594930464054,
+      "request_speedup_min": 3.672241540456,
+      "request_speedup_max": 15.235990544792138
+    },
+    {
+      "batch": 256,
+      "role": "direct_ABL200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.7075590351133454,
+      "gpu_p50_speedup_median": 23.64186232281463,
+      "request_speedup_min": 1.1974937388446454,
+      "request_speedup_max": 8.356583831745429
+    },
+    {
+      "batch": 256,
+      "role": "direct_ABL200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.8403153844932225,
+      "gpu_p50_speedup_median": 46.38384097748566,
+      "request_speedup_min": 3.5400718772084416,
+      "request_speedup_max": 14.281152485820517
+    },
+    {
+      "batch": 1024,
+      "role": "full200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.503499538751039,
+      "gpu_p50_speedup_median": 27.97981722564914,
+      "request_speedup_min": 1.4338880459797059,
+      "request_speedup_max": 6.512781378169665
+    },
+    {
+      "batch": 1024,
+      "role": "full200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.5812232761304816,
+      "gpu_p50_speedup_median": 40.14996096908706,
+      "request_speedup_min": 1.5850644388184618,
+      "request_speedup_max": 8.233261530676804
+    },
+    {
+      "batch": 1024,
+      "role": "direct_AB200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.408525021382202,
+      "gpu_p50_speedup_median": 23.44614010868546,
+      "request_speedup_min": 1.1588486872204455,
+      "request_speedup_max": 5.950848017618507
+    },
+    {
+      "batch": 1024,
+      "role": "direct_AB200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.5823876030213464,
+      "gpu_p50_speedup_median": 40.243153001921996,
+      "request_speedup_min": 1.928909654985632,
+      "request_speedup_max": 7.846252516535439
+    },
+    {
+      "batch": 1024,
+      "role": "direct_ABL200",
+      "backend": "legacy",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.4325791544389728,
+      "gpu_p50_speedup_median": 22.679609502070498,
+      "request_speedup_min": 1.1547011610702953,
+      "request_speedup_max": 5.6328579594734
+    },
+    {
+      "batch": 1024,
+      "role": "direct_ABL200",
+      "backend": "packed",
+      "datasets": 12,
+      "request_p95_speedup_median": 3.54751945972553,
+      "gpu_p50_speedup_median": 35.0730576645617,
+      "request_speedup_min": 1.6690202905142484,
+      "request_speedup_max": 7.988675765542591
+    }
+  ],
+  "checks": 336,
+  "native_probability_max_abs_error": 3.325457424152578e-07,
+  "label_disagreements": 0,
+  "new_trees": 0,
+  "new_gpu_timings": 0
+}

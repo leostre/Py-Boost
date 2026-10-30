@@ -1,0 +1,44 @@
+{
+  "artifact": "hasboost-results-interactive.html",
+  "artifact_sha256": "2d93aa3e7f0bda5991f49c877368cd1bd757e6b72bb2374c0e7998978fdd894e",
+  "artifact_bytes": 10326173,
+  "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
+  "build_status": "complete",
+  "snapshot_sha256": "10ba6765ca63b4ebdfd00a71922d86b513cc03921e098ef9f8ad1a1bb6602edc",
+  "build": {
+    "canonical_prebuilt_runtime": true,
+    "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
+    "compiler_sha256": "ec65601079c80bef7210f2c9760ff7f2db6adef28516ffff280d4c86f91d4078",
+    "protected_runtime_changed": false,
+    "execution": "WSL Ubuntu, isolated Node 24.19.0; native Windows path-validation error avoided without changing or bypassing integrity checks",
+    "external_required_asset_count": 0,
+    "canonical_export_offline": true,
+    "reconstructed_snapshot_equals_delivered": true
+  },
+  "analysis_checks": {
+    "passed": 10,
+    "failed": 0,
+    "log": "interactive-analytics.log"
+  },
+  "browser_checks": {
+    "method_families": 7,
+    "all_four_step_controls": true,
+    "method_drilldown_and_return": true,
+    "coefficient_representation_primer": "W ~ AB + L; schematic; full warmup/block-specific bases disclosed",
+    "executor_diagrams": "legacy narrow <=128 and wide >128; packed single CUDA launch; already optimized legacy preserved",
+    "two_comparison_modes": "own legacy baseline for one UID vs fixed packed model baseline for different UIDs",
+    "full_model_then_switch_mode": "valid effective role resolved before charts, no intermediate empty chart",
+    "both_fixed_references": "full200, ordinary70; UID and absolute p95/GPU values shown",
+    "same_session_example": "real recorded first session; tested against original pair ratio",
+    "ratio_definitions": "executor median of three paired ratios; representation ratio of pooled p95 values; medians across datasets",
+    "narrow_width": "390px viewport; document width 375px; schematic cards remain inside article",
+    "source_menu": "new method and executor metadata; original query rows unchanged",
+    "portable_export_opened_via_http": true,
+    "new_console_errors_observed": 0,
+    "file_protocol_browser_test": "not run; canonical offline export and no required external assets verified",
+    "previous_checks": "interactive-dashboard-v1.json"
+  },
+  "scientific_scope": "Existing saved results only; no model fitting, selection on test or new GPU timing. Browser checks validate the presentation, not a new independent scientific replication.",
+  "revision": "mechanisms-and-explicit-comparisons",
+  "checked_at": "2026-10-30T13:42:15+03:00"
+}

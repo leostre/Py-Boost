@@ -12,3 +12,6 @@ docs/research/2026-10-29/data/*.csv linguist-generated=true
 
 # Review the editable dashboard source; retain the exported bundle byte-for-byte.
 docs/research/2026-10-29/hasboost-results-interactive.html linguist-generated=true -diff
+
+# Raw native benchmark samples stay available; review the derived CSV and code.
+docs/research/2026-10-29/native_inference_report.json linguist-generated=true -diff

@@ -5,6 +5,31 @@ import {DATASETS,FAMILIES,pairModels,summarizePairs,selectedCurves,mean,median,s
 const snapshot=JSON.parse(await readFile(new URL('../../data.json',import.meta.url),'utf8'));
 const q=snapshot.queries,selected=q.selected_quality.rows;
 const near=(a,b,eps=1e-9)=>assert.ok(Math.abs(a-b)<eps,`${a} != ${b}`);
+
+test('native comparison keeps one measured full reference across all roles',()=>{
+  const rows=q.native_inference_summary.rows;assert.equal(rows.length,336);
+  for(const dataset of DATASETS)for(const batch of [1,32,256,1024]){
+    const scoped=rows.filter(r=>r.dataset===dataset&&r.batch===batch);assert.equal(scoped.length,7);
+    const native=scoped.find(r=>r.backend==='native');assert.ok(native);
+    near(native.speed_request_p95,1);near(native.speed_gpu_p50,1);
+    for(const row of scoped){
+      assert.equal(row.reference_uid,native.uid);near(row.native_request_p95_ms,native.request_p95_ms);near(row.native_gpu_p50_ms,native.gpu_p50_ms);
+      assert.equal(row.source_commit,'b2842af472e21c7332d9487d8c83e53cb48d1486');
+      assert.equal(row.sessions,3);assert.equal(row.requests_per_session,32);
+      assert.equal(row.request_session_ratios.length,3);near(row.speed_request_p95,median(row.request_session_ratios));
+      assert.ok(row.request_p95_ms>0&&row.gpu_p50_ms>0);assert.ok(row.speed_request_lo<=row.speed_request_p95&&row.speed_request_hi>=row.speed_request_p95);
+      if(row.role==='full200'){assert.equal(row.uid,native.uid);near(row.test_delta_full_pp,0);}
+    }
+  }
+});
+
+test('carried quality uses exact case/UID, not a newly selected or other-split model',()=>{
+  for(const row of q.native_inference_summary.rows){
+    const exact=q.all_quality_points.rows.find(r=>r.case===row.case&&r.uid===row.uid);
+    const full=q.all_quality_points.rows.find(r=>r.case===row.case&&r.uid===row.reference_uid);
+    assert.ok(exact&&full);near(row.test_f1,exact.f1_macro);near(row.test_delta_full_pp,100*(exact.f1_macro-full.f1_macro));
+  }
+});
 test('dataset and evidence cardinalities stay sealed',()=>{
   assert.equal(DATASETS.length,12);assert.equal(q.all_quality_points.rows.length,4941);assert.equal(selected.length,1008);
   assert.equal(q.executor_pairs.rows.length,520);assert.equal(q.bank_choices.rows.length,72);

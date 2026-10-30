@@ -3,6 +3,7 @@ import {DataComponent, DataTable, Dropdown, SectionHeader, SegmentedControl, use
 import catalog from './mechanisms.json';
 import {FAMILIES, LABELS, COLORS, ROLES} from './analytics.js';
 import './explainers.css';
+import {ExecutorFlow} from './ExecutorFlow.jsx';
 
 export const BACKENDS={legacy:'Legacy · по блокам',packed:'Packed · единое ядро'};
 const baseUrl=`https://github.com/leostre/Py-Boost/blob/${catalog.source_commit}/`;
@@ -92,14 +93,17 @@ export function InferenceComparison({mode,role,referenceRole,example,sourceRows}
 
 export function ExecutorDiagram({q,outputs}) {
   const {sectionViews,setSectionView}=useDataApp();
-  const route=sectionViews['hb-executor-diagram']?.route??(outputs!=null&&outputs<=128?'narrow':'wide');
+  const diagramPrefs=sectionViews['hb-executor-diagram']??{};
+  const route=diagramPrefs.route??(outputs!=null&&outputs<=128?'narrow':'wide');
   const wide=route==='wide';
-  const legacySteps=wide?['Обход деревьев и сбор значений листьев по блоку','Глобальные рабочие буферы и остаток, если он есть','Декодирование через B, если нужен базис; суммирование блоков','Отдельные CuPy-операции: вероятности и метки']:['Уже объединённое ядро внутри каждого блока','При нескольких блоках: рабочий выход и суммирование','Отдельные CuPy-операции: вероятности и метки'];
-  return <DataComponent id="executor-mechanism" queryId="executor_mechanisms" title="Legacy и packed: как вычисляется один прогноз" kind="diagram" sourceRows={q.executor_mechanisms.rows} displayRows={q.executor_mechanisms.rows} headerControls={<SegmentedControl ariaLabel="Поясняемый путь legacy" value={route} options={[{value:'narrow',label:'Legacy: до 128 выходов'},{value:'wide',label:'Legacy: более 128'}]} onChange={r=>setSectionView('hb-executor-diagram',{route:r})}/>}>
+  const compact=diagramPrefs.representation!=='full';
+  return <DataComponent id="executor-mechanism" queryId="executor_mechanisms" title="Три способа вычислить прогноз: деревья, память и запуски" kind="diagram" variant="card" sourceRows={q.executor_mechanisms.rows} displayRows={q.executor_mechanisms.rows} headerControls={<SegmentedControl ariaLabel="Поясняемый путь legacy" value={route} options={[{value:'narrow',label:'Legacy: до 128 выходов'},{value:'wide',label:'Legacy: более 128'}]} onChange={r=>setSectionView('hb-executor-diagram',{...diagramPrefs,route:r})}/>}>
     <div className="hb-request-ends"><span>Вход X на CPU</span><b>→</b><span>Передача на GPU</span><b>→</b><strong>Вычисления ниже</strong><b>→</b><span>Результат на CPU</span></div>
-    <div className="hb-engine-grid"><div className="hb-engine-lane"><h3>Legacy · по блокам</h3><p>Прежний оптимизированный путь{wide?' для широких выходов':'. Уже использует объединённое ядро для каждого блока'}.</p><ol>{legacySteps.map(s=><li key={s}>{s}</li>)}</ol></div><div className="hb-engine-lane hb-packed-lane"><h3>Packed · единое ядро</h3><p>Один запуск CUDA-ядра на весь батч и все блоки модели.</p><div className="hb-kernel-boundary"><span>Внутри одного запуска</span><ol><li>Группы потоков обрабатывают деревья</li><li>Собирают коэффициенты и поправки в регистрах и общей памяти блока</li><li>Декодируют базисы B, если они есть, и складывают приращения</li><li>Вычисляют вероятности и метки</li></ol></div><p className="hb-schematic-note">Глобальный промежуточный массив «батч × ранг» не создаётся. Входы, параметры и окончательные выходы всё равно занимают память GPU.</p></div></div>
-    <p className="hb-explain-takeaway">Модель и её пороги сохраняются. Параметры и входы — float32, суммы и вероятности — float64 в обоих путях; прогнозы сверены с численным допуском. Packed объединяет больше стадий в одном запуске; это не дополнительное сжатие модели.</p>
+    <div className="hb-flow-controls"><span>Представление на двух нижних дорожках</span><SegmentedControl ariaLabel="Представление на схеме исполнения" value={compact?'compact':'full'} options={[{value:'full',label:'Полные листья W'},{value:'compact',label:'Гибрид AB + L'}]} onChange={representation=>setSectionView('hb-executor-diagram',{...diagramPrefs,representation})}/></div>
+    <ExecutorFlow wide={wide} compact={compact}/>
+    <p className="hb-explain-takeaway">{compact?'Верхняя дорожка — полная модель W: исходный Py-Boost не исполняет AB + L напрямую. Две нижние показывают один и тот же гибрид на legacy и packed.':'Три дорожки показывают одну полную модель W на разных исполнителях.'} Оранжевые стрелки обозначают чтение или запись промежуточных массивов в глобальной памяти. Packed переносит промежуточные суммы внутрь одного запуска; входы, параметры и конечный выход остаются в памяти GPU.</p>
+    <p className="hb-schematic-note">T — число деревьев, K — число блоков модели, C — число выходов, r — ранг. Ширина дорожек, число клеток и длина полос запусков условны. W, A, B и L — параметры модели; J — индексы листьев, Z — суммы в базисе, E — собранные поправки, S — общий прогноз. Суммы legacy/packed — float64, исходного Py-Boost — float32. Это различие отдельно проверяется в сравнении прогнозов.</p>
     <p className="hb-schematic-note">Переключатель меняет поясняющую схему legacy, а не результаты замеров. {outputs!=null?`У выбранного набора ${outputs} выходов.`:'При выборе всех наборов в измерениях есть оба пути legacy.'} Подготовка модели и компиляция не входят в прогретые времена запроса.</p>
-    <details className="hb-inline-sources"><summary>Где это реализовано</summary>{catalog.executors.map(e=><p key={e.id}><b>{e.title}:</b> {e.sources.map((p,i)=><React.Fragment key={p}>{i>0?' · ':''}<a href={baseUrl+p} target="_blank" rel="noreferrer">{p.split('/').at(-1)}</a></React.Fragment>)}</p>)}<p><a href={baseUrl+'research/external_controls/wide_probe.py'} target="_blank" rel="noreferrer">Границы GPU-замера и request в wide_probe.py</a></p></details>
+    <details className="hb-inline-sources"><summary>Где это реализовано</summary>{catalog.executors.map(e=><p key={e.id}><b>{e.title}:</b> {e.sources.map((p,i)=><React.Fragment key={p}>{i>0?' · ':''}<a href={`https://github.com/leostre/Py-Boost/blob/${e.source_commit??catalog.source_commit}/${p}`} target="_blank" rel="noreferrer">{p.split('/').at(-1)}</a></React.Fragment>)}</p>)}<p><a href={baseUrl+'research/external_controls/wide_probe.py'} target="_blank" rel="noreferrer">Границы GPU-замера и request в wide_probe.py</a></p></details>
   </DataComponent>;
 }

@@ -1,18 +1,20 @@
-✔ dataset and evidence cardinalities stay sealed (0.8672ms)
-✔ headline paired quality reconciles, with equal weight per dataset (1.244ms)
-✔ missing models stay missing, never zero filled; reversal preserves pairs (0.45ms)
-✔ metric orientation favors lower loss; cohort and dataset filters restrict source (0.3386ms)
-✔ curves retain explicit empty budget cells (0.4088ms)
-✔ inference headlines are medians of paired session ratios (0.3428ms)
-✔ resident bank per-task bytes and F1 reconcile to measured aggregate (0.3453ms)
-✔ constant diagnostic deltas use the full-minus-constant orientation (0.2172ms)
-✔ the executor example compares one UID and the same recorded session (0.4171ms)
-✔ representation baseline is explicit, packed and paired by case/batch (10.2551ms)
-ℹ tests 10
+✔ native comparison keeps one measured full reference across all roles (2.2627ms)
+✔ carried quality uses exact case/UID, not a newly selected or other-split model (15.3504ms)
+✔ dataset and evidence cardinalities stay sealed (0.2358ms)
+✔ headline paired quality reconciles, with equal weight per dataset (1.3136ms)
+✔ missing models stay missing, never zero filled; reversal preserves pairs (0.578ms)
+✔ metric orientation favors lower loss; cohort and dataset filters restrict source (0.3463ms)
+✔ curves retain explicit empty budget cells (0.4533ms)
+✔ inference headlines are medians of paired session ratios (0.3444ms)
+✔ resident bank per-task bytes and F1 reconcile to measured aggregate (0.3547ms)
+✔ constant diagnostic deltas use the full-minus-constant orientation (0.3019ms)
+✔ the executor example compares one UID and the same recorded session (0.4659ms)
+✔ representation baseline is explicit, packed and paired by case/batch (12.3968ms)
+ℹ tests 12
 ℹ suites 0
-ℹ pass 10
+ℹ pass 12
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 125.9437
+ℹ duration_ms 173.7378

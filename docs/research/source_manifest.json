@@ -5683,6 +5683,38 @@
       "adaptations": [
         "LF publication text; original SHA retained"
       ]
+    },
+    "research/external_controls/native_inference_study.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
+      "source_path": "native_inference_study.py",
+      "source_sha256": "bef72af2c79ceb3bacf8e27146117fc75a122739a2facee044468043ffda1dc5",
+      "published_sha256": "bef72af2c79ceb3bacf8e27146117fc75a122739a2facee044468043ffda1dc5",
+      "adaptations": []
+    },
+    "research/external_controls/native_pyboost_adapter.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
+      "source_path": "native_pyboost_adapter.py",
+      "source_sha256": "aab2abc9e99b5a2e6ee9b5ec7168eb06cccfd879f1fcaf7da56b1be49fb37d85",
+      "published_sha256": "aab2abc9e99b5a2e6ee9b5ec7168eb06cccfd879f1fcaf7da56b1be49fb37d85",
+      "adaptations": []
+    },
+    "research/external_controls/native_measurement_summary.py": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "289eeae760cc62ae4e91e67ea864a65999302e3b",
+      "source_path": "native_measurement_summary.py",
+      "source_sha256": "86f3d8ec3b778bf384ceb3febce9fb488c4a6f95a03827cc9dd0d37451cd961d",
+      "published_sha256": "86f3d8ec3b778bf384ceb3febce9fb488c4a6f95a03827cc9dd0d37451cd961d",
+      "adaptations": []
+    },
+    "research/external_controls/original_pyboost/source.json": {
+      "source_repository": "HASBoost-A100-External",
+      "source_commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
+      "source_path": "original_pyboost/source.json",
+      "source_sha256": "84be06282e444ceef807afdd0306c5d75009fce8c81482753c8c1ca5753adff9",
+      "published_sha256": "84be06282e444ceef807afdd0306c5d75009fce8c81482753c8c1ca5753adff9",
+      "adaptations": []
     }
   }
 }

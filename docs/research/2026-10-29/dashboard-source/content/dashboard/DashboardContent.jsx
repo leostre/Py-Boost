@@ -91,7 +91,7 @@ function PairedView({q,go}) {
     <Table id="paired-exact-table" queryId="selected_quality" title="Точные пары · метрики и фактические байты" rows={rows} sourceRows={source} columns={[C('dataset','Набор'),C('seed','Разбиение',int),C('status','Покрытие'),C('value_A',`A · ${METRICS[v.metric]}`,v=>f(v,5)),C('value_B',`B · ${METRICS[v.metric]}`,v=>f(v,5)),C('delta',`Δ, ${deltaUnit(v.metric)}`,v=>signed(v,3)),C('bytes_A','A, байт',int),C('bytes_B','B, байт',int),C('model_A','A · представление',v=>LABELS[v]??v??'—'),C('model_B','B · представление',v=>LABELS[v]??v??'—'),C('uid_A','UID A'),C('uid_B','UID B')]}/>
   </>;
 }
-function InferenceView({q}) {
+function AdvancedInferenceView({q}) {
   const [v,set]=usePrefs('hb-inference',{mode:'executor',role:'direct_ABL200',batch:'1024',dataset:'all',reference:'full'});
   const roles=v.mode==='executor'?ROLES:Object.fromEntries(Object.keys(ROLES).filter(k=>k.startsWith('direct_')||['posthoc70','controller70','mixed2470'].includes(k)).map(k=>[k,ROLES[k]]));
   const role=roles[v.role]?v.role:Object.keys(roles)[0];
@@ -133,7 +133,38 @@ function InferenceView({q}) {
       <EvidenceChart id="inf-representation-chart" queryId="representation_comparison" title={`Скорость и качество A относительно «${ROLES[referenceRole]}»`} rows={repRows} sourceRows={reps} height={370} description="Одна точка на набор. Больше 1× по горизонтали — A быстрее ориентира B; положительная Δ macro-F1 — A качественнее B. Обе стороны на packed." spec={{type:'scatter',x:'speed',y:'delta',series:'dataset',xLabel:'p95 ориентира B / p95 модели A, ×',yLabel:'macro-F1(A) − macro-F1(B), п.п.',showXAxisLabel:true,showYAxisLabel:true,startAtZero:false}}/>
       <Table id="inf-representation-table" queryId="representation_comparison" queryIds={['representation_comparison','inference_summary']} sourceRowsByQuery={{representation_comparison:reps,inference_summary:repTimings}} title={`A против «${ROLES[referenceRole]}»: обе модели на packed`} rows={repRows} sourceRows={reps} description="В этом режиме ускорение равно p95(B) / p95(A) из объединённых запросов трёх сеансов. Затем карточка показывает медиану по выбранным наборам." columns={[C('dataset','Набор'),C('actual_family','A · представление',v=>LABELS[v]??v),C('request_p95_B','B · p95, мс',v=>f(v,4)),C('request_p95_A','A · p95, мс',v=>f(v,4)),C('speed','p95 B / A, ×',v=>f(v,3)),C('gpu_p50_B','B · GPU p50, мс',v=>f(v,4)),C('gpu_p50_A','A · GPU p50, мс',v=>f(v,4)),C('delta','F1 A − B, п.п.',v=>signed(v,3)),C('memory','Память A / B',v=>f(v,3)),C('uid','UID модели A'),C('uid_B','UID ориентира B')]}/>
     </>}
+  </>;
+}
+
+function InferenceView({q}) {
+  const [v,set]=usePrefs('hb-native-inference',{role:'full200',batch:'1024',dataset:'all',metric:'request'});
+  const all=q.native_inference_summary?.rows??[];
+  const common=r=>r.batch===Number(v.batch)&&(v.dataset==='all'||r.dataset===v.dataset);
+  const source=all.filter(r=>common(r)&&(r.role===v.role||r.backend==='native'));
+  const rows=source.filter(r=>r.role===v.role&&r.backend!=='native');
+  const metric=v.metric==='gpu'?'speed_gpu_p50':'speed_request_p95';
+  const chart=rows.map(r=>({...r,executor:BACKENDS[r.backend],speed:r[metric]}));
+  const label=v.metric==='gpu'?'GPU p50':'p95 запроса';
+  const outputs=v.dataset==='all'?null:q.dataset_profiles.rows.find(r=>r.dataset===v.dataset)?.outputs;
+  const compact=v.role!=='full200';
+  return <>
+    <SectionHeader id="native-inference-heading" title="Ускорение относительно исходного Py-Boost" filters={<ControlBar>
+      <Select label="Измеряемая модель" value={v.role} items={Object.fromEntries(['full200','direct_AB200','direct_ABL200'].map(k=>[k,ROLES[k]]))} onChange={x=>set('role',x)}/>
+      <Select label="Батч" value={v.batch} items={['1','32','256','1024']} onChange={x=>set('batch',x)}/>
+      <Select label="Набор" value={v.dataset} items={{all:'Все 12',...Object.fromEntries(DATASETS.map(d=>[d,d]))}} onChange={x=>set('dataset',x)}/>
+      <SegmentedControl ariaLabel="Граница времени нового сравнения" value={v.metric} options={[{value:'request',label:'Весь запрос · p95'},{value:'gpu',label:'На GPU · p50'}]} onChange={x=>set('metric',x)}/>
+    </ControlBar>}/>
+    <div className="hb-native-anchor"><span className="hb-native-tag">Общий ориентир · 1×</span><strong>Обычный Py-Boost · полная модель · 200 деревьев</strong><span>Исходный <a href="https://github.com/leostre/Py-Boost/commit/b2842af472e21c7332d9487d8c83e53cb48d1486" target="_blank" rel="noreferrer">master @ b2842af</a>. При переключении AB / AB + L ориентир остаётся тем же.</span></div>
+    <div className="hasboost-kpis">
+      {['legacy','packed'].map(backend=><Stat key={backend} id={'native-speed-'+backend} queryId="native_inference_summary" title={`${label} · Py-Boost / ${backend}`} value={`${f(median(rows.filter(r=>r.backend===backend).map(r=>r[metric])),2)}×`} sourceRows={source} description="Сначала медиана трёх парных отношений внутри набора, затем медиана по выбранным наборам. Больше 1× означает ускорение. Это не p95 смешанного потока."/>)}
+      <Stat id="native-quality" queryId="native_inference_summary" title="macro-F1 · модель − полная, п.п." value={signed(median(rows.filter(r=>r.backend==='packed').map(r=>r.test_delta_full_pp)),3)} sourceRows={source} description="Качество перенесено из прежнего финального отчёта, без нового доступа к тесту. Native использует float32; прогнозы проверены отдельно на D и входе с NaN."/>
+    </div>
+    <Note>{compact?'AB / AB + L — другие обученные модели: здесь совмещены эффект сжатого представления и оптимизации исполнения. Разница качества показана рядом.':'Полная модель: одни деревья и значения листьев на трёх исполнителях. Здесь измеряется оптимизация исполнения; исходный Py-Boost сохраняет штатные суммы float32, legacy/packed используют float64.'} Для каждой пары ориентир измерен заново в тех же трёх сеансах на свободной A100.</Note>
+    <EvidenceChart id="native-executor-speed-chart" queryId="native_inference_summary" title={`${ROLES[v.role]} · ${label} Py-Boost / исполнитель`} rows={chart} sourceRows={source} height={540} description="Два столбца на набор: legacy и packed относительно одной полной модели на исходном Py-Boost. Медианы трёх парных отношений времени. Размеры моделей и пороги фиксированы; обучения и настройки по тесту нет." spec={{type:'horizontalBar',x:'speed',y:'dataset',series:'executor',stackable:false,xLabel:`${label} исходного Py-Boost / ${label} исполнителя, × · 1× = без ускорения`,valueFormat:{style:'decimal',maximumFractionDigits:2},colors:{[BACKENDS.legacy]:'#bb8025',[BACKENDS.packed]:'#008d9b'}}}/>
+    <Table id="native-absolute-times" queryId="native_inference_summary" title="Абсолютные времена и общий знаменатель" rows={rows} sourceRows={source} description="p50/p95 времени — по объединённым 96 запросам. Ускорение — медиана трёх отношений сеансов; оно может отличаться от отношения этих объединённых квантилей. Разброс отношений доступен в CSV и Sources." columns={[C('dataset','Набор'),C('backend','Исполнитель',v=>BACKENDS[v]),C('native_request_p95_ms','Py-Boost p95, мс',v=>f(v,4)),C('request_p95_ms','Исполнитель p95, мс',v=>f(v,4)),C('speed_request_p95','Py-Boost / исп., ×',v=>f(v,2)),C('native_gpu_p50_ms','Py-Boost GPU p50, мс',v=>f(v,4)),C('gpu_p50_ms','Исп. GPU p50, мс',v=>f(v,4)),C('speed_gpu_p50','GPU ускорение, ×',v=>f(v,2)),C('test_delta_full_pp','Δ macro-F1, п.п.',v=>signed(v,3)),C('uid','UID модели')]}/>
     <div id="hb-executor-scheme"><ExecutorDiagram q={q} outputs={outputs}/></div>
+    <details className="hasboost-details"><summary>Как измерено сравнение с исходным Py-Boost</summary><p>12 прежних наборов, первое сохранённое разбиение каждого. Четыре размера батча, три сеанса по 32 запроса; порядок исполнителей перемешивается. Кэш CUDA прогрет. Признаки D используются для инференса, метки не нужны. Деревья, модели, пороги и окружения сохранены.</p><p>Исходный код Ensemble.predict и Tree.predict не изменён. Полная сохранённая модель переведена в штатные структуры Tree без обучения. Загрузчик пропускает только необязательные экспорты пакета и поиск метаданных установленного дистрибутива.</p><p>Полный запрос: CPU → GPU, прогноз, прежние пороги, вероятности и метки → CPU. Для исходного Py-Boost добавлена только обёртка порогов и обмена данными; штатные выделения памяти и синхронизация сохранены. GPU-время измерено CUDA-событиями при входе на GPU; в него входят паузы отправки ядер. Числа не означают чистое время арифметики CUDA-ядер.</p><p>Новый замер памяти не проводился. Старое сравнение собственного пула legacy/packed доступно ниже; оно относится к отдельной серии. Изменение точности исходного Py-Boost учитывается численной проверкой прогнозов, а не выдаётся за побитовое равенство.</p></details>
+    <details className="hasboost-details"><summary>Дополнительные сравнения прежней серии: legacy → packed и разные модели на packed</summary><AdvancedInferenceView q={q}/></details>
   </>;
 }
 
@@ -163,7 +194,7 @@ export function DashboardContent() {
   const go=d=>exploreDashboard('dataset',{focus:{dataset:d}});
   return <article className="hasboost-dashboard">
     {(!activeTabId||activeTabId==='overview')&&<div className="hasboost-hero"><img src={hero} alt="HASBoost. Компактное обучение и быстрый инференс: 12 наборов, 36 разбиений, 4941 представление модели. Общий базис AB и разреженные поправки L."/></div>}
-    <div className="hasboost-status"><span className="hasboost-dot"/> Срез 29 октября 2026 · 12 многометочных наборов · сохранённые результаты <span className="hasboost-status-right"><a href="https://github.com/leostre/Py-Boost/pull/24" target="_blank" rel="noreferrer">Код и PR #24 ↗</a></span></div>
+      <div className="hasboost-status"><span className="hasboost-dot"/> {activeTabId==='inference'?'Инференс Py-Boost · 30 октября 2026 · 12 прежних наборов':'Срез 29 октября 2026 · 12 многометочных наборов · сохранённые результаты'} <span className="hasboost-status-right"><a href="https://github.com/leostre/Py-Boost/pull/24" target="_blank" rel="noreferrer">Код и PR #24 ↗</a></span></div>
     {['dataset','methods'].includes(activeTabId)&&canReturnFromExploration&&<button className="hasboost-back" onClick={returnFromExploration}>← Вернуться к сравнению</button>}
     {(!activeTabId||activeTabId==='overview')&&<Overview q={q} go={go}/>}
     {activeTabId==='dataset'&&<DatasetView q={q} dataset={dataset} setDataset={choose}/>}

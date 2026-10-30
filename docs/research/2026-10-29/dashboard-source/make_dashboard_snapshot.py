@@ -25,7 +25,8 @@ def explanatory_queries(catalog_path):
     labels={'ordinary':'Обычный бустинг','direct_AB':'AB · прямое обучение','direct_ABL':'AB + L · прямое обучение','posthoc':'Сжатие после обучения','controller':'Регулятор бюджета','sketch':'Sketch','mixed24':'Смешанный отбор'}
     assert {m['id'] for m in catalog['methods']}==set(labels)
     paths=sorted({f for m in catalog['methods']+catalog['executors'] for f in m['sources']}|{'research/external_controls/wide_probe.py'})
-    links=[dict(label=f,url=f"https://github.com/leostre/Py-Boost/blob/{catalog['source_commit']}/{f}") for f in paths]
+    native_paths={f:e['source_commit'] for e in catalog['executors'] if e.get('source_commit') for f in e['sources']}
+    links=[dict(label=f,url=f"https://github.com/leostre/Py-Boost/blob/{native_paths.get(f,catalog['source_commit'])}/{f}") for f in paths]
     source=dict(label='Пояснения, сверенные с реализацией',provider='Код опубликованного исследовательского снимка',links=links,
         filters=['Концептуальные схемы фактически проверенных вариантов; не новые результаты и не обещание выигрыша.'],
         metricDefinitions=[dict(label='Схемы',definition='Количество ячеек и узлов на рисунках условно; численные замеры находятся в отдельных таблицах.'),
@@ -51,6 +52,18 @@ def main():
             filters=['Только опубликованные агрегированные результаты; без признаков и разметки отдельных объектов.'],metricDefinitions=definitions,
             evidenceFlow=[dict(title='Исходный снимок',detail='HASBoost-A100-External d339851c2ab943a967dd3123ce64460fb85e8baf; модели и решения зафиксированы до теста.'),
                           dict(title='Контрольная сумма CSV',detail=sha(file)),dict(title='Преобразование',detail='CSV → числа, логические значения и null без изменения оценок; cohort=new только для Enron/CAL500/Corel5k/Delicious.')]))
+        if name=='native_inference_summary':
+            queries[name]['source'].update(provider='Дополнительная парная серия A100, 30 октября 2026',
+                files=['data/native_inference_summary.csv','native_inference_report.json'],
+                filters=['12 прежних наборов; первое сохранённое разбиение каждого; батчи 1/32/256/1024; без обучения и новой оценки на тесте.',
+                         'Исходный master b2842af: арифметика float32; legacy/packed: float64 суммы. Проверка вероятностей и меток — на D и входе с NaN.',
+                         'Нового замера памяти нет. Δ macro-F1 взята из прежнего финального отчёта.'],
+                metricDefinitions=[dict(label='Общий ориентир',definition='Та же полная модель ordinary/d3/t200 на неизменённых Ensemble.predict и Tree.predict. Для AB/ABL ориентир остаётся полной моделью; это совмещённый эффект представления и исполнения.'),
+                    dict(label='Ускорение',definition='Медиана трёх отношений p95(native)/p95(backend) или p50 GPU(native)/p50 GPU(backend); затем равная медиана по выбранным наборам. Абсолютные времена — по 96 запросам вместе.'),
+                    dict(label='GPU-время',definition='CUDA elapsed при входе на GPU; включая паузы отправки ядер, исходные выделения и синхронизацию. Полный запрос дополнительно включает H2D/D2H вероятностей и меток.')],
+                evidenceFlow=[dict(title='Исходный код',detail='leostre/Py-Boost master b2842af472e21c7332d9487d8c83e53cb48d1486; исходные файлы проверены по SHA-256.'),
+                    dict(title='Парные измерения',detail='orx run 8d178a2d-3f3a-4ac1-bdbe-dda44b5020dc; свободная A100; 3×32 запроса; 336 численных проверок; без переобучения.'),
+                    dict(title='Контрольная сумма CSV',detail=sha(file))])
     pairs=json.loads((a.evidence/'inference_pairs.json').read_text())['pairs']
     queries['executor_pairs']=dict(rows=pairs,source=dict(label='Парные сеансы исполнителей',files=['inference_pairs.json'],metricDefinitions=definitions,
         evidenceFlow=[dict(title='Парное отношение',detail='Одинаковые case, uid и batch; прежний / новый исполнитель. Медиана трёх отношений сеансов. Данные взяты из опубликованного inference_pairs.json.')]))
