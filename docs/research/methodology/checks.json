@@ -6,8 +6,8 @@
   "source_map": "source-map.json",
   "original_html_unchanged": true,
   "original_html_sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc",
-  "delivered_html_sha256": "20cf67731c590437d78ff18492ef2162afdbb94dc05ea9be07119e98bb74da60",
-  "html_bytes": 24798463,
+  "delivered_html_sha256": "f6b6c6a79874180b88354b59900274d3ac1d3d6bf7091aa3d0c7580196a5d015",
+  "html_bytes": 33020520,
   "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
   "original_queries_unchanged": 12,
   "original_query_sha256": {
@@ -107,5 +107,10 @@
     "legacy_full_vs_compact": "Full W shows sum only; AB+L shows basis decoding; native remains full reference."
   },
   "export_decision": "Large image imports exceeded exporter stack; one bounded larger-stack retry also failed. Unmodified PNG bytes moved into the ordinary snapshot data layer; canonical build/export then passed, no runtime or integrity code changes.",
-  "quartz": "not_applicable_repository_markdown_and_HTML"
+  "quartz": "not_applicable_repository_markdown_and_HTML",
+  "revision": "animated-inference-journey",
+  "previous_receipt": "checks-before-animation.json",
+  "original_sources_unchanged": 13,
+  "animation_receipt": "animations/checks.json",
+  "animation_unit_tests": 7
 }

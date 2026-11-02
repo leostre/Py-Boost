@@ -56,8 +56,8 @@
   },
   "interactive_dashboard": {
     "file": "hasboost-results-interactive.html",
-    "sha256": "20cf67731c590437d78ff18492ef2162afdbb94dc05ea9be07119e98bb74da60",
-    "snapshot_sha256": "c8fa231003fe53714daee119f1df1032fb673c5ee912496fd456bec0db3b958a",
+    "sha256": "f6b6c6a79874180b88354b59900274d3ac1d3d6bf7091aa3d0c7580196a5d015",
+    "snapshot_sha256": "a2751d840da8e27d68e94c81e6570c742dfa2db2d3bf730022af4669f7ef3f97",
     "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
     "basis": "Published result tables and the same sealed bank choices; no new model fitting or GPU runs.",
     "bank_choices": {
@@ -138,6 +138,14 @@
       "new_fits": 0,
       "new_GPU_benchmarks": 0,
       "changes": "Readable executor grouping, layered developer details, hypothesis gallery and methodological history."
+    },
+    "animation_revision": {
+      "date": "2026-11-02",
+      "previous_receipt": "checks/interactive-dashboard-v4.json",
+      "previous_sources_unchanged": 13,
+      "query": "inference_animation",
+      "scope": "Exactly checkable authored teaching example; no new benchmark, data selection or model training.",
+      "frames_sha256": "a53c40ad517ef2a4f9fbc58d95cf7fedad5ac2d5b812c2c45827fac3e5b5709d"
     }
   }
 }

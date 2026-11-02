@@ -1,0 +1,5 @@
+*.json -text whitespace=cr-at-eol
+frames.json linguist-generated=true -diff
+*.svg -text linguist-generated=true -diff
+*.gif binary
+*.png binary

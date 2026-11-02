@@ -1,10 +1,10 @@
 {
   "artifact": "hasboost-results-interactive.html",
-  "artifact_sha256": "20cf67731c590437d78ff18492ef2162afdbb94dc05ea9be07119e98bb74da60",
-  "artifact_bytes": 24798463,
+  "artifact_sha256": "f6b6c6a79874180b88354b59900274d3ac1d3d6bf7091aa3d0c7580196a5d015",
+  "artifact_bytes": 33020520,
   "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
   "build_status": "complete",
-  "snapshot_sha256": "c8fa231003fe53714daee119f1df1032fb673c5ee912496fd456bec0db3b958a",
+  "snapshot_sha256": "a2751d840da8e27d68e94c81e6570c742dfa2db2d3bf730022af4669f7ef3f97",
   "build": {
     "canonical_prebuilt_runtime": true,
     "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
@@ -59,8 +59,8 @@
     "legacy_full_vs_compact": "Full W shows sum only; AB+L shows basis decoding; native remains full reference."
   },
   "scientific_scope": "New S2 inference timings on saved models; 12 datasets, first split, 4 batches, 7 variants, 3x32 queries. No fitting or new test-label metrics. Native float32 preserved; optimized sums float64;336 numeric checks passed. Existing memory series separate.",
-  "revision": "methodological-history-and-readable-primer",
-  "checked_at": "2026-11-02T13:11:06+03:00",
+  "revision": "animated-inference-journey",
+  "checked_at": "2026-11-02T14:25:48+03:00",
   "native_evidence": {
     "run": "8d178a2d-3f3a-4ac1-bdbe-dda44b5020dc",
     "commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
@@ -80,5 +80,37 @@
     "original_html_sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc",
     "original_html_commit": "6894ec9f55d17c24f48cb84d4a3e4c78a72ddb64",
     "new_scientific_runs": 0
+  },
+  "animation_revision": {
+    "previous_sources_unchanged": 13,
+    "teaching_query": "inference_animation",
+    "teaching_rows": 128,
+    "unit_tests_passed": 7,
+    "new_scientific_runs": 0,
+    "exports": [
+      "native",
+      "legacy",
+      "packed",
+      "packed-abl"
+    ],
+    "formats": [
+      "gif",
+      "animated-svg",
+      "png-poster"
+    ],
+    "controls": [
+      "play",
+      "pause",
+      "step",
+      "seek",
+      "restart",
+      "rate",
+      "loop",
+      "executor",
+      "representation",
+      "legacy-route"
+    ],
+    "preview_checked": true,
+    "final_export_browser_check": "Standalone HTML opened via HTTP; play/pause/seek, reset, native/full, legacy wide/narrow, AB+L, rate and responsive layout checked; zero console errors."
   }
 }

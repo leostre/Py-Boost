@@ -1,0 +1,79 @@
+{
+  "status": "verified",
+  "checked_at": "2026-11-02T14:31:59+03:00",
+  "teaching_example": true,
+  "new_scientific_runs": 0,
+  "original_sources_unchanged": 13,
+  "original_query_sha256": {
+    "all_quality_points": "289e475101634982d2b56817b380c0324287da59dd3add03186128dc9f6cf20c",
+    "bank_choices": "d3e8929ab61e3f1101e7ae2667d57fff2e3ca1d299bcfd49b75bd1aa9d945250",
+    "bank_summary": "7f9b3ef4f4f2ef0b70b4db55d4350caebc3509cb1d1ca9cf4a81003825ec176b",
+    "constant_diagnostics": "c3c204fe4ccc8f6b9eba02e37200ad407d9da4347f3b8ff7fdb26c4416302fff",
+    "dataset_profiles": "f22b2c6b3ae3b8977979475e2fc8882cdf09df7dc793b2b52d033ee27802872c",
+    "inference_summary": "f431a1097334b0c42b8e3541e67c295db2378be09962f3ada7b88d24e59908cc",
+    "native_inference_summary": "d46d7fae9196cc6c1152f347db33fe1bcc82d6301fefaa6f4436a9b9ec8f5d0d",
+    "representation_comparison": "c2d478c624fe2af43a9d9bd5f46011e440cd63f7652e13d687848030118c39e2",
+    "selected_quality": "31de04a8d203b2ce600308289aaced2ec339df5a99faa2ec9ec4da02d6907b14",
+    "executor_pairs": "c7923b46ecb6ea64bf90f48fcd2f54d1034347fbd129dc96a3e8be26909bebf5",
+    "method_mechanisms": "204c0ad780fccaa57cc4d54d80ee55ad7dafc02dbd57a0059fa8f72b5bf1c86d",
+    "executor_mechanisms": "cdb99e8090264e5737c77cc0a0f7442ed247fccf6e42c312f85e8cd474eb8ad5",
+    "hypothesis_atlas": "e95ad212190a5620f9fece42f229a229464d56c611f6f6788a16b4108c3bf121"
+  },
+  "teaching_stages": 128,
+  "variants": 10,
+  "unit_tests_passed": 7,
+  "analytics_checks_passed": 12,
+  "embedded_snapshot_matches_reproducer": true,
+  "external_required_assets": 0,
+  "html_sha256": "f6b6c6a79874180b88354b59900274d3ac1d3d6bf7091aa3d0c7580196a5d015",
+  "animations": [
+    {
+      "name": "native",
+      "stages": 14,
+      "gif_frames": 26,
+      "duration_ms": 18400,
+      "gif_sha256": "ef98da5d59dd6c33a637d36eaa85e73b35844f39f61e5eff528c702f0476411c",
+      "svg_sha256": "e2cb41154d4b76cb55941d539c70d43a24977d122d3c9544373c89f2613e9d87"
+    },
+    {
+      "name": "legacy",
+      "stages": 12,
+      "gif_frames": 20,
+      "duration_ms": 16000,
+      "gif_sha256": "d470b4c7b5c8625513103e1757980652a609072d9d4a48d92c9270fcc3197964",
+      "svg_sha256": "5ccbc2b902f092624f207fd8c8723f5ad0979d4fee7ffce8bedb0de140b4ff0c"
+    },
+    {
+      "name": "packed",
+      "stages": 12,
+      "gif_frames": 20,
+      "duration_ms": 16000,
+      "gif_sha256": "81491f4ae7444d633666a9df5e0fd6802a79e2f5aaad114a92294f95f977c9ce",
+      "svg_sha256": "f28f2aa56f19f604ed3fc99f1653487c3242ec7f08fc5d92efbf16c2ab078d1f"
+    },
+    {
+      "name": "packed-abl",
+      "stages": 12,
+      "gif_frames": 20,
+      "duration_ms": 16000,
+      "gif_sha256": "b19d641cd9403cad3bf0df1f5be6b0d8c0d68a96a969a7b3033c8c273caedeeb",
+      "svg_sha256": "277b0c57c1a5dba520f226aa40ebd9f067c2bdcb070c9716bf8b18028bcd0c24"
+    }
+  ],
+  "local_links_checked": 41,
+  "runtime_changed": false,
+  "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
+  "browser_checks": {
+    "play_pause": true,
+    "seek_last_step": true,
+    "variant_reset": true,
+    "native_compact_disabled": true,
+    "legacy_routes": true,
+    "representation": true,
+    "rate": true,
+    "mobile": "390px viewport,375px document; controls343px; scene341px scrolls900px inside card; viewport reset",
+    "svg_autoplay": "Separate packed-abl.svg opened;12 frames, visible frame changed over time; responsive sizing and font fallback checked",
+    "console_errors": 0
+  },
+  "scope": "All times and numbers in animations are educational; full and AB+L are exactly equal only in the constructed toy ensemble."
+}

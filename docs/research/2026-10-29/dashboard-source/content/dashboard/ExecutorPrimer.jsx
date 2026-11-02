@@ -29,8 +29,7 @@ function Packed({compact}) {
 }
 
 /** A four-tree teaching example, never a measured launch/time chart. */
-export function ExecutorFlow({wide,compact}) {
-  const [focus,setFocus]=React.useState('packed');
+export function ExecutorFlow({wide,compact,focus='packed',onFocus=()=>{}}) {
   const rows=[
     {id:'native',name:'Исходный Py-Boost',tag:compact?'Полный ориентир W':'По одному дереву',lead:'На каждое дерево — поиск листа, затем прибавление значений.',svg:<Native/>,detail:'Два разных запуска на дерево: один находит лист, другой прибавляет его значения. GPU обрабатывает весь батч, но получает много отдельных команд. После последнего дерева вероятности и метки вычисляются отдельно.'},
     {id:'legacy',name:'Legacy',tag:'По блокам деревьев',lead:'Несколько деревьев обрабатываются вместе. Результаты блоков складываются.',svg:<Legacy wide={wide} compact={compact}/>,detail:wide?(compact?'Прежний оптимизированный путь для более 128 выходов. Один блок собирает координаты и поправки, затем отдельные операции декодируют базис и суммируют результат. Вероятности и метки вычисляются после блоков. Legacy уже оптимизирован относительно исходного Py-Boost.':'Прежний оптимизированный путь для более 128 выходов. Один блок собирает полные значения листьев, затем его результат отдельно прибавляется к общему прогнозу. Базиса в этом представлении нет. Вероятности и метки вычисляются после блоков.'):'Прежний оптимизированный путь для не более 128 выходов. Деревья одного блока и его сумма обрабатываются совместно. При нескольких блоках остаются отдельные вызовы и общий накопитель; вероятности и метки считаются после них.'},
@@ -38,7 +37,7 @@ export function ExecutorFlow({wide,compact}) {
   ];
   return <div className="hb-primer">
     <p className="hb-primer-intro">Условный пример: <b>4 дерева, 2 блока</b>. Каждый CUDA-запуск работает с батчем целиком. Рамки показывают, какую работу движок объединяет.</p>
-    <div className="hb-primer-grid">{rows.map(r=><button key={r.id} className={`hb-primer-card hb-primer-${r.id}`} aria-pressed={focus===r.id} onClick={()=>setFocus(r.id)}><span className="hb-primer-tag">{r.tag}</span><strong>{r.name}</strong>{r.svg}<span className="hb-primer-lead">{r.lead}</span><span className="hb-primer-prompt">Пояснить этот вариант ↓</span></button>)}</div>
+    <div className="hb-primer-grid">{rows.map(r=><button key={r.id} className={`hb-primer-card hb-primer-${r.id}`} aria-pressed={focus===r.id} onClick={()=>onFocus(r.id)}><span className="hb-primer-tag">{r.tag}</span><strong>{r.name}</strong>{r.svg}<span className="hb-primer-lead">{r.lead}</span><span className="hb-primer-prompt">Пояснить этот вариант ↓</span></button>)}</div>
     <div className="hb-primer-detail" aria-live="polite"><b>{rows.find(r=>r.id===focus).name} · что важно</b><p>{rows.find(r=>r.id===focus).detail}</p></div>
     <p className="hb-schematic-note">Это схема организации работы, не шкала скорости. Один большой запуск не гарантирует наименьшую задержку; результат проверяется по измерениям.</p>
   </div>;

@@ -4,6 +4,7 @@ import catalog from './mechanisms.json';
 import {FAMILIES, LABELS, COLORS, ROLES} from './analytics.js';
 import './explainers.css';
 import {ExecutorFlow} from './ExecutorPrimer.jsx';
+import {InferenceJourney} from './InferenceJourney.jsx';
 
 export const BACKENDS={legacy:'Legacy · по блокам',packed:'Packed · единое ядро'};
 const baseUrl=`https://github.com/leostre/Py-Boost/blob/${catalog.source_commit}/`;
@@ -93,11 +94,13 @@ export function InferenceComparison({mode,role,referenceRole,example,sourceRows}
 
 export function ExecutorDiagram({q,outputs}) {
   const {sectionViews,setSectionView}=useDataApp();
+  const [engine,setEngine]=React.useState('packed');
   const prefs=sectionViews['hb-executor-diagram']??{};
   const route=prefs.route??(outputs!=null&&outputs<=128?'narrow':'wide');
   const wide=route==='wide',compact=prefs.representation==='compact';
-  return <DataComponent id="executor-mechanism" queryId="executor_mechanisms" title="Как движок группирует работу на GPU" kind="diagram" sourceRows={q.executor_mechanisms.rows} displayRows={q.executor_mechanisms.rows}>
-    <ExecutorFlow wide={wide} compact={compact}/>
+  return <><InferenceJourney q={q} engine={engine} onEngineChange={setEngine} wide={wide} compact={compact} onCompactChange={value=>setSectionView('hb-executor-diagram',{...prefs,representation:value?'compact':'full'})} onWideChange={value=>setSectionView('hb-executor-diagram',{...prefs,route:value?'wide':'narrow'})}/>
+  <DataComponent id="executor-mechanism" queryId="executor_mechanisms" title="Как движок группирует работу на GPU" kind="diagram" sourceRows={q.executor_mechanisms.rows} displayRows={q.executor_mechanisms.rows}>
+    <details className="hasboost-details"><summary>Сравнить три схемы рядом</summary><ExecutorFlow wide={wide} compact={compact} focus={engine} onFocus={setEngine}/></details>
     <p className="hb-explain-takeaway">{compact?'Исходный Py-Boost сверху остаётся полной моделью W: он не исполняет AB + L напрямую. Legacy и packed здесь показывают один и тот же гибрид.':'По умолчанию показана одна полная модель W: деревья и коэффициенты одинаковы, меняется организация вычислений.'}</p>
     <details className="hasboost-details hb-primer-technical"><summary>Для разработчика: базис, буферы и границы измерений</summary>
       <div className="hb-flow-controls"><span>Что показывают legacy и packed</span><SegmentedControl ariaLabel="Представление на схеме исполнения" value={compact?'compact':'full'} options={[{value:'full',label:'Полные листья W'},{value:'compact',label:'Гибрид AB + L'}]} onChange={representation=>setSectionView('hb-executor-diagram',{...prefs,representation})}/></div>
@@ -107,5 +110,5 @@ export function ExecutorDiagram({q,outputs}) {
       <p>Переключатели меняют только учебную схему. {outputs!=null?`У выбранного набора ${outputs} выходов.`:'В таблицах всех наборов представлены оба пути legacy.'} Числа измерений не пересчитываются.</p>
       {catalog.executors.map(e=><p key={e.id}><b>{e.title}:</b> {e.sources.map((p,i)=><React.Fragment key={p}>{i>0?' · ':''}<a href={`https://github.com/leostre/Py-Boost/blob/${e.source_commit??catalog.source_commit}/${p}`} target="_blank" rel="noreferrer">{p.split('/').at(-1)}</a></React.Fragment>)}</p>)}
     </details>
-  </DataComponent>;
+  </DataComponent></>;
 }
