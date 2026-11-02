@@ -1,0 +1,24 @@
+{
+  "phase": "publication",
+  "environment_root": "${HASBOOST_NVFOREST_ENV}",
+  "requirements": [
+    "nvforest-cu12==26.10.0",
+    "numpy==2.2.6",
+    "scikit-learn==1.7.2",
+    "scipy==1.15.3",
+    "treelite==4.7.0"
+  ],
+  "unchanged_environments": {
+    "${HASBOOST_NATIVE_ENV}/environment.json": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+    "${HASBOOST_EXTERNAL_ENV}/environment.json": "34588579bac49b4f49adf00f22459b84040c799c9bcd2d21b78c4821c139cbb7"
+  },
+  "source": "https://docs.nvidia.com/nvforest/26.10/getting_started/",
+  "scope": "Isolated external control for autonomous HASBoost R4; readiness only; no fitting/weights/benchmark. Python3.12, CuPy14 required by nvforest26.10 differ from frozen native Python3.10/CuPy13. No changes to old runtimes.",
+  "environment_sha256": "0ae5c6745c736f2bb263b4f93b27b315b2f251c585af08a3945dd24254879561",
+  "research_source": "${HASBOOST_ARTIFACTS}/df0c28d4-4b11-47b4-b4b2-b9f53470ed98/repo",
+  "tuning": {
+    "path": "${HASBOOST_ARTIFACTS}/214c9683-ad10-4848-923d-15502c1e8b71/repo/results/packed_S0T2_20261029/tuning_seal.json",
+    "sha256": "236e49eccfae95be254fdc2e31a513cb0ecfa9a12cdb307b423c24ca97c0193d"
+  },
+  "publication_source_phase": "measure"
+}
