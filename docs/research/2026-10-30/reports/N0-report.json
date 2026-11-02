@@ -1,0 +1,20 @@
+{
+  "status": "nvforest_environment_ready",
+  "environment_sha256": "0ae5c6745c736f2bb263b4f93b27b315b2f251c585af08a3945dd24254879561",
+  "record": {
+    "requirements": [
+      "nvforest-cu12==26.10.0",
+      "numpy==2.2.6",
+      "scikit-learn==1.7.2",
+      "scipy==1.15.3",
+      "treelite==4.7.0"
+    ],
+    "freeze": "cloudpickle==3.1.2\ncuda-bindings==12.9.10\ncuda-pathfinder==1.8.5\ncuda-toolkit==12.9.2.0\ncupy-cuda12x==14.2.0\njoblib==1.6.0\nlibnvforest-cu12==26.10.0\nlibraft-cu12==26.10.0\nlibrmm-cu12==26.10.0\nnumpy==2.2.6\nnvforest-cu12==26.10.0\nnvidia-cublas-cu12==12.9.2.10\nnvidia-cuda-nvrtc-cu12==12.9.86\nnvidia-cuda-runtime-cu12==12.9.79\nnvidia-cufft-cu12==11.4.1.4\nnvidia-curand-cu12==10.3.10.19\nnvidia-cusolver-cu12==11.7.5.82\nnvidia-cusparse-cu12==12.5.10.65\nnvidia-nvjitlink-cu12==12.9.86\npackaging==26.3\npylibraft-cu12==26.10.0\nrapids-logger==0.3.0\nrmm-cu12==26.10.0\nscikit-learn==1.7.2\nscipy==1.15.3\nthreadpoolctl==3.7.0\ntreelite==4.7.0\n",
+    "probe": "{\"python\": \"3.12.12 (main, Feb 12 2026, 00:42:14) [Clang 21.1.4 ]\", \"device\": 1, \"nvforest\": \"26.10.00\", \"cupy\": \"14.2.0\", \"treelite\": \"4.7.0\"}\n",
+    "unchanged_environments": {
+      "/root/hasboost_compactness_20260928/environment.json": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+      "/root/hasboost_external_20261021/environment.json": "34588579bac49b4f49adf00f22459b84040c799c9bcd2d21b78c4821c139cbb7"
+    }
+  },
+  "new_trees": 0
+}

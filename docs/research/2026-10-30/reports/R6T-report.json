@@ -1,0 +1,19 @@
+{
+  "status": "R6T_complete",
+  "boost": {
+    "path": "/root/.orx/runs/aa82a588-255f-4ca3-b614-ce8fd919ef1b/repo/results/six_R6T_20261030/boost-report.json",
+    "sha256": "5f9a68ba7b98243cf6775e910e980db6d319442d3f910e4080345b5aba5b5d0e"
+  },
+  "tabpfn": {
+    "path": "/root/.orx/runs/aa82a588-255f-4ca3-b614-ce8fd919ef1b/repo/results/six_R6T_20261030/tabpfn-cached-auto.json",
+    "sha256": "30203032ff242447746df5fbb88fe2cd8b94c3265efd31fff55f87b4d0cd6a99"
+  },
+  "new_trees": 0,
+  "nn_weight_updates": 0,
+  "caveats": [
+    "five tasks only, not the12multilabel tasks",
+    "old quality controls retained; no new5percent research gate",
+    "serial J1 transfer-inclusive traces,32samples not SLA guarantee",
+    "sequential native and external frozen environments; no speed attribution to environment changes"
+  ]
+}

@@ -1,0 +1,2623 @@
+{
+  "status": "R5QM_complete",
+  "cases": [
+    {
+      "case": "emotions_71004",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/emotions_71004/development.json",
+      "sha256": "480bc5d7bf08beb2a72cf12c09cfd34ea61c41b6664bca093bbdf165d3a9501e"
+    },
+    {
+      "case": "scene_71104",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/scene_71104/development.json",
+      "sha256": "c621c6daa658d072e9e61657a9a2a2b099054b984758e9998983718138db6dde"
+    },
+    {
+      "case": "yeast_71204",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/yeast_71204/development.json",
+      "sha256": "3c149e81a29d9457a05a86bef842df09c43c00581a14e011aa5309c84e465927"
+    },
+    {
+      "case": "birds_71304",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/birds_71304/development.json",
+      "sha256": "e0435550a745691b0a2a210a4a8397e1f7cb0eef155511c9e6f7738eeb790feb"
+    },
+    {
+      "case": "medical_71404",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/medical_71404/development.json",
+      "sha256": "e1279e230257e55a908ac6fe40119f3c8a8f1eb215f0e2db7231dc891aaff20e"
+    },
+    {
+      "case": "genbase_71504",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/genbase_71504/development.json",
+      "sha256": "63bea2bedea86afcd56a933a88044e94fac8104be734d11a77a026dc15e03d82"
+    },
+    {
+      "case": "bibtex_71604",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/bibtex_71604/development.json",
+      "sha256": "1c59719f84ddbd4cc82a3daf332146b984bcc0772962fa88f94267f664213df8"
+    },
+    {
+      "case": "mediamill_71704",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/mediamill_71704/development.json",
+      "sha256": "cd44775c0b063e87fcd2b539577460a5f9a79880e6180a54c16834130c325d24"
+    },
+    {
+      "case": "enron_71804",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/enron_71804/development.json",
+      "sha256": "9894043cd8ac21c53e75e115eb79961a1ab0a2e48ed5ec5fa5676b53540e4af6"
+    },
+    {
+      "case": "cal500_71904",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/cal500_71904/development.json",
+      "sha256": "52401d9db330380f778bf40a924a9a7c4f1d1d537f3b7cc4e1a294fa17300823"
+    },
+    {
+      "case": "corel5k_72004",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/corel5k_72004/development.json",
+      "sha256": "272a8665990f78cd98a0bd41a577447670d8af74c686813b4013190fc1b30949"
+    },
+    {
+      "case": "delicious_72104",
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/delicious_72104/development.json",
+      "sha256": "24f7c25f13d69ae14f951bf49a35f830cce6c43a7ffa2fa1906e10d522f9c619"
+    }
+  ],
+  "results": [
+    {
+      "case": "emotions_71004",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.668397318177305,
+            "f1_weighted": 0.6786152192425758,
+            "loss": 0.44995988575007784,
+            "brier": 0.14489451082608984
+          },
+          "packed_bytes": 37452,
+          "fit": {
+            "trees": 80,
+            "seconds": 5.506387278437614,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176004,
+            "proxy_sha256": "ccc8795c5cd945ff53c49ac51626ef9755d85830941aeabc2e6593b9fd47bbb4",
+            "replay_probability_error": 2.9008131452457064e-09,
+            "clipped": 0,
+            "coefficients": 1692,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367933755184075,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1017,
+                "utilization": 0,
+                "pids": [
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.6703261419989898,
+            "f1_weighted": 0.6761823763790358,
+            "loss": 0.45062800825113114,
+            "brier": 0.1451561501927604
+          },
+          "packed_bytes": 33276,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1885541714727879,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176004,
+            "proxy_sha256": "28068230f9363fb6b580775f50bca40dc1861722e940d15e1a835159197acfa4",
+            "replay_probability_error": 1.0076783796275635e-08,
+            "clipped": 0,
+            "coefficients": 1692,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367940228272024,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "scene_71104",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.6995458560275755,
+            "f1_weighted": 0.6831514929469908,
+            "loss": 0.22928299866049476,
+            "brier": 0.07037746309359898
+          },
+          "packed_bytes": 42024,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.333182130008936,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176104,
+            "proxy_sha256": "1f1887d4a4c00438c3aee478677af9c1b62ea5e6b43464ce4514c90d64e30524",
+            "replay_probability_error": 3.971151629755809e-09,
+            "clipped": 0,
+            "coefficients": 1869,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367942358354075,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.7308394741976693,
+            "f1_weighted": 0.7174676991442661,
+            "loss": 0.2285468410567357,
+            "brier": 0.06984478185424213
+          },
+          "packed_bytes": 37054,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2807245515286922,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176104,
+            "proxy_sha256": "29b31d91fcecf2791d22d303a46f44f1063cfb0f03721d998bcb0e2507146bbd",
+            "replay_probability_error": 7.222053177713406e-09,
+            "clipped": 0,
+            "coefficients": 1833,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367944359297159,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "yeast_71204",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.48926371138817615,
+            "f1_weighted": 0.6588570927412583,
+            "loss": 0.4295634351265795,
+            "brier": 0.1378201207292772
+          },
+          "packed_bytes": 54742,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.246610727161169,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176204,
+            "proxy_sha256": "6ea10e16118d415066483f822afcc8c24888bc6fba55e03d7f22ffc6670935cb",
+            "replay_probability_error": 6.52569887016341e-09,
+            "clipped": 0,
+            "coefficients": 4116,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367946544124220,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.4824529638914952,
+            "f1_weighted": 0.6493776440224462,
+            "loss": 0.4300330427617396,
+            "brier": 0.13805419679345207
+          },
+          "packed_bytes": 44013,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.3000708185136318,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176204,
+            "proxy_sha256": "9acfce732ce43e50029c5c4ac9feaa78c6f1d0cb6e2321b06921899decc17d32",
+            "replay_probability_error": 9.645355514287246e-09,
+            "clipped": 0,
+            "coefficients": 4102,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367948429721692,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "birds_71304",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.31355913756362136,
+            "f1_weighted": 0.44101190501326765,
+            "loss": 0.12883807757949456,
+            "brier": 0.03494720054004372
+          },
+          "packed_bytes": 61512,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1774647943675518,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176304,
+            "proxy_sha256": "ce7b165126a36badd225eac46b4cb6aa12d5dcd774ef60591faf7845b7c6b5c4",
+            "replay_probability_error": 7.982537963968639e-09,
+            "clipped": 0,
+            "coefficients": 5600,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367950683753161,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.3451778451394124,
+            "f1_weighted": 0.4592563936484163,
+            "loss": 0.12808195841674377,
+            "brier": 0.0347947694276457
+          },
+          "packed_bytes": 47100,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1992027647793293,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176304,
+            "proxy_sha256": "caacc3290520f56fcc6da064e003196203d6f00d6d50920402d70ebe5c308fae",
+            "replay_probability_error": 1.0067027877980195e-08,
+            "clipped": 0,
+            "coefficients": 5620,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367952520650047,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "medical_71404",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.21566117601676246,
+            "f1_weighted": 0.6509448860846413,
+            "loss": 0.04948162620755183,
+            "brier": 0.010952714758809188
+          },
+          "packed_bytes": 80866,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.3535723388195038,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176404,
+            "proxy_sha256": "b364e51809d5a4eedb0c8cadab086eb9fc48f9181ee36a54ae2a74436501c165",
+            "replay_probability_error": 8.367915971252415e-09,
+            "clipped": 0,
+            "coefficients": 9292,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367954581337298,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.20601031436099868,
+            "f1_weighted": 0.6438122209740189,
+            "loss": 0.04949491933496168,
+            "brier": 0.010963025055775727
+          },
+          "packed_bytes": 54756,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2570307664573193,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176404,
+            "proxy_sha256": "4ded1b76d6801c2fd1bc95d26df8e52ba13905ff096c53d14ae83ed91ae32914",
+            "replay_probability_error": 1.4007013549033331e-08,
+            "clipped": 0,
+            "coefficients": 9269,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367956644366559,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "genbase_71504",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.394714048699556,
+            "f1_weighted": 0.6092760316487357,
+            "loss": 0.06098709687045586,
+            "brier": 0.016366356196849344
+          },
+          "packed_bytes": 45008,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1749585717916489,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176504,
+            "proxy_sha256": "44c9a04d9b791dd3ea9edb6be73d21900d958ee183bfaaa5c1ba82b80d863cd0",
+            "replay_probability_error": 2.4240052187707306e-09,
+            "clipped": 0,
+            "coefficients": 4886,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367958767909028,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.394714048699556,
+            "f1_weighted": 0.6092760316487357,
+            "loss": 0.06003382190917886,
+            "brier": 0.01613131133114957
+          },
+          "packed_bytes": 32828,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2419556491076946,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176504,
+            "proxy_sha256": "e233c4cd05cd07c23482ddebbab6f4fe784679886dc3cfbde20ec7a10299ae27",
+            "replay_probability_error": 1.004502017676323e-08,
+            "clipped": 0,
+            "coefficients": 4900,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367960599679843,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "bibtex_71604",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.326649968298952,
+            "f1_weighted": 0.4183835811268109,
+            "loss": 0.04500365993927157,
+            "brier": 0.010513802260585453
+          },
+          "packed_bytes": 269296,
+          "fit": {
+            "trees": 80,
+            "seconds": 14.396009657531977,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176604,
+            "proxy_sha256": "52b0be82558abf6cad413f8d3028c7115dbe72d9f6c197fb15c7f33f5cc4aba9",
+            "replay_probability_error": 2.2062994542437764e-08,
+            "clipped": 0,
+            "coefficients": 37632,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367963506435620,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1449,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.324332588029113,
+            "f1_weighted": 0.41930212893981533,
+            "loss": 0.045122283895579485,
+            "brier": 0.010525705428149368
+          },
+          "packed_bytes": 165252,
+          "fit": {
+            "trees": 80,
+            "seconds": 15.966255228966475,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176604,
+            "proxy_sha256": "41774259561a5443055d6a76a2b3ce4465802263c54763d57e3658307bfda1c7",
+            "replay_probability_error": 1.7768721660704756e-08,
+            "clipped": 0,
+            "coefficients": 37568,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367978746933067,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 869,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "mediamill_71704",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.1447695105477262,
+            "f1_weighted": 0.5470120431079584,
+            "loss": 0.08850180098677361,
+            "brier": 0.024001495093461032
+          },
+          "packed_bytes": 226936,
+          "fit": {
+            "trees": 80,
+            "seconds": 2.4283030219376087,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176704,
+            "proxy_sha256": "c348f25de3bd82b5e7d70b0aec7798fca00ac627f6ce98d24ee5e18de0b9ec28",
+            "replay_probability_error": 2.8710836708079057e-08,
+            "clipped": 0,
+            "coefficients": 32589,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367995999765214,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1451,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.13979826902255674,
+            "f1_weighted": 0.5470790255190414,
+            "loss": 0.08835671584975659,
+            "brier": 0.02396622083771879
+          },
+          "packed_bytes": 140731,
+          "fit": {
+            "trees": 80,
+            "seconds": 2.420114878565073,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176704,
+            "proxy_sha256": "85713b56f869f25b0aa62ba2aacd9b1e91814d1e32a997216a3000fccdf8833f",
+            "replay_probability_error": 1.9207284651656664e-08,
+            "clipped": 0,
+            "coefficients": 32640,
+            "gpu_probe": [
+              {
+                "time_ns": 1793367999145154575,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1451,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "enron_71804",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.1997059468345589,
+            "f1_weighted": 0.5722196187283759,
+            "loss": 0.1261751215848826,
+            "brier": 0.0342356783802376
+          },
+          "packed_bytes": 130748,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.6710987910628319,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176804,
+            "proxy_sha256": "8f3849b8654349c8852330aa54f00e4f767dd5bc98a919b886fc7bf66fb3fe4c",
+            "replay_probability_error": 1.517273351403503e-08,
+            "clipped": 0,
+            "coefficients": 17064,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368002559488599,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1451,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.19711881233871556,
+            "f1_weighted": 0.5782185875909326,
+            "loss": 0.12646172616078372,
+            "brier": 0.03428481091775757
+          },
+          "packed_bytes": 86789,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.6964275054633617,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176804,
+            "proxy_sha256": "83f36647cdb5b120ce793e9b28d88acfd28a1a336d7510775d4a1e1205158ece",
+            "replay_probability_error": 1.670205607151587e-08,
+            "clipped": 0,
+            "coefficients": 16983,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368004938861093,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1451,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "cal500_71904",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.19636077427235463,
+            "f1_weighted": 0.43810559585103703,
+            "loss": 0.35036030892423564,
+            "brier": 0.10585704119170314
+          },
+          "packed_bytes": 277208,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1725500784814358,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176904,
+            "proxy_sha256": "ca13fd9468cfd236d9baea05d5dab182f39188b8b7f44c0f94f09de2d4c0f810",
+            "replay_probability_error": 1.18276637928183e-08,
+            "clipped": 0,
+            "coefficients": 37824,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368007532196897,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1451,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.19680725626315423,
+            "f1_weighted": 0.4427459780375359,
+            "loss": 0.34941777041658567,
+            "brier": 0.1055675194999805
+          },
+          "packed_bytes": 169036,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2339977733790874,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176904,
+            "proxy_sha256": "d6b1f11b63da0e0434e1e698aae38a4ff4c498a7015627e11ca4dd9f2d00bf58",
+            "replay_probability_error": 1.638740354525936e-08,
+            "clipped": 0,
+            "coefficients": 36608,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368009379925666,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1451,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "corel5k_72004",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.03460628653712809,
+            "f1_weighted": 0.1831829351833858,
+            "loss": 0.03936478483889116,
+            "brier": 0.008395975482657634
+          },
+          "packed_bytes": 259888,
+          "fit": {
+            "trees": 80,
+            "seconds": 4.245723195374012,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 177004,
+            "proxy_sha256": "6f8c8b44e9a9f9b3d1e14e81ba8a42ecb6f6ac9dfddf5e62974c61304eeed8b5",
+            "replay_probability_error": 3.002564963328069e-08,
+            "clipped": 0,
+            "coefficients": 27328,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368011786125316,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1451,
+                "utilization": 74,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.03610467699071361,
+            "f1_weighted": 0.18762682967406918,
+            "loss": 0.0393386624636547,
+            "brier": 0.008391595768780472
+          },
+          "packed_bytes": 167256,
+          "fit": {
+            "trees": 80,
+            "seconds": 3.8564292043447495,
+            "qat": true,
+            "codec": "int8",
+            "seed": 177004,
+            "proxy_sha256": "be724eb4f00cf63c5b925b96a191485f6ac454f83db4e66aabab01c8b67e6f35",
+            "replay_probability_error": 2.8194267698289366e-08,
+            "clipped": 0,
+            "coefficients": 27200,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368016829815879,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1453,
+                "utilization": 1,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "delicious_72104",
+      "models": [
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.1121829318181613,
+            "f1_weighted": 0.29445457806586045,
+            "loss": 0.06470953405189164,
+            "brier": 0.015432678951564076
+          },
+          "packed_bytes": 540608,
+          "fit": {
+            "trees": 80,
+            "seconds": 8.06023095548153,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 177104,
+            "proxy_sha256": "b3b98540f5301a5786a8a72a42c6be70eb2f119806bde0367b59d337128345f7",
+            "replay_probability_error": 3.559591532642514e-08,
+            "clipped": 0,
+            "coefficients": 38528,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368025587393727,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1453,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.11232115878987568,
+            "f1_weighted": 0.2950629370349865,
+            "loss": 0.06479416031392927,
+            "brier": 0.015447102449109283
+          },
+          "packed_bytes": 381676,
+          "fit": {
+            "trees": 80,
+            "seconds": 8.108334671705961,
+            "qat": true,
+            "codec": "int8",
+            "seed": 177104,
+            "proxy_sha256": "47be8dc1cb40bbc82a60274c4bd5234914f3f1f5173c14552bd968cf803e47ad",
+            "replay_probability_error": 4.435503353494852e-08,
+            "clipped": 2,
+            "coefficients": 38336,
+            "gpu_probe": [
+              {
+                "time_ns": 1793368034996654159,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1453,
+                "utilization": 0,
+                "pids": [
+                  175456,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "reused_controls": [
+    {
+      "case": "emotions_71004",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.668397318177305,
+            "f1_weighted": 0.6786152192425758,
+            "loss": 0.44988405981446056,
+            "brier": 0.1448938603621995
+          },
+          "packed_bytes": 37452,
+          "fit": {
+            "trees": 80,
+            "seconds": 5.747012712061405,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176004,
+            "proxy_sha256": "3b602ff7fc738cbbde61507cbef1c4c175abfedce00a1a7504feee2059895d90",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366597276072054,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 435,
+                "utilization": 0,
+                "pids": [
+                  4005671
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.668397318177305,
+            "f1_weighted": 0.6786152192425758,
+            "loss": 0.4496749678927248,
+            "brier": 0.1447737273038041
+          },
+          "packed_bytes": 37452,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.4928707666695118,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176004,
+            "proxy_sha256": "9e17f848111a6e3d9f1663a1d64c108b5e3ae0eec97e3053284f85399ee948d9",
+            "replay_probability_error": 3.669626713609375e-09,
+            "clipped": 0,
+            "coefficients": 1692,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366603984477749,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.6753385059125833,
+            "f1_weighted": 0.6822384717034365,
+            "loss": 0.44972136138109076,
+            "brier": 0.1449336865868926
+          },
+          "packed_bytes": 33184,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.279987409710884,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176004,
+            "proxy_sha256": "13d795fd8e5f914ee7e299727666b6d712654fd00d1f1c8c112c2d1ec8f99883",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366606143689247,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.6810819727540615,
+            "f1_weighted": 0.6873928549101564,
+            "loss": 0.4502452706794321,
+            "brier": 0.1454010420660649
+          },
+          "packed_bytes": 33445,
+          "fit": {
+            "trees": 80,
+            "seconds": 2.643305268138647,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176004,
+            "proxy_sha256": "0081502b32418b54447bac67f62e49eaab63537b9f199f3e28968787ac8e1059",
+            "replay_probability_error": 9.784236476573227e-09,
+            "clipped": 0,
+            "coefficients": 1713,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366608116316360,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "scene_71104",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.7255332603967221,
+            "f1_weighted": 0.7133937504362297,
+            "loss": 0.22941961635600863,
+            "brier": 0.07036315957736136
+          },
+          "packed_bytes": 41920,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.3032617680728436,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176104,
+            "proxy_sha256": "582bca4636ad02e660ee2cb0906ee1fb073512b5f0c2f2163afc8da121109d61",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366611708059116,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.6995458560275755,
+            "f1_weighted": 0.6831514929469908,
+            "loss": 0.22933350715734566,
+            "brier": 0.07039714155168969
+          },
+          "packed_bytes": 42024,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.3084518946707249,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176104,
+            "proxy_sha256": "057b5cd18e3f8096a76499998458a4b10d92391c69a47f9ce8f3a01079630dc4",
+            "replay_probability_error": 6.002101260449422e-09,
+            "clipped": 0,
+            "coefficients": 1869,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366613689454704,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.6996860492618625,
+            "f1_weighted": 0.684601457351825,
+            "loss": 0.22921808238549446,
+            "brier": 0.0703233895460451
+          },
+          "packed_bytes": 37169,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2772711552679539,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176104,
+            "proxy_sha256": "1d13a30d788028bbefbd76084317ae2db84de814d36b86544825db64ff885bfb",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366615678567524,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.736126194983933,
+            "f1_weighted": 0.7227858750443559,
+            "loss": 0.22895651835565858,
+            "brier": 0.07021381479533292
+          },
+          "packed_bytes": 37246,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2805133201181889,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176104,
+            "proxy_sha256": "b61e09853943b2952a5b4fa5bcb0d318fc341a7aa018289dc4908a9885217628",
+            "replay_probability_error": 7.137143320790074e-09,
+            "clipped": 0,
+            "coefficients": 1857,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366617614775347,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "yeast_71204",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.4894283864956489,
+            "f1_weighted": 0.6589179306737747,
+            "loss": 0.42959193632964243,
+            "brier": 0.13783479275365712
+          },
+          "packed_bytes": 54742,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2466528378427029,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176204,
+            "proxy_sha256": "9998099d0c761fffbe248c92e1c78f43e946ff23adcf319b35b28673aa382115",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366619791525208,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 871,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.48926371138817615,
+            "f1_weighted": 0.6588570927412583,
+            "loss": 0.4295952221001168,
+            "brier": 0.1378351699168438
+          },
+          "packed_bytes": 54742,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2430618926882744,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176204,
+            "proxy_sha256": "3b81fcc005702f30c0241747d576569edd598ec418020edef826ea5c1641a41f",
+            "replay_probability_error": 7.241031552140953e-09,
+            "clipped": 0,
+            "coefficients": 4116,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366621709060528,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.48518223625026125,
+            "f1_weighted": 0.6516976692679448,
+            "loss": 0.4303140605967252,
+            "brier": 0.13814003601329097
+          },
+          "packed_bytes": 44245,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2256916761398315,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176204,
+            "proxy_sha256": "cf26661251f4fa1d5f5166fe5c9f816e00bc6235a66a3a8596a3673832108fbb",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366623620846466,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 877,
+                "utilization": 2,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.48455689865436163,
+            "f1_weighted": 0.650375163968384,
+            "loss": 0.4301982851362501,
+            "brier": 0.1380015640191486
+          },
+          "packed_bytes": 44013,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2764992527663708,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176204,
+            "proxy_sha256": "002679559a7c0d6761837a37dde6f65a5164b029914c0223a4c0433a5b890f26",
+            "replay_probability_error": 9.055387217848931e-09,
+            "clipped": 0,
+            "coefficients": 4102,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366625507797072,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 3,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "birds_71304",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.3446491638791649,
+            "f1_weighted": 0.4515291411274724,
+            "loss": 0.1277389581179117,
+            "brier": 0.03488390258705733
+          },
+          "packed_bytes": 61560,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.3181220218539238,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176304,
+            "proxy_sha256": "f9702dcea2e5a4c39e4b730cdec53f87377c57facb9dc88fcad7b4292ce12fa7",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366627681043498,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.31355913756362136,
+            "f1_weighted": 0.44101190501326765,
+            "loss": 0.12890582351864247,
+            "brier": 0.03496133611989356
+          },
+          "packed_bytes": 61512,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1717310510575771,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176304,
+            "proxy_sha256": "075de939c9a70a30f6627753d70c175527c2f57b24477e72852c162a016de82b",
+            "replay_probability_error": 1.110331970810563e-08,
+            "clipped": 0,
+            "coefficients": 5600,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366629680468096,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.35924942894434286,
+            "f1_weighted": 0.4583171035285418,
+            "loss": 0.1284651699458775,
+            "brier": 0.03485528220764469
+          },
+          "packed_bytes": 47334,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.173152782022953,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176304,
+            "proxy_sha256": "c27c400ef93bbbba2ba61f09db51924ef651972c894f3fd10f591bc87b02b7b5",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366631514190575,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.33862064785863855,
+            "f1_weighted": 0.4487305112158451,
+            "loss": 0.12842111312385296,
+            "brier": 0.034939440547800314
+          },
+          "packed_bytes": 47002,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2701570466160774,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176304,
+            "proxy_sha256": "e2a27c59c6bc1ffd017923b085d3919d62f6591f476099c99442ddc552ab189b",
+            "replay_probability_error": 1.2784894143358372e-08,
+            "clipped": 0,
+            "coefficients": 5590,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366633349879299,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "medical_71404",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.21566117601676246,
+            "f1_weighted": 0.6509448860846413,
+            "loss": 0.0494812876102446,
+            "brier": 0.010952683904781572
+          },
+          "packed_bytes": 80866,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2670792266726494,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176404,
+            "proxy_sha256": "0038e176cef9d86c63fe0cec82b44c9b8ad1dac450dad3a31ba4cd9a3caf4160",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366635517925243,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 871,
+                "utilization": 1,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.21566117601676246,
+            "f1_weighted": 0.6509448860846413,
+            "loss": 0.04948155702290353,
+            "brier": 0.01095271429155717
+          },
+          "packed_bytes": 80866,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1722903810441494,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176404,
+            "proxy_sha256": "7b6ba8f6309b8d7bee05d212ca19eca0573a856a58b5b01550fc054248511a7c",
+            "replay_probability_error": 9.264002565068097e-09,
+            "clipped": 0,
+            "coefficients": 9292,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366637456416370,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 879,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.21017880672839617,
+            "f1_weighted": 0.6479765159619708,
+            "loss": 0.0495669660903622,
+            "brier": 0.01096456425199956
+          },
+          "packed_bytes": 54858,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1486145816743374,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176404,
+            "proxy_sha256": "4abc12b2353833dc53cc2afe9537a33101e2195f5a90963800ffd1e175408335",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366639292576573,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 3,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.21162876917307605,
+            "f1_weighted": 0.6486313028756063,
+            "loss": 0.049504653750305584,
+            "brier": 0.010967566009495461
+          },
+          "packed_bytes": 55062,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.8626751489937305,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176404,
+            "proxy_sha256": "88a8d2da32dac8c1c9f64cdb176c9664ea0de7c229553c81971549d06a6e2d0b",
+            "replay_probability_error": 1.5730829139304348e-08,
+            "clipped": 0,
+            "coefficients": 9407,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366641129270655,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 4,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "genbase_71504",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.394714048699556,
+            "f1_weighted": 0.6092760316487357,
+            "loss": 0.060961254877418575,
+            "brier": 0.01636510339695786
+          },
+          "packed_bytes": 44744,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2392664328217506,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176504,
+            "proxy_sha256": "1f9016f31c71f5b828194ec4fe28e4ebe12dfd97f1f97972b7f132368490d054",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366643896400366,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 867,
+                "utilization": 0,
+                "pids": [
+                  4005671,
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.394714048699556,
+            "f1_weighted": 0.6092760316487357,
+            "loss": 0.060963259004543316,
+            "brier": 0.016365472879143507
+          },
+          "packed_bytes": 44744,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1421763934195042,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176504,
+            "proxy_sha256": "a9022985726136a3ea28d7b20e6fdaec8067cfda2b6feb7a556ea27481c0581f",
+            "replay_probability_error": 2.6426415777880408e-09,
+            "clipped": 0,
+            "coefficients": 4816,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366645800462047,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 435,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.059833806771964954,
+            "brier": 0.016062308103792396
+          },
+          "packed_bytes": 32668,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.161547139286995,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176504,
+            "proxy_sha256": "0e4b463ba5b90955d9c311f5b060bebc8c0eaeccf10c8e0e7056c58b8a612437",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366647597660297,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 435,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.06002059364051909,
+            "brier": 0.016141192692179705
+          },
+          "packed_bytes": 32744,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.278177984058857,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176504,
+            "proxy_sha256": "cbc1b34cff2adde9352e0357bec5a57c19d626be755e3ac25d1bee13a04ee009",
+            "replay_probability_error": 8.870012696560181e-09,
+            "clipped": 0,
+            "coefficients": 4872,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366649430357754,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 435,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "bibtex_71604",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.3285050643084601,
+            "f1_weighted": 0.42014157283135534,
+            "loss": 0.044996757501584626,
+            "brier": 0.010514579836265546
+          },
+          "packed_bytes": 268608,
+          "fit": {
+            "trees": 80,
+            "seconds": 14.339229293167591,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176604,
+            "proxy_sha256": "1e21ebe1d7f18039ce5473cdab3c1adc23af165a57d285d90318123730edbd23",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366651992020350,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 435,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.326649968298952,
+            "f1_weighted": 0.4183835811268109,
+            "loss": 0.04500365637661412,
+            "brier": 0.010513802577438619
+          },
+          "packed_bytes": 269296,
+          "fit": {
+            "trees": 80,
+            "seconds": 14.381170779466629,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176604,
+            "proxy_sha256": "b481a25f2c8e643dfb0dde45dff6769f00d84a782c1db2be301f32764fd545e5",
+            "replay_probability_error": 1.8761899756025713e-08,
+            "clipped": 0,
+            "coefficients": 37632,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366667124093381,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 1,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.3233167694415776,
+            "f1_weighted": 0.41778035227280147,
+            "loss": 0.04513260245574957,
+            "brier": 0.010529267391696694
+          },
+          "packed_bytes": 164812,
+          "fit": {
+            "trees": 80,
+            "seconds": 14.570037469267845,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176604,
+            "proxy_sha256": "f3af5a8720eafb072f8ff1a60011c87e5fae0ac973f27778aa13b5097b30a256",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366682299891769,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 1,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.32252040927426,
+            "f1_weighted": 0.4177971391862902,
+            "loss": 0.04511490303469841,
+            "brier": 0.010527124161643456
+          },
+          "packed_bytes": 164928,
+          "fit": {
+            "trees": 80,
+            "seconds": 15.273820422589779,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176604,
+            "proxy_sha256": "8ed44fd3b7121457f33242d85b4eefc1263aa1fda1a7af957518a3a05122417f",
+            "replay_probability_error": 1.8285236047521636e-08,
+            "clipped": 0,
+            "coefficients": 37376,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366697709757206,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 1,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "mediamill_71704",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.1447695105477262,
+            "f1_weighted": 0.5470120431079584,
+            "loss": 0.08850164088621137,
+            "brier": 0.024001416680357508
+          },
+          "packed_bytes": 226936,
+          "fit": {
+            "trees": 80,
+            "seconds": 2.3914570920169353,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176704,
+            "proxy_sha256": "100b0a1bdd55e5a67ad6943d1d0da6f0daa3c4a30034a3167be6ec07b748f12e",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366714281025882,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.14478029189881003,
+            "f1_weighted": 0.5470649736667231,
+            "loss": 0.08850115558040209,
+            "brier": 0.024001470104857106
+          },
+          "packed_bytes": 226936,
+          "fit": {
+            "trees": 80,
+            "seconds": 2.437249716371298,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176704,
+            "proxy_sha256": "6e28c07150c0b04d369e902148e3b824ef343b738ffff5c29b47f4293daa56ae",
+            "replay_probability_error": 2.146831629135093e-08,
+            "clipped": 0,
+            "coefficients": 32589,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366717409548452,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.14465552491084566,
+            "f1_weighted": 0.5486848384304694,
+            "loss": 0.08844511725995018,
+            "brier": 0.02398904392384125
+          },
+          "packed_bytes": 140731,
+          "fit": {
+            "trees": 80,
+            "seconds": 2.3859076872467995,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176704,
+            "proxy_sha256": "aaf9ca8e47267f29153ba6bd99a95023ad8901ea024bd40074f2cd99c5ff6ff8",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366720578303578,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.1412148048729591,
+            "f1_weighted": 0.5484386543191571,
+            "loss": 0.08837684039734413,
+            "brier": 0.02398391908049177
+          },
+          "packed_bytes": 140731,
+          "fit": {
+            "trees": 80,
+            "seconds": 2.521925166249275,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176704,
+            "proxy_sha256": "cc489a821f9e224ac24cc228a72d290664cdffa6d648ed3265dd7882b3d431f1",
+            "replay_probability_error": 2.0233488440268843e-08,
+            "clipped": 0,
+            "coefficients": 32640,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366723680683126,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "enron_71804",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.20313341990521186,
+            "f1_weighted": 0.5761099908880086,
+            "loss": 0.12639853812889157,
+            "brier": 0.03432130762115401
+          },
+          "packed_bytes": 130830,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.6545728705823421,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176804,
+            "proxy_sha256": "4a641f114d884ef773c8617d7b45bb284570cd6c7fac36924a6a2d7ce9e7920c",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366727196031253,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.1997059468345589,
+            "f1_weighted": 0.5722196187283759,
+            "loss": 0.12617516629280776,
+            "brier": 0.03423569024151963
+          },
+          "packed_bytes": 130748,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.660797517746687,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176804,
+            "proxy_sha256": "6d8b5f917f6164380e6e41fe0111764446e2ad0c383caab140cd0de94a56c8ec",
+            "replay_probability_error": 1.2162060136766684e-08,
+            "clipped": 0,
+            "coefficients": 17064,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366729515181080,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.2028885940233258,
+            "f1_weighted": 0.5870057235281214,
+            "loss": 0.12621373367207867,
+            "brier": 0.03428443056994611
+          },
+          "packed_bytes": 86789,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.6441411562263966,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176804,
+            "proxy_sha256": "39689050c7ccfcc1c77b490cc5fe31812887416ffe1f1d7fd9d95c304fc992f1",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366731928099948,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.2187532751301681,
+            "f1_weighted": 0.5897820970948344,
+            "loss": 0.12630689556635083,
+            "brier": 0.03424292249539085
+          },
+          "packed_bytes": 86899,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.6719800680875778,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176804,
+            "proxy_sha256": "60ab9b7d9ef7f8f59ed73ae73f6be0c683d8b5fe64e63798fad95613aa75079b",
+            "replay_probability_error": 1.378448966082857e-08,
+            "clipped": 0,
+            "coefficients": 17037,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366734232697394,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "cal500_71904",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.19646460184509482,
+            "f1_weighted": 0.43811028082468256,
+            "loss": 0.35039369648862834,
+            "brier": 0.10586865688104416
+          },
+          "packed_bytes": 277208,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1898609027266502,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 176904,
+            "proxy_sha256": "bb1e26c84a3f1556fdbfac3bbf697bbfad927e074b76deb7edaa3f60dc426119",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366736780258863,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.19637981237235222,
+            "f1_weighted": 0.4381205344278109,
+            "loss": 0.35036807183193014,
+            "brier": 0.10585848402873244
+          },
+          "packed_bytes": 277208,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.189540758728981,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 176904,
+            "proxy_sha256": "e73d5e9cb91f9e5b1caa8a6cef784f2027d20ca2dbc880a66c8f2c138d590e8e",
+            "replay_probability_error": 1.3388827713178841e-08,
+            "clipped": 0,
+            "coefficients": 37824,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366738641059637,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.1910237688740029,
+            "f1_weighted": 0.4355946413976663,
+            "loss": 0.35041266235310786,
+            "brier": 0.10586299188049328
+          },
+          "packed_bytes": 169816,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.1700953394174576,
+            "qat": false,
+            "codec": "int8",
+            "seed": 176904,
+            "proxy_sha256": "438f1afd09c373feb12602ec242c1d29026437f54ef7175c0c2dc02a1816a23d",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366740506574538,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.1952368823036659,
+            "f1_weighted": 0.44053309759349946,
+            "loss": 0.349286295263112,
+            "brier": 0.10559358938784269
+          },
+          "packed_bytes": 170264,
+          "fit": {
+            "trees": 80,
+            "seconds": 1.2005310133099556,
+            "qat": true,
+            "codec": "int8",
+            "seed": 176904,
+            "proxy_sha256": "0a1288117986f41ac5460e087b32761cd3ce2d16e7309df41044314a4f4d7916",
+            "replay_probability_error": 1.3211257199330362e-08,
+            "clipped": 0,
+            "coefficients": 37312,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366742318294756,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "corel5k_72004",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.03460628653712809,
+            "f1_weighted": 0.1831829351833858,
+            "loss": 0.03936477797315511,
+            "brier": 0.008395975130178658
+          },
+          "packed_bytes": 259888,
+          "fit": {
+            "trees": 80,
+            "seconds": 3.9229600690305233,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 177004,
+            "proxy_sha256": "ea0ab0325de1d3e963f23460a9d8190d7dc56038b2b02678d3ea75db3360a363",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366744649518059,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 437,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.03460628653712809,
+            "f1_weighted": 0.1831829351833858,
+            "loss": 0.03936478670735808,
+            "brier": 0.008395975375612841
+          },
+          "packed_bytes": 259888,
+          "fit": {
+            "trees": 80,
+            "seconds": 3.863292634487152,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 177004,
+            "proxy_sha256": "a711318a4ab2e86edb3612f36989477ae0b07e39c8443a89b63fc2a81d47d1fa",
+            "replay_probability_error": 4.439185030680193e-08,
+            "clipped": 0,
+            "coefficients": 27328,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366749340106932,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 439,
+                "utilization": 1,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.0345907464648615,
+            "f1_weighted": 0.18555706496785085,
+            "loss": 0.03940276462540306,
+            "brier": 0.008396413361543491
+          },
+          "packed_bytes": 165956,
+          "fit": {
+            "trees": 80,
+            "seconds": 4.014294181019068,
+            "qat": false,
+            "codec": "int8",
+            "seed": 177004,
+            "proxy_sha256": "1a9a5a79d3a52e2035cf2c8ff33eb2e6655966c0992e859d40fc7c0ab663ef7d",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366753946161434,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 439,
+                "utilization": 1,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.03426388961350671,
+            "f1_weighted": 0.1843632435593561,
+            "loss": 0.039400185283352714,
+            "brier": 0.00839818361202547
+          },
+          "packed_bytes": 166104,
+          "fit": {
+            "trees": 80,
+            "seconds": 4.101241111755371,
+            "qat": true,
+            "codec": "int8",
+            "seed": 177004,
+            "proxy_sha256": "547a7c9f0a010f1adf49678d4698994d6b7aaa684217925c96529a1d49b8eb44",
+            "replay_probability_error": 3.2304524388848677e-08,
+            "clipped": 0,
+            "coefficients": 26688,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366758727232230,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 439,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "delicious_72104",
+      "models": [
+        {
+          "uid": "fp16/PTQ",
+          "quality": {
+            "f1_macro": 0.11223063007593077,
+            "f1_weighted": 0.29449013492474996,
+            "loss": 0.06470956208791347,
+            "brier": 0.015432684281179861
+          },
+          "packed_bytes": 540608,
+          "fit": {
+            "trees": 80,
+            "seconds": 8.466035295277834,
+            "qat": false,
+            "codec": "fp16",
+            "seed": 177104,
+            "proxy_sha256": "5db8eecb1af91caf31fd250bd8a62ed834f363a1bcac7067a7f746aec76967bb",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366765479610787,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 439,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "fp16/QAT",
+          "quality": {
+            "f1_macro": 0.1121829318181613,
+            "f1_weighted": 0.29445457806586045,
+            "loss": 0.06470953350819034,
+            "brier": 0.015432678691964036
+          },
+          "packed_bytes": 540608,
+          "fit": {
+            "trees": 80,
+            "seconds": 9.184724643826485,
+            "qat": true,
+            "codec": "fp16",
+            "seed": 177104,
+            "proxy_sha256": "e6808de0e19ba0724d79cfb5e35574fccc66358e632a268396d0710dc6e8508f",
+            "replay_probability_error": 3.821385624602769e-08,
+            "clipped": 0,
+            "coefficients": 38528,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366775485281028,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 439,
+                "utilization": 0,
+                "pids": [
+                  4100773
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/PTQ",
+          "quality": {
+            "f1_macro": 0.11255947522697457,
+            "f1_weighted": 0.295565984432471,
+            "loss": 0.06479428200143879,
+            "brier": 0.015445746601173224
+          },
+          "packed_bytes": 382156,
+          "fit": {
+            "trees": 80,
+            "seconds": 10.768748071044683,
+            "qat": false,
+            "codec": "int8",
+            "seed": 177104,
+            "proxy_sha256": "86773b1fcfea08734b4c3d9099382d27bec9e0ef915b4cdb26d3dfd484600e0f",
+            "replay_probability_error": null,
+            "clipped": 0,
+            "coefficients": 0,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366786247930426,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 859,
+                "utilization": 0,
+                "pids": [
+                  4100773,
+                  4131288
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        },
+        {
+          "uid": "int8/QAT",
+          "quality": {
+            "f1_macro": 0.11292759266402198,
+            "f1_weighted": 0.29534668359278105,
+            "loss": 0.06478681445750634,
+            "brier": 0.015445016298370483
+          },
+          "packed_bytes": 382156,
+          "fit": {
+            "trees": 80,
+            "seconds": 13.372642394155264,
+            "qat": true,
+            "codec": "int8",
+            "seed": 177104,
+            "proxy_sha256": "8e9400e7167bb50aa16df141cb832d9bb5f89a7d9b4f4100cd37d43f5bbeb638",
+            "replay_probability_error": 5.317623319456288e-08,
+            "clipped": 2,
+            "coefficients": 38464,
+            "gpu_probe": [
+              {
+                "time_ns": 1793366798530246263,
+                "name": "NVIDIA A100-PCIE-40GB",
+                "memory_mib": 1291,
+                "utilization": 0,
+                "pids": [
+                  4100773,
+                  4131288,
+                  4133313
+                ],
+                "total_mib": 40960
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "previous_program_trees": 19680,
+  "total_program_trees": 21600,
+  "new_trees": 1920,
+  "environment": {
+    "sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+    "packages": 45,
+    "actual_runtime_checked": true
+  },
+  "pretest_seal": {
+    "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/pretest_seal.json",
+    "sha256": "59eecb36c94a6f3986513ae809150de2eeb860e804619447c6cd2a02bd282f48"
+  }
+}

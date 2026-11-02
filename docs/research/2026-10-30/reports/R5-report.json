@@ -1,0 +1,2730 @@
+{
+  "status": "R5_PTQ_complete",
+  "cases": [
+    {
+      "case": "emotions_71004",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/emotions_71004/development.json",
+      "sha256": "f1123f228863045e9adabfa13a661e8fe9c00bbcc625596708efc5abfe7aa058"
+    },
+    {
+      "case": "scene_71104",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/scene_71104/development.json",
+      "sha256": "5acc4f5c1afb13bc46b9bd33e6b13644f98b0dc7f630343818017454736341cd"
+    },
+    {
+      "case": "yeast_71204",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/yeast_71204/development.json",
+      "sha256": "10aacb2b5aa02ff4ece8d7d0227738d99cd4277c092932281e2c9b682194817f"
+    },
+    {
+      "case": "birds_71304",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/birds_71304/development.json",
+      "sha256": "d27c9c8cba353a491555d39a4d4e511314be3513e9bf23594205a6ce0668081b"
+    },
+    {
+      "case": "medical_71404",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/medical_71404/development.json",
+      "sha256": "cfa1e0220333310bec5037da5d689443f8b18cf3f5eab06f126e86e4b81a4692"
+    },
+    {
+      "case": "genbase_71504",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/genbase_71504/development.json",
+      "sha256": "a876ef45e2588dc178a85bc03222e2860ee36b78c5ca703b002bee7c2f8c8659"
+    },
+    {
+      "case": "bibtex_71604",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/bibtex_71604/development.json",
+      "sha256": "55fc91caa6a34fec14a4b93d6a9294d00d1f4b086943e96197fa648f25c77d43"
+    },
+    {
+      "case": "mediamill_71704",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/mediamill_71704/development.json",
+      "sha256": "954465e59ffc2b749978d00c5826c0e569c869c32a8f29a56e72bd0bf380b36e"
+    },
+    {
+      "case": "enron_71804",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/enron_71804/development.json",
+      "sha256": "d6a73898e58548d2bd44bb5615f8d69e87914bbe9ed8afe515c6ca5112c543bd"
+    },
+    {
+      "case": "cal500_71904",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/cal500_71904/development.json",
+      "sha256": "f8c6148ae88b387190f9b2c19047a23c74bd4f568c1746f1ddd91c322afecc90"
+    },
+    {
+      "case": "corel5k_72004",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/corel5k_72004/development.json",
+      "sha256": "fc4e83ce2b7c7afffe173c70bb9052a870afbc8b0cbc9587e1fa6dadac438f4c"
+    },
+    {
+      "case": "delicious_72104",
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/delicious_72104/development.json",
+      "sha256": "50cc626ce84371355d3a2f6a1a077954f6d5029758c84b9b58b3c8227ac5522f"
+    }
+  ],
+  "results": [
+    {
+      "case": "emotions_71004",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6864587907756787,
+              "f1_weighted": 0.6935804582157181,
+              "loss": 0.4581557713349658,
+              "brier": 0.1452261804524034
+            },
+            "recalibrated": {
+              "f1_macro": 0.6864587907756787,
+              "f1_weighted": 0.6935804582157181,
+              "loss": 0.4581557713349658,
+              "brier": 0.1452261804524034
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6864587907756787,
+            "f1_weighted": 0.6935804582157181,
+            "loss": 0.4581568319263464,
+            "brier": 0.14522673577671302
+          },
+          "packed_bytes": 40176,
+          "fp32_bytes": 57320
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6855405171301324,
+              "f1_weighted": 0.6925724284995544,
+              "loss": 0.45820551433521883,
+              "brier": 0.14525239401078335
+            },
+            "recalibrated": {
+              "f1_macro": 0.6855405171301324,
+              "f1_weighted": 0.6925724284995544,
+              "loss": 0.45820551433521883,
+              "brier": 0.14525239401078335
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6864587907756787,
+            "f1_weighted": 0.6935804582157181,
+            "loss": 0.4581568319263464,
+            "brier": 0.14522673577671302
+          },
+          "packed_bytes": 31620,
+          "fp32_bytes": 57320
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6588853448749469,
+              "f1_weighted": 0.6622709480748793,
+              "loss": 0.44390563665191096,
+              "brier": 0.14376755306004194
+            },
+            "recalibrated": {
+              "f1_macro": 0.6588853448749469,
+              "f1_weighted": 0.6622709480748793,
+              "loss": 0.44390563665191096,
+              "brier": 0.14376755306004194
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6588853448749469,
+            "f1_weighted": 0.6622709480748793,
+            "loss": 0.4439062666738481,
+            "brier": 0.14376804225272866
+          },
+          "packed_bytes": 32806,
+          "fp32_bytes": 43028
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6588853448749469,
+              "f1_weighted": 0.6622709480748793,
+              "loss": 0.4440063262003517,
+              "brier": 0.14380196746719587
+            },
+            "recalibrated": {
+              "f1_macro": 0.6588853448749469,
+              "f1_weighted": 0.6622709480748793,
+              "loss": 0.4440063262003517,
+              "brier": 0.14380196746719587
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6588853448749469,
+            "f1_weighted": 0.6622709480748793,
+            "loss": 0.4439062666738481,
+            "brier": 0.14376804225272866
+          },
+          "packed_bytes": 27727,
+          "fp32_bytes": 43028
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6558172621692527,
+              "f1_weighted": 0.6617493139713182,
+              "loss": 0.45200717465417956,
+              "brier": 0.14571253315640045
+            },
+            "recalibrated": {
+              "f1_macro": 0.6558172621692527,
+              "f1_weighted": 0.6617493139713182,
+              "loss": 0.45200717465417956,
+              "brier": 0.14571253315640045
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6558172621692527,
+            "f1_weighted": 0.6617493139713182,
+            "loss": 0.4520090903693986,
+            "brier": 0.1457132318965619
+          },
+          "packed_bytes": 38154,
+          "fp32_bytes": 48364
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6558172621692527,
+              "f1_weighted": 0.6617493139713182,
+              "loss": 0.45198304012029683,
+              "brier": 0.14572136598811922
+            },
+            "recalibrated": {
+              "f1_macro": 0.6558172621692527,
+              "f1_weighted": 0.6617493139713182,
+              "loss": 0.45198304012029683,
+              "brier": 0.14572136598811922
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6558172621692527,
+            "f1_weighted": 0.6617493139713182,
+            "loss": 0.4520090903693986,
+            "brier": 0.1457132318965619
+          },
+          "packed_bytes": 33081,
+          "fp32_bytes": 48364
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6706405612661754,
+              "f1_weighted": 0.6788358150595727,
+              "loss": 0.45033862138370456,
+              "brier": 0.14484121943131606
+            },
+            "recalibrated": {
+              "f1_macro": 0.6706405612661754,
+              "f1_weighted": 0.6788358150595727,
+              "loss": 0.45033862138370456,
+              "brier": 0.14484121943131606
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6706405612661754,
+            "f1_weighted": 0.6788358150595727,
+            "loss": 0.4503430498822552,
+            "brier": 0.14484312243896785
+          },
+          "packed_bytes": 37754,
+          "fp32_bytes": 46204
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.6726032209050552,
+              "f1_weighted": 0.6804760284396949,
+              "loss": 0.45053360494845834,
+              "brier": 0.14490593365310583
+            },
+            "recalibrated": {
+              "f1_macro": 0.6755250793035871,
+              "f1_weighted": 0.6836834820200381,
+              "loss": 0.45053360494845834,
+              "brier": 0.14490593365310583
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.6706405612661754,
+            "f1_weighted": 0.6788358150595727,
+            "loss": 0.4503430498822552,
+            "brier": 0.14484312243896785
+          },
+          "packed_bytes": 33545,
+          "fp32_bytes": 46204
+        }
+      ]
+    },
+    {
+      "case": "scene_71104",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.7675106491661302,
+              "f1_weighted": 0.7540562284466303,
+              "loss": 0.19743401326273738,
+              "brier": 0.06023300801035153
+            },
+            "recalibrated": {
+              "f1_macro": 0.7675106491661302,
+              "f1_weighted": 0.7540562284466303,
+              "loss": 0.19743401326273738,
+              "brier": 0.06023300801035153
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.7675106491661302,
+            "f1_weighted": 0.7540562284466303,
+            "loss": 0.19743357302511194,
+            "brier": 0.06023288102346908
+          },
+          "packed_bytes": 44600,
+          "fp32_bytes": 63640
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.7665851769030784,
+              "f1_weighted": 0.7532093677271582,
+              "loss": 0.19739370500397604,
+              "brier": 0.0602255705433296
+            },
+            "recalibrated": {
+              "f1_macro": 0.7665851769030784,
+              "f1_weighted": 0.7532093677271582,
+              "loss": 0.19739370500397604,
+              "brier": 0.0602255705433296
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.7675106491661302,
+            "f1_weighted": 0.7540562284466303,
+            "loss": 0.19743357302511194,
+            "brier": 0.06023288102346908
+          },
+          "packed_bytes": 35096,
+          "fp32_bytes": 63640
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.7539601698466184,
+              "f1_weighted": 0.7408330862549927,
+              "loss": 0.21619328059539927,
+              "brier": 0.06425303375296994
+            },
+            "recalibrated": {
+              "f1_macro": 0.7539601698466184,
+              "f1_weighted": 0.7408330862549927,
+              "loss": 0.21619328059539927,
+              "brier": 0.06425303375296994
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.7539601698466184,
+            "f1_weighted": 0.7408330862549927,
+            "loss": 0.21619044668266577,
+            "brier": 0.06425212721564723
+          },
+          "packed_bytes": 36316,
+          "fp32_bytes": 47552
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.7535325766078124,
+              "f1_weighted": 0.7405827936053807,
+              "loss": 0.21616114843589934,
+              "brier": 0.0642503816181119
+            },
+            "recalibrated": {
+              "f1_macro": 0.7496758208001473,
+              "f1_weighted": 0.7367510726724054,
+              "loss": 0.21616114843589934,
+              "brier": 0.0642503816181119
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.7539601698466184,
+            "f1_weighted": 0.7408330862549927,
+            "loss": 0.21619044668266577,
+            "brier": 0.06425212721564723
+          },
+          "packed_bytes": 30730,
+          "fp32_bytes": 47552
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.7427773218640207,
+              "f1_weighted": 0.730748676966358,
+              "loss": 0.20802231898247162,
+              "brier": 0.06291957103142164
+            },
+            "recalibrated": {
+              "f1_macro": 0.7427773218640207,
+              "f1_weighted": 0.730748676966358,
+              "loss": 0.20802231898247162,
+              "brier": 0.06291957103142164
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.7427773218640207,
+            "f1_weighted": 0.730748676966358,
+            "loss": 0.20801920240559113,
+            "brier": 0.0629184172462396
+          },
+          "packed_bytes": 42726,
+          "fp32_bytes": 54028
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.7421878850577324,
+              "f1_weighted": 0.7298450402515427,
+              "loss": 0.207984189509342,
+              "brier": 0.06291318005972091
+            },
+            "recalibrated": {
+              "f1_macro": 0.7421878850577324,
+              "f1_weighted": 0.7298450402515427,
+              "loss": 0.207984189509342,
+              "brier": 0.06291318005972091
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.7427773218640207,
+            "f1_weighted": 0.730748676966358,
+            "loss": 0.20801920240559113,
+            "brier": 0.0629184172462396
+          },
+          "packed_bytes": 37107,
+          "fp32_bytes": 54028
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.733699506952683,
+              "f1_weighted": 0.7212222698675901,
+              "loss": 0.22940058575259953,
+              "brier": 0.07038815183037285
+            },
+            "recalibrated": {
+              "f1_macro": 0.733699506952683,
+              "f1_weighted": 0.7212222698675901,
+              "loss": 0.22940058575259953,
+              "brier": 0.07038815183037285
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.733699506952683,
+            "f1_weighted": 0.7212222698675901,
+            "loss": 0.22939803667414976,
+            "brier": 0.07038748402116071
+          },
+          "packed_bytes": 41790,
+          "fp32_bytes": 51140
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.7346570178430977,
+              "f1_weighted": 0.7222472201803855,
+              "loss": 0.22945968324448782,
+              "brier": 0.07041290705029248
+            },
+            "recalibrated": {
+              "f1_macro": 0.7316935280375026,
+              "f1_weighted": 0.7195354553775823,
+              "loss": 0.22945968324448782,
+              "brier": 0.07041290705029248
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.733699506952683,
+            "f1_weighted": 0.7212222698675901,
+            "loss": 0.22939803667414976,
+            "brier": 0.07038748402116071
+          },
+          "packed_bytes": 37131,
+          "fp32_bytes": 51140
+        }
+      ]
+    },
+    {
+      "case": "yeast_71204",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.49194902279937314,
+              "f1_weighted": 0.6565075059293246,
+              "loss": 0.43346842896790494,
+              "brier": 0.13887816875739442
+            },
+            "recalibrated": {
+              "f1_macro": 0.49194902279937314,
+              "f1_weighted": 0.6565075059293246,
+              "loss": 0.43346842896790494,
+              "brier": 0.13887816875739442
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.49194902279937314,
+            "f1_weighted": 0.6565075059293246,
+            "loss": 0.43346846409643286,
+            "brier": 0.13887815015687585
+          },
+          "packed_bytes": 67080,
+          "fp32_bytes": 109624
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.49195635796660125,
+              "f1_weighted": 0.6563069015990377,
+              "loss": 0.4334304406849496,
+              "brier": 0.13886526215935954
+            },
+            "recalibrated": {
+              "f1_macro": 0.49195635796660125,
+              "f1_weighted": 0.6563069015990377,
+              "loss": 0.4334304406849496,
+              "brier": 0.13886526215935954
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.49194902279937314,
+            "f1_weighted": 0.6565075059293246,
+            "loss": 0.43346846409643286,
+            "brier": 0.13887815015687585
+          },
+          "packed_bytes": 45856,
+          "fp32_bytes": 109624
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.48396769486331076,
+              "f1_weighted": 0.6548384061533385,
+              "loss": 0.4310759290797215,
+              "brier": 0.13814970331083068
+            },
+            "recalibrated": {
+              "f1_macro": 0.48396769486331076,
+              "f1_weighted": 0.6548384061533385,
+              "loss": 0.4310759290797215,
+              "brier": 0.13814970331083068
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.48396769486331076,
+            "f1_weighted": 0.6548384061533385,
+            "loss": 0.43107547183677036,
+            "brier": 0.13814946445793266
+          },
+          "packed_bytes": 50638,
+          "fp32_bytes": 76548
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.48445424272018317,
+              "f1_weighted": 0.6551781236499886,
+              "loss": 0.4310648937318395,
+              "brier": 0.13814839618322503
+            },
+            "recalibrated": {
+              "f1_macro": 0.48445424272018317,
+              "f1_weighted": 0.6551781236499886,
+              "loss": 0.4310648937318395,
+              "brier": 0.13814839618322503
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.48396769486331076,
+            "f1_weighted": 0.6548384061533385,
+            "loss": 0.43107547183677036,
+            "brier": 0.13814946445793266
+          },
+          "packed_bytes": 37779,
+          "fp32_bytes": 76548
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.48607331386465297,
+              "f1_weighted": 0.6557712309442962,
+              "loss": 0.4310173141351635,
+              "brier": 0.13808415335135124
+            },
+            "recalibrated": {
+              "f1_macro": 0.48607331386465297,
+              "f1_weighted": 0.6557712309442962,
+              "loss": 0.4310173141351635,
+              "brier": 0.13808415335135124
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.48607331386465297,
+            "f1_weighted": 0.6557712309442962,
+            "loss": 0.4310172627811303,
+            "brier": 0.13808415529798018
+          },
+          "packed_bytes": 57664,
+          "fp32_bytes": 83364
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.4865544144484152,
+              "f1_weighted": 0.6557518862884877,
+              "loss": 0.4309773514398518,
+              "brier": 0.13807199938812215
+            },
+            "recalibrated": {
+              "f1_macro": 0.48694566547348944,
+              "f1_weighted": 0.6557028484862792,
+              "loss": 0.4309773514398518,
+              "brier": 0.13807199938812215
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.48607331386465297,
+            "f1_weighted": 0.6557712309442962,
+            "loss": 0.4310172627811303,
+            "brier": 0.13808415529798018
+          },
+          "packed_bytes": 44910,
+          "fp32_bytes": 83364
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.48179193629253286,
+              "f1_weighted": 0.6492262235823686,
+              "loss": 0.42923080942466413,
+              "brier": 0.1377745631754549
+            },
+            "recalibrated": {
+              "f1_macro": 0.48179193629253286,
+              "f1_weighted": 0.6492262235823686,
+              "loss": 0.42923080942466413,
+              "brier": 0.1377745631754549
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.48179193629253286,
+            "f1_weighted": 0.6492262235823686,
+            "loss": 0.42923007480120684,
+            "brier": 0.13777429746295458
+          },
+          "packed_bytes": 54742,
+          "fp32_bytes": 76188
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.4823405227996576,
+              "f1_weighted": 0.6499918951694629,
+              "loss": 0.42917225606167614,
+              "brier": 0.13775338803737555
+            },
+            "recalibrated": {
+              "f1_macro": 0.4821948927001104,
+              "f1_weighted": 0.6497961603670501,
+              "loss": 0.42917225606167614,
+              "brier": 0.13775338803737555
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.48179193629253286,
+            "f1_weighted": 0.6492262235823686,
+            "loss": 0.42923007480120684,
+            "brier": 0.13777429746295458
+          },
+          "packed_bytes": 44067,
+          "fp32_bytes": 76188
+        }
+      ]
+    },
+    {
+      "case": "birds_71304",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.30217340188824626,
+              "f1_weighted": 0.4740565797888606,
+              "loss": 0.1197701966797497,
+              "brier": 0.03174194839416237
+            },
+            "recalibrated": {
+              "f1_macro": 0.30217340188824626,
+              "f1_weighted": 0.4740565797888606,
+              "loss": 0.1197701966797497,
+              "brier": 0.03174194839416237
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.30217340188824626,
+            "f1_weighted": 0.4740565797888606,
+            "loss": 0.11977026949353989,
+            "brier": 0.03174190498653882
+          },
+          "packed_bytes": 81294,
+          "fp32_bytes": 138316
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.3048213260464679,
+              "f1_weighted": 0.47664062037489263,
+              "loss": 0.11989602458782661,
+              "brier": 0.03177262026695023
+            },
+            "recalibrated": {
+              "f1_macro": 0.3048213260464679,
+              "f1_weighted": 0.47664062037489263,
+              "loss": 0.11989602458782661,
+              "brier": 0.03177262026695023
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.30217340188824626,
+            "f1_weighted": 0.4740565797888606,
+            "loss": 0.11977026949353989,
+            "brier": 0.03174190498653882
+          },
+          "packed_bytes": 52851,
+          "fp32_bytes": 138316
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.3571295949778922,
+              "f1_weighted": 0.46318210261856424,
+              "loss": 0.12425978499172102,
+              "brier": 0.033929311958845326
+            },
+            "recalibrated": {
+              "f1_macro": 0.3571295949778922,
+              "f1_weighted": 0.46318210261856424,
+              "loss": 0.12425978499172102,
+              "brier": 0.033929311958845326
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3571295949778922,
+            "f1_weighted": 0.46318210261856424,
+            "loss": 0.12425889929599686,
+            "brier": 0.03392908820848217
+          },
+          "packed_bytes": 57472,
+          "fp32_bytes": 91856
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.36214212630621306,
+              "f1_weighted": 0.46536312770035265,
+              "loss": 0.12425063625506154,
+              "brier": 0.03392405629329489
+            },
+            "recalibrated": {
+              "f1_macro": 0.36214212630621306,
+              "f1_weighted": 0.46536312770035265,
+              "loss": 0.12425063625506154,
+              "brier": 0.03392405629329489
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3571295949778922,
+            "f1_weighted": 0.46318210261856424,
+            "loss": 0.12425889929599686,
+            "brier": 0.03392908820848217
+          },
+          "packed_bytes": 40420,
+          "fp32_bytes": 91856
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.34869602815496836,
+              "f1_weighted": 0.48456246585661167,
+              "loss": 0.12309854216089233,
+              "brier": 0.03348061894824556
+            },
+            "recalibrated": {
+              "f1_macro": 0.34869602815496836,
+              "f1_weighted": 0.48456246585661167,
+              "loss": 0.12309854216089233,
+              "brier": 0.03348061894824556
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.34869602815496836,
+            "f1_weighted": 0.48456246585661167,
+            "loss": 0.12309778157028992,
+            "brier": 0.03348041801339303
+          },
+          "packed_bytes": 65968,
+          "fp32_bytes": 100672
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.34869602815496836,
+              "f1_weighted": 0.48456246585661167,
+              "loss": 0.1231188784666677,
+              "brier": 0.03348390788032706
+            },
+            "recalibrated": {
+              "f1_macro": 0.34869602815496836,
+              "f1_weighted": 0.48456246585661167,
+              "loss": 0.1231188784666677,
+              "brier": 0.03348390788032706
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.34869602815496836,
+            "f1_weighted": 0.48456246585661167,
+            "loss": 0.12309778157028992,
+            "brier": 0.03348041801339303
+          },
+          "packed_bytes": 48756,
+          "fp32_bytes": 100672
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.3465332179956589,
+              "f1_weighted": 0.4557932432348096,
+              "loss": 0.12796375636373292,
+              "brier": 0.034927415310976276
+            },
+            "recalibrated": {
+              "f1_macro": 0.3465332179956589,
+              "f1_weighted": 0.4557932432348096,
+              "loss": 0.12796375636373292,
+              "brier": 0.034927415310976276
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3465332179956589,
+            "f1_weighted": 0.4557932432348096,
+            "loss": 0.12796194092528476,
+            "brier": 0.034926807184993046
+          },
+          "packed_bytes": 61304,
+          "fp32_bytes": 90308
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.34763958752308105,
+              "f1_weighted": 0.4591630252305458,
+              "loss": 0.12793367557571877,
+              "brier": 0.03491597728057325
+            },
+            "recalibrated": {
+              "f1_macro": 0.34763958752308105,
+              "f1_weighted": 0.4591630252305458,
+              "loss": 0.12793367557571877,
+              "brier": 0.03491597728057325
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3465332179956589,
+            "f1_weighted": 0.4557932432348096,
+            "loss": 0.12796194092528476,
+            "brier": 0.034926807184993046
+          },
+          "packed_bytes": 46874,
+          "fp32_bytes": 90308
+        }
+      ]
+    },
+    {
+      "case": "medical_71404",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.18902847650623708,
+              "f1_weighted": 0.6312163051394154,
+              "loss": 0.049949935578778804,
+              "brier": 0.01109325553191494
+            },
+            "recalibrated": {
+              "f1_macro": 0.18902847650623708,
+              "f1_weighted": 0.6312163051394154,
+              "loss": 0.049949935578778804,
+              "brier": 0.01109325553191494
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.18902847650623708,
+            "f1_weighted": 0.6312163051394154,
+            "loss": 0.04994996034104358,
+            "brier": 0.01109325401048131
+          },
+          "packed_bytes": 125634,
+          "fp32_bytes": 231908
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.18862177085408963,
+              "f1_weighted": 0.630966057607611,
+              "loss": 0.04995197416803998,
+              "brier": 0.011093077655198125
+            },
+            "recalibrated": {
+              "f1_macro": 0.18862177085408963,
+              "f1_weighted": 0.630966057607611,
+              "loss": 0.04995197416803998,
+              "brier": 0.011093077655198125
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.18902847650623708,
+            "f1_weighted": 0.6312163051394154,
+            "loss": 0.04994996034104358,
+            "brier": 0.01109325401048131
+          },
+          "packed_bytes": 72669,
+          "fp32_bytes": 231908
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19651806647440825,
+              "f1_weighted": 0.6346037383665146,
+              "loss": 0.04994072107337506,
+              "brier": 0.010958323831013589
+            },
+            "recalibrated": {
+              "f1_macro": 0.19651806647440825,
+              "f1_weighted": 0.6346037383665146,
+              "loss": 0.04994072107337506,
+              "brier": 0.010958323831013589
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19559855712769447,
+            "f1_weighted": 0.6329206775610781,
+            "loss": 0.04994137404751128,
+            "brier": 0.010958357313719948
+          },
+          "packed_bytes": 81866,
+          "fp32_bytes": 145668
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19651806647440825,
+              "f1_weighted": 0.6346037383665146,
+              "loss": 0.04994683497480146,
+              "brier": 0.010954656865668452
+            },
+            "recalibrated": {
+              "f1_macro": 0.19651806647440825,
+              "f1_weighted": 0.6346037383665146,
+              "loss": 0.04994683497480146,
+              "brier": 0.010954656865668452
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19559855712769447,
+            "f1_weighted": 0.6329206775610781,
+            "loss": 0.04994137404751128,
+            "brier": 0.010958357313719948
+          },
+          "packed_bytes": 50313,
+          "fp32_bytes": 145668
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.20878626888889634,
+              "f1_weighted": 0.6481534589796364,
+              "loss": 0.04953999657152458,
+              "brier": 0.0109823324699247
+            },
+            "recalibrated": {
+              "f1_macro": 0.20878626888889634,
+              "f1_weighted": 0.6481534589796364,
+              "loss": 0.04953999657152458,
+              "brier": 0.0109823324699247
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.20878626888889634,
+            "f1_weighted": 0.6481534589796364,
+            "loss": 0.04954059363547716,
+            "brier": 0.010982362532491036
+          },
+          "packed_bytes": 91206,
+          "fp32_bytes": 155008
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.20896321156163747,
+              "f1_weighted": 0.6489005168404681,
+              "loss": 0.04954625049281853,
+              "brier": 0.010978850712373162
+            },
+            "recalibrated": {
+              "f1_macro": 0.20896321156163747,
+              "f1_weighted": 0.6489005168404681,
+              "loss": 0.04954625049281853,
+              "brier": 0.010978850712373162
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.20878626888889634,
+            "f1_weighted": 0.6481534589796364,
+            "loss": 0.04954059363547716,
+            "brier": 0.010982362532491036
+          },
+          "packed_bytes": 59653,
+          "fp32_bytes": 155008
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.2097750245904702,
+              "f1_weighted": 0.6457123570507545,
+              "loss": 0.049534919463628965,
+              "brier": 0.010978276585474026
+            },
+            "recalibrated": {
+              "f1_macro": 0.2097750245904702,
+              "f1_weighted": 0.6457123570507545,
+              "loss": 0.049534919463628965,
+              "brier": 0.010978276585474026
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.2097750245904702,
+            "f1_weighted": 0.6457123570507545,
+            "loss": 0.049535510258099665,
+            "brier": 0.010978252724415575
+          },
+          "packed_bytes": 80068,
+          "fp32_bytes": 132032
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.21002901992652265,
+              "f1_weighted": 0.6460093787623071,
+              "loss": 0.049540816173344604,
+              "brier": 0.01097130112632374
+            },
+            "recalibrated": {
+              "f1_macro": 0.21030169225858714,
+              "f1_weighted": 0.6472824177126333,
+              "loss": 0.049540816173344604,
+              "brier": 0.01097130112632374
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.2097750245904702,
+            "f1_weighted": 0.6457123570507545,
+            "loss": 0.049535510258099665,
+            "brier": 0.010978252724415575
+          },
+          "packed_bytes": 54262,
+          "fp32_bytes": 132032
+        }
+      ]
+    },
+    {
+      "case": "genbase_71504",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.4428621968477041,
+              "f1_weighted": 0.6274578498305539,
+              "loss": 0.06528615687240057,
+              "brier": 0.017196116620166693
+            },
+            "recalibrated": {
+              "f1_macro": 0.4428621968477041,
+              "f1_weighted": 0.6274578498305539,
+              "loss": 0.06528615687240057,
+              "brier": 0.017196116620166693
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.4428621968477041,
+            "f1_weighted": 0.6274578498305539,
+            "loss": 0.0652866344446707,
+            "brier": 0.01719625594628721
+          },
+          "packed_bytes": 62044,
+          "fp32_bytes": 109656
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.4428621968477041,
+              "f1_weighted": 0.6274578498305539,
+              "loss": 0.06536280638834256,
+              "brier": 0.017212052581035565
+            },
+            "recalibrated": {
+              "f1_macro": 0.4428621968477041,
+              "f1_weighted": 0.6274578498305539,
+              "loss": 0.06536280638834256,
+              "brier": 0.017212052581035565
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.4428621968477041,
+            "f1_weighted": 0.6274578498305539,
+            "loss": 0.0652866344446707,
+            "brier": 0.01719625594628721
+          },
+          "packed_bytes": 38338,
+          "fp32_bytes": 109656
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.4539733079588152,
+              "f1_weighted": 0.6306664059802864,
+              "loss": 0.08240682343367808,
+              "brier": 0.018314577401667698
+            },
+            "recalibrated": {
+              "f1_macro": 0.4539733079588152,
+              "f1_weighted": 0.6306664059802864,
+              "loss": 0.08240682343367808,
+              "brier": 0.018314577401667698
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.08241311310842668,
+            "brier": 0.018314746785019993
+          },
+          "packed_bytes": 43550,
+          "fp32_bytes": 72860
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.4539733079588152,
+              "f1_weighted": 0.6306664059802864,
+              "loss": 0.08204179035663442,
+              "brier": 0.018289222154066396
+            },
+            "recalibrated": {
+              "f1_macro": 0.4539733079588152,
+              "f1_weighted": 0.6306664059802864,
+              "loss": 0.08204179035663442,
+              "brier": 0.018289222154066396
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.08241311310842668,
+            "brier": 0.018314746785019993
+          },
+          "packed_bytes": 29099,
+          "fp32_bytes": 72860
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.06125160857053725,
+              "brier": 0.016423542255923573
+            },
+            "recalibrated": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.06125160857053725,
+              "brier": 0.016423542255923573
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.06125750497757515,
+            "brier": 0.016424669541261955
+          },
+          "packed_bytes": 48598,
+          "fp32_bytes": 77516
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.061095478538672025,
+              "brier": 0.016385021968942717
+            },
+            "recalibrated": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.061095478538672025,
+              "brier": 0.016385021968942717
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.06125750497757515,
+            "brier": 0.016424669541261955
+          },
+          "packed_bytes": 34343,
+          "fp32_bytes": 77516
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.06078897453548008,
+              "brier": 0.016325214267474183
+            },
+            "recalibrated": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.06078897453548008,
+              "brier": 0.016325214267474183
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.060793144290196714,
+            "brier": 0.016326058767051618
+          },
+          "packed_bytes": 44904,
+          "fp32_bytes": 69500
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.0605783474506618,
+              "brier": 0.016274346133474477
+            },
+            "recalibrated": {
+              "f1_macro": 0.42434367832918557,
+              "f1_weighted": 0.6221102562476661,
+              "loss": 0.0605783474506618,
+              "brier": 0.016274346133474477
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.060793144290196714,
+            "brier": 0.016326058767051618
+          },
+          "packed_bytes": 32710,
+          "fp32_bytes": 69500
+        }
+      ]
+    },
+    {
+      "case": "bibtex_71604",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.32941287285450327,
+              "f1_weighted": 0.4247776072409637,
+              "loss": 0.04501295585828147,
+              "brier": 0.010653666298115054
+            },
+            "recalibrated": {
+              "f1_macro": 0.32941287285450327,
+              "f1_weighted": 0.4247776072409637,
+              "loss": 0.04501295585828147,
+              "brier": 0.010653666298115054
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3293929480489867,
+            "f1_weighted": 0.4247401367111862,
+            "loss": 0.04501291034432485,
+            "brier": 0.010653637079342413
+          },
+          "packed_bytes": 526408,
+          "fp32_bytes": 1026288
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.32918678477290836,
+              "f1_weighted": 0.4246963838512767,
+              "loss": 0.04503349742322891,
+              "brier": 0.010670442608442266
+            },
+            "recalibrated": {
+              "f1_macro": 0.3280496614625443,
+              "f1_weighted": 0.42252319603509503,
+              "loss": 0.04503349742322891,
+              "brier": 0.010670442608442266
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3293929480489867,
+            "f1_weighted": 0.4247401367111862,
+            "loss": 0.04501291034432485,
+            "brier": 0.010653637079342413
+          },
+          "packed_bytes": 277096,
+          "fp32_bytes": 1026288
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.3158720479973769,
+              "f1_weighted": 0.409528066749188,
+              "loss": 0.04571444737730488,
+              "brier": 0.010555625760133329
+            },
+            "recalibrated": {
+              "f1_macro": 0.3158720479973769,
+              "f1_weighted": 0.409528066749188,
+              "loss": 0.04571444737730488,
+              "brier": 0.010555625760133329
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3160268617370963,
+            "f1_weighted": 0.40960431829263194,
+            "loss": 0.04571441023874564,
+            "brier": 0.010555603498934082
+          },
+          "packed_bytes": 290212,
+          "fp32_bytes": 555672
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.3163549122416091,
+              "f1_weighted": 0.4100788419784157,
+              "loss": 0.04571501792778061,
+              "brier": 0.010558031369662239
+            },
+            "recalibrated": {
+              "f1_macro": 0.3186385087628976,
+              "f1_weighted": 0.412169118133421,
+              "loss": 0.04571501792778061,
+              "brier": 0.010558031369662239
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.3160268617370963,
+            "f1_weighted": 0.40960431829263194,
+            "loss": 0.04571441023874564,
+            "brier": 0.010555603498934082
+          },
+          "packed_bytes": 158614,
+          "fp32_bytes": 555672
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.3187641730001743,
+              "f1_weighted": 0.4133392295817529,
+              "loss": 0.044937293310316054,
+              "brier": 0.010500256564139485
+            },
+            "recalibrated": {
+              "f1_macro": 0.3187641730001743,
+              "f1_weighted": 0.4133392295817529,
+              "loss": 0.044937293310316054,
+              "brier": 0.010500256564139485
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.31871851559054737,
+            "f1_weighted": 0.4132881205411258,
+            "loss": 0.04493727529173909,
+            "brier": 0.010500229887735532
+          },
+          "packed_bytes": 327216,
+          "fp32_bytes": 595108
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.31922354241035517,
+              "f1_weighted": 0.41384110995312096,
+              "loss": 0.04493973005135921,
+              "brier": 0.010502368904752337
+            },
+            "recalibrated": {
+              "f1_macro": 0.3193434610069489,
+              "f1_weighted": 0.4142775656717401,
+              "loss": 0.04493973005135921,
+              "brier": 0.010502368904752337
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.31871851559054737,
+            "f1_weighted": 0.4132881205411258,
+            "loss": 0.04493727529173909,
+            "brier": 0.010500229887735532
+          },
+          "packed_bytes": 194402,
+          "fp32_bytes": 595108
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.32982005708196066,
+              "f1_weighted": 0.42260533383072124,
+              "loss": 0.04498034224730566,
+              "brier": 0.010507850575213418
+            },
+            "recalibrated": {
+              "f1_macro": 0.32885710080619407,
+              "f1_weighted": 0.4219585721529675,
+              "loss": 0.04498034224730566,
+              "brier": 0.010507850575213418
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.32982895105311877,
+            "f1_weighted": 0.4226200686187593,
+            "loss": 0.04498037566656433,
+            "brier": 0.0105077892875602
+          },
+          "packed_bytes": 270172,
+          "fp32_bytes": 479692
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.3296325831660435,
+              "f1_weighted": 0.42242471513378427,
+              "loss": 0.04497734706016985,
+              "brier": 0.010508937114193085
+            },
+            "recalibrated": {
+              "f1_macro": 0.3263181484658119,
+              "f1_weighted": 0.4199726483745549,
+              "loss": 0.04497734706016985,
+              "brier": 0.010508937114193085
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.32982895105311877,
+            "f1_weighted": 0.4226200686187593,
+            "loss": 0.04498037566656433,
+            "brier": 0.0105077892875602
+          },
+          "packed_bytes": 165916,
+          "fp32_bytes": 479692
+        }
+      ]
+    },
+    {
+      "case": "mediamill_71704",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.16184320891082363,
+              "f1_weighted": 0.5522004347848442,
+              "loss": 0.08802181544463367,
+              "brier": 0.023924724084745278
+            },
+            "recalibrated": {
+              "f1_macro": 0.16184320891082363,
+              "f1_weighted": 0.5522004347848442,
+              "loss": 0.08802181544463367,
+              "brier": 0.023924724084745278
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1618496102573123,
+            "f1_weighted": 0.5522512159935155,
+            "loss": 0.08802181961425887,
+            "brier": 0.023924719590593654
+          },
+          "packed_bytes": 349696,
+          "fp32_bytes": 672880
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.16139519630764307,
+              "f1_weighted": 0.5521179869696243,
+              "loss": 0.08802233426721354,
+              "brier": 0.02392387210219244
+            },
+            "recalibrated": {
+              "f1_macro": 0.16114430061377186,
+              "f1_weighted": 0.5514827241427919,
+              "loss": 0.08802233426721354,
+              "brier": 0.02392387210219244
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1618496102573123,
+            "f1_weighted": 0.5522512159935155,
+            "loss": 0.08802181961425887,
+            "brier": 0.023924719590593654
+          },
+          "packed_bytes": 188500,
+          "fp32_bytes": 672880
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.15030949729191645,
+              "f1_weighted": 0.5484095150454193,
+              "loss": 0.08866214429557359,
+              "brier": 0.024021211516171107
+            },
+            "recalibrated": {
+              "f1_macro": 0.15030949729191645,
+              "f1_weighted": 0.5484095150454193,
+              "loss": 0.08866214429557359,
+              "brier": 0.024021211516171107
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.15029552076619504,
+            "f1_weighted": 0.548344658956851,
+            "loss": 0.08866211231463351,
+            "brier": 0.02402118791576861
+          },
+          "packed_bytes": 231960,
+          "fp32_bytes": 437328
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.1480255408589743,
+              "f1_weighted": 0.5482743166329772,
+              "loss": 0.08866161196629088,
+              "brier": 0.024021327723238266
+            },
+            "recalibrated": {
+              "f1_macro": 0.14706294459934835,
+              "f1_weighted": 0.5481445757969167,
+              "loss": 0.08866161196629088,
+              "brier": 0.024021327723238266
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.15029552076619504,
+            "f1_weighted": 0.548344658956851,
+            "loss": 0.08866211231463351,
+            "brier": 0.02402118791576861
+          },
+          "packed_bytes": 130072,
+          "fp32_bytes": 437328
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.1501638877107154,
+              "f1_weighted": 0.546521394329546,
+              "loss": 0.08847389609434152,
+              "brier": 0.02398603723745736
+            },
+            "recalibrated": {
+              "f1_macro": 0.1501638877107154,
+              "f1_weighted": 0.546521394329546,
+              "loss": 0.08847389609434152,
+              "brier": 0.02398603723745736
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.15016620439261427,
+            "f1_weighted": 0.5465291782128987,
+            "loss": 0.08847383648944224,
+            "brier": 0.02398600939028708
+          },
+          "packed_bytes": 257882,
+          "fp32_bytes": 463352
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.14997251939231676,
+              "f1_weighted": 0.5463947933708153,
+              "loss": 0.08847509027197116,
+              "brier": 0.023986725930672068
+            },
+            "recalibrated": {
+              "f1_macro": 0.14997251939231676,
+              "f1_weighted": 0.5463947933708153,
+              "loss": 0.08847509027197116,
+              "brier": 0.023986725930672068
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.15016620439261427,
+            "f1_weighted": 0.5465291782128987,
+            "loss": 0.08847383648944224,
+            "brier": 0.02398600939028708
+          },
+          "packed_bytes": 155943,
+          "fp32_bytes": 463352
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.14979722963876496,
+              "f1_weighted": 0.5475284406853634,
+              "loss": 0.08846617387380498,
+              "brier": 0.02399438479519728
+            },
+            "recalibrated": {
+              "f1_macro": 0.14979722963876496,
+              "f1_weighted": 0.5475284406853634,
+              "loss": 0.08846617387380498,
+              "brier": 0.02399438479519728
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1497948038398588,
+            "f1_weighted": 0.5475451555487135,
+            "loss": 0.0884661641606578,
+            "brier": 0.023994374701668014
+          },
+          "packed_bytes": 226944,
+          "fp32_bytes": 400328
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.15086710744257317,
+              "f1_weighted": 0.5483001785449609,
+              "loss": 0.08846619053873254,
+              "brier": 0.023994533171550477
+            },
+            "recalibrated": {
+              "f1_macro": 0.14969404334279862,
+              "f1_weighted": 0.5457977598109984,
+              "loss": 0.08846619053873254,
+              "brier": 0.023994533171550477
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1497948038398588,
+            "f1_weighted": 0.5475451555487135,
+            "loss": 0.0884661641606578,
+            "brier": 0.023994374701668014
+          },
+          "packed_bytes": 140652,
+          "fp32_bytes": 400328
+        }
+      ]
+    },
+    {
+      "case": "enron_71804",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19687457263402286,
+              "f1_weighted": 0.5779776174123762,
+              "loss": 0.12651012389076025,
+              "brier": 0.03433927209998346
+            },
+            "recalibrated": {
+              "f1_macro": 0.19687457263402286,
+              "f1_weighted": 0.5779776174123762,
+              "loss": 0.12651012389076025,
+              "brier": 0.03433927209998346
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19687457263402286,
+            "f1_weighted": 0.5779776174123762,
+            "loss": 0.12651011761244194,
+            "brier": 0.0343392515823817
+          },
+          "packed_bytes": 194004,
+          "fp32_bytes": 362104
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19668001146629926,
+              "f1_weighted": 0.5777915103040702,
+              "loss": 0.12651056338580824,
+              "brier": 0.03434039050575039
+            },
+            "recalibrated": {
+              "f1_macro": 0.19786439731288843,
+              "f1_weighted": 0.5796587572818074,
+              "loss": 0.12651056338580824,
+              "brier": 0.03434039050575039
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19687457263402286,
+            "f1_weighted": 0.5779776174123762,
+            "loss": 0.12651011761244194,
+            "brier": 0.0343392515823817
+          },
+          "packed_bytes": 110158,
+          "fp32_bytes": 362104
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.2056844550840186,
+              "f1_weighted": 0.584357659127604,
+              "loss": 0.12702264909826513,
+              "brier": 0.03438489603568643
+            },
+            "recalibrated": {
+              "f1_macro": 0.2056844550840186,
+              "f1_weighted": 0.584357659127604,
+              "loss": 0.12702264909826513,
+              "brier": 0.03438489603568643
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.2056844550840186,
+            "f1_weighted": 0.584357659127604,
+            "loss": 0.12702252868180808,
+            "brier": 0.03438481096475183
+          },
+          "packed_bytes": 130608,
+          "fp32_bytes": 235296
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.20572586843899737,
+              "f1_weighted": 0.5844114276479788,
+              "loss": 0.1270365681011847,
+              "brier": 0.03438646876458923
+            },
+            "recalibrated": {
+              "f1_macro": 0.19943656026289672,
+              "f1_weighted": 0.5838281672221987,
+              "loss": 0.1270365681011847,
+              "brier": 0.03438646876458923
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.2056844550840186,
+            "f1_weighted": 0.584357659127604,
+            "loss": 0.12702252868180808,
+            "brier": 0.03438481096475183
+          },
+          "packed_bytes": 78676,
+          "fp32_bytes": 235296
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19868762189323538,
+              "f1_weighted": 0.5868307735167925,
+              "loss": 0.12665224070411382,
+              "brier": 0.03436951844486978
+            },
+            "recalibrated": {
+              "f1_macro": 0.19868762189323538,
+              "f1_weighted": 0.5868307735167925,
+              "loss": 0.12665224070411382,
+              "brier": 0.03436951844486978
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19868762189323538,
+            "f1_weighted": 0.5868307735167925,
+            "loss": 0.12665211463865905,
+            "brier": 0.03436947813275651
+          },
+          "packed_bytes": 146052,
+          "fp32_bytes": 250524
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19798831201406927,
+              "f1_weighted": 0.5863970013937199,
+              "loss": 0.12665597141720397,
+              "brier": 0.03436771631773322
+            },
+            "recalibrated": {
+              "f1_macro": 0.19798831201406927,
+              "f1_weighted": 0.5863970013937199,
+              "loss": 0.12665597141720397,
+              "brier": 0.03436771631773322
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19868762189323538,
+            "f1_weighted": 0.5868307735167925,
+            "loss": 0.12665211463865905,
+            "brier": 0.03436947813275651
+          },
+          "packed_bytes": 94228,
+          "fp32_bytes": 250524
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.20206623504263935,
+              "f1_weighted": 0.5818999592754938,
+              "loss": 0.12639534725205592,
+              "brier": 0.03432118899163774
+            },
+            "recalibrated": {
+              "f1_macro": 0.20206623504263935,
+              "f1_weighted": 0.5818999592754938,
+              "loss": 0.12639534725205592,
+              "brier": 0.03432118899163774
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.20206623504263935,
+            "f1_weighted": 0.5818999592754938,
+            "loss": 0.12639507650217194,
+            "brier": 0.034320986550776415
+          },
+          "packed_bytes": 130674,
+          "fp32_bytes": 218624
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.20141804732108315,
+              "f1_weighted": 0.5812436919542436,
+              "loss": 0.1263978017266629,
+              "brier": 0.03431579728817006
+            },
+            "recalibrated": {
+              "f1_macro": 0.20123465145286312,
+              "f1_weighted": 0.5823696641645281,
+              "loss": 0.1263978017266629,
+              "brier": 0.03431579728817006
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.20206623504263935,
+            "f1_weighted": 0.5818999592754938,
+            "loss": 0.12639507650217194,
+            "brier": 0.034320986550776415
+          },
+          "packed_bytes": 86907,
+          "fp32_bytes": 218624
+        }
+      ]
+    },
+    {
+      "case": "cal500_71904",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.18319012463447132,
+              "f1_weighted": 0.4225260237361331,
+              "loss": 0.355414743476099,
+              "brier": 0.10626102374433412
+            },
+            "recalibrated": {
+              "f1_macro": 0.18319012463447132,
+              "f1_weighted": 0.4225260237361331,
+              "loss": 0.355414743476099,
+              "brier": 0.10626102374433412
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.18319012463447132,
+            "f1_weighted": 0.4225260237361331,
+            "loss": 0.3554148408283156,
+            "brier": 0.106261058516369
+          },
+          "packed_bytes": 546752,
+          "fp32_bytes": 1068040
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.1844127208154713,
+              "f1_weighted": 0.42235422783196824,
+              "loss": 0.3554279558520361,
+              "brier": 0.10626173975786156
+            },
+            "recalibrated": {
+              "f1_macro": 0.18593897234172285,
+              "f1_weighted": 0.4230301146408878,
+              "loss": 0.3554279558520361,
+              "brier": 0.10626173975786156
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.18319012463447132,
+            "f1_weighted": 0.4225260237361331,
+            "loss": 0.3554148408283156,
+            "brier": 0.106261058516369
+          },
+          "packed_bytes": 286796,
+          "fp32_bytes": 1068040
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.1958698736225772,
+              "f1_weighted": 0.43176764767397796,
+              "loss": 0.34824463758221563,
+              "brier": 0.10573538205978412
+            },
+            "recalibrated": {
+              "f1_macro": 0.1958698736225772,
+              "f1_weighted": 0.43176764767397796,
+              "loss": 0.34824463758221563,
+              "brier": 0.10573538205978412
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1958698736225772,
+            "f1_weighted": 0.43176764767397796,
+            "loss": 0.34824454061406873,
+            "brier": 0.10573537605017488
+          },
+          "packed_bytes": 304660,
+          "fp32_bytes": 584176
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19569192622526724,
+              "f1_weighted": 0.43175318784202,
+              "loss": 0.34824388444380655,
+              "brier": 0.1057333989801418
+            },
+            "recalibrated": {
+              "f1_macro": 0.19570168365555043,
+              "f1_weighted": 0.4317716906579571,
+              "loss": 0.34824388444380655,
+              "brier": 0.1057333989801418
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1958698736225772,
+            "f1_weighted": 0.43176764767397796,
+            "loss": 0.34824454061406873,
+            "brier": 0.10573537605017488
+          },
+          "packed_bytes": 166094,
+          "fp32_bytes": 584176
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.1933938638000475,
+              "f1_weighted": 0.43594909018956096,
+              "loss": 0.35202990820052943,
+              "brier": 0.10634419164280585
+            },
+            "recalibrated": {
+              "f1_macro": 0.1933938638000475,
+              "f1_weighted": 0.43594909018956096,
+              "loss": 0.35202990820052943,
+              "brier": 0.10634419164280585
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1933938638000475,
+            "f1_weighted": 0.43594909018956096,
+            "loss": 0.3520301929421971,
+            "brier": 0.10634431626019196
+          },
+          "packed_bytes": 345428,
+          "fp32_bytes": 627760
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19332086490480785,
+              "f1_weighted": 0.43608252410150183,
+              "loss": 0.3520682428508077,
+              "brier": 0.10635252056243494
+            },
+            "recalibrated": {
+              "f1_macro": 0.19332086490480785,
+              "f1_weighted": 0.43608252410150183,
+              "loss": 0.3520682428508077,
+              "brier": 0.10635252056243494
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1933938638000475,
+            "f1_weighted": 0.43594909018956096,
+            "loss": 0.3520301929421971,
+            "brier": 0.10634431626019196
+          },
+          "packed_bytes": 205454,
+          "fp32_bytes": 627760
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19976724559951278,
+              "f1_weighted": 0.44617341331493277,
+              "loss": 0.3504106925974606,
+              "brier": 0.10582653918109741
+            },
+            "recalibrated": {
+              "f1_macro": 0.19976724559951278,
+              "f1_weighted": 0.44617341331493277,
+              "loss": 0.3504106925974606,
+              "brier": 0.10582653918109741
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19976724559951278,
+            "f1_weighted": 0.44617341331493277,
+            "loss": 0.3504100035571764,
+            "brier": 0.10582631930886612
+          },
+          "packed_bytes": 277036,
+          "fp32_bytes": 490012
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.19926297927198255,
+              "f1_weighted": 0.4454032806108301,
+              "loss": 0.3504364453195285,
+              "brier": 0.10583151732088764
+            },
+            "recalibrated": {
+              "f1_macro": 0.19926297927198255,
+              "f1_weighted": 0.4454032806108301,
+              "loss": 0.3504364453195285,
+              "brier": 0.10583151732088764
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.19976724559951278,
+            "f1_weighted": 0.44617341331493277,
+            "loss": 0.3504100035571764,
+            "brier": 0.10582631930886612
+          },
+          "packed_bytes": 171052,
+          "fp32_bytes": 490012
+        }
+      ]
+    },
+    {
+      "case": "corel5k_72004",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.032287616384019065,
+              "f1_weighted": 0.1850265928420218,
+              "loss": 0.039367760777800666,
+              "brier": 0.008436179656046407
+            },
+            "recalibrated": {
+              "f1_macro": 0.032287616384019065,
+              "f1_weighted": 0.1850265928420218,
+              "loss": 0.039367760777800666,
+              "brier": 0.008436179656046407
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.032287616384019065,
+            "f1_weighted": 0.1850265928420218,
+            "loss": 0.039367761549020046,
+            "brier": 0.008436177587665782
+          },
+          "packed_bytes": 930576,
+          "fp32_bytes": 1838632
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.0329736102862465,
+              "f1_weighted": 0.18680510898911556,
+              "loss": 0.03937226731940763,
+              "brier": 0.008438346727555262
+            },
+            "recalibrated": {
+              "f1_macro": 0.0329736102862465,
+              "f1_weighted": 0.18680510898911556,
+              "loss": 0.03937226731940763,
+              "brier": 0.008438346727555262
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.032287616384019065,
+            "f1_weighted": 0.1850265928420218,
+            "loss": 0.039367761549020046,
+            "brier": 0.008436177587665782
+          },
+          "packed_bytes": 478036,
+          "fp32_bytes": 1838632
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.035124773721194505,
+              "f1_weighted": 0.18786137640780157,
+              "loss": 0.03941332520184069,
+              "brier": 0.00839137460276558
+            },
+            "recalibrated": {
+              "f1_macro": 0.035124773721194505,
+              "f1_weighted": 0.18786137640780157,
+              "loss": 0.03941332520184069,
+              "brier": 0.00839137460276558
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.03511872491404168,
+            "f1_weighted": 0.1877959340098248,
+            "loss": 0.039413352132572126,
+            "brier": 0.00839137917156462
+          },
+          "packed_bytes": 356036,
+          "fp32_bytes": 692144
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.035101333464640845,
+              "f1_weighted": 0.18781277340705277,
+              "loss": 0.03941315761286169,
+              "brier": 0.008391049278145801
+            },
+            "recalibrated": {
+              "f1_macro": 0.035101333464640845,
+              "f1_weighted": 0.18781277340705277,
+              "loss": 0.03941315761286169,
+              "brier": 0.008391049278145801
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.03511872491404168,
+            "f1_weighted": 0.1877959340098248,
+            "loss": 0.039413352132572126,
+            "brier": 0.00839137917156462
+          },
+          "packed_bytes": 189974,
+          "fp32_bytes": 692144
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.03506144948423046,
+              "f1_weighted": 0.18730958024150365,
+              "loss": 0.03936371796492029,
+              "brier": 0.008391186575674617
+            },
+            "recalibrated": {
+              "f1_macro": 0.03506144948423046,
+              "f1_weighted": 0.18730958024150365,
+              "loss": 0.03936371796492029,
+              "brier": 0.008391186575674617
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.03506144948423046,
+            "f1_weighted": 0.18730958024150365,
+            "loss": 0.039363752012306234,
+            "brier": 0.008391192184723843
+          },
+          "packed_bytes": 411908,
+          "fp32_bytes": 751088
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.03507256279707977,
+              "f1_weighted": 0.18757112144063576,
+              "loss": 0.03936608932460527,
+              "brier": 0.008391497771826796
+            },
+            "recalibrated": {
+              "f1_macro": 0.03507256279707977,
+              "f1_weighted": 0.18757112144063576,
+              "loss": 0.03936608932460527,
+              "brier": 0.008391497771826796
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.03506144948423046,
+            "f1_weighted": 0.18730958024150365,
+            "loss": 0.039363752012306234,
+            "brier": 0.008391192184723843
+          },
+          "packed_bytes": 244310,
+          "fp32_bytes": 751088
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.03509107976525613,
+              "f1_weighted": 0.1833048807388479,
+              "loss": 0.03935962814511139,
+              "brier": 0.008394169337900234
+            },
+            "recalibrated": {
+              "f1_macro": 0.03509107976525613,
+              "f1_weighted": 0.1833048807388479,
+              "loss": 0.03935962814511139,
+              "brier": 0.008394169337900234
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.03509107976525613,
+            "f1_weighted": 0.1833048807388479,
+            "loss": 0.03935969702896164,
+            "brier": 0.008394182762322944
+          },
+          "packed_bytes": 259684,
+          "fp32_bytes": 445268
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.03485770940895331,
+              "f1_weighted": 0.18405506422238072,
+              "loss": 0.03936174387535885,
+              "brier": 0.00839470147212867
+            },
+            "recalibrated": {
+              "f1_macro": 0.03485770940895331,
+              "f1_weighted": 0.18405506422238072,
+              "loss": 0.03936174387535885,
+              "brier": 0.00839470147212867
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.03509107976525613,
+            "f1_weighted": 0.1833048807388479,
+            "loss": 0.03935969702896164,
+            "brier": 0.008394182762322944
+          },
+          "packed_bytes": 167396,
+          "fp32_bytes": 445268
+        }
+      ]
+    },
+    {
+      "case": "delicious_72104",
+      "models": [
+        {
+          "uid": "ordinary-d3-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.11583689871516813,
+              "f1_weighted": 0.2995071514729993,
+              "loss": 0.06444695115860713,
+              "brier": 0.015406254497998841
+            },
+            "recalibrated": {
+              "f1_macro": 0.11583689871516813,
+              "f1_weighted": 0.2995071514729993,
+              "loss": 0.06444695115860713,
+              "brier": 0.015406254497998841
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.11583888694451197,
+            "f1_weighted": 0.29951661652426675,
+            "loss": 0.06444694366895765,
+            "brier": 0.015406250573869703
+          },
+          "packed_bytes": 3131584,
+          "fp32_bytes": 6229984
+        },
+        {
+          "uid": "ordinary-d3-t200/int8",
+          "codec": "int8",
+          "source_uid": "ordinary/d3/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.11505565526348138,
+              "f1_weighted": 0.2990017895011075,
+              "loss": 0.0644609069202109,
+              "brier": 0.015415967778748228
+            },
+            "recalibrated": {
+              "f1_macro": 0.11614781562157248,
+              "f1_weighted": 0.2994985251435111,
+              "loss": 0.0644609069202109,
+              "brier": 0.015415967778748228
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.11583888694451197,
+            "f1_weighted": 0.29951661652426675,
+            "loss": 0.06444694366895765,
+            "brier": 0.015406250573869703
+          },
+          "packed_bytes": 1586308,
+          "fp32_bytes": 6229984
+        },
+        {
+          "uid": "direct_AB-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.1111537126214944,
+              "f1_weighted": 0.2943546449244438,
+              "loss": 0.06496056114032588,
+              "brier": 0.01546658019947439
+            },
+            "recalibrated": {
+              "f1_macro": 0.1112539583287035,
+              "f1_weighted": 0.2944641733715031,
+              "loss": 0.06496056114032588,
+              "brier": 0.01546658019947439
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.11120629805078243,
+            "f1_weighted": 0.2943930300688366,
+            "loss": 0.06496060180883761,
+            "brier": 0.015466592034642875
+          },
+          "packed_bytes": 934882,
+          "fp32_bytes": 1837844
+        },
+        {
+          "uid": "direct_AB-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_AB/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.11099648646868564,
+              "f1_weighted": 0.29439408647345916,
+              "loss": 0.06496071563761585,
+              "brier": 0.015466986966089254
+            },
+            "recalibrated": {
+              "f1_macro": 0.11135195179675086,
+              "f1_weighted": 0.2947874836560589,
+              "loss": 0.06496071563761585,
+              "brier": 0.015466986966089254
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.11120629805078243,
+            "f1_weighted": 0.2943930300688366,
+            "loss": 0.06496060180883761,
+            "brier": 0.015466592034642875
+          },
+          "packed_bytes": 487829,
+          "fp32_bytes": 1837844
+        },
+        {
+          "uid": "direct_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.11509853290933403,
+              "f1_weighted": 0.2976419382034814,
+              "loss": 0.06469173979251808,
+              "brier": 0.01542804150142603
+            },
+            "recalibrated": {
+              "f1_macro": 0.11531168022319345,
+              "f1_weighted": 0.2977010775676068,
+              "loss": 0.06469173979251808,
+              "brier": 0.01542804150142603
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.11511652877132597,
+            "f1_weighted": 0.29764068369757063,
+            "loss": 0.06469176382753343,
+            "brier": 0.015428046536614445
+          },
+          "packed_bytes": 1126958,
+          "fp32_bytes": 2031200
+        },
+        {
+          "uid": "direct_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "direct_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.114893468295577,
+              "f1_weighted": 0.29711368507184455,
+              "loss": 0.06469279315452649,
+              "brier": 0.015429507764666847
+            },
+            "recalibrated": {
+              "f1_macro": 0.114744425829825,
+              "f1_weighted": 0.2970399534506324,
+              "loss": 0.06469279315452649,
+              "brier": 0.015429507764666847
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.11511652877132597,
+            "f1_weighted": 0.29764068369757063,
+            "loss": 0.06469176382753343,
+            "brier": 0.015428046536614445
+          },
+          "packed_bytes": 679265,
+          "fp32_bytes": 2031200
+        },
+        {
+          "uid": "compressed40_ABL-t200/fp16",
+          "codec": "fp16",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.11169633146074621,
+              "f1_weighted": 0.29475027972051254,
+              "loss": 0.06472047898123469,
+              "brier": 0.015434672966139557
+            },
+            "recalibrated": {
+              "f1_macro": 0.11188734790480864,
+              "f1_weighted": 0.2947908083552014,
+              "loss": 0.06472047898123469,
+              "brier": 0.015434672966139557
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1117018772262529,
+            "f1_weighted": 0.2947633799388657,
+            "loss": 0.06472052740747075,
+            "brier": 0.015434688284851866
+          },
+          "packed_bytes": 538468,
+          "fp32_bytes": 854996
+        },
+        {
+          "uid": "compressed40_ABL-t200/int8",
+          "codec": "int8",
+          "source_uid": "compressed40_ABL/t200",
+          "quality": {
+            "fixed": {
+              "f1_macro": 0.11188090754696739,
+              "f1_weighted": 0.2953286686932409,
+              "loss": 0.0647264922103596,
+              "brier": 0.01543702697480554
+            },
+            "recalibrated": {
+              "f1_macro": 0.11200606081071073,
+              "f1_weighted": 0.2953710427478238,
+              "loss": 0.0647264922103596,
+              "brier": 0.01543702697480554
+            }
+          },
+          "original_quality": {
+            "f1_macro": 0.1117018772262529,
+            "f1_weighted": 0.2947633799388657,
+            "loss": 0.06472052740747075,
+            "brier": 0.015434688284851866
+          },
+          "packed_bytes": 380708,
+          "fp32_bytes": 854996
+        }
+      ]
+    }
+  ],
+  "new_trees": 0,
+  "environment": {
+    "sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+    "packages": 45,
+    "actual_runtime_checked": true
+  },
+  "pretest_seal": {
+    "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/pretest_seal.json",
+    "sha256": "726ed53558d9940e86051f45352c1728ac39dd6ef9bf72859a4599a827c1f7bc"
+  },
+  "seconds": 70.66479032859206
+}
