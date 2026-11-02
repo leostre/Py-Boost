@@ -1,0 +1,69 @@
+{
+  "artifact": "hasboost-results-interactive.html",
+  "artifact_sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc",
+  "artifact_bytes": 10707591,
+  "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
+  "build_status": "complete",
+  "snapshot_sha256": "e968809c1eecdc847f06428a1d049a9e3e6ce164a0bd717b43c0307d141d140d",
+  "build": {
+    "canonical_prebuilt_runtime": true,
+    "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
+    "compiler_sha256": "ec65601079c80bef7210f2c9760ff7f2db6adef28516ffff280d4c86f91d4078",
+    "protected_runtime_changed": false,
+    "execution": "WSL Ubuntu, isolated Node 24.19.0; native Windows path-validation error avoided without changing or bypassing integrity checks",
+    "external_required_asset_count": 0,
+    "canonical_export_offline": true,
+    "reconstructed_snapshot_equals_delivered": true
+  },
+  "analysis_checks": {
+    "passed": 12,
+    "failed": 0,
+    "log": "interactive-analytics.log"
+  },
+  "browser_checks": {
+    "method_families": 7,
+    "all_four_step_controls": true,
+    "method_drilldown_and_return": true,
+    "coefficient_representation_primer": "W ~ AB + L; schematic; full warmup/block-specific bases disclosed",
+    "executor_diagrams": "legacy narrow <=128 and wide >128; packed single CUDA launch; already optimized legacy preserved",
+    "two_comparison_modes": "own legacy baseline for one UID vs fixed packed model baseline for different UIDs",
+    "full_model_then_switch_mode": "valid effective role resolved before charts, no intermediate empty chart",
+    "both_fixed_references": "full200, ordinary70; UID and absolute p95/GPU values shown",
+    "same_session_example": "real recorded first session; tested against original pair ratio",
+    "ratio_definitions": "executor median of three paired ratios; representation ratio of pooled p95 values; medians across datasets",
+    "narrow_width": "390px viewport; document375px; diagram scroll container301px with SVG880px; viewport reset",
+    "source_menu": "new method and executor metadata; original query rows unchanged",
+    "portable_export_opened_via_http": true,
+    "new_console_errors_observed": 0,
+    "file_protocol_browser_test": "not run; canonical offline export and no required external assets verified",
+    "previous_checks": [
+      "interactive-dashboard-v1.json",
+      "interactive-dashboard-v2.json"
+    ],
+    "native_baseline": "fixed master b2842af / full200, default main comparison",
+    "native_role_switch": "full200 and AB+L; common reference preserved",
+    "native_time_scope": "request p95 and resident CUDA p50 switch",
+    "native_filters": "Bibtex / batch32 and all datasets / batch1024",
+    "native_sources": "Overview definitions, source files and fixed commit verified",
+    "graphical_dataflow": "native tree/gather J/S; legacy block Z/E/GEMM; packed local sums and one launch",
+    "independent_diagram_controls": "narrow/wide and full/hybrid preserve each other",
+    "issues_fixed_during_authoring": [
+      "unsupported grouped-chart reference/stack option removed",
+      "diagram controls preserve independent state"
+    ]
+  },
+  "scientific_scope": "New S2 inference timings on saved models; 12 datasets, first split, 4 batches, 7 variants, 3x32 queries. No fitting or new test-label metrics. Native float32 preserved; optimized sums float64;336 numeric checks passed. Existing memory series separate.",
+  "revision": "native-baseline-and-graphical-dataflow",
+  "checked_at": "2026-10-30T15:03:32+03:00",
+  "native_evidence": {
+    "run": "8d178a2d-3f3a-4ac1-bdbe-dda44b5020dc",
+    "commit": "8d413ec11d0c277d635e98bf8eb20c5182041dd8",
+    "report_sha256": "c8715eb7012af54321b5b17ffe91a77a3fbf9a4b8c9af4cecdd936d1104ff10e",
+    "summary_sha256": "db9144b0792cfdaaf928b02f127b11fd1686681475372ecf5fdb2d7a86278615",
+    "csv_sha256": "3026cd58ba21f77ed75d8f6f44bf1d894d280c2742501ae3ac28ef53d514e0a2",
+    "checks": 336,
+    "label_disagreements": 0,
+    "native_probability_max_abs_error": 3.325457424152578e-07,
+    "new_trees": 0
+  }
+}

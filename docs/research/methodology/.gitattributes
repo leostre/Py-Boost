@@ -1,0 +1,2 @@
+*.json -text whitespace=cr-at-eol
+visual-registry.csv -text whitespace=cr-at-eol
