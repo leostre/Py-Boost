@@ -1,0 +1,22 @@
+[
+  {
+    "name": "native",
+    "variant": "native/full/narrow",
+    "stages": 14
+  },
+  {
+    "name": "legacy",
+    "variant": "legacy/full/narrow",
+    "stages": 12
+  },
+  {
+    "name": "packed",
+    "variant": "packed/full/narrow",
+    "stages": 12
+  },
+  {
+    "name": "packed-abl",
+    "variant": "packed/compact/narrow",
+    "stages": 12
+  }
+]

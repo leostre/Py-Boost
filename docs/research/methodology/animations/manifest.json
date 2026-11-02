@@ -1,0 +1,94 @@
+{
+  "files": [
+    {
+      "file": ".gitattributes",
+      "bytes": 144,
+      "sha256": "c4d9e2263b908e3ca3c956a280eb4c86c6620de5f7d1ff0645ff2816f4c13ba0"
+    },
+    {
+      "file": "checks.json",
+      "bytes": 3621,
+      "sha256": "89a8d1f818d3383d24cdc3e0cb8f1ee1b8ac28bbf1eb3914ed9e6c59e376c591"
+    },
+    {
+      "file": "exports.json",
+      "bytes": 372,
+      "sha256": "5b53c74f9492951c0fe79f919698b4506956e4c888cef57661b96c06a09462aa"
+    },
+    {
+      "file": "frames.json",
+      "bytes": 7724433,
+      "sha256": "a53c40ad517ef2a4f9fbc58d95cf7fedad5ac2d5b812c2c45827fac3e5b5709d"
+    },
+    {
+      "file": "legacy-poster.png",
+      "bytes": 97043,
+      "sha256": "d3f97c553cf0af4f96c2f225ac69da6164a035d2023d262cee3ba65ed1bce9b7"
+    },
+    {
+      "file": "legacy.gif",
+      "bytes": 1118723,
+      "sha256": "d470b4c7b5c8625513103e1757980652a609072d9d4a48d92c9270fcc3197964"
+    },
+    {
+      "file": "legacy.svg",
+      "bytes": 469302,
+      "sha256": "5ccbc2b902f092624f207fd8c8723f5ad0979d4fee7ffce8bedb0de140b4ff0c"
+    },
+    {
+      "file": "native-poster.png",
+      "bytes": 101332,
+      "sha256": "b2705c9829568f40fa071262142b9055eb604429e86254e9c6a04ab9b1e300c2"
+    },
+    {
+      "file": "native.gif",
+      "bytes": 1504260,
+      "sha256": "ef98da5d59dd6c33a637d36eaa85e73b35844f39f61e5eff528c702f0476411c"
+    },
+    {
+      "file": "native.svg",
+      "bytes": 538647,
+      "sha256": "e2cb41154d4b76cb55941d539c70d43a24977d122d3c9544373c89f2613e9d87"
+    },
+    {
+      "file": "packed-abl-poster.png",
+      "bytes": 106859,
+      "sha256": "5f1a008cf2522c343504b1fdb5c916474caa97b686d1abbf4abb02a8c7e10e51"
+    },
+    {
+      "file": "packed-abl.gif",
+      "bytes": 1126166,
+      "sha256": "b19d641cd9403cad3bf0df1f5be6b0d8c0d68a96a969a7b3033c8c273caedeeb"
+    },
+    {
+      "file": "packed-abl.svg",
+      "bytes": 473606,
+      "sha256": "277b0c57c1a5dba520f226aa40ebd9f067c2bdcb070c9716bf8b18028bcd0c24"
+    },
+    {
+      "file": "packed-poster.png",
+      "bytes": 105376,
+      "sha256": "919fe30f6b55f9aa4012ab99870fa959b694993d7d76ae8ac6303b1a5cee0235"
+    },
+    {
+      "file": "packed.gif",
+      "bytes": 1138526,
+      "sha256": "81491f4ae7444d633666a9df5e0fd6802a79e2f5aaad114a92294f95f977c9ce"
+    },
+    {
+      "file": "packed.svg",
+      "bytes": 469794,
+      "sha256": "f28f2aa56f19f604ed3fc99f1653487c3242ec7f08fc5d92efbf16c2ab078d1f"
+    },
+    {
+      "file": "player-preview.png",
+      "bytes": 150737,
+      "sha256": "8558eeb5cbbc58d15058e32b4ee18a05911767eea7072f58ba80537e9ae001bf"
+    },
+    {
+      "file": "README.md",
+      "bytes": 7377,
+      "sha256": "564b8347354dc1218f1d292ed59588ab069bde27e1ab52c947300605bada2566"
+    }
+  ]
+}

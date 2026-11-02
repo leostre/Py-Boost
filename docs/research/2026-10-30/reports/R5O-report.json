@@ -1,0 +1,309 @@
+{
+  "status": "R5O_complete",
+  "rows": [
+    {
+      "case": "emotions_71004",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/emotions_71004/ordinary-d3-t200/report.json",
+      "sha256": "b51d80732e6468b5cae750bda4ba059db139d6c071d83e6b60c3f08a462615c5"
+    },
+    {
+      "case": "emotions_71004",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/emotions_71004/direct_AB-t200/report.json",
+      "sha256": "d4de73978a4d10ef2656c47c4a4a5b9d88ed59e9b5c2bfc0cad3dab335951a42"
+    },
+    {
+      "case": "emotions_71004",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/emotions_71004/direct_ABL-t200/report.json",
+      "sha256": "0aee926989941915880a48d2d8e17f66b415c29ce7916f3341ea46cc5ed65f43"
+    },
+    {
+      "case": "emotions_71004",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/emotions_71004/compressed40_ABL-t200/report.json",
+      "sha256": "481b05e0adf78afff721076ee52b6eca74d187c34b9c1e61ee9ecd234f00c25e"
+    },
+    {
+      "case": "scene_71104",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/scene_71104/ordinary-d3-t200/report.json",
+      "sha256": "13e90a2a7c40d023db80d11ab94f38ee490b8195adbb30fe4a4850b0cacb9b39"
+    },
+    {
+      "case": "scene_71104",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/scene_71104/direct_AB-t200/report.json",
+      "sha256": "5f87cea244b07ff983607bedc832c7fbee0c58663caf062da3cd04794adb5547"
+    },
+    {
+      "case": "scene_71104",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/scene_71104/direct_ABL-t200/report.json",
+      "sha256": "f5f48687d9225caa5fd3a9e8123a0aa61c6ffd4968a619f2f4434c232dced464"
+    },
+    {
+      "case": "scene_71104",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/scene_71104/compressed40_ABL-t200/report.json",
+      "sha256": "0f0e24b37f2015e1d92cc03d1d2a3f6a502393f659e36c78e265539979e99627"
+    },
+    {
+      "case": "yeast_71204",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/yeast_71204/ordinary-d3-t200/report.json",
+      "sha256": "47b66d74434eab34a1bc0f4e1762c514afd62882358dce3784844db190d572f9"
+    },
+    {
+      "case": "yeast_71204",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/yeast_71204/direct_AB-t200/report.json",
+      "sha256": "09d8afd007fb65b1ee19e9a9f7f8fff16f6d0cd5d5da5a1ee57235d8eae5c650"
+    },
+    {
+      "case": "yeast_71204",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/yeast_71204/direct_ABL-t200/report.json",
+      "sha256": "79c61eb04b87f4edf53d55174f769307036e189ef9c2ee4cfe7715bdeb283bb3"
+    },
+    {
+      "case": "yeast_71204",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/yeast_71204/compressed40_ABL-t200/report.json",
+      "sha256": "305d1703bb4ba0d38d1bb1377f8f6f15ec6bad79b4ecaf2d71c2ad7d326cb549"
+    },
+    {
+      "case": "birds_71304",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/birds_71304/ordinary-d3-t200/report.json",
+      "sha256": "0c412414ca7c211b60c3584f318e56ab7a33555c6d69c9455d40602ad18d064b"
+    },
+    {
+      "case": "birds_71304",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/birds_71304/direct_AB-t200/report.json",
+      "sha256": "793facfdb5425e487e97a5b0d7da2e103f6e9d6621e42e7905aeb9dd17b59197"
+    },
+    {
+      "case": "birds_71304",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/birds_71304/direct_ABL-t200/report.json",
+      "sha256": "7202b88cd31c1beebc4107ac2cf6c7a061d496ab3017c9fbd8a7531f684e9422"
+    },
+    {
+      "case": "birds_71304",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/birds_71304/compressed40_ABL-t200/report.json",
+      "sha256": "c9a76d4360bbf7df72b747dbdb0d8567967f9e1b1ef3d7041d62009f5dc5c217"
+    },
+    {
+      "case": "medical_71404",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/medical_71404/ordinary-d3-t200/report.json",
+      "sha256": "2cc4260a435a142b0f597614b41728bcc95ca05a530ce43aff14f521eb902dbe"
+    },
+    {
+      "case": "medical_71404",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/medical_71404/direct_AB-t200/report.json",
+      "sha256": "e4b651f3d695b82fd051e4277a288556c0574d045ab214839edaa730f2198d34"
+    },
+    {
+      "case": "medical_71404",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/medical_71404/direct_ABL-t200/report.json",
+      "sha256": "3e3e790449798a4cfd65ff2c75a899ad5d1776b85f160a072201bbf62fd54472"
+    },
+    {
+      "case": "medical_71404",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/medical_71404/compressed40_ABL-t200/report.json",
+      "sha256": "80c75e1ea47a7ba36198dcb45b550d6cf28c10b2a683391ac018832d046b31ce"
+    },
+    {
+      "case": "genbase_71504",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/genbase_71504/ordinary-d3-t200/report.json",
+      "sha256": "d9245a3344898859756e344df8d352a20bc9afdceefd3ff4ade955b2845872f4"
+    },
+    {
+      "case": "genbase_71504",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/genbase_71504/direct_AB-t200/report.json",
+      "sha256": "90e1e26df762443832d7cd8f5f126e554c506d40727fbd1cc8c40dbe51fbf574"
+    },
+    {
+      "case": "genbase_71504",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/genbase_71504/direct_ABL-t200/report.json",
+      "sha256": "a4ee3eed70387c5086ce1c12c284870d1655d0b2ca0b2d06aee439e5f3bb90cd"
+    },
+    {
+      "case": "genbase_71504",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/genbase_71504/compressed40_ABL-t200/report.json",
+      "sha256": "830f546d12f69af08b26938ffc0b66475ac9f92a523085a7cb5d839329e840ed"
+    },
+    {
+      "case": "bibtex_71604",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/bibtex_71604/ordinary-d3-t200/report.json",
+      "sha256": "44245bc106cef0c38a15ef5b8a486bffdf0f0d0b641c689e9b629fd6aa2f3602"
+    },
+    {
+      "case": "bibtex_71604",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/bibtex_71604/direct_AB-t200/report.json",
+      "sha256": "68aff862bbaf05b2891f724487b867098b5f1e3155b8b082b8823ae1188387ae"
+    },
+    {
+      "case": "bibtex_71604",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/bibtex_71604/direct_ABL-t200/report.json",
+      "sha256": "5f00720bc4901dfe553bf1288f20df21527447eb3b2a9987cc800557eaf631e3"
+    },
+    {
+      "case": "bibtex_71604",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/bibtex_71604/compressed40_ABL-t200/report.json",
+      "sha256": "10825ee324a7a6948c9dffdc5f3c0c98901f2ffa7600e0cbbe5cbdc40cfb0f70"
+    },
+    {
+      "case": "mediamill_71704",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/mediamill_71704/ordinary-d3-t200/report.json",
+      "sha256": "08ba0e5e222873f0e286268f9f4490344259359dc8ed417ef83df869404834d5"
+    },
+    {
+      "case": "mediamill_71704",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/mediamill_71704/direct_AB-t200/report.json",
+      "sha256": "234dff9e018866bb0ca32d8d57c42207281e4752f8780d203b5f215806fe89ca"
+    },
+    {
+      "case": "mediamill_71704",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/mediamill_71704/direct_ABL-t200/report.json",
+      "sha256": "5f2120f0ad78a775ca764e33974510c75f38a3af5bc91b864072e2bb2a7b2288"
+    },
+    {
+      "case": "mediamill_71704",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/mediamill_71704/compressed40_ABL-t200/report.json",
+      "sha256": "d3849df8a5184dc3aeeb0ee3e1f645e586801f80798054a3f856ae45a4d7be17"
+    },
+    {
+      "case": "enron_71804",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/enron_71804/ordinary-d3-t200/report.json",
+      "sha256": "7cffd0405ee080c2ba9adf6101f5fbceac854a25cd55f19cd86f0213435bf20f"
+    },
+    {
+      "case": "enron_71804",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/enron_71804/direct_AB-t200/report.json",
+      "sha256": "aa68151b3b7a8e4d592ff7907ca4fe5fa5580f64a4cf2190189f6a8f8ecbc5f7"
+    },
+    {
+      "case": "enron_71804",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/enron_71804/direct_ABL-t200/report.json",
+      "sha256": "de812305bfcb693fb05796f7c717406fa4a01fa7057cbc34c262225ca4fb4744"
+    },
+    {
+      "case": "enron_71804",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/enron_71804/compressed40_ABL-t200/report.json",
+      "sha256": "9b5d85ac49f7a35826d9c1467d8b6249d4b074468fea34c3c1e8f6a6c564615f"
+    },
+    {
+      "case": "cal500_71904",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/cal500_71904/ordinary-d3-t200/report.json",
+      "sha256": "87c3de661f74bd0a8afcac6e76f6753dd9f753f25e3fc55c7c600aa31a4d315d"
+    },
+    {
+      "case": "cal500_71904",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/cal500_71904/direct_AB-t200/report.json",
+      "sha256": "3ad0119081b72ae0ccf26b9aff3d47c6a7c4559b6f420d8ac32c4df02ad4daed"
+    },
+    {
+      "case": "cal500_71904",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/cal500_71904/direct_ABL-t200/report.json",
+      "sha256": "51860e34e37e621e23834d85f42b89c5da7d566923f2f789e9c88e18e540be4c"
+    },
+    {
+      "case": "cal500_71904",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/cal500_71904/compressed40_ABL-t200/report.json",
+      "sha256": "d8662377d301decc474f8fa4a94d4bbcc7c538023042b76eb4d5085cef2f8b06"
+    },
+    {
+      "case": "corel5k_72004",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/corel5k_72004/ordinary-d3-t200/report.json",
+      "sha256": "066b71548b916a79984522b689cd855f1cbe95c13e2a598e737e129ee3876159"
+    },
+    {
+      "case": "corel5k_72004",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/corel5k_72004/direct_AB-t200/report.json",
+      "sha256": "0ba4fc560ba4a149d94ed2f6b521e41121307b458b1148ddde28d1ecb8ad5c89"
+    },
+    {
+      "case": "corel5k_72004",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/corel5k_72004/direct_ABL-t200/report.json",
+      "sha256": "3c871be387c46105a5a39186338fa2c7fc5f903735807fbc7e175bfce9a5e3cf"
+    },
+    {
+      "case": "corel5k_72004",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/corel5k_72004/compressed40_ABL-t200/report.json",
+      "sha256": "4f94613d61136877a0f2096357724ebda9e2664962e4696a47509f618083055f"
+    },
+    {
+      "case": "delicious_72104",
+      "uid": "ordinary/d3/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/delicious_72104/ordinary-d3-t200/report.json",
+      "sha256": "63a7ce2b2af5d2c08f27cfa768d56eb7364ec355a90f42fdbc0ee9851626a32c"
+    },
+    {
+      "case": "delicious_72104",
+      "uid": "direct_AB/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/delicious_72104/direct_AB-t200/report.json",
+      "sha256": "11bf2ff34f54ef08470c516d2fe103958d3a756cfbf924bee61d6553a5f994e1"
+    },
+    {
+      "case": "delicious_72104",
+      "uid": "direct_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/delicious_72104/direct_ABL-t200/report.json",
+      "sha256": "da1074246abfeb8c6887857384ad2480f417d24212ec054deeba91114a65e817"
+    },
+    {
+      "case": "delicious_72104",
+      "uid": "compressed40_ABL/t200",
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/delicious_72104/compressed40_ABL-t200/report.json",
+      "sha256": "51ecf788a536be9b4c4c4f443d303b369a5bcc6f1b752eaa58670e883cc4dc77"
+    }
+  ],
+  "environment": {
+    "sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+    "packages": 45,
+    "actual_runtime_checked": true
+  },
+  "new_trees": 0,
+  "gpu_before": "4, 0",
+  "memory_scope": "actual physical FP32/FP16/INT8 parameter arrays and scales plus allocation-tracked active request workspace; excludes context and driver",
+  "codec_selected": false,
+  "measurement_reference": "fp32",
+  "half_preflight": {
+    "finite_half_patterns": 63488,
+    "exact": true,
+    "negative_zero_preserved": true
+  },
+  "precision": "same packed algorithm and FP64 sums; physical FP32 FP16 INT8 parameters; quantization changes model function; common fixed controls"
+}

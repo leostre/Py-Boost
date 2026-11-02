@@ -56,8 +56,8 @@
   },
   "interactive_dashboard": {
     "file": "hasboost-results-interactive.html",
-    "sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc",
-    "snapshot_sha256": "e968809c1eecdc847f06428a1d049a9e3e6ce164a0bd717b43c0307d141d140d",
+    "sha256": "f6b6c6a79874180b88354b59900274d3ac1d3d6bf7091aa3d0c7580196a5d015",
+    "snapshot_sha256": "a2751d840da8e27d68e94c81e6570c742dfa2db2d3bf730022af4669f7ef3f97",
     "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
     "basis": "Published result tables and the same sealed bank choices; no new model fitting or GPU runs.",
     "bank_choices": {
@@ -125,6 +125,27 @@
       "methods": 7,
       "executors": 3,
       "mechanism_catalog_sha256": "aeeb7394f4144213b4207e7c91bd82e348ceabb5f57310a029473ee99d2d1927"
+    },
+    "methodology_revision": {
+      "date": "2026-11-02",
+      "original_html_sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc",
+      "original_source": "HASBoost-Publication-20261026/docs/research/2026-10-29/hasboost-results-interactive.html",
+      "source_html_unchanged": true,
+      "previous_receipt": "checks/interactive-dashboard-v3.json",
+      "original_queries_unchanged": 12,
+      "added_query": "hypothesis_atlas",
+      "figures_copied_without_edits": 6,
+      "new_fits": 0,
+      "new_GPU_benchmarks": 0,
+      "changes": "Readable executor grouping, layered developer details, hypothesis gallery and methodological history."
+    },
+    "animation_revision": {
+      "date": "2026-11-02",
+      "previous_receipt": "checks/interactive-dashboard-v4.json",
+      "previous_sources_unchanged": 13,
+      "query": "inference_animation",
+      "scope": "Exactly checkable authored teaching example; no new benchmark, data selection or model training.",
+      "frames_sha256": "a53c40ad517ef2a4f9fbc58d95cf7fedad5ac2d5b812c2c45827fac3e5b5709d"
     }
   }
 }

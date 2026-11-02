@@ -3,7 +3,8 @@ import {DataComponent, DataTable, Dropdown, SectionHeader, SegmentedControl, use
 import catalog from './mechanisms.json';
 import {FAMILIES, LABELS, COLORS, ROLES} from './analytics.js';
 import './explainers.css';
-import {ExecutorFlow} from './ExecutorFlow.jsx';
+import {ExecutorFlow} from './ExecutorPrimer.jsx';
+import {InferenceJourney} from './InferenceJourney.jsx';
 
 export const BACKENDS={legacy:'Legacy · по блокам',packed:'Packed · единое ядро'};
 const baseUrl=`https://github.com/leostre/Py-Boost/blob/${catalog.source_commit}/`;
@@ -93,17 +94,21 @@ export function InferenceComparison({mode,role,referenceRole,example,sourceRows}
 
 export function ExecutorDiagram({q,outputs}) {
   const {sectionViews,setSectionView}=useDataApp();
-  const diagramPrefs=sectionViews['hb-executor-diagram']??{};
-  const route=diagramPrefs.route??(outputs!=null&&outputs<=128?'narrow':'wide');
-  const wide=route==='wide';
-  const compact=diagramPrefs.representation!=='full';
-  return <DataComponent id="executor-mechanism" queryId="executor_mechanisms" title="Три способа вычислить прогноз: деревья, память и запуски" kind="diagram" variant="card" sourceRows={q.executor_mechanisms.rows} displayRows={q.executor_mechanisms.rows} headerControls={<SegmentedControl ariaLabel="Поясняемый путь legacy" value={route} options={[{value:'narrow',label:'Legacy: до 128 выходов'},{value:'wide',label:'Legacy: более 128'}]} onChange={r=>setSectionView('hb-executor-diagram',{...diagramPrefs,route:r})}/>}>
-    <div className="hb-request-ends"><span>Вход X на CPU</span><b>→</b><span>Передача на GPU</span><b>→</b><strong>Вычисления ниже</strong><b>→</b><span>Результат на CPU</span></div>
-    <div className="hb-flow-controls"><span>Представление на двух нижних дорожках</span><SegmentedControl ariaLabel="Представление на схеме исполнения" value={compact?'compact':'full'} options={[{value:'full',label:'Полные листья W'},{value:'compact',label:'Гибрид AB + L'}]} onChange={representation=>setSectionView('hb-executor-diagram',{...diagramPrefs,representation})}/></div>
-    <ExecutorFlow wide={wide} compact={compact}/>
-    <p className="hb-explain-takeaway">{compact?'Верхняя дорожка — полная модель W: исходный Py-Boost не исполняет AB + L напрямую. Две нижние показывают один и тот же гибрид на legacy и packed.':'Три дорожки показывают одну полную модель W на разных исполнителях.'} Оранжевые стрелки обозначают чтение или запись промежуточных массивов в глобальной памяти. Packed переносит промежуточные суммы внутрь одного запуска; входы, параметры и конечный выход остаются в памяти GPU.</p>
-    <p className="hb-schematic-note">T — число деревьев, K — число блоков модели, C — число выходов, r — ранг. Ширина дорожек, число клеток и длина полос запусков условны. W, A, B и L — параметры модели; J — индексы листьев, Z — суммы в базисе, E — собранные поправки, S — общий прогноз. Суммы legacy/packed — float64, исходного Py-Boost — float32. Это различие отдельно проверяется в сравнении прогнозов.</p>
-    <p className="hb-schematic-note">Переключатель меняет поясняющую схему legacy, а не результаты замеров. {outputs!=null?`У выбранного набора ${outputs} выходов.`:'При выборе всех наборов в измерениях есть оба пути legacy.'} Подготовка модели и компиляция не входят в прогретые времена запроса.</p>
-    <details className="hb-inline-sources"><summary>Где это реализовано</summary>{catalog.executors.map(e=><p key={e.id}><b>{e.title}:</b> {e.sources.map((p,i)=><React.Fragment key={p}>{i>0?' · ':''}<a href={`https://github.com/leostre/Py-Boost/blob/${e.source_commit??catalog.source_commit}/${p}`} target="_blank" rel="noreferrer">{p.split('/').at(-1)}</a></React.Fragment>)}</p>)}<p><a href={baseUrl+'research/external_controls/wide_probe.py'} target="_blank" rel="noreferrer">Границы GPU-замера и request в wide_probe.py</a></p></details>
-  </DataComponent>;
+  const [engine,setEngine]=React.useState('packed');
+  const prefs=sectionViews['hb-executor-diagram']??{};
+  const route=prefs.route??(outputs!=null&&outputs<=128?'narrow':'wide');
+  const wide=route==='wide',compact=prefs.representation==='compact';
+  return <><InferenceJourney q={q} engine={engine} onEngineChange={setEngine} wide={wide} compact={compact} onCompactChange={value=>setSectionView('hb-executor-diagram',{...prefs,representation:value?'compact':'full'})} onWideChange={value=>setSectionView('hb-executor-diagram',{...prefs,route:value?'wide':'narrow'})}/>
+  <DataComponent id="executor-mechanism" queryId="executor_mechanisms" title="Как движок группирует работу на GPU" kind="diagram" sourceRows={q.executor_mechanisms.rows} displayRows={q.executor_mechanisms.rows}>
+    <details className="hasboost-details"><summary>Сравнить три схемы рядом</summary><ExecutorFlow wide={wide} compact={compact} focus={engine} onFocus={setEngine}/></details>
+    <p className="hb-explain-takeaway">{compact?'Исходный Py-Boost сверху остаётся полной моделью W: он не исполняет AB + L напрямую. Legacy и packed здесь показывают один и тот же гибрид.':'По умолчанию показана одна полная модель W: деревья и коэффициенты одинаковы, меняется организация вычислений.'}</p>
+    <details className="hasboost-details hb-primer-technical"><summary>Для разработчика: базис, буферы и границы измерений</summary>
+      <div className="hb-flow-controls"><span>Что показывают legacy и packed</span><SegmentedControl ariaLabel="Представление на схеме исполнения" value={compact?'compact':'full'} options={[{value:'full',label:'Полные листья W'},{value:'compact',label:'Гибрид AB + L'}]} onChange={representation=>setSectionView('hb-executor-diagram',{...prefs,representation})}/></div>
+      <div className="hb-flow-controls"><span>Путь прежнего legacy</span><SegmentedControl ariaLabel="Поясняемый путь legacy" value={route} options={[{value:'narrow',label:'До 128 выходов'},{value:'wide',label:'Более 128 выходов'}]} onChange={r=>setSectionView('hb-executor-diagram',{...prefs,route:r})}/></div>
+      <p>Полные листья хранят C значений. В гибриде лист хранит r координат; общий B восстанавливает C выходов, L добавляет адресные коэффициенты. В packed временные суммы находятся в регистрах и общей памяти CUDA-блока. Это не устраняет память входов, параметров и плотного конечного выхода.</p>
+      <p>Суммы исходного Py-Boost — float32, legacy/packed — float64. Численное совпадение проверялось отдельно. Подготовка модели и компиляция не входят в прогретые времена. GPU-интервал и полный запрос — разные границы: последний включает передачи CPU/GPU.</p>
+      <p>Переключатели меняют только учебную схему. {outputs!=null?`У выбранного набора ${outputs} выходов.`:'В таблицах всех наборов представлены оба пути legacy.'} Числа измерений не пересчитываются.</p>
+      {catalog.executors.map(e=><p key={e.id}><b>{e.title}:</b> {e.sources.map((p,i)=><React.Fragment key={p}>{i>0?' · ':''}<a href={`https://github.com/leostre/Py-Boost/blob/${e.source_commit??catalog.source_commit}/${p}`} target="_blank" rel="noreferrer">{p.split('/').at(-1)}</a></React.Fragment>)}</p>)}
+    </details>
+  </DataComponent></>;
 }

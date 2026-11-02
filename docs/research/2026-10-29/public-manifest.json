@@ -1,11 +1,6 @@
 {
   "files": [
     {
-      "file": "README.md",
-      "bytes": 11357,
-      "sha256": "c04c66c8c7b9a612a64bbef4ab6f116403eb84e68dc706158c33138c4cfb9547"
-    },
-    {
       "file": "checks/interactive-analytics.log",
       "bytes": 1102,
       "sha256": "d55f3ce3366ca2f8515e2b0dc11e517818fce295eab312bf67fcfe29b6b5d55a"
@@ -21,9 +16,19 @@
       "sha256": "2ca5c309cf42e7cfb4a0817a4e206b3a809f9cb7ce7eb8193812e0d7eea136fb"
     },
     {
-      "file": "checks/interactive-dashboard.json",
+      "file": "checks/interactive-dashboard-v3.json",
       "bytes": 4152,
       "sha256": "b506b8337a43aae5c57a753f19d64024979686456f63bd49990f8e794e30b6e2"
+    },
+    {
+      "file": "checks/interactive-dashboard-v4.json",
+      "bytes": 5336,
+      "sha256": "1b8a794cad5feff045e4f62217a30fb3d10e800a63022a666ef13ddac9f0670f"
+    },
+    {
+      "file": "checks/interactive-dashboard.json",
+      "bytes": 6127,
+      "sha256": "955a5f17855768925d7e7d83180aaf43119f7f0274383b20d010107953eedb44"
     },
     {
       "file": "checks/publication-cpu.log",
@@ -31,29 +36,9 @@
       "sha256": "e2fb72297217f92edcaa60fc216bfa8278fbe78e99593302038dfc1d40411a8b"
     },
     {
-      "file": "dashboard-source/README.md",
-      "bytes": 11486,
-      "sha256": "ad232da77350c9219e04702bf4b26bcd5ca3977150a498535086e9be966d7d8c"
-    },
-    {
       "file": "dashboard-source/app-metadata.json",
       "bytes": 365,
-      "sha256": "a9040d15f42ed08aed2c0dd2740987c3b9d42fdf6de6436347041c60c99a1773"
-    },
-    {
-      "file": "dashboard-source/content/dashboard/DashboardContent.jsx",
-      "bytes": 48868,
-      "sha256": "e3f02dfc6dfaf02980aae5c1b69f337d3f4b3d8edb752f45ef88ecb71ebd2b62"
-    },
-    {
-      "file": "dashboard-source/content/dashboard/ExecutorFlow.jsx",
-      "bytes": 10769,
-      "sha256": "23a91762dba5118d52260f1bed199e369b0e14027e991c10135df92a463b9a4e"
-    },
-    {
-      "file": "dashboard-source/content/dashboard/Explainers.jsx",
-      "bytes": 16843,
-      "sha256": "900b07a560cedbb2c77fbb03870ead6f54e4e68541a679cf369cbcdb9e3842be"
+      "sha256": "bb73f78b498770dde430759323a1c0168adec83a9107fc8487e10437f77d3a8a"
     },
     {
       "file": "dashboard-source/content/dashboard/analytics.js",
@@ -66,9 +51,29 @@
       "sha256": "8b4763b106c0619b59c3ad1afe24c3d9df3fb6bdbef87286fe0478f5e91d5440"
     },
     {
+      "file": "dashboard-source/content/dashboard/DashboardContent.jsx",
+      "bytes": 49312,
+      "sha256": "a3d333ce36e3fa4f887cd39ebe8ee72506914204c3151d507211447b9c3bdd2c"
+    },
+    {
+      "file": "dashboard-source/content/dashboard/ExecutorFlow.jsx",
+      "bytes": 10769,
+      "sha256": "23a91762dba5118d52260f1bed199e369b0e14027e991c10135df92a463b9a4e"
+    },
+    {
+      "file": "dashboard-source/content/dashboard/ExecutorPrimer.jsx",
+      "bytes": 8957,
+      "sha256": "ac521263978ba74bde3f5ae269f5a8617d939aa21808c2a710fdf0d019d70835"
+    },
+    {
       "file": "dashboard-source/content/dashboard/explainers.css",
-      "bytes": 9553,
-      "sha256": "7228f7f987d9de1661122d75cf4bc65bb72abe3de83db26cb0569057db711f77"
+      "bytes": 14113,
+      "sha256": "7d7768033e62df4dea2f50850d12612c768e18fbfd98f9656da0c2e2ead84f6d"
+    },
+    {
+      "file": "dashboard-source/content/dashboard/Explainers.jsx",
+      "bytes": 16903,
+      "sha256": "c949eb70ab3e376d64eea18396fa39321856cb22cfae11a2bb872b30c5bffbf8"
     },
     {
       "file": "dashboard-source/content/dashboard/hasboost.css",
@@ -76,14 +81,49 @@
       "sha256": "52e34f57edc57827da3cd22f5675e33ebfc50337470234e90b44f972f6e4e24a"
     },
     {
+      "file": "dashboard-source/content/dashboard/hypothesis-atlas.json",
+      "bytes": 7302,
+      "sha256": "b54ae3602972e12914ba3f0fecbfc19a4fd098bb7b3074d6659197e957c28b2b"
+    },
+    {
+      "file": "dashboard-source/content/dashboard/HypothesisAtlas.jsx",
+      "bytes": 1706,
+      "sha256": "b9b8e21d933c1a587641977a5a104778199ad960158f832d90a0a93776fd1926"
+    },
+    {
+      "file": "dashboard-source/content/dashboard/InferenceJourney.jsx",
+      "bytes": 5213,
+      "sha256": "149c60b3210eb8c78170d997c7f483f86783012ffed0ce6ea4181b807a9f00b8"
+    },
+    {
       "file": "dashboard-source/content/dashboard/mechanisms.json",
       "bytes": 19129,
       "sha256": "aeeb7394f4144213b4207e7c91bd82e348ceabb5f57310a029473ee99d2d1927"
     },
     {
+      "file": "dashboard-source/inference_animation_model.py",
+      "bytes": 8776,
+      "sha256": "73e70a104b27f1ef2652fa67ee250b8ed9ddaee92602b4dfb0887fba88b63db6"
+    },
+    {
       "file": "dashboard-source/make_dashboard_snapshot.py",
-      "bytes": 11523,
-      "sha256": "04cf26f85a95baaa27a4ba069bf7d536400dc3a8f1abbf98cf0dea7bbcd0e5ef"
+      "bytes": 12194,
+      "sha256": "b816f25e0d78c38a925959a104b3f4999d75763694c4db979391393e00ee100e"
+    },
+    {
+      "file": "dashboard-source/README.md",
+      "bytes": 14438,
+      "sha256": "b93412d9e95cef42e13d00d86a6361bd601e83cb66e0a6cf79260e7bbb7b9263"
+    },
+    {
+      "file": "dashboard-source/render_inference_animations.py",
+      "bytes": 13774,
+      "sha256": "0161fbc0c37612a18e33d0925491bff6ceb7917e789f43f4283d78c64a137393"
+    },
+    {
+      "file": "dashboard-source/test_inference_animation.py",
+      "bytes": 2811,
+      "sha256": "dfb183376d0fa1efd91b472250dc9cf27e4d36011e2e3464398ce8d036c2ecee"
     },
     {
       "file": "data/all_quality_points.csv",
@@ -317,8 +357,8 @@
     },
     {
       "file": "hasboost-results-interactive.html",
-      "bytes": 10707591,
-      "sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc"
+      "bytes": 33020520,
+      "sha256": "f6b6c6a79874180b88354b59900274d3ac1d3d6bf7091aa3d0c7580196a5d015"
     },
     {
       "file": "inference_pairs.json",
@@ -347,8 +387,8 @@
     },
     {
       "file": "provenance.json",
-      "bytes": 6982,
-      "sha256": "2b7db22dbe4f92aeb7e1df10ba576ac3ae7c7aa0de9c3636c8d59233fab9c78c"
+      "bytes": 8093,
+      "sha256": "e716fb1569a0d740aa5816e794af3fa69879fa16691fcbab7a36434d335d0c17"
     },
     {
       "file": "publication-verification.json",
@@ -359,6 +399,11 @@
       "file": "quality_summary.json",
       "bytes": 87987,
       "sha256": "90064a3a053f6dc83854c7a9dc64c4be7ecc69abfbcb758f0649d8f02e4c9595"
+    },
+    {
+      "file": "README.md",
+      "bytes": 12226,
+      "sha256": "cdcedd8e7150ae31d29d4583d7e541dc8ff796514dd83e00713ed81c062bafc9"
     },
     {
       "file": "review.md",

@@ -1,0 +1,28 @@
+{
+  "status": "publication_integrity_passed",
+  "date": "2026-11-02",
+  "source_files": 45,
+  "parsed_modules": 44,
+  "registry_stages": 18,
+  "pinned_reports": 19,
+  "csv_files": 11,
+  "old_dashboard_unchanged": true,
+  "inert_entries": {
+    "hasboost": {
+      "status": "publication_only",
+      "experiments_started": false,
+      "note": "Restore the documented frozen inputs and an explicitly authorized configuration before running research."
+    },
+    "nvforest": {
+      "status": "publication_only",
+      "experiments_started": false
+    }
+  },
+  "cpu_tests": {
+    "passed": 38,
+    "command": "python ../../tools/hasboost_cpu_tests.py -q tests/test_six_residual_gate.py tests/test_six_structural.py tests/test_six_quant.py tests/test_six_mixed_quant.py tests/test_quant_metric.py tests/test_packed_serving_core.py tests/test_direct_leaf_core.py tests/test_saved_serving_core.py",
+    "cwd": "research/external_controls",
+    "duration_seconds": 13.39
+  },
+  "collection_retry": "Initial root-directory invocation failed before test execution; rerun from documented research directory passed. No scientific result was changed."
+}

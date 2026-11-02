@@ -1,0 +1,366 @@
+{
+  "status": "six_directions_complete",
+  "new_trees": 21600,
+  "datasets_multilabel": 12,
+  "old_splits": 36,
+  "structural_representations": 864,
+  "matched_byte": [
+    {
+      "family": "direct_AB",
+      "ratio": 0.25,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 0.39425986171526417,
+      "positive_datasets": 9,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.5833333333333334,
+        "baseline_sign_accuracy": 0.75,
+        "MAE_pp": 1.442979194103675,
+        "baseline_MAE_pp": 0.8739499003342295,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": -0.06304738215045118,
+        "label_density": -0.027972027972027972,
+        "top64_energy_fraction": -0.11228139293160061
+      }
+    },
+    {
+      "family": "direct_AB",
+      "ratio": 0.5,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 1.3553492543745473,
+      "positive_datasets": 11,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.9166666666666666,
+        "baseline_sign_accuracy": 0.9166666666666666,
+        "MAE_pp": 1.46008726226498,
+        "baseline_MAE_pp": 1.0087526836179113,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": 0.08406317620060155,
+        "label_density": -0.5524475524475525,
+        "top64_energy_fraction": -0.11228139293160061
+      }
+    },
+    {
+      "family": "direct_AB",
+      "ratio": 0.7,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 1.139350775982112,
+      "positive_datasets": 9,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.6666666666666666,
+        "baseline_sign_accuracy": 0.75,
+        "MAE_pp": 0.9668335117080109,
+        "baseline_MAE_pp": 2.036974097117836,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": 0.18563951410966179,
+        "label_density": -0.49650349650349657,
+        "top64_energy_fraction": -0.10175501234426305
+      }
+    },
+    {
+      "family": "direct_AB",
+      "ratio": 1.0,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 1.139350775982112,
+      "positive_datasets": 9,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.6666666666666666,
+        "baseline_sign_accuracy": 0.75,
+        "MAE_pp": 0.9668335117080109,
+        "baseline_MAE_pp": 2.036974097117836,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": 0.18563951410966179,
+        "label_density": -0.49650349650349657,
+        "top64_energy_fraction": -0.10175501234426305
+      }
+    },
+    {
+      "family": "direct_ABL",
+      "ratio": 0.25,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 0.25262317552735486,
+      "positive_datasets": 7,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.5833333333333334,
+        "baseline_sign_accuracy": 0.5833333333333334,
+        "MAE_pp": 1.3133873134673226,
+        "baseline_MAE_pp": 0.8473897063747652,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": -0.06304738215045118,
+        "label_density": -0.006993006993006993,
+        "top64_energy_fraction": -0.0736846641113629
+      }
+    },
+    {
+      "family": "direct_ABL",
+      "ratio": 0.5,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 0.471965762132071,
+      "positive_datasets": 8,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.4166666666666667,
+        "baseline_sign_accuracy": 0.6666666666666666,
+        "MAE_pp": 1.2989857684274864,
+        "baseline_MAE_pp": 0.9460091714879714,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": 0.42732114568639123,
+        "label_density": -0.6573426573426573,
+        "top64_energy_fraction": -0.47719591995930266
+      }
+    },
+    {
+      "family": "direct_ABL",
+      "ratio": 0.7,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 0.4566544046761072,
+      "positive_datasets": 7,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.6666666666666666,
+        "baseline_sign_accuracy": 0.5833333333333334,
+        "MAE_pp": 1.0761002503569173,
+        "baseline_MAE_pp": 0.9647195821441669,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": 0.62697118916282,
+        "label_density": -0.8531468531468532,
+        "top64_energy_fraction": -0.5824597258326782
+      }
+    },
+    {
+      "family": "direct_ABL",
+      "ratio": 1.0,
+      "pairs": 36,
+      "datasets": 12,
+      "mean_dataset_delta_pp": 0.4394333133989646,
+      "positive_datasets": 7,
+      "exploratory_LODO_1NN": {
+        "sign_accuracy": 0.6666666666666666,
+        "baseline_sign_accuracy": 0.5833333333333334,
+        "MAE_pp": 1.0933213416340597,
+        "baseline_MAE_pp": 0.9819406734213095,
+        "n": 12
+      },
+      "exploratory_spearman": {
+        "log2_outputs": 0.62697118916282,
+        "label_density": -0.8531468531468532,
+        "top64_energy_fraction": -0.5824597258326782
+      }
+    }
+  ],
+  "training_compact_start": {
+    "mean": -0.0520515851494491,
+    "positive_datasets": 7,
+    "datasets": {
+      "emotions": 0.47564569809102436,
+      "scene": -1.1723662484692587,
+      "yeast": 0.18476301927723426,
+      "birds": 0.04771912962340622,
+      "medical": 0.4598127634279932,
+      "genbase": 0.0,
+      "bibtex": 0.012176199941349442,
+      "mediamill": -0.39708790423192514,
+      "enron": -0.48159121299217916,
+      "cal500": 0.3028583112495921,
+      "corel5k": 0.05889807026526565,
+      "delicious": -0.11544684797589143
+    }
+  },
+  "compact_start_memory": {
+    "mean": 0.8161181007083488,
+    "positive_datasets": 12,
+    "datasets": {
+      "emotions": 0.9536213036743929,
+      "scene": 0.9502037226449458,
+      "yeast": 0.909183601680613,
+      "birds": 0.9013274268237943,
+      "medical": 0.8504804543725709,
+      "genbase": 0.8950580070834414,
+      "bibtex": 0.8016044348597617,
+      "mediamill": 0.8644303574000327,
+      "enron": 0.8723676496764664,
+      "cal500": 0.7812124145898802,
+      "corel5k": 0.5925577409224033,
+      "delicious": 0.42137009477188253
+    }
+  },
+  "refit50": {
+    "mean": 2.3552811568940917,
+    "positive_datasets": 8,
+    "datasets": {
+      "emotions": -2.5446281206624697,
+      "scene": 1.1734767696156185,
+      "yeast": -0.5515497031122214,
+      "birds": 9.211063949021149,
+      "medical": 2.7045441954257896,
+      "genbase": -0.5861698405558076,
+      "bibtex": 8.708506098009737,
+      "mediamill": 4.579834321725339,
+      "enron": 2.1543288869898922,
+      "cal500": -2.2388066812503067,
+      "corel5k": 1.7839943274940413,
+      "delicious": 3.8687796800283443
+    }
+  },
+  "refitABL50": {
+    "mean": 1.0947487795572342,
+    "positive_datasets": 7,
+    "datasets": {
+      "emotions": -3.4541869004246384,
+      "scene": -2.1092230493805597,
+      "yeast": -0.9590525590784197,
+      "birds": 3.682462366771866,
+      "medical": 1.4293698047499284,
+      "genbase": -0.43184885290148606,
+      "bibtex": 8.178637089195574,
+      "mediamill": 3.147950575807829,
+      "enron": 1.1066114490495476,
+      "cal500": -2.564978032934168,
+      "corel5k": 1.8533478904023368,
+      "delicious": 3.257895573429001
+    }
+  },
+  "corrected_quantized_continuation": {
+    "fp16": {
+      "mean": -0.5223016725236135,
+      "positive_datasets": 0,
+      "datasets": {
+        "emotions": 0.0,
+        "scene": -2.5987404369146594,
+        "yeast": -0.016467510747275593,
+        "birds": -3.109002631554353,
+        "medical": 0.0,
+        "genbase": 0.0,
+        "bibtex": -0.1855096009508117,
+        "mediamill": 0.0,
+        "enron": -0.342747307065297,
+        "cal500": -0.010382757274018939,
+        "corel5k": 0.0,
+        "delicious": -0.004769825776947123
+      }
+    },
+    "int8": {
+      "mean": -0.22508362204974564,
+      "positive_datasets": 4,
+      "datasets": {
+        "emotions": -0.5012363913593498,
+        "scene": 3.115342493580675,
+        "yeast": -0.27292723587660217,
+        "birds": -1.4071583804930454,
+        "medical": -0.4168492367397497,
+        "genbase": -2.962962962962956,
+        "bibtex": 0.10158185875354109,
+        "mediamill": -0.48572558882889194,
+        "enron": -0.5769781684610231,
+        "cal500": 0.5783487389151326,
+        "corel5k": 0.15139305258521085,
+        "delicious": -0.023831643709888717
+      }
+    }
+  },
+  "actual_bank_budget_checks": 240,
+  "all_actual_bank_budgets_passed": true,
+  "tabpfn_status": "complete",
+  "tabpfn_context_fits": 5,
+  "tabpfn_weight_bytes": 875950628,
+  "tabpfn_context_fit_seconds": 20.85509593039751,
+  "tabpfn_gpu_pid_verified": false,
+  "environment": {
+    "sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+    "packages": 45,
+    "actual_runtime_checked": true
+  },
+  "input_reports": {
+    "R1": {
+      "path": "/root/.orx/runs/c831e0eb-0142-41ec-8f7c-16fc6c505090/repo/results/six_R1A_20261030/report.json",
+      "sha256": "3bee3688bd9cbd5e34b63801443a47d9741878b6abdcdbd824e8e990c9475164"
+    },
+    "R2": {
+      "path": "/root/.orx/runs/25c4052f-3b44-4b75-ad2c-e5595540e634/repo/results/six_R2_20261030/report.json",
+      "sha256": "50214658de5b340ba4432fe251658dc79e8cfd0f576377e6e66d03043a2e2b1f"
+    },
+    "R2C": {
+      "path": "/root/.orx/runs/364087c9-132b-4471-a642-4bd71f6756e3/repo/results/six_R2C_20261030/report.json",
+      "sha256": "125fdc0c8c6be011d503ee0cc700da6b5c5907fd5d5109b0b094970542e9f625"
+    },
+    "R3": {
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/report.json",
+      "sha256": "d72d35d5cc050eac7a270a67b01cdca5b75c72a8aa039c94dee16d53f8069af5"
+    },
+    "R3C": {
+      "path": "/root/.orx/runs/dff804bd-3d37-4173-84ea-4571436567fe/repo/results/six_R3C_20261030/report.json",
+      "sha256": "bff7adaf74442a02a192dc865e12e1efad975d93ab809380343aa6397e83f38a"
+    },
+    "R4": {
+      "path": "/root/.orx/runs/06c20bc6-f294-4b51-995e-739cfa3d2a7d/repo/results/six_R4_20261030/report.json",
+      "sha256": "d45837c670b2f35d987e0fc23d59dd7c6df6f7202db722cef3b6757ebe6420f5"
+    },
+    "R5": {
+      "path": "/root/.orx/runs/ab424868-ed29-4abc-bc59-590bf5c2e2d4/repo/results/six_R5_20261030/report.json",
+      "sha256": "57e0e479bc5f62411e374dcea865514920fa72e43403bfe65f2410633fa8b8b1"
+    },
+    "R5A": {
+      "path": "/root/.orx/runs/c21980fb-2981-4c05-a003-251c0b316b3b/repo/results/six_R5A_20261030/report.json",
+      "sha256": "6fc972e7ef1e492aac437766a506dc42c61a178d4bd6c846ef6c26ca64c316fb"
+    },
+    "R5Q": {
+      "path": "/root/.orx/runs/8cf162f4-c371-4f06-8060-a783834468be/repo/results/six_R5Q_20261030/report.json",
+      "sha256": "22cd50931e22bbb7418c32ad7fc4bd4b41d44b8d3a24ac2d82a112eafecb5f06"
+    },
+    "R5QM": {
+      "path": "/root/.orx/runs/45a3ddb5-b223-411d-84c1-d9456f605865/repo/results/six_R5QM_20261030/report.json",
+      "sha256": "95bdd2e664743e28287db79666c9d6dc75487a50468fd63f7c59429f537e3d9c"
+    },
+    "R5S": {
+      "path": "/root/.orx/runs/a19dc116-8daf-4694-96ba-0bd1490accdb/repo/results/six_R5S_20261030/report.json",
+      "sha256": "cf370733f2604f4add9a211c7abedccb80ab8e86693c19ecddd5d20be22adeb0"
+    },
+    "R5O": {
+      "path": "/root/.orx/runs/1604236a-8439-47af-aeac-e2aef5fa1300/repo/results/six_R5O_20261030/report.json",
+      "sha256": "6f8eb4acff4bb3a82d26444e0d5b827ec5170a0f360c7488d79bea21c1024aba"
+    },
+    "N2V": {
+      "path": "/root/.orx/runs/7cb7fab9-d886-4f3c-a1f6-2cc4b1e0e444/repo/results/report.json",
+      "sha256": "94a2d3ccd39c933e358fdf97bf6e4d13b3b9ef2cad22d967078e5bc2b03fcbe3"
+    },
+    "N2F": {
+      "path": "/root/.orx/runs/eb478822-ae43-4e22-8c72-3175433d2cac/repo/results/report.json",
+      "sha256": "ecb7208a6f4169893947479501e00a38271d83e64359cd2008d5eeee27f89d2b"
+    },
+    "R6D": {
+      "path": "/root/.orx/runs/ed7dd106-ac55-429b-975b-bf30b3770294/repo/results/six_R6D_20261030/report.json",
+      "sha256": "36b23f734cbf948379a947649db42129c5c2dcc3d0af508305f92a1c21114825"
+    },
+    "R6E": {
+      "path": "/root/.orx/runs/2e9ddeac-e163-49ab-a557-92a80758a50b/repo/results/six_R6E_20261030/report.json",
+      "sha256": "fa673d8046899d629a3ae0fa4c4b5d7fd488745465d732f2359e303ac6acf3b7"
+    },
+    "R6B": {
+      "path": "/root/.orx/runs/01d5ce9e-9ef2-4bbf-96e9-35d1f3d6e927/repo/results/six_R6B_20261030/report.json",
+      "sha256": "e22f53ab4dd0d76d13edb9b7b42f9b709f3b722364ac02ed05d07020fc4b028a"
+    },
+    "R6T": {
+      "path": "/root/.orx/runs/aa82a588-255f-4ca3-b614-ce8fd919ef1b/repo/results/six_R6T_20261030/report.json",
+      "sha256": "8d20bef6858f30f7284329243480719d7c758e0008881b1d662229cf7316cf4c"
+    }
+  },
+  "scope": "old inspected tests, three splits share test; per-task means, no universal superiority or new blind evaluation; PTR+driver excluded from own pools"
+}

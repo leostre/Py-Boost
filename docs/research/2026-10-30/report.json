@@ -1,0 +1,73 @@
+{
+  "status": "six_direction_rollup_complete",
+  "summary": {
+    "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/summary.json",
+    "sha256": "e23bde3e5eefe37454fb4aa96cb36fbacb3a47ea90bea54cf9575e593f63ebea"
+  },
+  "data": [
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/bank_capacity.csv",
+      "sha256": "cb560632011995fb6a1e9bcdc13a433cccccad30c345c1af308b149ce7bb6d46"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/bank_selection.csv",
+      "sha256": "7279985f740738ac1a853a9e31733da82fbcedc6383e8b73c224090b83250279"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/bank_serving.csv",
+      "sha256": "8ee24399ea09655dfff2578fd513cf1c53b4ea9e18f37f8122de6e9c792f1cbc"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/five_task_quality.csv",
+      "sha256": "6c12d9f680cdc78ec4d1b7faedbe0fda47102853c128e2b4ac784ade77a2d1fd"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/five_task_serving.csv",
+      "sha256": "e8992e6f3313615ac7a85b0791c1ed75b6b13691aed576d999f2a41bb1c3cc6a"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/inference_aggregate.csv",
+      "sha256": "9faae9e8b0c0d78978bf2a64a08b767ec845942b30ab4b18e82b963961959d07"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/inference_sessions.csv",
+      "sha256": "000f7273df07ba3111696f91970e1b377a2d807210cd6c743afb609b267d3fa4"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/nvforest_compatibility.csv",
+      "sha256": "d49c9eaa6881533fcfc746b4acb6b91ef0f79b908343b85c7d9ae2f4145fe6cb"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/quality_points.csv",
+      "sha256": "7d6537342866854a3dfa1966b27f46130d24ee6c5f0ca6f55e31372e4d938068"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/quantization.csv",
+      "sha256": "f97d18a0fb0749fb7ceca53c8f8674139d9782bc277c852111ad8c9726ff5b9a"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/data/quantized_continuation.csv",
+      "sha256": "78b3823a6aba53e38e9151c2a8789c711cd0944f26d383643689d3a58318516f"
+    }
+  ],
+  "figures": [
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/figures/quantization_memory_quality.pdf",
+      "sha256": "6c486e1d88d3c19ef88363f3a0d1ae19eb39f6d0f794da4c84bd3845743faf4f"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/figures/quantization_memory_quality.svg",
+      "sha256": "d4bf6166bdbe13a2ab01c91fd03781305a921ac1a6deb93e612d9f8870cd6a9a"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/figures/structure_refit.pdf",
+      "sha256": "4b713a9914b13f14e105092df3af21b0a0b3a2492d4d35ffadb6351f9463b0ad"
+    },
+    {
+      "path": "/root/.orx/runs/5bd3d60c-643f-4890-b1ce-5ee37c75720b/repo/results/six_R7_20261030/figures/structure_refit.svg",
+      "sha256": "9e54f7eaaff3a2ef1a6fb3312ec70c5f8a052f935abbaee7d378d071b145d37d"
+    }
+  ],
+  "new_trees": 0,
+  "total_program_trees": 21600
+}

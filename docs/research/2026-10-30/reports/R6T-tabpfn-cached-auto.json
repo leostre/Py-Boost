@@ -1,0 +1,962 @@
+{
+  "status": "complete",
+  "mode": "fit_with_cache",
+  "family": "tabpfn_auto",
+  "tasks": [
+    "helena_1204",
+    "mnist_3104",
+    "rt_iot2022_3204",
+    "wdbc_4104",
+    "banknote_4204"
+  ],
+  "fits": [
+    {
+      "case_id": "helena_1204",
+      "seconds": 2.14360062032938,
+      "actual_n_estimators": 8,
+      "nn_weight_updates": 0
+    },
+    {
+      "case_id": "mnist_3104",
+      "seconds": 16.5307673253119,
+      "actual_n_estimators": 8,
+      "nn_weight_updates": 0
+    },
+    {
+      "case_id": "rt_iot2022_3204",
+      "seconds": 1.9933142624795437,
+      "actual_n_estimators": 8,
+      "nn_weight_updates": 0
+    },
+    {
+      "case_id": "wdbc_4104",
+      "seconds": 0.09036561474204063,
+      "actual_n_estimators": 8,
+      "nn_weight_updates": 0
+    },
+    {
+      "case_id": "banknote_4204",
+      "seconds": 0.09704810753464699,
+      "actual_n_estimators": 8,
+      "nn_weight_updates": 0
+    }
+  ],
+  "metrics": [
+    {
+      "batch": 1,
+      "jobs": 1,
+      "traffic": "uniform",
+      "p50_ms": 38.948192,
+      "p95_ms": 298.33592565,
+      "p99_ms": 393.07609354000016,
+      "requests": 32,
+      "qps": 11.388024448864277,
+      "wall_seconds": 2.8712188452482224,
+      "wall_qps": 11.145092633032485,
+      "objects_per_second": 11.145092633032485,
+      "request_samples_ms": [
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.26901
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 290.911544
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 57.970616
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 36.884014
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 36.914999
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 58.154033
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 41.905917
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 36.937153
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 36.952966
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.353652
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.206767
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 37.954247
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 37.238146
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 59.316804
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.600962
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 38.408331
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 38.933116
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 60.398308
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.530435
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 287.933893
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 59.32052
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 37.903201
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.963268
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 59.075668
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 36.468003
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 295.910229
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.742038
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 36.643449
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 434.308532
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 58.394411
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 301.300666
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 62.164482
+        }
+      ],
+      "per_task": {
+        "helena_1204": {
+          "p50_ms": 38.6715,
+          "p95_ms": 41.332999550000004,
+          "p99_ms": 41.79133351,
+          "requests": 8,
+          "qps": 25.51247799512896
+        },
+        "mnist_3104": {
+          "p50_ms": 295.910229,
+          "p95_ms": 407.7069588,
+          "p99_ms": 428.98821736,
+          "requests": 5,
+          "qps": 3.1048864215656407
+        },
+        "rt_iot2022_3204": {
+          "p50_ms": 59.196236,
+          "p95_ms": 61.5463211,
+          "p99_ms": 62.04084982,
+          "requests": 8,
+          "qps": 16.84938270664701
+        },
+        "wdbc_4104": {
+          "p50_ms": 37.954247,
+          "p95_ms": 38.8352291,
+          "p99_ms": 38.91353862,
+          "requests": 3,
+          "qps": 26.36867091799372
+        },
+        "banknote_4204": {
+          "p50_ms": 36.9450595,
+          "p95_ms": 38.2315355,
+          "p99_ms": 38.372971899999996,
+          "requests": 8,
+          "qps": 26.893807461477106
+        }
+      },
+      "rss_peak_bytes": 3374862336,
+      "gpu_process_bytes": 4680843264,
+      "gpu_ownership": {
+        "pid": 658835,
+        "verified": false,
+        "method": "unique_new_pid_after_actual_inference_not_namespace_verified"
+      },
+      "wall_includes_checkpoint_io": true,
+      "cuda_allocated_bytes": 3083128320,
+      "cuda_reserved_bytes": 4137680896,
+      "cuda_peak_allocated_bytes": 3785712128,
+      "cuda_peak_reserved_bytes": 4137680896
+    },
+    {
+      "batch": 1,
+      "jobs": 1,
+      "traffic": "skew",
+      "p50_ms": 39.191351999999995,
+      "p95_ms": 303.56326555,
+      "p99_ms": 391.21965056000016,
+      "requests": 32,
+      "qps": 10.587427350020603,
+      "wall_seconds": 3.104721423238516,
+      "wall_qps": 10.306882852832896,
+      "objects_per_second": 10.306882852832896,
+      "request_samples_ms": [
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.530663
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 294.064997
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 59.912697
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 37.460779
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 36.621939
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.801665
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.397558
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.551349
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.202531
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.080337
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.422548
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 36.73709
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 35.983217
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 37.731718
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 60.017688
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.072029
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 59.259418
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 37.752028
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 58.858039
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 299.369644
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 308.688803
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 36.913505
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.69535
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 38.852041
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 37.93411
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 37.766859
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 428.298727
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 294.374101
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 37.143727
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 295.66221
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.217576
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 60.07791
+        }
+      ],
+      "per_task": {
+        "helena_1204": {
+          "p50_ms": 38.69535,
+          "p95_ms": 40.3177079,
+          "p99_ms": 40.50462078,
+          "requests": 15,
+          "qps": 25.728618966189035
+        },
+        "mnist_3104": {
+          "p50_ms": 297.51592700000003,
+          "p95_ms": 398.396246,
+          "p99_ms": 422.3182308,
+          "requests": 6,
+          "qps": 3.1242539509375344
+        },
+        "rt_iot2022_3204": {
+          "p50_ms": 59.912697,
+          "p95_ms": 60.0658656,
+          "p99_ms": 60.075501120000006,
+          "requests": 5,
+          "qps": 16.771446164771437
+        },
+        "wdbc_4104": {
+          "p50_ms": 36.913505,
+          "p95_ms": 37.3973686,
+          "p99_ms": 37.448096920000005,
+          "requests": 5,
+          "qps": 27.13876274098421
+        },
+        "banknote_4204": {
+          "p50_ms": 36.621939,
+          "p95_ms": 36.621939,
+          "p99_ms": 36.621939,
+          "requests": 1,
+          "qps": 27.306036417132365
+        }
+      },
+      "rss_peak_bytes": 3374940160,
+      "gpu_process_bytes": 4680843264,
+      "gpu_ownership": {
+        "pid": 658835,
+        "verified": false,
+        "method": "unique_new_pid_after_actual_inference_not_namespace_verified"
+      },
+      "wall_includes_checkpoint_io": true,
+      "cuda_allocated_bytes": 3083128320,
+      "cuda_reserved_bytes": 4137680896,
+      "cuda_peak_allocated_bytes": 3785712128,
+      "cuda_peak_reserved_bytes": 4137680896
+    },
+    {
+      "batch": 32,
+      "jobs": 1,
+      "traffic": "uniform",
+      "p50_ms": 40.306388,
+      "p95_ms": 335.93267999999995,
+      "p99_ms": 432.16857227000014,
+      "requests": 32,
+      "qps": 10.540466566940811,
+      "wall_seconds": 3.1574071422219276,
+      "wall_qps": 10.134898211917323,
+      "objects_per_second": 324.3167427813543,
+      "request_samples_ms": [
+        {
+          "task_index": 0,
+          "elapsed_ms": 48.456646
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 352.0985
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 61.89231
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 39.111653
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 40.511559
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 61.596732
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.303028
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 38.199945
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 38.750103
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.987494
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.889145
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 39.861664
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 38.492501
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 60.994332
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.345783
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 39.080037
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 38.907253
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 61.985855
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.266993
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 468.142083
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 62.901016
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 39.22494
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.60485
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 61.591771
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 39.097057
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 321.021142
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.05718
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 39.190295
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 322.7061
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 62.480624
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 318.822482
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 61.347669
+        }
+      ],
+      "per_task": {
+        "helena_1204": {
+          "p50_ms": 40.022337,
+          "p95_ms": 45.617843949999994,
+          "p99_ms": 47.888885589999994,
+          "requests": 8,
+          "qps": 24.39685492946032
+        },
+        "mnist_3104": {
+          "p50_ms": 322.7061,
+          "p95_ms": 444.9333664,
+          "p99_ms": 463.50033968,
+          "requests": 5,
+          "qps": 2.8045923182147967
+        },
+        "rt_iot2022_3204": {
+          "p50_ms": 61.744521000000006,
+          "p95_ms": 62.753878799999995,
+          "p99_ms": 62.87158856,
+          "requests": 8,
+          "qps": 16.168465417539128
+        },
+        "wdbc_4104": {
+          "p50_ms": 39.111653,
+          "p95_ms": 39.786662899999996,
+          "p99_ms": 39.84666378,
+          "requests": 3,
+          "qps": 25.449486713544058
+        },
+        "banknote_4204": {
+          "p50_ms": 39.088547,
+          "p95_ms": 40.06124235,
+          "p99_ms": 40.42149567,
+          "requests": 8,
+          "qps": 25.59619644616202
+        }
+      },
+      "rss_peak_bytes": 3375063040,
+      "gpu_process_bytes": 4857004032,
+      "gpu_ownership": {
+        "pid": 658835,
+        "verified": false,
+        "method": "unique_new_pid_after_actual_inference_not_namespace_verified"
+      },
+      "wall_includes_checkpoint_io": true,
+      "cuda_allocated_bytes": 3083128320,
+      "cuda_reserved_bytes": 4313841664,
+      "cuda_peak_allocated_bytes": 3977459200,
+      "cuda_peak_reserved_bytes": 4313841664
+    },
+    {
+      "batch": 32,
+      "jobs": 1,
+      "traffic": "skew",
+      "p50_ms": 41.093740999999994,
+      "p95_ms": 330.5042147,
+      "p99_ms": 421.6364236100002,
+      "requests": 32,
+      "qps": 9.85445550326599,
+      "wall_seconds": 3.3891785219311714,
+      "wall_qps": 9.441816001408576,
+      "objects_per_second": 302.1381120450744,
+      "request_samples_ms": [
+        {
+          "task_index": 0,
+          "elapsed_ms": 41.868056
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 321.109258
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 63.721515
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 41.526394
+        },
+        {
+          "task_index": 4,
+          "elapsed_ms": 40.645887
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.960364
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 42.360892
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.659371
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.392342
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.33036
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.347587
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 39.007441
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 39.05693
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.625619
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 62.70697
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.480543
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 61.331862
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 39.903508
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 62.169764
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 459.884896
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 320.946975
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 38.904249
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 41.974604
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 41.227118
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.525001
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.246316
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 325.596341
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 322.366368
+        },
+        {
+          "task_index": 3,
+          "elapsed_ms": 39.710873
+        },
+        {
+          "task_index": 1,
+          "elapsed_ms": 336.502727
+        },
+        {
+          "task_index": 0,
+          "elapsed_ms": 40.104015
+        },
+        {
+          "task_index": 2,
+          "elapsed_ms": 62.067967
+        }
+      ],
+      "per_task": {
+        "helena_1204": {
+          "p50_ms": 40.525001,
+          "p95_ms": 42.0904904,
+          "p99_ms": 42.30681168,
+          "requests": 15,
+          "qps": 24.58993432087559
+        },
+        "mnist_3104": {
+          "p50_ms": 323.9813545,
+          "p95_ms": 429.03935375000003,
+          "p99_ms": 453.7157875500001,
+          "requests": 6,
+          "qps": 2.8757578223973814
+        },
+        "rt_iot2022_3204": {
+          "p50_ms": 62.169764,
+          "p95_ms": 63.518606,
+          "p99_ms": 63.6809332,
+          "requests": 5,
+          "qps": 16.02573974830704
+        },
+        "wdbc_4104": {
+          "p50_ms": 39.05693,
+          "p95_ms": 41.1632898,
+          "p99_ms": 41.453773160000004,
+          "requests": 5,
+          "qps": 25.226294111032132
+        },
+        "banknote_4204": {
+          "p50_ms": 40.645887,
+          "p95_ms": 40.645887,
+          "p99_ms": 40.645887,
+          "requests": 1,
+          "qps": 24.60273532719313
+        }
+      },
+      "rss_peak_bytes": 3375075328,
+      "gpu_process_bytes": 4857004032,
+      "gpu_ownership": {
+        "pid": 658835,
+        "verified": false,
+        "method": "unique_new_pid_after_actual_inference_not_namespace_verified"
+      },
+      "wall_includes_checkpoint_io": true,
+      "cuda_allocated_bytes": 3083128320,
+      "cuda_reserved_bytes": 4313841664,
+      "cuda_peak_allocated_bytes": 3977459200,
+      "cuda_peak_reserved_bytes": 4313841664
+    }
+  ],
+  "quality": [
+    {
+      "case_id": "helena_1204",
+      "quality": {
+        "loss": 2.617570303388618,
+        "f1_weighted": 0.33763355679908263,
+        "f1_macro": 0.2006032528630816
+      }
+    },
+    {
+      "case_id": "mnist_3104",
+      "quality": {
+        "loss": 0.09831515207696359,
+        "f1_weighted": 0.9724974911219588,
+        "f1_macro": 0.9722504760890205
+      }
+    },
+    {
+      "case_id": "rt_iot2022_3204",
+      "quality": {
+        "loss": 0.01799480016450104,
+        "f1_weighted": 0.9926404872818692,
+        "f1_macro": 0.8826523217982847
+      }
+    },
+    {
+      "case_id": "wdbc_4104",
+      "quality": {
+        "loss": 0.08461560971796467,
+        "f1_weighted": 0.973621425014614,
+        "f1_macro": 0.9718634306869601
+      }
+    },
+    {
+      "case_id": "banknote_4204",
+      "quality": {
+        "loss": 7.334011678734184e-05,
+        "f1_weighted": 1.0,
+        "f1_macro": 1.0
+      }
+    }
+  ],
+  "shared_weight_bytes": 875950628,
+  "independent_weight_sum_bytes": 4379753140,
+  "reachable_state": {
+    "cpu_numerical_bytes": 1286056,
+    "gpu_numerical_bytes": 3057288260,
+    "numerical_bytes": 3058574316,
+    "observed_spans": 2678,
+    "limitation": "tensor/NumPy storage reachable via Python fields only; excludes hidden native buffers, Python overhead and allocator pools"
+  },
+  "resident_rss_bytes": 3373613056,
+  "paired_probe_max_abs_error": 0.0,
+  "cross_batch_reference_max_abs_error": 0.005276138085066107,
+  "validation_qualities": [
+    {
+      "case_id": "helena_1204",
+      "quality": {
+        "loss": 2.61273026589769,
+        "f1_weighted": 0.3386452780418122,
+        "f1_macro": 0.20516470791161143
+      },
+      "reference": {
+        "loss": 2.612448027368015,
+        "f1_weighted": 0.33806303661610115,
+        "f1_macro": 0.20509181207019558
+      },
+      "within_original_five_percent": true
+    },
+    {
+      "case_id": "mnist_3104",
+      "quality": {
+        "loss": 0.08646890806241975,
+        "f1_weighted": 0.9738317305725698,
+        "f1_macro": 0.9734771089179416
+      },
+      "reference": {
+        "loss": 0.0864311558710325,
+        "f1_weighted": 0.973842375719575,
+        "f1_macro": 0.9734563542708475
+      },
+      "within_original_five_percent": true
+    },
+    {
+      "case_id": "rt_iot2022_3204",
+      "quality": {
+        "loss": 0.017553691040516458,
+        "f1_weighted": 0.9943312060439007,
+        "f1_macro": 0.9628213053643833
+      },
+      "reference": {
+        "loss": 0.017636564989004715,
+        "f1_weighted": 0.9943312060439007,
+        "f1_macro": 0.9628213053643833
+      },
+      "within_original_five_percent": true
+    },
+    {
+      "case_id": "wdbc_4104",
+      "quality": {
+        "loss": 0.1130751384325719,
+        "f1_weighted": 0.9654101671817585,
+        "f1_macro": 0.9631616090331687
+      },
+      "reference": {
+        "loss": 0.11289380100380125,
+        "f1_weighted": 0.9654101671817585,
+        "f1_macro": 0.9631616090331687
+      },
+      "within_original_five_percent": true
+    },
+    {
+      "case_id": "banknote_4204",
+      "quality": {
+        "loss": 8.583267847379887e-05,
+        "f1_weighted": 1.0,
+        "f1_macro": 1.0
+      },
+      "reference": {
+        "loss": 8.687468782356432e-05,
+        "f1_weighted": 1.0,
+        "f1_macro": 1.0
+      },
+      "within_original_five_percent": true
+    }
+  ],
+  "pretest_validation_sha256": "8eca3286760f16731af97bd6b8ae3d60e23299ec6493eaa6dbc46ac061ba605e",
+  "initialization_seconds": 0.3829784393310547,
+  "initialization_torch_peaks": {
+    "allocated": 9906880000,
+    "reserved": 16831741952
+  },
+  "gpu_host_pid": 658835,
+  "gpu_ownership_verified": false,
+  "gpu_ownership": {
+    "pid": 658835,
+    "verified": false,
+    "method": "unique_new_pid_after_actual_inference_not_namespace_verified"
+  },
+  "available_before_bytes": 42285924352,
+  "process_peak_rss_bytes": 4794556416,
+  "context_fit_calls": 5,
+  "nn_weight_updates": 0,
+  "new_boosting_trees": 0,
+  "test_labels_loaded": true,
+  "test_is_reused_exploratory": true,
+  "shared_a100": true,
+  "latency_mode": "ready resident contexts, J1, host/device transfers included"
+}

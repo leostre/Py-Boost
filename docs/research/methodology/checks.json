@@ -1,0 +1,116 @@
+{
+  "status": "verified",
+  "checked_at": "2026-11-02T13:23:25+03:00",
+  "new_scientific_runs": 0,
+  "sources": 18,
+  "source_map": "source-map.json",
+  "original_html_unchanged": true,
+  "original_html_sha256": "cbac282a6f93ca7caec4ff731dd08b91b2581a0b966ee5354864b6c894c694bc",
+  "delivered_html_sha256": "f6b6c6a79874180b88354b59900274d3ac1d3d6bf7091aa3d0c7580196a5d015",
+  "html_bytes": 33020520,
+  "artifact_id": "dashboard:f27d0221-7bae-4de9-b4f8-8a63b949f137",
+  "original_queries_unchanged": 12,
+  "original_query_sha256": {
+    "all_quality_points": "289e475101634982d2b56817b380c0324287da59dd3add03186128dc9f6cf20c",
+    "bank_choices": "d3e8929ab61e3f1101e7ae2667d57fff2e3ca1d299bcfd49b75bd1aa9d945250",
+    "bank_summary": "7f9b3ef4f4f2ef0b70b4db55d4350caebc3509cb1d1ca9cf4a81003825ec176b",
+    "constant_diagnostics": "c3c204fe4ccc8f6b9eba02e37200ad407d9da4347f3b8ff7fdb26c4416302fff",
+    "dataset_profiles": "f22b2c6b3ae3b8977979475e2fc8882cdf09df7dc793b2b52d033ee27802872c",
+    "inference_summary": "f431a1097334b0c42b8e3541e67c295db2378be09962f3ada7b88d24e59908cc",
+    "native_inference_summary": "d46d7fae9196cc6c1152f347db33fe1bcc82d6301fefaa6f4436a9b9ec8f5d0d",
+    "representation_comparison": "c2d478c624fe2af43a9d9bd5f46011e440cd63f7652e13d687848030118c39e2",
+    "selected_quality": "31de04a8d203b2ce600308289aaced2ec339df5a99faa2ec9ec4da02d6907b14",
+    "executor_pairs": "c7923b46ecb6ea64bf90f48fcd2f54d1034347fbd129dc96a3e8be26909bebf5",
+    "method_mechanisms": "204c0ad780fccaa57cc4d54d80ee55ad7dafc02dbd57a0059fa8f72b5bf1c86d",
+    "executor_mechanisms": "cdb99e8090264e5737c77cc0a0f7442ed247fccf6e42c312f85e8cd474eb8ad5"
+  },
+  "added_query": "hypothesis_atlas",
+  "reused_images": [
+    {
+      "file": "docs/research/figures/methods/shared-leaf-basis.png",
+      "sha256": "d9a5178943607c89e1a2fd4e2057ece393f7a4da22dac48cfe0caee6789d81d9"
+    },
+    {
+      "file": "docs/research/figures/methods/sparse-corrections.png",
+      "sha256": "1541ccc14f3ad2fe3b90d4449f84fd7fcbe3e330341275434564f222d3630d64"
+    },
+    {
+      "file": "docs/research/figures/methods/joint-budget-v2.png",
+      "sha256": "007c4cfddf62d63b942c195b4c74ba45209223bbf5e912c55cfdacead00db67d"
+    },
+    {
+      "file": "docs/research/figures/methods/online-training-v2.png",
+      "sha256": "4bb6a0ccfb65d0ed85cf82abd864e5661a8bcbaa63263be882e5cfb236aa2b3b"
+    },
+    {
+      "file": "docs/research/figures/methods/history-v2.png",
+      "sha256": "f87c92b2edc08c8d5c4069f1705495e9f089f6ebb6813e4f969a0e61e5f30e32"
+    },
+    {
+      "file": "docs/research/figures/methods/serving-memory-v2.png",
+      "sha256": "25a9ec55c4bc74ec95de5dda68271c9ea35c6c2fa325b4ec73a809d7b84ee8e5"
+    }
+  ],
+  "embedded_snapshot_equals_reproducer": true,
+  "external_required_assets": 0,
+  "analytics_tests_passed": 12,
+  "visual_notes_audit": {
+    "notes": 1,
+    "images": 2,
+    "errors": 0,
+    "warnings": 0
+  },
+  "visual_registry_audit": {
+    "assets": 7,
+    "errors": 0,
+    "warnings": 0
+  },
+  "local_links_checked": 27,
+  "runtime_changed": false,
+  "runtime_sha256": "18896172786ae9fbbfed81fdc93754ee0d68d5a8502c99ee0c27066d5f9edf51",
+  "browser_checks": {
+    "method_families": 7,
+    "all_four_step_controls": true,
+    "method_drilldown_and_return": true,
+    "coefficient_representation_primer": "W ~ AB + L; schematic; full warmup/block-specific bases disclosed",
+    "executor_diagrams": "legacy narrow <=128 and wide >128; packed single CUDA launch; already optimized legacy preserved",
+    "two_comparison_modes": "own legacy baseline for one UID vs fixed packed model baseline for different UIDs",
+    "full_model_then_switch_mode": "valid effective role resolved before charts, no intermediate empty chart",
+    "both_fixed_references": "full200, ordinary70; UID and absolute p95/GPU values shown",
+    "same_session_example": "real recorded first session; tested against original pair ratio",
+    "ratio_definitions": "executor median of three paired ratios; representation ratio of pooled p95 values; medians across datasets",
+    "narrow_width": "390px viewport; document375px; diagram scroll container301px with SVG880px; viewport reset",
+    "source_menu": "new method and executor metadata; original query rows unchanged",
+    "portable_export_opened_via_http": true,
+    "new_console_errors_observed": 0,
+    "file_protocol_browser_test": "not run; canonical offline export and no required external assets verified",
+    "previous_checks": [
+      "interactive-dashboard-v1.json",
+      "interactive-dashboard-v2.json"
+    ],
+    "native_baseline": "fixed master b2842af / full200, default main comparison",
+    "native_role_switch": "full200 and AB+L; common reference preserved",
+    "native_time_scope": "request p95 and resident CUDA p50 switch",
+    "native_filters": "Bibtex / batch32 and all datasets / batch1024",
+    "native_sources": "Overview definitions, source files and fixed commit verified",
+    "graphical_dataflow": "native tree/gather J/S; legacy block Z/E/GEMM; packed local sums and one launch",
+    "independent_diagram_controls": "narrow/wide and full/hybrid preserve each other",
+    "issues_fixed_during_authoring": [
+      "unsupported grouped-chart reference/stack option removed",
+      "diagram controls preserve independent state"
+    ],
+    "hypothesis_gallery": "Six images loaded and captions changed; historical gates and transposition clarified",
+    "executor_primer": "Four-tree teaching example: native per-tree, legacy per-block, packed all-ensemble; selectable explanations",
+    "technical_disclosure": "AB+L/full and narrow/wide controls work independently; no measured row changes",
+    "responsive_primer": "390px viewport, document375px, card scrollWidth equals clientWidth; SVG321px; override reset",
+    "portable_revision": "Final standalone HTML opened via HTTP; complete status, embedded images, executor selection and W/AB+L toggle verified; zero console errors. Direct file:// launch was not tested.",
+    "legacy_full_vs_compact": "Full W shows sum only; AB+L shows basis decoding; native remains full reference."
+  },
+  "export_decision": "Large image imports exceeded exporter stack; one bounded larger-stack retry also failed. Unmodified PNG bytes moved into the ordinary snapshot data layer; canonical build/export then passed, no runtime or integrity code changes.",
+  "quartz": "not_applicable_repository_markdown_and_HTML",
+  "revision": "animated-inference-journey",
+  "previous_receipt": "checks-before-animation.json",
+  "original_sources_unchanged": 13,
+  "animation_receipt": "animations/checks.json",
+  "animation_unit_tests": 7
+}

@@ -1,0 +1,5610 @@
+{
+  "status": "R3_complete",
+  "cases": [
+    {
+      "case": "emotions_71004",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/emotions_71004/development.json",
+      "sha256": "251167c82526ea0a8cddd09b6c0b14da7b4353c743b16600420ae2fd3fcdf322"
+    },
+    {
+      "case": "scene_71104",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/scene_71104/development.json",
+      "sha256": "f6d213e13db087e7524c8c5fe586ef83df9e386df0d783786b621d82b327e69f"
+    },
+    {
+      "case": "yeast_71204",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/yeast_71204/development.json",
+      "sha256": "91d7d0706117f74e0942a84d7dd6251fb649ac76d72c4b3b7f46933ac0b0b73b"
+    },
+    {
+      "case": "birds_71304",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/birds_71304/development.json",
+      "sha256": "8b24b33ee17a3d8b1b7b2ca91715c0cb3ea531b60213fad74901302012fccc78"
+    },
+    {
+      "case": "medical_71404",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/medical_71404/development.json",
+      "sha256": "2129576867a04aab03039006c00e14ef0000c5e2730e116de1435bab1a646515"
+    },
+    {
+      "case": "genbase_71504",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/genbase_71504/development.json",
+      "sha256": "596440988e622eac4e29bebe497ea9233a812c85fa462fae4691747bd81cf069"
+    },
+    {
+      "case": "bibtex_71604",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/bibtex_71604/development.json",
+      "sha256": "c4c37b871232dbd57673133fd453c065863bf9a8281902132e9ed9679b0af9c3"
+    },
+    {
+      "case": "mediamill_71704",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/mediamill_71704/development.json",
+      "sha256": "5269d8ac52f7130037fe6e3d55bb98cb1530b431a93ec91052055590bd7d8d65"
+    },
+    {
+      "case": "enron_71804",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/enron_71804/development.json",
+      "sha256": "0159889d2c3bd04e0b140f231290c47e85f51b5f5d4d9c86c5eccdb6ff4f8224"
+    },
+    {
+      "case": "cal500_71904",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/cal500_71904/development.json",
+      "sha256": "e61dd934cb0d7dbaaad328b0329d8a12e4692140cc60379f4dade574d5d64f39"
+    },
+    {
+      "case": "corel5k_72004",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/corel5k_72004/development.json",
+      "sha256": "e8d132fc56030548cef07d1b2543b6c835eada85433fd047ba3d4cf11f11846c"
+    },
+    {
+      "case": "delicious_72104",
+      "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/delicious_72104/development.json",
+      "sha256": "db5b2f9443968e267bc00d04910dfb4d64096e30d218bbccbd9ce278c07d6d87"
+    }
+  ],
+  "results": [
+    {
+      "case": "emotions_71004",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.6636669049310613,
+            "f1_weighted": 0.6750994349318266,
+            "loss": 0.44327804674375165,
+            "brier": 0.14516991776664573
+          },
+          "D_quality": {
+            "f1_macro": 0.7059022599557622,
+            "f1_weighted": 0.7176936329102531,
+            "loss": 0.40013788526940325,
+            "brier": 0.12811694812735275
+          },
+          "packed_bytes": 15160,
+          "trees": 50,
+          "sha256": "1bdf0c985102710bd0772de07e3e56f2e93c7c43fbad90bf46a6e290a72ac3b7"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.6781723447281283,
+            "f1_weighted": 0.6849907958239426,
+            "loss": 0.44768569558343163,
+            "brier": 0.14655478005295566
+          },
+          "D_quality": {
+            "f1_macro": 0.7081818963053976,
+            "f1_weighted": 0.7195395329455122,
+            "loss": 0.40376969893662595,
+            "brier": 0.12920290409233406
+          },
+          "packed_bytes": 15720,
+          "trees": 50,
+          "sha256": "e2913b4696d41ffd195df89b91faf48923c156a3bb14f018344628953ac1febb"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.6277017474408298,
+            "f1_weighted": 0.6399169550572263,
+            "loss": 0.5875626552700158,
+            "brier": 0.17185013096177545
+          },
+          "D_quality": {
+            "f1_macro": 0.6959052064065615,
+            "f1_weighted": 0.7075390882354938,
+            "loss": 0.4675821925372808,
+            "brier": 0.1399624535448378
+          },
+          "packed_bytes": 15720,
+          "trees": 50,
+          "sha256": "8d42c6e6036225493a66f8f5467d4e01f519b1f7bc35cf609e5a0946cf2527a5"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.6486515006291883,
+            "f1_weighted": 0.6541079098796924,
+            "loss": 0.5650152585995455,
+            "brier": 0.16992575789202224
+          },
+          "D_quality": {
+            "f1_macro": 0.6577820064326811,
+            "f1_weighted": 0.6721661879080701,
+            "loss": 0.4734837200937094,
+            "brier": 0.14386647668115607
+          },
+          "packed_bytes": 11112,
+          "trees": 50,
+          "sha256": "8e1ccf6ccbaba8eba24d133a6d8ec7e8699fd96988a63624ee0ccdd8d9bf1ca8"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.6353386460779594,
+            "f1_weighted": 0.6398970964007984,
+            "loss": 0.5568695173070635,
+            "brier": 0.1683283695214431
+          },
+          "D_quality": {
+            "f1_macro": 0.6843638389354423,
+            "f1_weighted": 0.6949161789701633,
+            "loss": 0.4596859053270091,
+            "brier": 0.1400471603909546
+          },
+          "packed_bytes": 13044,
+          "trees": 50,
+          "sha256": "e5a78a76fa45cd83daf1a3705a7d1e6f42e9aff1be2e2492d2274e125241e802"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.6245281618320354,
+            "f1_weighted": 0.6245345929023769,
+            "loss": 0.5942810538409296,
+            "brier": 0.17457665915575857
+          },
+          "D_quality": {
+            "f1_macro": 0.6669462944067138,
+            "f1_weighted": 0.6765370968043086,
+            "loss": 0.4638049413929041,
+            "brier": 0.14233521443835548
+          },
+          "packed_bytes": 6788,
+          "trees": 50,
+          "sha256": "6587290c657bfd2e789a0cc0c137d45d60780cad1526c6bc3aba4e5774b17783"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.675174049466917,
+            "f1_weighted": 0.6838728799001741,
+            "loss": 0.4476447521901648,
+            "brier": 0.1456593886417603
+          },
+          "D_quality": {
+            "f1_macro": 0.7066598524931859,
+            "f1_weighted": 0.7180684507987141,
+            "loss": 0.39116183142730715,
+            "brier": 0.12568397195242068
+          },
+          "packed_bytes": 28760,
+          "trees": 100,
+          "sha256": "ca8318d87ae66d7b682f3b9993d5b5bef19330e330039a413649f20c8bd53c0d"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.6751196118184106,
+            "f1_weighted": 0.6824675758196563,
+            "loss": 0.4421959338323195,
+            "brier": 0.1437936977557434
+          },
+          "D_quality": {
+            "f1_macro": 0.7203979066932836,
+            "f1_weighted": 0.7392838524654842,
+            "loss": 0.39010433632662517,
+            "brier": 0.12529707871233198
+          },
+          "packed_bytes": 30560,
+          "trees": 100,
+          "sha256": "f4c4e7137179ddfc6d534bb49e86f4792e4e60bafece1f27f914b5483293707b"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.6515712641127908,
+            "f1_weighted": 0.6624035735573376,
+            "loss": 0.543616074001653,
+            "brier": 0.16235181476467533
+          },
+          "D_quality": {
+            "f1_macro": 0.716968936655246,
+            "f1_weighted": 0.7350072191147694,
+            "loss": 0.4385759751306344,
+            "brier": 0.13428949453881997
+          },
+          "packed_bytes": 30560,
+          "trees": 100,
+          "sha256": "cca2ff40f23c7d824fc89b87a105d54b9d9195ccf95f7b25aa2f6c39bc595c5f"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.66205390154147,
+            "f1_weighted": 0.6707344226181187,
+            "loss": 0.5218216761396786,
+            "brier": 0.1596098466124367
+          },
+          "D_quality": {
+            "f1_macro": 0.6978043386447416,
+            "f1_weighted": 0.7086759160566508,
+            "loss": 0.4497417304364372,
+            "brier": 0.13914841865300023
+          },
+          "packed_bytes": 21500,
+          "trees": 100,
+          "sha256": "bb3bcbb64170e41815e86fc8e371ca04d1c2991b205891f98a8b807365859bf1"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.6495260621922868,
+            "f1_weighted": 0.6567438778509572,
+            "loss": 0.5177103528890682,
+            "brier": 0.15932322578752403
+          },
+          "D_quality": {
+            "f1_macro": 0.6821581863803111,
+            "f1_weighted": 0.6959748109975588,
+            "loss": 0.4356450155543574,
+            "brier": 0.1344860806410758
+          },
+          "packed_bytes": 25276,
+          "trees": 100,
+          "sha256": "a3e65de15c9d2098320fccf1f77b1cf70eb1d48ae228fda9ebd39e4cb556e1a5"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.6037914447606659,
+            "f1_weighted": 0.608226090276529,
+            "loss": 0.5939140307459738,
+            "brier": 0.17136542546825584
+          },
+          "D_quality": {
+            "f1_macro": 0.7028143193869666,
+            "f1_weighted": 0.7101434169208732,
+            "loss": 0.466477433183338,
+            "brier": 0.13539681985527252
+          },
+          "packed_bytes": 13380,
+          "trees": 100,
+          "sha256": "e6417e18a9802ccc8b69fd087bbf847b3e8e31e6d7f0a85c525c740071839fe6"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.6714688252154856,
+            "f1_weighted": 0.6755777924988963,
+            "loss": 0.45441820211115247,
+            "brier": 0.14606540500860707
+          },
+          "D_quality": {
+            "f1_macro": 0.7062354312354313,
+            "f1_weighted": 0.716267942583732,
+            "loss": 0.38911394345912703,
+            "brier": 0.1253722562995741
+          },
+          "packed_bytes": 42880,
+          "trees": 150,
+          "sha256": "933edabbe5eddaf7c487357d6d892747383cf39c272802e5b3ee3733696aba83"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.6670885165512296,
+            "f1_weighted": 0.6736516354831921,
+            "loss": 0.44852109612443064,
+            "brier": 0.14434379272962297
+          },
+          "D_quality": {
+            "f1_macro": 0.7174899287704166,
+            "f1_weighted": 0.7270237344491196,
+            "loss": 0.38637545756012953,
+            "brier": 0.12472278868059948
+          },
+          "packed_bytes": 44800,
+          "trees": 150,
+          "sha256": "6fbdb3107faab8f5f5f91ebbdf04a7bc633b3cbf0a4fa53e9cf6452828f0bb79"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.686127247149544,
+            "f1_weighted": 0.695116177890829,
+            "loss": 0.5262240945185692,
+            "brier": 0.15805290345072728
+          },
+          "D_quality": {
+            "f1_macro": 0.7081768163522898,
+            "f1_weighted": 0.7276421599104864,
+            "loss": 0.4255534381084203,
+            "brier": 0.1314281123036141
+          },
+          "packed_bytes": 44800,
+          "trees": 150,
+          "sha256": "ce81e90116533b7efaf153a4a941eee36abb50f37322bdfc99389bd44555ede0"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.6482240207589622,
+            "f1_weighted": 0.65758420117278,
+            "loss": 0.5084496312506871,
+            "brier": 0.15705623276082242
+          },
+          "D_quality": {
+            "f1_macro": 0.6861036513834219,
+            "f1_weighted": 0.6965303392019393,
+            "loss": 0.4400797695963648,
+            "brier": 0.1371867769554334
+          },
+          "packed_bytes": 31468,
+          "trees": 150,
+          "sha256": "86e4737e9ae48e05b7aa86eb18fcb11d06423ee549c35c3cea24f97c9afa0555"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.6693434868887268,
+            "f1_weighted": 0.6776740997312094,
+            "loss": 0.5075209407023902,
+            "brier": 0.1565895647098188
+          },
+          "D_quality": {
+            "f1_macro": 0.6984199255493736,
+            "f1_weighted": 0.7078417490560248,
+            "loss": 0.4253352766771509,
+            "brier": 0.13269303387550394
+          },
+          "packed_bytes": 37012,
+          "trees": 150,
+          "sha256": "9d409f499edda508be7d08831ed3c33b4c8e059472d184bbccc3b725b7fda7b3"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.6169340586662457,
+            "f1_weighted": 0.6200716543202545,
+            "loss": 0.5774662247431201,
+            "brier": 0.16779169832495427
+          },
+          "D_quality": {
+            "f1_macro": 0.6882570225964845,
+            "f1_weighted": 0.6969157677202419,
+            "loss": 0.4558884698087891,
+            "brier": 0.13668722769553712
+          },
+          "packed_bytes": 19972,
+          "trees": 150,
+          "sha256": "1e729221391f740b116e158b25f57c0c9902162c6cf3b0908ad30fd68a88b819"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.6864587907756787,
+            "f1_weighted": 0.6935804582157181,
+            "loss": 0.4581568319263464,
+            "brier": 0.14522673577671302
+          },
+          "D_quality": {
+            "f1_macro": 0.7047311006986572,
+            "f1_weighted": 0.7140139794718566,
+            "loss": 0.39171273623675223,
+            "brier": 0.12616964650885046
+          },
+          "packed_bytes": 57320,
+          "trees": 200,
+          "sha256": "7d46e062fadf32beffcb75a7443b94f64053daef60bb7f59b663c81ea17566a8"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.6864587907756787,
+            "f1_weighted": 0.6935804582157181,
+            "loss": 0.4581568319263464,
+            "brier": 0.14522673577671302
+          },
+          "D_quality": {
+            "f1_macro": 0.7047311006986572,
+            "f1_weighted": 0.7140139794718566,
+            "loss": 0.39171273623675223,
+            "brier": 0.12616964650885046
+          },
+          "packed_bytes": 57320,
+          "trees": 200,
+          "sha256": "7d46e062fadf32beffcb75a7443b94f64053daef60bb7f59b663c81ea17566a8"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.6728165388654835,
+            "f1_weighted": 0.6844894768568549,
+            "loss": 0.5085247075460302,
+            "brier": 0.15374559842415808
+          },
+          "D_quality": {
+            "f1_macro": 0.7164207290294247,
+            "f1_weighted": 0.7340293668954997,
+            "loss": 0.4191697534624146,
+            "brier": 0.13035795857109225
+          },
+          "packed_bytes": 57320,
+          "trees": 200,
+          "sha256": "18725fa37f01d9a7c144df68f21568ba01e6636b53b44f55905024563b03b2be"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.6724906746052685,
+            "f1_weighted": 0.681683189239673,
+            "loss": 0.4956003351133884,
+            "brier": 0.15359489336905316
+          },
+          "D_quality": {
+            "f1_macro": 0.7084722606239318,
+            "f1_weighted": 0.7202791213811139,
+            "loss": 0.4349521783940395,
+            "brier": 0.13603794699066107
+          },
+          "packed_bytes": 40232,
+          "trees": 200,
+          "sha256": "820cad0b56dc23ef254aec1f3bc1050fada1da3d04729c7781944123a17b0cb9"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.6831698099357096,
+            "f1_weighted": 0.6929283317365754,
+            "loss": 0.49337688578450967,
+            "brier": 0.1530713568856333
+          },
+          "D_quality": {
+            "f1_macro": 0.6998481454161317,
+            "f1_weighted": 0.7099986501681628,
+            "loss": 0.4214301788838043,
+            "brier": 0.13302142156615415
+          },
+          "packed_bytes": 47324,
+          "trees": 200,
+          "sha256": "55512ece196adf8e173d61e3f76c13751f00fa3410887b324b675a232184f189"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.6225504716158791,
+            "f1_weighted": 0.6286960522349564,
+            "loss": 0.5635554572013676,
+            "brier": 0.16473494985565545
+          },
+          "D_quality": {
+            "f1_macro": 0.7039618609238861,
+            "f1_weighted": 0.7146603562992637,
+            "loss": 0.4421411025855703,
+            "brier": 0.13254960853100653
+          },
+          "packed_bytes": 26564,
+          "trees": 200,
+          "sha256": "a85760c3fc0a87fdfde1017d02322cccf51ab939f43f16237346bc7dc24a57d8"
+        }
+      ]
+    },
+    {
+      "case": "scene_71104",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.7314023838625542,
+            "f1_weighted": 0.7210098059141048,
+            "loss": 0.2388821020452706,
+            "brier": 0.0721720053332166
+          },
+          "D_quality": {
+            "f1_macro": 0.7194154242335631,
+            "f1_weighted": 0.7166945640341887,
+            "loss": 0.23700653318477838,
+            "brier": 0.07052728323973748
+          },
+          "packed_bytes": 16120,
+          "trees": 50,
+          "sha256": "b544c8f89ca0f3ceccc6ecdc608fef3e8bb9c01e6202b82669c7b0b863872eb9"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.7268060749484898,
+            "f1_weighted": 0.7160171250372908,
+            "loss": 0.24362861830439472,
+            "brier": 0.07352519307843963
+          },
+          "D_quality": {
+            "f1_macro": 0.7336624552927118,
+            "f1_weighted": 0.7284233512726939,
+            "loss": 0.24075298388650754,
+            "brier": 0.0711296019489299
+          },
+          "packed_bytes": 16120,
+          "trees": 50,
+          "sha256": "bef774849b23364143d0e5c66c71c3911653ea06f21309e3922418b83aa59297"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.7399864124322275,
+            "f1_weighted": 0.7275343158607945,
+            "loss": 0.2418234190293966,
+            "brier": 0.0701350209531256
+          },
+          "D_quality": {
+            "f1_macro": 0.7443134825030394,
+            "f1_weighted": 0.7365693788012829,
+            "loss": 0.23425216726959697,
+            "brier": 0.06741268551398293
+          },
+          "packed_bytes": 16120,
+          "trees": 50,
+          "sha256": "3a39c4fe6d72c176e81eee6fc9327a5e6b402fc329d9110fe0cc6528a49f513c"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.6639944971128604,
+            "f1_weighted": 0.6504619274281979,
+            "loss": 0.3033712449395632,
+            "brier": 0.0936959859464956
+          },
+          "D_quality": {
+            "f1_macro": 0.6461238014283932,
+            "f1_weighted": 0.6433662674756475,
+            "loss": 0.30951958792710493,
+            "brier": 0.09321237885701975
+          },
+          "packed_bytes": 11392,
+          "trees": 50,
+          "sha256": "ac4e8f68909c5179ff601779657038f18c7f05fc972268ddbf49bd73604d9387"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.7188710916072486,
+            "f1_weighted": 0.7079091674095245,
+            "loss": 0.26318738879448067,
+            "brier": 0.08073765256269119
+          },
+          "D_quality": {
+            "f1_macro": 0.692609022025327,
+            "f1_weighted": 0.6852748517364708,
+            "loss": 0.26839454457862,
+            "brier": 0.07912697500898827
+          },
+          "packed_bytes": 13380,
+          "trees": 50,
+          "sha256": "54eb84babeaab38e999a0a4e9f9d908c474aa76ecee621199866e224902c1630"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.6624151879337995,
+            "f1_weighted": 0.6523674102766022,
+            "loss": 0.28861686677494847,
+            "brier": 0.0889699235583376
+          },
+          "D_quality": {
+            "f1_macro": 0.6633057911308003,
+            "f1_weighted": 0.6582174141198178,
+            "loss": 0.29522150224241184,
+            "brier": 0.08820519788209781
+          },
+          "packed_bytes": 6788,
+          "trees": 50,
+          "sha256": "ef5769088ed5ecdde1e766f8c174580701f93337d47a79c34cd70a00f279aacc"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.7491940818067677,
+            "f1_weighted": 0.7381254147035625,
+            "loss": 0.2133808890656697,
+            "brier": 0.0653402474514646
+          },
+          "D_quality": {
+            "f1_macro": 0.7641784043869255,
+            "f1_weighted": 0.7607550002902601,
+            "loss": 0.20548388602384934,
+            "brier": 0.06144067943146488
+          },
+          "packed_bytes": 32040,
+          "trees": 100,
+          "sha256": "8dac1ea9aeaa6d090da5fe928281576e00eca35ce9ade6333b3befc99845e0c8"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.7282887065497922,
+            "f1_weighted": 0.7153982792025925,
+            "loss": 0.2135577054920318,
+            "brier": 0.06487122092634502
+          },
+          "D_quality": {
+            "f1_macro": 0.7549777397520464,
+            "f1_weighted": 0.7488435820896515,
+            "loss": 0.20818156243395067,
+            "brier": 0.061790002767694106
+          },
+          "packed_bytes": 32120,
+          "trees": 100,
+          "sha256": "6bab91db5b1b9bbb77e01bb731665ed733a9d54c58f6212abcca34e02cb444f2"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.7463350893774091,
+            "f1_weighted": 0.7344357528962135,
+            "loss": 0.2232712415553635,
+            "brier": 0.06539152666910675
+          },
+          "D_quality": {
+            "f1_macro": 0.770548887135118,
+            "f1_weighted": 0.7641458344259346,
+            "loss": 0.21227892507431464,
+            "brier": 0.06130483449484846
+          },
+          "packed_bytes": 32120,
+          "trees": 100,
+          "sha256": "6bcefab10adf3b92922ac09413597939c312c9af5161341af1538258dc7e428f"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.6548475411645923,
+            "f1_weighted": 0.6434060109046196,
+            "loss": 0.2987241686167115,
+            "brier": 0.09309120794705314
+          },
+          "D_quality": {
+            "f1_macro": 0.6604730068479042,
+            "f1_weighted": 0.6509076999375099,
+            "loss": 0.30062787497931753,
+            "brier": 0.09314286642475773
+          },
+          "packed_bytes": 22592,
+          "trees": 100,
+          "sha256": "d96ca17dcffe8eff1fc313d945f86fa53ed744bb2fdf0d54f1e0993be24fabc8"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.7393814698833059,
+            "f1_weighted": 0.7285907476045612,
+            "loss": 0.25105699496662454,
+            "brier": 0.07763906861665125
+          },
+          "D_quality": {
+            "f1_macro": 0.7466285366928608,
+            "f1_weighted": 0.7382615775508158,
+            "loss": 0.25348233452103713,
+            "brier": 0.07691721604197412
+          },
+          "packed_bytes": 26564,
+          "trees": 100,
+          "sha256": "09bab9998c377075265c57600a36c269873bf82e277ee96546cc428ed014f158"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.657073909271771,
+            "f1_weighted": 0.6467967934410849,
+            "loss": 0.27955812681122433,
+            "brier": 0.08588726757809362
+          },
+          "D_quality": {
+            "f1_macro": 0.6845180774887969,
+            "f1_weighted": 0.676682652273372,
+            "loss": 0.2757368261516292,
+            "brier": 0.08324743925918833
+          },
+          "packed_bytes": 13380,
+          "trees": 100,
+          "sha256": "c18f98b0e44dd164db98652c930826c1ab235622aa933cc0a39b33858f5fee53"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.7621909672015695,
+            "f1_weighted": 0.7519363288871093,
+            "loss": 0.20241397741491843,
+            "brier": 0.06194268911606455
+          },
+          "D_quality": {
+            "f1_macro": 0.7684615523528028,
+            "f1_weighted": 0.7612636913784728,
+            "loss": 0.19359792639025408,
+            "brier": 0.05829472305635521
+          },
+          "packed_bytes": 47880,
+          "trees": 150,
+          "sha256": "5a6e3b67907b929471783e435d5d059b15c92d2c1d0bc4a60314db9d54ee3234"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.7616284236407843,
+            "f1_weighted": 0.7501957164218652,
+            "loss": 0.20257628603474429,
+            "brier": 0.061869006182277954
+          },
+          "D_quality": {
+            "f1_macro": 0.7643241110630697,
+            "f1_weighted": 0.7617683372332953,
+            "loss": 0.19433815113842434,
+            "brier": 0.058304382485889275
+          },
+          "packed_bytes": 48120,
+          "trees": 150,
+          "sha256": "47443a732bd7724a05000b8776c20a8447043228ab126ceeab3830060724c4a4"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.763279218673982,
+            "f1_weighted": 0.7516003816398207,
+            "loss": 0.21490358586364627,
+            "brier": 0.06418333728705485
+          },
+          "D_quality": {
+            "f1_macro": 0.7702806170174589,
+            "f1_weighted": 0.7625644408552754,
+            "loss": 0.2007688222702229,
+            "brier": 0.05942776988262341
+          },
+          "packed_bytes": 48120,
+          "trees": 150,
+          "sha256": "e6fae0a1a0e65a285b5fec9ab48a0ee8919c8c9e3f3b5455549df00d9209d683"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.6872169636716685,
+            "f1_weighted": 0.6742120511728523,
+            "loss": 0.2887391652040601,
+            "brier": 0.09115625377778337
+          },
+          "D_quality": {
+            "f1_macro": 0.6763360718471215,
+            "f1_weighted": 0.667585678891772,
+            "loss": 0.2867902132246058,
+            "brier": 0.09036117925904069
+          },
+          "packed_bytes": 33792,
+          "trees": 150,
+          "sha256": "3478c3e54eb597726d73cfb479a6be013ed51cbcf17816b70f2993bb93f06714"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.7271397527782449,
+            "f1_weighted": 0.7130414159784161,
+            "loss": 0.23559480551839682,
+            "brier": 0.07365360951545093
+          },
+          "D_quality": {
+            "f1_macro": 0.7398316013129381,
+            "f1_weighted": 0.7307518620546292,
+            "loss": 0.23559146028178032,
+            "brier": 0.0718097793182329
+          },
+          "packed_bytes": 39748,
+          "trees": 150,
+          "sha256": "baf3302438d88415826825afc05c3bb8b803ed9aa2a449d45d126bb7782afb1c"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.6973186805783351,
+            "f1_weighted": 0.6871244286717206,
+            "loss": 0.26780467445927053,
+            "brier": 0.0816927657320509
+          },
+          "D_quality": {
+            "f1_macro": 0.7085290247107867,
+            "f1_weighted": 0.698785670885729,
+            "loss": 0.259162926814813,
+            "brier": 0.07853347010626668
+          },
+          "packed_bytes": 19972,
+          "trees": 150,
+          "sha256": "ec324c96590faa93b26bb1cfe1a83790900a2b155f43be452514a8512f1aa022"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.7675106491661302,
+            "f1_weighted": 0.7540562284466303,
+            "loss": 0.19743357302511194,
+            "brier": 0.06023288102346908
+          },
+          "D_quality": {
+            "f1_macro": 0.7816401701648191,
+            "f1_weighted": 0.7758819048820803,
+            "loss": 0.18601964192128195,
+            "brier": 0.05618065476776186
+          },
+          "packed_bytes": 63640,
+          "trees": 200,
+          "sha256": "c4a5ddc7d61d751fd9e3e5dcbb7199a20e7655b7c1877cb8c8baeed247d38f80"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.7675106491661302,
+            "f1_weighted": 0.7540562284466303,
+            "loss": 0.19743357302511194,
+            "brier": 0.06023288102346908
+          },
+          "D_quality": {
+            "f1_macro": 0.7816401701648191,
+            "f1_weighted": 0.7758819048820803,
+            "loss": 0.18601964192128195,
+            "brier": 0.05618065476776186
+          },
+          "packed_bytes": 63640,
+          "trees": 200,
+          "sha256": "c4a5ddc7d61d751fd9e3e5dcbb7199a20e7655b7c1877cb8c8baeed247d38f80"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.7725042569622289,
+            "f1_weighted": 0.7608837894584297,
+            "loss": 0.20896973651628245,
+            "brier": 0.062532522747252
+          },
+          "D_quality": {
+            "f1_macro": 0.7795468760952424,
+            "f1_weighted": 0.7761948479155617,
+            "loss": 0.19228552177293665,
+            "brier": 0.057162692348566385
+          },
+          "packed_bytes": 63640,
+          "trees": 200,
+          "sha256": "d8ace8b8cdb988479107c92786991e78712e72ca4a1bf338fbbc46ea95ae3ffa"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.6924959860884122,
+            "f1_weighted": 0.679741086556107,
+            "loss": 0.2827740524467042,
+            "brier": 0.09002780036922628
+          },
+          "D_quality": {
+            "f1_macro": 0.6712332559728239,
+            "f1_weighted": 0.6630350944786484,
+            "loss": 0.28065170830129,
+            "brier": 0.08935437274225407
+          },
+          "packed_bytes": 44656,
+          "trees": 200,
+          "sha256": "c4685bc591c44cbf8316450b0a0c50e43d55d40d1b95280a09677fb44bfffe3d"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.7544790741881394,
+            "f1_weighted": 0.7406253741207013,
+            "loss": 0.22829603054570158,
+            "brier": 0.07171704900143705
+          },
+          "D_quality": {
+            "f1_macro": 0.7607469956154166,
+            "f1_weighted": 0.7560002862634441,
+            "loss": 0.2265304290817317,
+            "brier": 0.06954266488062265
+          },
+          "packed_bytes": 52532,
+          "trees": 200,
+          "sha256": "e78c3726ddd63f7abacf01fc94341800b2e36e0acbcefeff66fb721cbb7d6fa4"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.7061123891138843,
+            "f1_weighted": 0.6960062631213995,
+            "loss": 0.2600626686086575,
+            "brier": 0.07973668588212583
+          },
+          "D_quality": {
+            "f1_macro": 0.7143012894289379,
+            "f1_weighted": 0.7028721553276904,
+            "loss": 0.246309077256265,
+            "brier": 0.07542070450042472
+          },
+          "packed_bytes": 26564,
+          "trees": 200,
+          "sha256": "bfc4c197794e063e0cd5f29f0056c9a8f4c5bb88ce3348fbd2348d0df510f32d"
+        }
+      ]
+    },
+    {
+      "case": "yeast_71204",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.46840806384397915,
+            "f1_weighted": 0.6492442539468861,
+            "loss": 0.44058855379469875,
+            "brier": 0.14129927283645072
+          },
+          "D_quality": {
+            "f1_macro": 0.4567034819140155,
+            "f1_weighted": 0.6300926506900245,
+            "loss": 0.4511856150344749,
+            "brier": 0.14501990759384928
+          },
+          "packed_bytes": 28408,
+          "trees": 50,
+          "sha256": "96ef5f9639315ecd57bcbfa20f64e0fbae30eeb3219c1da83a5677ed96e743f4"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.4678880673406682,
+            "f1_weighted": 0.6471305039439091,
+            "loss": 0.444682544068816,
+            "brier": 0.14267233625939427
+          },
+          "D_quality": {
+            "f1_macro": 0.44816487688718487,
+            "f1_weighted": 0.6237873503574879,
+            "loss": 0.4542768579196036,
+            "brier": 0.14605943808026467
+          },
+          "packed_bytes": 28912,
+          "trees": 50,
+          "sha256": "6db3f316fcbf800d9fab326c30b8478bf55a323cec438b44c23ac7a3ddfe7621"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.47947172822524287,
+            "f1_weighted": 0.6523211172271273,
+            "loss": 0.4746275307435266,
+            "brier": 0.14886245975987747
+          },
+          "D_quality": {
+            "f1_macro": 0.4567604154088633,
+            "f1_weighted": 0.6239103244307331,
+            "loss": 0.48951285331211974,
+            "brier": 0.1535014960314467
+          },
+          "packed_bytes": 28912,
+          "trees": 50,
+          "sha256": "047fb603759bdbe1e1d5ea518e013a79827401a1832b5d7af543be386e7f7dcd"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.4765717766220143,
+            "f1_weighted": 0.6491454066491164,
+            "loss": 0.47530793065801574,
+            "brier": 0.14995233655651993
+          },
+          "D_quality": {
+            "f1_macro": 0.4442028967624685,
+            "f1_weighted": 0.6203920880688714,
+            "loss": 0.48504545534780574,
+            "brier": 0.15310539986475294
+          },
+          "packed_bytes": 18132,
+          "trees": 50,
+          "sha256": "453d07f174e3add3419b226e786cb6721bc1126c6271dc8ff7f7779833c4cd1a"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.47560822252373036,
+            "f1_weighted": 0.6472942982645704,
+            "loss": 0.47200430448059394,
+            "brier": 0.14852126259877485
+          },
+          "D_quality": {
+            "f1_macro": 0.44155240384442657,
+            "f1_weighted": 0.618944198293337,
+            "loss": 0.4842872515048217,
+            "brier": 0.15256477704461735
+          },
+          "packed_bytes": 20620,
+          "trees": 50,
+          "sha256": "15df550c2ef6913dd11acb276204ff62671a7747e9a02f01167db1d36e814af3"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.4625891640220802,
+            "f1_weighted": 0.6346049655720445,
+            "loss": 0.46647863525574035,
+            "brier": 0.14820575683383358
+          },
+          "D_quality": {
+            "f1_macro": 0.4461940690777745,
+            "f1_weighted": 0.614569940019456,
+            "loss": 0.4755462619172668,
+            "brier": 0.15273362359120882
+          },
+          "packed_bytes": 10628,
+          "trees": 50,
+          "sha256": "b621439680245ac72219d87c77a1680416255c9f4ba25e44cb414e16b235aa5f"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.4806611715626487,
+            "f1_weighted": 0.6522148658886467,
+            "loss": 0.4348568900491914,
+            "brier": 0.13942817500861784
+          },
+          "D_quality": {
+            "f1_macro": 0.4604481974152551,
+            "f1_weighted": 0.629929750969957,
+            "loss": 0.4436738423751336,
+            "brier": 0.14245817314417797
+          },
+          "packed_bytes": 56056,
+          "trees": 100,
+          "sha256": "f38498a0f026b8896af58f7c272dd80897f77dd4e1accdc05f77b65e00bbc6d6"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.47401679718811973,
+            "f1_weighted": 0.6457367837558822,
+            "loss": 0.4352549399990054,
+            "brier": 0.1392998992298017
+          },
+          "D_quality": {
+            "f1_macro": 0.468648826333707,
+            "f1_weighted": 0.6375557921305617,
+            "loss": 0.4435311268615342,
+            "brier": 0.14229678117559996
+          },
+          "packed_bytes": 57208,
+          "trees": 100,
+          "sha256": "13037b6681b34642aafb19758b975904053954d307d89429d35ef9974a1faebc"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.468460810317464,
+            "f1_weighted": 0.6409060159179005,
+            "loss": 0.49089810522510463,
+            "brier": 0.1520890032131251
+          },
+          "D_quality": {
+            "f1_macro": 0.45774366652894155,
+            "f1_weighted": 0.6273666420887815,
+            "loss": 0.48637125942167536,
+            "brier": 0.1519012014932769
+          },
+          "packed_bytes": 57208,
+          "trees": 100,
+          "sha256": "f3e9222d89fd593047bac41ceb1f5ee4f85c98b759784d129073edfa31b57b6e"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.46552742249299317,
+            "f1_weighted": 0.6398563198553394,
+            "loss": 0.49073756923484674,
+            "brier": 0.1533661768611015
+          },
+          "D_quality": {
+            "f1_macro": 0.4521791533257673,
+            "f1_weighted": 0.6178297677810864,
+            "loss": 0.4808378772320181,
+            "brier": 0.15146320686584303
+          },
+          "packed_bytes": 35424,
+          "trees": 100,
+          "sha256": "8d36d1697a4258eb1e3f80170c5ab9428c68bedf2bd7cdf9878a4a5a7efcee4a"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.4652258312272744,
+            "f1_weighted": 0.6387867685649886,
+            "loss": 0.4864635497465389,
+            "brier": 0.15168914449025359
+          },
+          "D_quality": {
+            "f1_macro": 0.44887156241025983,
+            "f1_weighted": 0.6187576801082135,
+            "loss": 0.4789110808090472,
+            "brier": 0.15057788842146616
+          },
+          "packed_bytes": 40364,
+          "trees": 100,
+          "sha256": "640a22ca0d5c58cae8bd74a70236f7a3ef09cb8621b5fc0959bfdc9285de69b1"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.4653241139417115,
+            "f1_weighted": 0.6361947769576446,
+            "loss": 0.4868431039625554,
+            "brier": 0.1538983057616913
+          },
+          "D_quality": {
+            "f1_macro": 0.4586733129946595,
+            "f1_weighted": 0.6198017617877376,
+            "loss": 0.4805010251778888,
+            "brier": 0.1528392219204228
+          },
+          "packed_bytes": 20676,
+          "trees": 100,
+          "sha256": "1fd904c8c9bb7938b61aae8ea57ca5dccb83b74a49fb82f82c4d6207b748ae51"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.49011400953619255,
+            "f1_weighted": 0.6575267080664882,
+            "loss": 0.4331871821221773,
+            "brier": 0.1388097938959231
+          },
+          "D_quality": {
+            "f1_macro": 0.4730599342117866,
+            "f1_weighted": 0.6373363091509802,
+            "loss": 0.44033152217906996,
+            "brier": 0.14116595624039638
+          },
+          "packed_bytes": 82552,
+          "trees": 150,
+          "sha256": "24ecf0df00ffe4783a256f861839e0a355c91ec15fe389c6d80791570e35b5e4"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.49448961904398747,
+            "f1_weighted": 0.6579291133575813,
+            "loss": 0.4321647728596855,
+            "brier": 0.1382879000812903
+          },
+          "D_quality": {
+            "f1_macro": 0.4819591628791586,
+            "f1_weighted": 0.641046549026939,
+            "loss": 0.4412538282700525,
+            "brier": 0.14147705042853229
+          },
+          "packed_bytes": 85072,
+          "trees": 150,
+          "sha256": "2bc2e4a396d7e4f00f6eb2fbaefa870ffc0ce6712b0b5381c9074f2a9f73bd91"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.4809040657654249,
+            "f1_weighted": 0.6476897138246325,
+            "loss": 0.48393135540739257,
+            "brier": 0.15054068465622458
+          },
+          "D_quality": {
+            "f1_macro": 0.46880266665649944,
+            "f1_weighted": 0.6314945189343314,
+            "loss": 0.49076343709137427,
+            "brier": 0.15307429785869886
+          },
+          "packed_bytes": 85072,
+          "trees": 150,
+          "sha256": "4301d412c508d0951fcdbbc8d39731afa5972ffdeeb2cbbf4d34c468ec6316b7"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.4695050369349732,
+            "f1_weighted": 0.6369888874818109,
+            "loss": 0.48424410961871184,
+            "brier": 0.15180622023309612
+          },
+          "D_quality": {
+            "f1_macro": 0.4633850034476818,
+            "f1_weighted": 0.6223947536515057,
+            "loss": 0.4855243430339055,
+            "brier": 0.15236021837312974
+          },
+          "packed_bytes": 52452,
+          "trees": 150,
+          "sha256": "95aaa8f3c22357952fa72e8a21dbd34735c974d24e10a79f147e837f3555fb65"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.4722815308917934,
+            "f1_weighted": 0.6425049030593252,
+            "loss": 0.4789384086910182,
+            "brier": 0.14975957646132612
+          },
+          "D_quality": {
+            "f1_macro": 0.46271586176201057,
+            "f1_weighted": 0.6241795767659829,
+            "loss": 0.483775701149306,
+            "brier": 0.15154763965487206
+          },
+          "packed_bytes": 59812,
+          "trees": 150,
+          "sha256": "43d948fe26120ff89dc88b3a155eb2f903cbd038340434572d052c3bc69a53ee"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.47014988172665156,
+            "f1_weighted": 0.6391738744485669,
+            "loss": 0.48871836199335844,
+            "brier": 0.15326642568654145
+          },
+          "D_quality": {
+            "f1_macro": 0.4631955980980851,
+            "f1_weighted": 0.6266036126891751,
+            "loss": 0.4885353757838758,
+            "brier": 0.15391954021294874
+          },
+          "packed_bytes": 30724,
+          "trees": 150,
+          "sha256": "23f1736749bb4319b036c73313a9e5b9309298cb3defa2ca67e945a759ca3641"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.49194902279937314,
+            "f1_weighted": 0.6565075059293246,
+            "loss": 0.43346846409643286,
+            "brier": 0.13887815015687585
+          },
+          "D_quality": {
+            "f1_macro": 0.4782817607249091,
+            "f1_weighted": 0.6381281638085335,
+            "loss": 0.43949604481202664,
+            "brier": 0.14092773471879289
+          },
+          "packed_bytes": 109624,
+          "trees": 200,
+          "sha256": "a56a4a8f76733274644ec6121c6cf7e933d551de0c81d767519329392e0b3255"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.49194902279937314,
+            "f1_weighted": 0.6565075059293246,
+            "loss": 0.43346846409643286,
+            "brier": 0.13887815015687585
+          },
+          "D_quality": {
+            "f1_macro": 0.4782817607249091,
+            "f1_weighted": 0.6381281638085335,
+            "loss": 0.43949604481202664,
+            "brier": 0.14092773471879289
+          },
+          "packed_bytes": 109624,
+          "trees": 200,
+          "sha256": "a56a4a8f76733274644ec6121c6cf7e933d551de0c81d767519329392e0b3255"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.48001921314497864,
+            "f1_weighted": 0.6450874131283577,
+            "loss": 0.48292045636171915,
+            "brier": 0.15093334528495667
+          },
+          "D_quality": {
+            "f1_macro": 0.4722913421936038,
+            "f1_weighted": 0.6317254239000077,
+            "loss": 0.48500839914044463,
+            "brier": 0.15176784081529793
+          },
+          "packed_bytes": 109624,
+          "trees": 200,
+          "sha256": "37b9b4a9e68c44bb51012ac62456e9265ede5949a8f1abef6daa4cf7983667c2"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.4703901021421048,
+            "f1_weighted": 0.6366139980941038,
+            "loss": 0.4820593054490885,
+            "brier": 0.15175342791410232
+          },
+          "D_quality": {
+            "f1_macro": 0.46058743885246695,
+            "f1_weighted": 0.6177175207358605,
+            "loss": 0.48133935125416577,
+            "brier": 0.15131564810174306
+          },
+          "packed_bytes": 67456,
+          "trees": 200,
+          "sha256": "47ef0f172a83ddbf71558e95f17157d8ad9133dad244bb74886b256356eb1f5e"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.4658478947846563,
+            "f1_weighted": 0.6402735560986199,
+            "loss": 0.4779518587051138,
+            "brier": 0.15010742074777234
+          },
+          "D_quality": {
+            "f1_macro": 0.46706204535690693,
+            "f1_weighted": 0.6295389729734528,
+            "loss": 0.4791546002431836,
+            "brier": 0.15084064237097086
+          },
+          "packed_bytes": 76940,
+          "trees": 200,
+          "sha256": "901322c3858bdf3126e749e9cb2b389eb3540441e8301ab08f9b1e2b7c7b2f84"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.46514228893212134,
+            "f1_weighted": 0.6355452073973201,
+            "loss": 0.4908816027255012,
+            "brier": 0.15370517899074634
+          },
+          "D_quality": {
+            "f1_macro": 0.4586325200071947,
+            "f1_weighted": 0.6221415025132978,
+            "loss": 0.4892067743006989,
+            "brier": 0.15367742778256777
+          },
+          "packed_bytes": 40772,
+          "trees": 200,
+          "sha256": "9946a1a14862a119d4f24dcdf742c8922fcb1646e36a76d585a471fff14f2b41"
+        }
+      ]
+    },
+    {
+      "case": "birds_71304",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.2559404798682666,
+            "f1_weighted": 0.4006777251079768,
+            "loss": 0.12659978518168702,
+            "brier": 0.03432460674561208
+          },
+          "D_quality": {
+            "f1_macro": 0.29757879547353233,
+            "f1_weighted": 0.4553922340285977,
+            "loss": 0.1256371488937001,
+            "brier": 0.03450324277494872
+          },
+          "packed_bytes": 36196,
+          "trees": 50,
+          "sha256": "f7a54334aa1dc07488616326aca9a04a4f4369c0725c0d67522bc56c737d331a"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.19965622126202665,
+            "f1_weighted": 0.34980855136049144,
+            "loss": 0.1283010722915108,
+            "brier": 0.034798908301908064
+          },
+          "D_quality": {
+            "f1_macro": 0.29245890875772035,
+            "f1_weighted": 0.4528100443056454,
+            "loss": 0.12731525206113917,
+            "brier": 0.03490099843592739
+          },
+          "packed_bytes": 36472,
+          "trees": 50,
+          "sha256": "dce0919fc7989abff3b18e897c42963fbe1f9c9610dcf2be0c8b39c58f395fe1"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.3625027091009119,
+            "f1_weighted": 0.4908533159883001,
+            "loss": 0.13830210173438703,
+            "brier": 0.0332450502163452
+          },
+          "D_quality": {
+            "f1_macro": 0.34645857769126465,
+            "f1_weighted": 0.5094679984153668,
+            "loss": 0.13536829458119812,
+            "brier": 0.03264052764661574
+          },
+          "packed_bytes": 36472,
+          "trees": 50,
+          "sha256": "c71703ae25d3d2c7eb8f1fbeb2258961c9c65537b3ea8eab6883e8fe72d3997f"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.2583859978275896,
+            "f1_weighted": 0.3945444990269045,
+            "loss": 0.15038519817263105,
+            "brier": 0.03583407876786227
+          },
+          "D_quality": {
+            "f1_macro": 0.234725152802956,
+            "f1_weighted": 0.3739287853121845,
+            "loss": 0.1479140265369254,
+            "brier": 0.036710755816171316
+          },
+          "packed_bytes": 23048,
+          "trees": 50,
+          "sha256": "a29e787d3d716e689f31b6601afb8bf234611d120ed7b16967f02b802833d746"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.29701584175268386,
+            "f1_weighted": 0.42774780064856405,
+            "loss": 0.14556010132331346,
+            "brier": 0.035314366322313065
+          },
+          "D_quality": {
+            "f1_macro": 0.28852889800258225,
+            "f1_weighted": 0.4163019808474354,
+            "loss": 0.1446773946254652,
+            "brier": 0.035981268699442966
+          },
+          "packed_bytes": 25820,
+          "trees": 50,
+          "sha256": "f4a4e34aa80492996d20bc035a24230f13a47047dfe8e1cf5f50f76e286baa91"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.31051416381480496,
+            "f1_weighted": 0.4165941163972869,
+            "loss": 0.15720054107016784,
+            "brier": 0.036030884532742134
+          },
+          "D_quality": {
+            "f1_macro": 0.3621422093558316,
+            "f1_weighted": 0.4628809485226597,
+            "loss": 0.14446479208631297,
+            "brier": 0.03635933548981843
+          },
+          "packed_bytes": 13596,
+          "trees": 50,
+          "sha256": "70544dab0eddf0e6c04d5b1382b65bf0de37db2bff2882a427a2662a6252678a"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.3113692874403036,
+            "f1_weighted": 0.491250019032826,
+            "loss": 0.12048866042548279,
+            "brier": 0.03277307426421968
+          },
+          "D_quality": {
+            "f1_macro": 0.3568187368187368,
+            "f1_weighted": 0.5304695102876921,
+            "loss": 0.11873033725553722,
+            "brier": 0.03264939449178708
+          },
+          "packed_bytes": 70144,
+          "trees": 100,
+          "sha256": "30ae3f1077604fc9c25efe601689b9fadf881bb76148f5eee144a7d04a1fd2ca"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.29799718594732444,
+            "f1_weighted": 0.456240792821749,
+            "loss": 0.12046834457846085,
+            "brier": 0.03269167308007637
+          },
+          "D_quality": {
+            "f1_macro": 0.34173586458815663,
+            "f1_weighted": 0.5131811516928819,
+            "loss": 0.11882729318291387,
+            "brier": 0.03271394213008945
+          },
+          "packed_bytes": 72628,
+          "trees": 100,
+          "sha256": "99c0ec7d06b440bdb4cae0b4914105772c84c3b10844ae8049e2e28926dc2fea"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.3733783669446101,
+            "f1_weighted": 0.5171246481867697,
+            "loss": 0.12954467443345824,
+            "brier": 0.03209021273908939
+          },
+          "D_quality": {
+            "f1_macro": 0.37912629076063975,
+            "f1_weighted": 0.5522970596654807,
+            "loss": 0.12738604766485026,
+            "brier": 0.0316705196446184
+          },
+          "packed_bytes": 72628,
+          "trees": 100,
+          "sha256": "928b4d520284ece0e07b320ec25318271848738ee82d1b4ea721f701ab6e983d"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.2725023342670401,
+            "f1_weighted": 0.39893835396754124,
+            "loss": 0.1437621506427852,
+            "brier": 0.03546869093936604
+          },
+          "D_quality": {
+            "f1_macro": 0.21406899601946042,
+            "f1_weighted": 0.36149350649350653,
+            "loss": 0.14297218049014992,
+            "brier": 0.03651301061551217
+          },
+          "packed_bytes": 45056,
+          "trees": 100,
+          "sha256": "ef5e1819ad48c597bebead99d0a4c982408561ef7de0eb3c8ceb02becb0c7684"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.3040072880164067,
+            "f1_weighted": 0.4485133561915642,
+            "loss": 0.1377943769435947,
+            "brier": 0.03467874496968158
+          },
+          "D_quality": {
+            "f1_macro": 0.30551334630282,
+            "f1_weighted": 0.4395315290769837,
+            "loss": 0.1363875222261052,
+            "brier": 0.03495764287518774
+          },
+          "packed_bytes": 50600,
+          "trees": 100,
+          "sha256": "898b2ba08706c692a588e8879c5cd84922b06b38d235d432e9022483e983be39"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.3270893607061782,
+            "f1_weighted": 0.44991115050438335,
+            "loss": 0.15652154411291036,
+            "brier": 0.03719777294552852
+          },
+          "D_quality": {
+            "f1_macro": 0.32463209305314566,
+            "f1_weighted": 0.46237318237318237,
+            "loss": 0.1438125842277332,
+            "brier": 0.03526585462297936
+          },
+          "packed_bytes": 26204,
+          "trees": 100,
+          "sha256": "62c80a61c0a639164d2005934d9fd141dddf5a2a0c062a313afa5c8cab8bc341"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.3771417625536619,
+            "f1_weighted": 0.516953714655341,
+            "loss": 0.1186935655460965,
+            "brier": 0.03193016741484427
+          },
+          "D_quality": {
+            "f1_macro": 0.33066043004123497,
+            "f1_weighted": 0.498072848126324,
+            "loss": 0.117052880489845,
+            "brier": 0.031690096427493694
+          },
+          "packed_bytes": 103816,
+          "trees": 150,
+          "sha256": "bf531c752ff9714fa178c842c3c073f9c79117da3c18dcfb7fd32ad70717963b"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.34652066856691693,
+            "f1_weighted": 0.49054847540357693,
+            "loss": 0.11925282941200221,
+            "brier": 0.03194954021162106
+          },
+          "D_quality": {
+            "f1_macro": 0.34966014106473614,
+            "f1_weighted": 0.5249394413635899,
+            "loss": 0.11725416939277067,
+            "brier": 0.031831344699191674
+          },
+          "packed_bytes": 107864,
+          "trees": 150,
+          "sha256": "6e93e00fe38a1173e3adc3b0e6e9b40334560d86a563db2a0a58406781ae3f36"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.33311572705413345,
+            "f1_weighted": 0.48689498655584734,
+            "loss": 0.1268569196234726,
+            "brier": 0.0316454995017465
+          },
+          "D_quality": {
+            "f1_macro": 0.35042890832364515,
+            "f1_weighted": 0.522016367470913,
+            "loss": 0.12542106035444908,
+            "brier": 0.03126266542691298
+          },
+          "packed_bytes": 107864,
+          "trees": 150,
+          "sha256": "0c7cffc411d83d406e05b927e18cd87189da2b8ae0712d26a0234e233be4686f"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.3108636633404435,
+            "f1_weighted": 0.45844041953157355,
+            "loss": 0.14193600976126372,
+            "brier": 0.035435621577600225
+          },
+          "D_quality": {
+            "f1_macro": 0.2257360965035725,
+            "f1_weighted": 0.3899353512609915,
+            "loss": 0.14196191043948617,
+            "brier": 0.03664484736591315
+          },
+          "packed_bytes": 66504,
+          "trees": 150,
+          "sha256": "6959719a760142750e3e82b01da31d252d7e7b44b2eafc833aad46b922d048e3"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.31816752807057513,
+            "f1_weighted": 0.4505210951273627,
+            "loss": 0.13532469149174176,
+            "brier": 0.03443891883766159
+          },
+          "D_quality": {
+            "f1_macro": 0.2684708652200912,
+            "f1_weighted": 0.4288968755546295,
+            "loss": 0.1342899759127309,
+            "brier": 0.03485762119086492
+          },
+          "packed_bytes": 74740,
+          "trees": 150,
+          "sha256": "f71aff08fe7a75decd9bd580bcc9988f5d8f474277062fa0772cdb50d9dd02b1"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.260965082389231,
+            "f1_weighted": 0.36364520676150675,
+            "loss": 0.1508950935723046,
+            "brier": 0.036920553556372804
+          },
+          "D_quality": {
+            "f1_macro": 0.3477032182199258,
+            "f1_weighted": 0.4738731468502813,
+            "loss": 0.1380249366589622,
+            "brier": 0.034072083688555584
+          },
+          "packed_bytes": 38812,
+          "trees": 150,
+          "sha256": "896af1da57d638832de2d05e454c3a003f7618365b27518d947a481e321ca6a4"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.30217340188824626,
+            "f1_weighted": 0.4740565797888606,
+            "loss": 0.11977026949353989,
+            "brier": 0.03174190498653882
+          },
+          "D_quality": {
+            "f1_macro": 0.31723905609354525,
+            "f1_weighted": 0.4737415258538253,
+            "loss": 0.11825785128914353,
+            "brier": 0.03154538508565768
+          },
+          "packed_bytes": 138316,
+          "trees": 200,
+          "sha256": "a0a41c74790db35c9a0529e368a55e774533c2dcfd44db7008d994862abea719"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.30217340188824626,
+            "f1_weighted": 0.4740565797888606,
+            "loss": 0.11977026949353989,
+            "brier": 0.03174190498653882
+          },
+          "D_quality": {
+            "f1_macro": 0.31723905609354525,
+            "f1_weighted": 0.4737415258538253,
+            "loss": 0.11825785128914353,
+            "brier": 0.03154538508565768
+          },
+          "packed_bytes": 138316,
+          "trees": 200,
+          "sha256": "a0a41c74790db35c9a0529e368a55e774533c2dcfd44db7008d994862abea719"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.3339091996986734,
+            "f1_weighted": 0.4831497205543007,
+            "loss": 0.12543316476377162,
+            "brier": 0.031584007464852695
+          },
+          "D_quality": {
+            "f1_macro": 0.3585440874914559,
+            "f1_weighted": 0.5088593224956862,
+            "loss": 0.1240591556799128,
+            "brier": 0.03135607519146874
+          },
+          "packed_bytes": 138316,
+          "trees": 200,
+          "sha256": "b2f40fb7160bc014fad3bda00a8b091f724df4395f49f16e036c63ca2eaf894d"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.29782907151328203,
+            "f1_weighted": 0.44167655923381116,
+            "loss": 0.14097475138796572,
+            "brier": 0.035534860610323155
+          },
+          "D_quality": {
+            "f1_macro": 0.23394043086889754,
+            "f1_weighted": 0.39372323004887033,
+            "loss": 0.14045133494305004,
+            "brier": 0.03674874249755533
+          },
+          "packed_bytes": 85040,
+          "trees": 200,
+          "sha256": "31a2bf8330285651b8459169a8fc3ab29c9d59538793f014d579d0a6e985bedc"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.31024187916202434,
+            "f1_weighted": 0.44183725616339464,
+            "loss": 0.1349834090757747,
+            "brier": 0.03443375042124091
+          },
+          "D_quality": {
+            "f1_macro": 0.2770874754700953,
+            "f1_weighted": 0.43841635294244546,
+            "loss": 0.13362946035679846,
+            "brier": 0.035076060759273824
+          },
+          "packed_bytes": 95608,
+          "trees": 200,
+          "sha256": "5eda851dcaaf22aaa81e6b3072b0077302a79319d22b11cb7f689e28a9981007"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.3451761811742567,
+            "f1_weighted": 0.47666742676756213,
+            "loss": 0.14728030457631394,
+            "brier": 0.03656498629039837
+          },
+          "D_quality": {
+            "f1_macro": 0.346040566474003,
+            "f1_weighted": 0.493105293399411,
+            "loss": 0.1351627732949949,
+            "brier": 0.0340933567904225
+          },
+          "packed_bytes": 51420,
+          "trees": 200,
+          "sha256": "54bb2638e86a4601950d72bbbb274314537df1650554ca688e1220fb617ee663"
+        }
+      ]
+    },
+    {
+      "case": "medical_71404",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.1837980162775616,
+            "f1_weighted": 0.6247047217754877,
+            "loss": 0.05605898966902468,
+            "brier": 0.012346776328735097
+          },
+          "D_quality": {
+            "f1_macro": 0.15832762734723518,
+            "f1_weighted": 0.5178034547152194,
+            "loss": 0.07964776611152265,
+            "brier": 0.014718376195832586
+          },
+          "packed_bytes": 64132,
+          "trees": 50,
+          "sha256": "f2f468d17ebf66d8f862353d50fe41678685f9e89a30a3883d99d1c07f10e0d7"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.1678104529045475,
+            "f1_weighted": 0.6027291002198346,
+            "loss": 0.05672215225654003,
+            "brier": 0.01253016340169762
+          },
+          "D_quality": {
+            "f1_macro": 0.15213403880070547,
+            "f1_weighted": 0.4983531746031746,
+            "loss": 0.08035900589534872,
+            "brier": 0.014949188983448759
+          },
+          "packed_bytes": 65308,
+          "trees": 50,
+          "sha256": "bed757c2626d09712395a45818b7303eba31ea8fdff5b331ed207cd885155714"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.21329990806040683,
+            "f1_weighted": 0.6501029460744654,
+            "loss": 0.05215704806530909,
+            "brier": 0.011425903567346234
+          },
+          "D_quality": {
+            "f1_macro": 0.20829124579124578,
+            "f1_weighted": 0.5874857954545454,
+            "loss": 0.08096459852492605,
+            "brier": 0.014942098776412088
+          },
+          "packed_bytes": 65308,
+          "trees": 50,
+          "sha256": "2a000cf856fc7cc060cd1835fd9b2e26c9b2ca27d0db31310025d09058d05dbf"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.18649815550676838,
+            "f1_weighted": 0.6209061095234755,
+            "loss": 0.05377960203401261,
+            "brier": 0.012028219797032768
+          },
+          "D_quality": {
+            "f1_macro": 0.2017656725990059,
+            "f1_weighted": 0.5569500811688312,
+            "loss": 0.08009463228524406,
+            "brier": 0.014487893485034965
+          },
+          "packed_bytes": 40320,
+          "trees": 50,
+          "sha256": "d0ce8b37a803f7de69c84e5794771faf598a4da876e3b28f27c37d2a76b3126c"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.2043699968746233,
+            "f1_weighted": 0.6455481946134414,
+            "loss": 0.05263904007429807,
+            "brier": 0.011537992463056168
+          },
+          "D_quality": {
+            "f1_macro": 0.18076987826987828,
+            "f1_weighted": 0.5481588723776223,
+            "loss": 0.07983353348810641,
+            "brier": 0.014632797154449808
+          },
+          "packed_bytes": 44024,
+          "trees": 50,
+          "sha256": "e1ae9609311fc5842b5a815710a7fa045ff84c413fdfeadceb0846e94cda3fed"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.2085949004485926,
+            "f1_weighted": 0.640980614292661,
+            "loss": 0.05309606496891866,
+            "brier": 0.011676140438617092
+          },
+          "D_quality": {
+            "f1_macro": 0.18600032583903553,
+            "f1_weighted": 0.5769061583577713,
+            "loss": 0.0807759578834818,
+            "brier": 0.014608301757697688
+          },
+          "packed_bytes": 28416,
+          "trees": 50,
+          "sha256": "b63e8ae74a4ee9ffcb04ee6ef20ddcc8a675bec655138bec9d96b3ff1b072b26"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.18924074216046086,
+            "f1_weighted": 0.6275718677850913,
+            "loss": 0.051589930948270246,
+            "brier": 0.011454536633416485
+          },
+          "D_quality": {
+            "f1_macro": 0.17940676607343273,
+            "f1_weighted": 0.5361688311688312,
+            "loss": 0.07597804424348119,
+            "brier": 0.014136685066674155
+          },
+          "packed_bytes": 123716,
+          "trees": 100,
+          "sha256": "61eba3a20049cd96b4c21375125d034975a582616bd46964443840f00bcaa7c7"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.18121893706496478,
+            "f1_weighted": 0.6228850907767117,
+            "loss": 0.05229920894586361,
+            "brier": 0.01161550311128752
+          },
+          "D_quality": {
+            "f1_macro": 0.17973808326749502,
+            "f1_weighted": 0.5450290885585003,
+            "loss": 0.0761253062319863,
+            "brier": 0.014107129664833016
+          },
+          "packed_bytes": 127636,
+          "trees": 100,
+          "sha256": "b8419c559e1a1330bc12b562f51c69aaa8ed20f883a9f20f57b83e305c49ef66"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.2090450311097154,
+            "f1_weighted": 0.649517754775287,
+            "loss": 0.05286149314108576,
+            "brier": 0.011499765228524444
+          },
+          "D_quality": {
+            "f1_macro": 0.18137395255816308,
+            "f1_weighted": 0.5601455698906357,
+            "loss": 0.08163446549161968,
+            "brier": 0.015038054676821212
+          },
+          "packed_bytes": 127636,
+          "trees": 100,
+          "sha256": "b1b6b2d79e20001ad2e5f1d81cef22b7a369de8967c1fd562cba65692a200f88"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.1899524042465714,
+            "f1_weighted": 0.6298899501403612,
+            "loss": 0.05422091841499921,
+            "brier": 0.012006365854028183
+          },
+          "D_quality": {
+            "f1_macro": 0.17759527509527512,
+            "f1_weighted": 0.5410160152347652,
+            "loss": 0.08052557107430315,
+            "brier": 0.01463807322615984
+          },
+          "packed_bytes": 74664,
+          "trees": 100,
+          "sha256": "3f2dcc3b5752a716ff8ce0e61b8eac22e7e5fc07e9f05fd3e99e85d09baaef2d"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.19807899432517684,
+            "f1_weighted": 0.6430611139219158,
+            "loss": 0.053142781382271756,
+            "brier": 0.011601362837295168
+          },
+          "D_quality": {
+            "f1_macro": 0.17943482443482445,
+            "f1_weighted": 0.5445616883116883,
+            "loss": 0.08037260556059976,
+            "brier": 0.01470039578574241
+          },
+          "packed_bytes": 81936,
+          "trees": 100,
+          "sha256": "95ec9f6eef6e42f845c20a5091158f91f70cfe12a5e517c7cbaf66c9943f89a2"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.20159916957099083,
+            "f1_weighted": 0.6291533123738543,
+            "loss": 0.05366987647470177,
+            "brier": 0.011584645972179616
+          },
+          "D_quality": {
+            "f1_macro": 0.20212842712842713,
+            "f1_weighted": 0.5667207792207793,
+            "loss": 0.08042549641225033,
+            "brier": 0.014359851579805778
+          },
+          "packed_bytes": 52256,
+          "trees": 100,
+          "sha256": "7089b2403010825b20118841648642e19c977050ea6acf726d0a40669bb0d074"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.19462594569652789,
+            "f1_weighted": 0.6314577654005595,
+            "loss": 0.05022839473667507,
+            "brier": 0.011201255989995442
+          },
+          "D_quality": {
+            "f1_macro": 0.17940676607343273,
+            "f1_weighted": 0.5361688311688312,
+            "loss": 0.07563604943718007,
+            "brier": 0.014108205784776276
+          },
+          "packed_bytes": 178400,
+          "trees": 150,
+          "sha256": "25a1c2c5baf6eddb41ac27fa3ad755b7c0b5f17b1ffa124d8da99fe49350490f"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.19380108121941902,
+            "f1_weighted": 0.6333814967057595,
+            "loss": 0.05064604346746137,
+            "brier": 0.011273704743093768
+          },
+          "D_quality": {
+            "f1_macro": 0.17623216289882956,
+            "f1_weighted": 0.529025974025974,
+            "loss": 0.07577844924808277,
+            "brier": 0.014107829836812087
+          },
+          "packed_bytes": 182908,
+          "trees": 150,
+          "sha256": "efd5c5044f911b1f7db5a55ea02649258e48ef9bae86afcd97f08f6350c51d32"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.21044848656663445,
+            "f1_weighted": 0.659785221731524,
+            "loss": 0.05226161655297378,
+            "brier": 0.011400126937669673
+          },
+          "D_quality": {
+            "f1_macro": 0.17708754208754207,
+            "f1_weighted": 0.5142045454545454,
+            "loss": 0.08146849129115687,
+            "brier": 0.015072680778227232
+          },
+          "packed_bytes": 182908,
+          "trees": 150,
+          "sha256": "04fd5c0f4c61713b2211a3fa921d5b8440ea6d426f7ceaf5321dce59c56cdf2a"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.18908448496432273,
+            "f1_weighted": 0.6288795217403459,
+            "loss": 0.053802205701084564,
+            "brier": 0.011933403127420476
+          },
+          "D_quality": {
+            "f1_macro": 0.18042726111691632,
+            "f1_weighted": 0.5330084247648903,
+            "loss": 0.0799672079357095,
+            "brier": 0.014568650835207225
+          },
+          "packed_bytes": 105120,
+          "trees": 150,
+          "sha256": "e4f4f4bc8281ad223200ae56eb7305cdcaebcfec5af9b07ab0f9652c97ae8c01"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.19766562035320484,
+            "f1_weighted": 0.6421491597450707,
+            "loss": 0.05254017002726215,
+            "brier": 0.011511601311767745
+          },
+          "D_quality": {
+            "f1_macro": 0.18080758566052685,
+            "f1_weighted": 0.5389747660427807,
+            "loss": 0.07963297620335862,
+            "brier": 0.014632492113392162
+          },
+          "packed_bytes": 115544,
+          "trees": 150,
+          "sha256": "f7feedcd25e661c9bf9f2721da58d807a021c08890a7e517d79b5dc0c3df6255"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.19822062085483255,
+            "f1_weighted": 0.6371955299934028,
+            "loss": 0.05284243502237212,
+            "brier": 0.01152852249013452
+          },
+          "D_quality": {
+            "f1_macro": 0.18282572266443234,
+            "f1_weighted": 0.5697633012149141,
+            "loss": 0.07995252658945891,
+            "brier": 0.014164018070216472
+          },
+          "packed_bytes": 76096,
+          "trees": 150,
+          "sha256": "f388d8d9afd78bbbb26eccb884f7d3a524976438c5977432928b45856d9f6bef"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.18902847650623708,
+            "f1_weighted": 0.6312163051394154,
+            "loss": 0.04994996034104358,
+            "brier": 0.01109325401048131
+          },
+          "D_quality": {
+            "f1_macro": 0.17940676607343273,
+            "f1_weighted": 0.5361688311688312,
+            "loss": 0.0754134611779995,
+            "brier": 0.014059479268487666
+          },
+          "packed_bytes": 231908,
+          "trees": 200,
+          "sha256": "a1ace1895dc1ddd9917af286fc813cf2e943b39cce1eec77526227b65d388a17"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.18902847650623708,
+            "f1_weighted": 0.6312163051394154,
+            "loss": 0.04994996034104358,
+            "brier": 0.01109325401048131
+          },
+          "D_quality": {
+            "f1_macro": 0.17940676607343273,
+            "f1_weighted": 0.5361688311688312,
+            "loss": 0.0754134611779995,
+            "brier": 0.014059479268487666
+          },
+          "packed_bytes": 231908,
+          "trees": 200,
+          "sha256": "a1ace1895dc1ddd9917af286fc813cf2e943b39cce1eec77526227b65d388a17"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.20900563235959016,
+            "f1_weighted": 0.657029817299518,
+            "loss": 0.0518654891763406,
+            "brier": 0.011319161543635195
+          },
+          "D_quality": {
+            "f1_macro": 0.18042726111691632,
+            "f1_weighted": 0.5330084247648903,
+            "loss": 0.08087092434472154,
+            "brier": 0.014967973729479968
+          },
+          "packed_bytes": 231908,
+          "trees": 200,
+          "sha256": "1514b815cd1b0dd85a4fdbd7def2c04b9d0d35fa14381df2c6a5467385f6ff16"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.18802211457989548,
+            "f1_weighted": 0.6360981822275662,
+            "loss": 0.05329660935659739,
+            "brier": 0.011807929820951383
+          },
+          "D_quality": {
+            "f1_macro": 0.18042726111691632,
+            "f1_weighted": 0.5330084247648903,
+            "loss": 0.0795554536298122,
+            "brier": 0.014443031087437656
+          },
+          "packed_bytes": 132120,
+          "trees": 200,
+          "sha256": "9097a6b0c5fd260508f022df306b5d1e4d87b9d7cca03c8a235b1bcc7c5d5d62"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.19698565586923472,
+            "f1_weighted": 0.6404753164376552,
+            "loss": 0.052149621857403204,
+            "brier": 0.011414335696586371
+          },
+          "D_quality": {
+            "f1_macro": 0.1773552047081459,
+            "f1_weighted": 0.5294881588999236,
+            "loss": 0.0793472240515195,
+            "brier": 0.014543302119381346
+          },
+          "packed_bytes": 145344,
+          "trees": 200,
+          "sha256": "c4fd8618b232db2f98e554c0b121ca5208b3c22919886891d3574bde213bdb11"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.1992140967716815,
+            "f1_weighted": 0.636011621936239,
+            "loss": 0.052722019586808895,
+            "brier": 0.011526753949492567
+          },
+          "D_quality": {
+            "f1_macro": 0.18165343915343912,
+            "f1_weighted": 0.5579241071428571,
+            "loss": 0.07938008168385732,
+            "brier": 0.014110239816982593
+          },
+          "packed_bytes": 99936,
+          "trees": 200,
+          "sha256": "26e6cb40a31e29d6f19e129d42b02258cfdd6c3d1ec9910dae960ddc9492d583"
+        }
+      ]
+    },
+    {
+      "case": "genbase_71504",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.3978004684526424,
+            "f1_weighted": 0.6141779924330494,
+            "loss": 0.08783989379499559,
+            "brier": 0.020193020374879238
+          },
+          "D_quality": {
+            "f1_macro": 0.3851851851851852,
+            "f1_weighted": 0.8736,
+            "loss": 0.05315779974549159,
+            "brier": 0.009023547685675459
+          },
+          "packed_bytes": 27072,
+          "trees": 50,
+          "sha256": "e61565f5a26aeaed5fad0fab3af2c5773433d302e80d3b7689af8edc32891ffe"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.3978004684526424,
+            "f1_weighted": 0.6141779924330494,
+            "loss": 0.08898633314784309,
+            "brier": 0.020347965746166114
+          },
+          "D_quality": {
+            "f1_macro": 0.3851851851851852,
+            "f1_weighted": 0.8736,
+            "loss": 0.05329420550500857,
+            "brier": 0.009115716039398881
+          },
+          "packed_bytes": 26948,
+          "trees": 50,
+          "sha256": "7b03ab0b6b18606266ffb222e5e1529fa962785453599c79184c7f5549ab350f"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.04591651108359022,
+            "brier": 0.010869471582388114
+          },
+          "D_quality": {
+            "f1_macro": 0.45925925925925926,
+            "f1_weighted": 0.8896000000000001,
+            "loss": 0.032481057872451674,
+            "brier": 0.006159276125093644
+          },
+          "packed_bytes": 26948,
+          "trees": 50,
+          "sha256": "627ec646ea9639ac13ce45db065263470ae922a891c92deb190071426ed8959a"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.048546542815203875,
+            "brier": 0.011858046540482165
+          },
+          "D_quality": {
+            "f1_macro": 0.45925925925925926,
+            "f1_weighted": 0.8896000000000001,
+            "loss": 0.03244484545936437,
+            "brier": 0.005996787266050307
+          },
+          "packed_bytes": 17280,
+          "trees": 50,
+          "sha256": "59be86f4ea95f02e67b34dee7f6c4ca232034378c5873cd66224761cbe5da2dd"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.048911537842631164,
+            "brier": 0.012004950180100662
+          },
+          "D_quality": {
+            "f1_macro": 0.45925925925925926,
+            "f1_weighted": 0.8896000000000001,
+            "loss": 0.03143047183813758,
+            "brier": 0.005689263953039517
+          },
+          "packed_bytes": 19072,
+          "trees": 50,
+          "sha256": "e4fcb368c2625abed0e69efebe77e83300e61331532a70c6b432158f6d0ed810"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.42434367832918557,
+            "f1_weighted": 0.6221102562476661,
+            "loss": 0.04873504960733306,
+            "brier": 0.012006137968830002
+          },
+          "D_quality": {
+            "f1_macro": 0.45925925925925926,
+            "f1_weighted": 0.8896000000000001,
+            "loss": 0.03156864693000482,
+            "brier": 0.005780139948656209
+          },
+          "packed_bytes": 17868,
+          "trees": 50,
+          "sha256": "8c1e578b468648977567ff023e588c492fdf275a1675c2b83de4506f1afa1df4"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.394714048699556,
+            "f1_weighted": 0.6092760316487357,
+            "loss": 0.07234711599687037,
+            "brier": 0.017979737965917512
+          },
+          "D_quality": {
+            "f1_macro": 0.4222222222222222,
+            "f1_weighted": 0.8816,
+            "loss": 0.03533459902837603,
+            "brier": 0.005514056005957811
+          },
+          "packed_bytes": 53980,
+          "trees": 100,
+          "sha256": "0ece5aeddc1ea26bba0856cfec692e2274e13fac7cde77517468642982f6d86e"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.394714048699556,
+            "f1_weighted": 0.6092760316487357,
+            "loss": 0.07264253972536981,
+            "brier": 0.017981199802138116
+          },
+          "D_quality": {
+            "f1_macro": 0.4222222222222222,
+            "f1_weighted": 0.8816,
+            "loss": 0.03559986363462461,
+            "brier": 0.0055450503749708705
+          },
+          "packed_bytes": 54352,
+          "trees": 100,
+          "sha256": "05fcc89a2224ebb1e36fa96c7377b183065596cbe3a9158f8629540e056f60ed"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.04705561414739938,
+            "brier": 0.011416194293686057
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.030237580751031785,
+            "brier": 0.005623163154989724
+          },
+          "packed_bytes": 54352,
+          "trees": 100,
+          "sha256": "373f027a0bb4d65a4fbb05daa33b54a2220dabedf23a8748da9557ffbec06b1f"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.05077064843133133,
+            "brier": 0.012685288194945632
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.02920669932551702,
+            "brier": 0.0052804099866445575
+          },
+          "packed_bytes": 33192,
+          "trees": 100,
+          "sha256": "85aeafa622c6a439dfc544d10f8a0b0a5596ebf3ff91be904cc2913375ff862b"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.049270562465234244,
+            "brier": 0.012581066611285979
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.027537886436075704,
+            "brier": 0.004857755855566226
+          },
+          "packed_bytes": 36820,
+          "trees": 100,
+          "sha256": "1cae39ea9661a03064bd95745d98cd87724fdb609baf9c45ef30ee3d6b2cf352"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.04894716307725867,
+            "brier": 0.012492995575409074
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.027491672429632068,
+            "brier": 0.0048420715927406195
+          },
+          "packed_bytes": 33932,
+          "trees": 100,
+          "sha256": "728fdf58a28b62d58c04c9531b49ca5090346bd0d20d7af6d179ab986e724cac"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.4132325672180745,
+            "f1_weighted": 0.6146236252316234,
+            "loss": 0.06692054053516569,
+            "brier": 0.017345269644119202
+          },
+          "D_quality": {
+            "f1_macro": 0.4222222222222222,
+            "f1_weighted": 0.8816,
+            "loss": 0.03143707201415746,
+            "brier": 0.005205256831087613
+          },
+          "packed_bytes": 81756,
+          "trees": 150,
+          "sha256": "e0d0421bc56aebb3a633517656258103c31f3d0d2ce62d1eddab7de68986dd32"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.4132325672180745,
+            "f1_weighted": 0.6146236252316234,
+            "loss": 0.06640046751176906,
+            "brier": 0.01725789257314116
+          },
+          "D_quality": {
+            "f1_macro": 0.4222222222222222,
+            "f1_weighted": 0.8816,
+            "loss": 0.0316449251738841,
+            "brier": 0.005241953283842033
+          },
+          "packed_bytes": 82004,
+          "trees": 150,
+          "sha256": "9d0163f1261f5e70228d6927171fc480322ae1c1e4b116cdb199150ad154d721"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.04771005145781254,
+            "brier": 0.011601743926193344
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.030119755314647775,
+            "brier": 0.005600990402003551
+          },
+          "packed_bytes": 82004,
+          "trees": 150,
+          "sha256": "9d43db78f1d99ace2f073b2d8a4462eae3c486c152dd7b78dba8a158309f208f"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.050817142538725914,
+            "brier": 0.012709958235933703
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.028973302778042664,
+            "brier": 0.005216856325882247
+          },
+          "packed_bytes": 49248,
+          "trees": 150,
+          "sha256": "839ed2b53ed2fc5649c441c72eb5e802f66906d6570e523b0187c3b4ad3a8034"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.04950404360565113,
+            "brier": 0.012681551762816311
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.0278497455813394,
+            "brier": 0.004933396533811697
+          },
+          "packed_bytes": 54728,
+          "trees": 150,
+          "sha256": "bb848f51e8c3c3908c27222aea4d49b5fd8f24730f3985543b2f636866548245"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.04858710318459789,
+            "brier": 0.012434346627714329
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.027719442761938957,
+            "brier": 0.00491399690755831
+          },
+          "packed_bytes": 49996,
+          "trees": 150,
+          "sha256": "3d029a0e7d41a3cc9a16c76db2a45c03de2d909421b88b89b00484a1c7e0883f"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.4428621968477041,
+            "f1_weighted": 0.6274578498305539,
+            "loss": 0.0652866344446707,
+            "brier": 0.01719625594628721
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.03003783485703792,
+            "brier": 0.005216047107733345
+          },
+          "packed_bytes": 109656,
+          "trees": 200,
+          "sha256": "6995c665e4d22de5bc39004d4a47cff2f32e7802ce9ba6f8662506026f33568b"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.4428621968477041,
+            "f1_weighted": 0.6274578498305539,
+            "loss": 0.0652866344446707,
+            "brier": 0.01719625594628721
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.03003783485703792,
+            "brier": 0.005216047107733345
+          },
+          "packed_bytes": 109656,
+          "trees": 200,
+          "sha256": "6995c665e4d22de5bc39004d4a47cff2f32e7802ce9ba6f8662506026f33568b"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.04726290348719968,
+            "brier": 0.011430354605625885
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.02984043658441551,
+            "brier": 0.005531638188019471
+          },
+          "packed_bytes": 109656,
+          "trees": 200,
+          "sha256": "7d9300939cca2f93850e91ded0b2ca57acdb932a02bef5f8b2da21f2640dadc6"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.05013550390493351,
+            "brier": 0.012488590282049487
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.028724303256806007,
+            "brier": 0.0051599388173927865
+          },
+          "packed_bytes": 65304,
+          "trees": 200,
+          "sha256": "444fdd7d4429ad957e66434e0b632c6347126c3562a4155163d1b42d64ad3331"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.048609956877605755,
+            "brier": 0.012380647690430461
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.028007385518907177,
+            "brier": 0.004974865818383699
+          },
+          "packed_bytes": 72644,
+          "trees": 200,
+          "sha256": "23c14ee07308b3e0981d309a9e3f8710498a61ee5af45031fd48a257c22c421b"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.4539733079588152,
+            "f1_weighted": 0.6306664059802864,
+            "loss": 0.04766531703775401,
+            "brier": 0.01213808904760075
+          },
+          "D_quality": {
+            "f1_macro": 0.4777777777777778,
+            "f1_weighted": 0.9016000000000001,
+            "loss": 0.02782264192428646,
+            "brier": 0.004940116441518335
+          },
+          "packed_bytes": 66060,
+          "trees": 200,
+          "sha256": "677234d85a8ce73f75ae855fb127ab1fd7c7ff79f72797e3237a6142ec435845"
+        }
+      ]
+    },
+    {
+      "case": "bibtex_71604",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.23917881006485922,
+            "f1_weighted": 0.34815269429203494,
+            "loss": 0.05155628197009464,
+            "brier": 0.011662063456574862
+          },
+          "D_quality": {
+            "f1_macro": 0.1948817930471278,
+            "f1_weighted": 0.3137697476394687,
+            "loss": 0.05069277519277352,
+            "brier": 0.01145496878821802
+          },
+          "packed_bytes": 255624,
+          "trees": 50,
+          "sha256": "e51944481cf373cae5bcfa19a4d459a59a81d8293230eb459937a0d0154e2e6a"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.23649022249695442,
+            "f1_weighted": 0.34327975224640844,
+            "loss": 0.05181943588234048,
+            "brier": 0.011735600896201947
+          },
+          "D_quality": {
+            "f1_macro": 0.19938233991537127,
+            "f1_weighted": 0.3158443223081713,
+            "loss": 0.050882102275641466,
+            "brier": 0.011511702206427582
+          },
+          "packed_bytes": 254972,
+          "trees": 50,
+          "sha256": "e845d9bee41780bdd21f10ba00e7d3ce0d17b6211ba7f00d6a22a847f444effd"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.3256272099884135,
+            "f1_weighted": 0.41817281351780633,
+            "loss": 0.045556005562217956,
+            "brier": 0.010686813376457691
+          },
+          "D_quality": {
+            "f1_macro": 0.31790103957388843,
+            "f1_weighted": 0.41998163120938053,
+            "loss": 0.04412195811062224,
+            "brier": 0.01028923924714252
+          },
+          "packed_bytes": 254972,
+          "trees": 50,
+          "sha256": "9a166d40a0b601797931ba20ee99441560b0f806696de9f00f59738e9883ff52"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.29488665932631214,
+            "f1_weighted": 0.393745785282306,
+            "loss": 0.04750959713690536,
+            "brier": 0.011093835440583451
+          },
+          "D_quality": {
+            "f1_macro": 0.2850445638112793,
+            "f1_weighted": 0.3906123572262933,
+            "loss": 0.04585231848925941,
+            "brier": 0.010646650021255633
+          },
+          "packed_bytes": 147856,
+          "trees": 50,
+          "sha256": "3237db350b22a83a484da08ae4345d79d730002b4cd30d044c811c105f59090e"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.319663054211722,
+            "f1_weighted": 0.41109627536118126,
+            "loss": 0.04565586111093345,
+            "brier": 0.010710297634734755
+          },
+          "D_quality": {
+            "f1_macro": 0.3107351971050433,
+            "f1_weighted": 0.4141966670624799,
+            "loss": 0.04418727315733049,
+            "brier": 0.010333741548086393
+          },
+          "packed_bytes": 159312,
+          "trees": 50,
+          "sha256": "2ab04e46d4d59c5ac1758a84d3bc7c84fb0f4cc37b4118f8c00225fbc5b627e0"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.2828878726251045,
+            "f1_weighted": 0.3810129525648566,
+            "loss": 0.04681762012763317,
+            "brier": 0.010998993637514349
+          },
+          "D_quality": {
+            "f1_macro": 0.28475497812222317,
+            "f1_weighted": 0.3956031140811235,
+            "loss": 0.04510976523355316,
+            "brier": 0.01050757660569985
+          },
+          "packed_bytes": 102340,
+          "trees": 50,
+          "sha256": "75ad3f8e7a40a58a58a5475720e2fe2c4b4bdb4c8e99268d9e25a87f2e4a0aea"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.29413687489678136,
+            "f1_weighted": 0.39138973819964407,
+            "loss": 0.04772888426473224,
+            "brier": 0.011069614352384422
+          },
+          "D_quality": {
+            "f1_macro": 0.26863338324382063,
+            "f1_weighted": 0.38023429634867667,
+            "loss": 0.04683279775962291,
+            "brier": 0.010849219197065212
+          },
+          "packed_bytes": 510556,
+          "trees": 100,
+          "sha256": "86b80942db6f37305d37641be3c7c8b6ed52c280411f76e3bcc84735fadef364"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.29342429032498674,
+            "f1_weighted": 0.38790831318476665,
+            "loss": 0.047891407439083794,
+            "brier": 0.011112686495243038
+          },
+          "D_quality": {
+            "f1_macro": 0.2658641736456995,
+            "f1_weighted": 0.37435929621125724,
+            "loss": 0.04697774863245792,
+            "brier": 0.010884241643553358
+          },
+          "packed_bytes": 511860,
+          "trees": 100,
+          "sha256": "345b0012168c91539b9cefca509f9c9bb85efda866ea1d1da1b2bbaa496118b2"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.34135949410861793,
+            "f1_weighted": 0.42481244118676903,
+            "loss": 0.045430765659874896,
+            "brier": 0.010655849139311344
+          },
+          "D_quality": {
+            "f1_macro": 0.3228094895016595,
+            "f1_weighted": 0.4231949322638398,
+            "loss": 0.043630424303800625,
+            "brier": 0.01018392194536655
+          },
+          "packed_bytes": 511860,
+          "trees": 100,
+          "sha256": "cc4fe31aaa35a3865d68f816821cd47aa45179d9cfb59d1fbdf445b7e1b0b089"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.3202568154309076,
+            "f1_weighted": 0.4101474316626895,
+            "loss": 0.04714596597340321,
+            "brier": 0.011070838117902645
+          },
+          "D_quality": {
+            "f1_macro": 0.2915929274093827,
+            "f1_weighted": 0.39510913363246614,
+            "loss": 0.04533066635687742,
+            "brier": 0.01061785191093267
+          },
+          "packed_bytes": 255024,
+          "trees": 100,
+          "sha256": "f9791a7b3ec8fa2fa634c3ad8ded5a2496d5622b79444d766f6b7bcba81a6ef4"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.34735410958189494,
+            "f1_weighted": 0.43348290273256357,
+            "loss": 0.045227578357073125,
+            "brier": 0.010632987177258873
+          },
+          "D_quality": {
+            "f1_macro": 0.323065033842659,
+            "f1_weighted": 0.42304809166053886,
+            "loss": 0.043526662097347596,
+            "brier": 0.010227460396916067
+          },
+          "packed_bytes": 278072,
+          "trees": 100,
+          "sha256": "61f7a01fd5263fcc40c974d0acfc7199f4239dd89eadd312a89548812112475c"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.3220232225262449,
+            "f1_weighted": 0.4153953480672961,
+            "loss": 0.045584198138044915,
+            "brier": 0.010761392602078569
+          },
+          "D_quality": {
+            "f1_macro": 0.3136662258285944,
+            "f1_weighted": 0.41562409710465037,
+            "loss": 0.04387869705683427,
+            "brier": 0.010313051601485015
+          },
+          "packed_bytes": 162628,
+          "trees": 100,
+          "sha256": "f8bc269be74301022af46d48fe5e852af6387dea6f7cd652ccaac4d27d89653f"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.3147174930642413,
+            "f1_weighted": 0.4113170753811317,
+            "loss": 0.04593918476243017,
+            "brier": 0.01080047395555064
+          },
+          "D_quality": {
+            "f1_macro": 0.2923044914070584,
+            "f1_weighted": 0.39720924068139307,
+            "loss": 0.04497608309179559,
+            "brier": 0.010553863109997156
+          },
+          "packed_bytes": 769400,
+          "trees": 150,
+          "sha256": "119cc6a2e6cea724ba97bb495c7de699200abbeb0664bd7bfaa6153d20ec6337"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.3077113100471928,
+            "f1_weighted": 0.4060931949259999,
+            "loss": 0.0461850156445509,
+            "brier": 0.010851526804298909
+          },
+          "D_quality": {
+            "f1_macro": 0.2885555969687533,
+            "f1_weighted": 0.3973682255301829,
+            "loss": 0.04523153140232223,
+            "brier": 0.010599188686462497
+          },
+          "packed_bytes": 771356,
+          "trees": 150,
+          "sha256": "c4bfe5f9b0a5b79afd139039fa17fda1a0f6760be26ecdfaf2aa903e004d1ce3"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.3467826064136657,
+            "f1_weighted": 0.4326516934193231,
+            "loss": 0.04553192262732115,
+            "brier": 0.010670149009251033
+          },
+          "D_quality": {
+            "f1_macro": 0.31661819153455867,
+            "f1_weighted": 0.41574158622982504,
+            "loss": 0.04402644663839849,
+            "brier": 0.010281017015300632
+          },
+          "packed_bytes": 771356,
+          "trees": 150,
+          "sha256": "aac3b3273a31f2fb81f9364c7b39b9bed7cf2c1d1004f74a832cd69fc04404fa"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.29768319641078234,
+            "f1_weighted": 0.3986024577948655,
+            "loss": 0.04738583332949535,
+            "brier": 0.011151971789278344
+          },
+          "D_quality": {
+            "f1_macro": 0.2820331256959246,
+            "f1_weighted": 0.389974117036702,
+            "loss": 0.04571043291870308,
+            "brier": 0.010724300334700879
+          },
+          "packed_bytes": 363280,
+          "trees": 150,
+          "sha256": "17c790d5cbbd043b5a153b7abcefaf025cecf9da7701d5a8aa135f361d9bf9a9"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.3325761489346439,
+            "f1_weighted": 0.42321690098463305,
+            "loss": 0.045389356714862786,
+            "brier": 0.010706086312759395
+          },
+          "D_quality": {
+            "f1_macro": 0.3295166308014568,
+            "f1_weighted": 0.4297431006731511,
+            "loss": 0.04376295822157283,
+            "brier": 0.010314050434130834
+          },
+          "packed_bytes": 398048,
+          "trees": 150,
+          "sha256": "df7d3ca9918e8a71ea5bb7f9acd6be8c158838416acba5d7e77b70ce2455ad58"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.30980949587645396,
+            "f1_weighted": 0.4082851637478075,
+            "loss": 0.045912562368743935,
+            "brier": 0.010802669076498992
+          },
+          "D_quality": {
+            "f1_macro": 0.3215577181936749,
+            "f1_weighted": 0.4150466209148774,
+            "loss": 0.04427943415938859,
+            "brier": 0.01040483152595519
+          },
+          "packed_bytes": 222916,
+          "trees": 150,
+          "sha256": "3319cf98d23c1db4cce8a0544ccebc4b7e1863f458d6ed5caac7bf365c77a16c"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.3293929480489867,
+            "f1_weighted": 0.4247401367111862,
+            "loss": 0.04501291034432485,
+            "brier": 0.010653637079342413
+          },
+          "D_quality": {
+            "f1_macro": 0.30708189573464567,
+            "f1_weighted": 0.4073064311339598,
+            "loss": 0.04398745266849624,
+            "brier": 0.01038607524178598
+          },
+          "packed_bytes": 1026288,
+          "trees": 200,
+          "sha256": "cf1fec9356682bf678599556fc10b9dc411048f4f914b0375506ecf2eefab0d5"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.3293929480489867,
+            "f1_weighted": 0.4247401367111862,
+            "loss": 0.04501291034432485,
+            "brier": 0.010653637079342413
+          },
+          "D_quality": {
+            "f1_macro": 0.30708189573464567,
+            "f1_weighted": 0.4073064311339598,
+            "loss": 0.04398745266849624,
+            "brier": 0.01038607524178598
+          },
+          "packed_bytes": 1026288,
+          "trees": 200,
+          "sha256": "cf1fec9356682bf678599556fc10b9dc411048f4f914b0375506ecf2eefab0d5"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.34093957941917713,
+            "f1_weighted": 0.42777200421534184,
+            "loss": 0.045331881790852645,
+            "brier": 0.010633446880879999
+          },
+          "D_quality": {
+            "f1_macro": 0.3254267317918614,
+            "f1_weighted": 0.4299253522170611,
+            "loss": 0.04378392963468035,
+            "brier": 0.010229976836665277
+          },
+          "packed_bytes": 1026288,
+          "trees": 200,
+          "sha256": "8d490e1a0dbb9fe8bfe2acfb8f7871d06f0e08cfdd3679e12f650e6f7d9b0819"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.297620748676176,
+            "f1_weighted": 0.39754566225720167,
+            "loss": 0.047339183082258,
+            "brier": 0.011154394424744456
+          },
+          "D_quality": {
+            "f1_macro": 0.28208061355966224,
+            "f1_weighted": 0.3913067176635048,
+            "loss": 0.045651452891050194,
+            "brier": 0.01074305432974085
+          },
+          "packed_bytes": 469632,
+          "trees": 200,
+          "sha256": "bef0932cf38ce6d2a67fb4f21c852dab2e6ae220423a9b93dd6c41a1973d3f25"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.32584957374879586,
+            "f1_weighted": 0.4195526455558542,
+            "loss": 0.045293861766459345,
+            "brier": 0.010697421513799613
+          },
+          "D_quality": {
+            "f1_macro": 0.3340554224093467,
+            "f1_weighted": 0.4335694590164334,
+            "loss": 0.043593823669654044,
+            "brier": 0.010305783745588472
+          },
+          "packed_bytes": 515908,
+          "trees": 200,
+          "sha256": "5155798fcad6765a8554aaf6d826863a7e5cc34249c6eedffd764e36e89205dc"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.32492681876538765,
+            "f1_weighted": 0.4183822623506355,
+            "loss": 0.045583551274590274,
+            "brier": 0.010750520360821435
+          },
+          "D_quality": {
+            "f1_macro": 0.3364639368540634,
+            "f1_weighted": 0.4292788603041123,
+            "loss": 0.043842607621005995,
+            "brier": 0.010321446130998783
+          },
+          "packed_bytes": 283204,
+          "trees": 200,
+          "sha256": "08ac76df82bc41d9b2ca20f37d9a76320f95130a531b6dcb8745242fb860f4b5"
+        }
+      ]
+    },
+    {
+      "case": "mediamill_71704",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.11770970720975021,
+            "f1_weighted": 0.5278459971215232,
+            "loss": 0.09207594041024486,
+            "brier": 0.024929134304751983
+          },
+          "D_quality": {
+            "f1_macro": 0.11660605483425263,
+            "f1_weighted": 0.5329374696775787,
+            "loss": 0.09098692904607747,
+            "brier": 0.0246632559591231
+          },
+          "packed_bytes": 168880,
+          "trees": 50,
+          "sha256": "e791300aa4a8204f89011187c95e3a5e0ed44fb4d38c4c8f1abbfb08f395bbad"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.11522497250148749,
+            "f1_weighted": 0.5253586396525106,
+            "loss": 0.09207617281432481,
+            "brier": 0.024923960701290094
+          },
+          "D_quality": {
+            "f1_macro": 0.11692522948925793,
+            "f1_weighted": 0.5335395273858881,
+            "loss": 0.09099389571848242,
+            "brier": 0.02466894458482261
+          },
+          "packed_bytes": 168880,
+          "trees": 50,
+          "sha256": "b9b29e702ff587354b4a0992b2539f256dca665050bc733206113a9843cabbe8"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.15560745349061686,
+            "f1_weighted": 0.5463148889081981,
+            "loss": 0.09112291692601036,
+            "brier": 0.024371446273812217
+          },
+          "D_quality": {
+            "f1_macro": 0.15603691147808907,
+            "f1_weighted": 0.551471178714031,
+            "loss": 0.08969703852301202,
+            "brier": 0.02412406355688992
+          },
+          "packed_bytes": 168880,
+          "trees": 50,
+          "sha256": "d8e041644ff78192642549a0b18367ad3e290814683500a978f8cb5a84e2bc4a"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.1378494290200507,
+            "f1_weighted": 0.5411832068421113,
+            "loss": 0.09126188437220599,
+            "brier": 0.024428956670793738
+          },
+          "D_quality": {
+            "f1_macro": 0.1336962437264145,
+            "f1_weighted": 0.5467579422536183,
+            "loss": 0.09003962662646672,
+            "brier": 0.02418489534351945
+          },
+          "packed_bytes": 109484,
+          "trees": 50,
+          "sha256": "59bb8edef1cc002b18d995c312f9ce74f917a05234e82475ef081ed45052680a"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.14366108053078122,
+            "f1_weighted": 0.540496036687824,
+            "loss": 0.0911704381143575,
+            "brier": 0.02443093167026295
+          },
+          "D_quality": {
+            "f1_macro": 0.14153419414554316,
+            "f1_weighted": 0.5456123527073797,
+            "loss": 0.08983514169573474,
+            "brier": 0.02418133628872519
+          },
+          "packed_bytes": 117552,
+          "trees": 50,
+          "sha256": "283dc85ccc0a094f6d990236a0d6cf8c3c2f57e3f8ea457655b12bf305d17ba1"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.13206631903891766,
+            "f1_weighted": 0.5341512702229415,
+            "loss": 0.09236435743298775,
+            "brier": 0.02485318036276941
+          },
+          "D_quality": {
+            "f1_macro": 0.12364788875380234,
+            "f1_weighted": 0.5391987702012682,
+            "loss": 0.0906677738245714,
+            "brier": 0.02444393041812991
+          },
+          "packed_bytes": 69520,
+          "trees": 50,
+          "sha256": "8c950644a5c212bd53da9944e291fdcc1b1222bc19b52f8d66c23adfb11e608d"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.13035562661635325,
+            "f1_weighted": 0.5405478387891092,
+            "loss": 0.08988258115283858,
+            "brier": 0.024397326920883634
+          },
+          "D_quality": {
+            "f1_macro": 0.14020314853323554,
+            "f1_weighted": 0.5458078278939191,
+            "loss": 0.08861041432320023,
+            "brier": 0.02408941150325945
+          },
+          "packed_bytes": 336880,
+          "trees": 100,
+          "sha256": "a77011219aa51017a20e9d501129d937907be04fc429f9746562eebf41aa0d58"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.12904002292794567,
+            "f1_weighted": 0.5410949408179562,
+            "loss": 0.08991900553794994,
+            "brier": 0.02441936938904746
+          },
+          "D_quality": {
+            "f1_macro": 0.14551945469045016,
+            "f1_weighted": 0.5489432666239589,
+            "loss": 0.08874716944819198,
+            "brier": 0.024126764702470552
+          },
+          "packed_bytes": 336880,
+          "trees": 100,
+          "sha256": "cb19f38b302fc0858681192514312c50b3e9b545b2b6eac40719a9aecb77895e"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.17611181605112394,
+            "f1_weighted": 0.5460329422999053,
+            "loss": 0.0906740631085913,
+            "brier": 0.02423814615370382
+          },
+          "D_quality": {
+            "f1_macro": 0.16454308089336556,
+            "f1_weighted": 0.5548682688875305,
+            "loss": 0.0894761548506047,
+            "brier": 0.023893130339675838
+          },
+          "packed_bytes": 336880,
+          "trees": 100,
+          "sha256": "b3f6321f200b4218c23653f0142db09df6a34df75109711b94a9ee732aa4f329"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.14096255935318633,
+            "f1_weighted": 0.54272235663298,
+            "loss": 0.09074324901871803,
+            "brier": 0.02424435280892071
+          },
+          "D_quality": {
+            "f1_macro": 0.1515669287773469,
+            "f1_weighted": 0.5547753233198991,
+            "loss": 0.08984918634302504,
+            "brier": 0.023968714511090294
+          },
+          "packed_bytes": 197484,
+          "trees": 100,
+          "sha256": "3fa940fe0a0687dca28d328dc9a5b00f19ba103faaf6f03983908acebd5ce74b"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.15639960548171059,
+            "f1_weighted": 0.5440665574967297,
+            "loss": 0.09061047040778386,
+            "brier": 0.02423507466623663
+          },
+          "D_quality": {
+            "f1_macro": 0.1712239550076958,
+            "f1_weighted": 0.5544823587532818,
+            "loss": 0.08970954859544474,
+            "brier": 0.023960153862908055
+          },
+          "packed_bytes": 213616,
+          "trees": 100,
+          "sha256": "d4583171db9c017cd7acd3ba320a6a9fcbc055006d3f07f5347b9b89a9e79a80"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.1657532277581997,
+            "f1_weighted": 0.5390873022433355,
+            "loss": 0.09115320440198202,
+            "brier": 0.0245407435655258
+          },
+          "D_quality": {
+            "f1_macro": 0.15316238416613337,
+            "f1_weighted": 0.5516888813524159,
+            "loss": 0.08976190339252528,
+            "brier": 0.024139574162530764
+          },
+          "packed_bytes": 117552,
+          "trees": 100,
+          "sha256": "62c93e3ed93c10a08447af8ccef7009548f1cfc0b965d01e1f4af00266942048"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.1509154018206173,
+            "f1_weighted": 0.5471945199965791,
+            "loss": 0.08874341413094439,
+            "brier": 0.02411696152313048
+          },
+          "D_quality": {
+            "f1_macro": 0.1513959291745038,
+            "f1_weighted": 0.5542883786237147,
+            "loss": 0.08740848739067093,
+            "brier": 0.023787899691514715
+          },
+          "packed_bytes": 504880,
+          "trees": 150,
+          "sha256": "033e8e5e8f19b15f2f2419cf86e4b036d0b3bfe6e1075d39ead58f57193800a6"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.14438724721810825,
+            "f1_weighted": 0.548142791869416,
+            "loss": 0.08876138103945501,
+            "brier": 0.024127853868193917
+          },
+          "D_quality": {
+            "f1_macro": 0.15004141906716525,
+            "f1_weighted": 0.5555119328889389,
+            "loss": 0.08743421828322913,
+            "brier": 0.023788874884594913
+          },
+          "packed_bytes": 504880,
+          "trees": 150,
+          "sha256": "3c62f46f89baf72b645527721df85ce44dfa0dcafd66e5159b5b4ec1ff3d2180"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.1827351729596458,
+            "f1_weighted": 0.5490678816565304,
+            "loss": 0.09050263921844372,
+            "brier": 0.02414902830022616
+          },
+          "D_quality": {
+            "f1_macro": 0.1812444912390913,
+            "f1_weighted": 0.5609585369947988,
+            "loss": 0.08925408820235094,
+            "brier": 0.023818401950519305
+          },
+          "packed_bytes": 504880,
+          "trees": 150,
+          "sha256": "92fcb06372141f06a4d7de0ce95e18cfae9248d41f5c8a22e17ffcaa578f1327"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.14775648086434776,
+            "f1_weighted": 0.5505621531567574,
+            "loss": 0.09023630036784343,
+            "brier": 0.024063803513145868
+          },
+          "D_quality": {
+            "f1_macro": 0.15081461283909076,
+            "f1_weighted": 0.556738543186945,
+            "loss": 0.08921400951345985,
+            "brier": 0.023798545042910537
+          },
+          "packed_bytes": 285484,
+          "trees": 150,
+          "sha256": "8cec6c284be964aad109b752c1350dac5fef89757e60467ebc6e8ebf21d9ac41"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.16695592111900784,
+            "f1_weighted": 0.5500470101733465,
+            "loss": 0.09022720218971005,
+            "brier": 0.02407748783321771
+          },
+          "D_quality": {
+            "f1_macro": 0.18397460882369804,
+            "f1_weighted": 0.5580963170912107,
+            "loss": 0.0892202548760552,
+            "brier": 0.023805323981768274
+          },
+          "packed_bytes": 309680,
+          "trees": 150,
+          "sha256": "4f64e9c0eb7aa81730ae70c997f1a9a542f46357f08fbdfc4bad52c9dfc24414"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.16290666746837895,
+            "f1_weighted": 0.5440476221667346,
+            "loss": 0.09088808313817587,
+            "brier": 0.024404448088469508
+          },
+          "D_quality": {
+            "f1_macro": 0.17350661475276336,
+            "f1_weighted": 0.5548491036308517,
+            "loss": 0.0894508244683617,
+            "brier": 0.024034460789616907
+          },
+          "packed_bytes": 165584,
+          "trees": 150,
+          "sha256": "73b3555d219fe945a1c8c39d369bfec28c52d4f45a0977575ab410b7d280b67c"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.1618496102573123,
+            "f1_weighted": 0.5522512159935155,
+            "loss": 0.08802181961425887,
+            "brier": 0.023924719590593654
+          },
+          "D_quality": {
+            "f1_macro": 0.1522602689128822,
+            "f1_weighted": 0.5590603671998626,
+            "loss": 0.08660543141252462,
+            "brier": 0.023571870458940387
+          },
+          "packed_bytes": 672880,
+          "trees": 200,
+          "sha256": "55392d5e839d6da5847ea1f916e2c953d124684799375f3f48ec4a3efef75d35"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.1618496102573123,
+            "f1_weighted": 0.5522512159935155,
+            "loss": 0.08802181961425887,
+            "brier": 0.023924719590593654
+          },
+          "D_quality": {
+            "f1_macro": 0.1522602689128822,
+            "f1_weighted": 0.5590603671998626,
+            "loss": 0.08660543141252462,
+            "brier": 0.023571870458940387
+          },
+          "packed_bytes": 672880,
+          "trees": 200,
+          "sha256": "55392d5e839d6da5847ea1f916e2c953d124684799375f3f48ec4a3efef75d35"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.18298265546528486,
+            "f1_weighted": 0.5526077143274761,
+            "loss": 0.09060856648379655,
+            "brier": 0.024153757425146284
+          },
+          "D_quality": {
+            "f1_macro": 0.17938884931210305,
+            "f1_weighted": 0.56122148616414,
+            "loss": 0.08929071959682841,
+            "brier": 0.02383144671714254
+          },
+          "packed_bytes": 672880,
+          "trees": 200,
+          "sha256": "dabd26539af1b9867e15045e8784fd9c2790abe2a780c923514f6c88cc0b5411"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.14585230607471728,
+            "f1_weighted": 0.5542179225549457,
+            "loss": 0.09041820744638293,
+            "brier": 0.024086349255707427
+          },
+          "D_quality": {
+            "f1_macro": 0.14543399449745964,
+            "f1_weighted": 0.5548429175113129,
+            "loss": 0.08926238645753279,
+            "brier": 0.023784197185666763
+          },
+          "packed_bytes": 373484,
+          "trees": 200,
+          "sha256": "ee2840ee2aa806b174249e7da9f158faa6d650f1dc49d124e06a5314c2a91a36"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.17254003373305718,
+            "f1_weighted": 0.5535936468716551,
+            "loss": 0.09043714995135367,
+            "brier": 0.02411305409830133
+          },
+          "D_quality": {
+            "f1_macro": 0.17446082589837153,
+            "f1_weighted": 0.5572468392963089,
+            "loss": 0.08930854548178209,
+            "brier": 0.02380561392192129
+          },
+          "packed_bytes": 405744,
+          "trees": 200,
+          "sha256": "e1410ca2339b58be225f4530a13dc8ad9fc256c1091a8dc65c284010655d5d36"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.17665896132275477,
+            "f1_weighted": 0.5474369186658868,
+            "loss": 0.09123304689425273,
+            "brier": 0.024423385407136594
+          },
+          "D_quality": {
+            "f1_macro": 0.17463390670864953,
+            "f1_weighted": 0.5577774150038506,
+            "loss": 0.08927564781630344,
+            "brier": 0.02396787117574483
+          },
+          "packed_bytes": 213616,
+          "trees": 200,
+          "sha256": "d473d8e74fb0dbfe79d5d631330cef762ce4f257fc089f6ff5b999d89f199f7e"
+        }
+      ]
+    },
+    {
+      "case": "enron_71804",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.17731353624653495,
+            "f1_weighted": 0.5665735299409013,
+            "loss": 0.1333330319769047,
+            "brier": 0.036335490043181026
+          },
+          "D_quality": {
+            "f1_macro": 0.15431989539273439,
+            "f1_weighted": 0.5429605772581043,
+            "loss": 0.13916991367806922,
+            "brier": 0.037877717457915745
+          },
+          "packed_bytes": 91012,
+          "trees": 50,
+          "sha256": "d6be911aecbbcf9ee5d526b54c1eb1c20a89f3df1f192bd660f135570d7435e3"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.17301822264805264,
+            "f1_weighted": 0.5572549367456261,
+            "loss": 0.13397303779300984,
+            "brier": 0.03653543732708773
+          },
+          "D_quality": {
+            "f1_macro": 0.15173990734842793,
+            "f1_weighted": 0.553498875296576,
+            "loss": 0.13908481670666983,
+            "brier": 0.03792799432803131
+          },
+          "packed_bytes": 91240,
+          "trees": 50,
+          "sha256": "2f685d202785d5c475a912ec432e9efc70f9dbcbf39134a694885e729bb17283"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.19523063060281473,
+            "f1_weighted": 0.5497000769690192,
+            "loss": 0.14107457174721438,
+            "brier": 0.03728431873708428
+          },
+          "D_quality": {
+            "f1_macro": 0.17052884941552643,
+            "f1_weighted": 0.5525268260500041,
+            "loss": 0.14915929309130543,
+            "brier": 0.03910100766504304
+          },
+          "packed_bytes": 91240,
+          "trees": 50,
+          "sha256": "04396d8b9f35fc92b8dddd597299b488d30286514e6217a3ad44810037119715"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.17390221445527815,
+            "f1_weighted": 0.5482812559933355,
+            "loss": 0.139028163075145,
+            "brier": 0.03695718807701857
+          },
+          "D_quality": {
+            "f1_macro": 0.16802372671959087,
+            "f1_weighted": 0.5508450022377871,
+            "loss": 0.14629839792173882,
+            "brier": 0.03847717086227957
+          },
+          "packed_bytes": 55572,
+          "trees": 50,
+          "sha256": "5c70e9d6f1e67aac216cfebc24a72ca04d61448c172fa1d7666d412738704994"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.18056351276555155,
+            "f1_weighted": 0.5495856955428279,
+            "loss": 0.13838489242154517,
+            "brier": 0.036802738722565766
+          },
+          "D_quality": {
+            "f1_macro": 0.1675641826547444,
+            "f1_weighted": 0.5491183154979565,
+            "loss": 0.1464371794806777,
+            "brier": 0.03872492992386748
+          },
+          "packed_bytes": 60536,
+          "trees": 50,
+          "sha256": "9c1cce345c6b6fbe379672b04eb315271484d127b64c36ebae576f02f5a7f70a"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.1998431747733383,
+            "f1_weighted": 0.5578026535726747,
+            "loss": 0.13615100378039766,
+            "brier": 0.03609222094486263
+          },
+          "D_quality": {
+            "f1_macro": 0.17070397615356828,
+            "f1_weighted": 0.5700899822754196,
+            "loss": 0.14316961730407857,
+            "brier": 0.038084451098202354
+          },
+          "packed_bytes": 33520,
+          "trees": 50,
+          "sha256": "0c2230e3171fa17ba895ebce2aa0668ba6445f3e8ee5fbe10b7f5d98f65a79e7"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.20070611887353856,
+            "f1_weighted": 0.5865479800551415,
+            "loss": 0.1288067641198678,
+            "brier": 0.035054844335482324
+          },
+          "D_quality": {
+            "f1_macro": 0.17223325886010063,
+            "f1_weighted": 0.575682182136408,
+            "loss": 0.1357129198008008,
+            "brier": 0.03689738078922306
+          },
+          "packed_bytes": 181756,
+          "trees": 100,
+          "sha256": "26265db440144ac6158c494f653e09faa1e1159bfd0460b2da69906b149db4d0"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.19794089951890076,
+            "f1_weighted": 0.5817915020381645,
+            "loss": 0.12960067268771758,
+            "brier": 0.03522118547591018
+          },
+          "D_quality": {
+            "f1_macro": 0.16626057000894828,
+            "f1_weighted": 0.5657807589281526,
+            "loss": 0.13574272547474955,
+            "brier": 0.03694033632402601
+          },
+          "packed_bytes": 182212,
+          "trees": 100,
+          "sha256": "5bf9de582c4ab0cec83218a20e15679edf0780767010fda31ca5bfb4849d6def"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.17982051821866465,
+            "f1_weighted": 0.5529011306421779,
+            "loss": 0.14049889706579452,
+            "brier": 0.03680601429975964
+          },
+          "D_quality": {
+            "f1_macro": 0.16963149415010667,
+            "f1_weighted": 0.552540154671768,
+            "loss": 0.15015924568389907,
+            "brier": 0.0389756204907456
+          },
+          "packed_bytes": 182212,
+          "trees": 100,
+          "sha256": "59e0019f848a09e4deb024cd65631dbc479fa0d8525715a7e0473e2f82c61883"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.17549452546646555,
+            "f1_weighted": 0.5570753521108481,
+            "loss": 0.13875618745178467,
+            "brier": 0.036600738937900536
+          },
+          "D_quality": {
+            "f1_macro": 0.14852895988824427,
+            "f1_weighted": 0.545349203211017,
+            "loss": 0.146254780443114,
+            "brier": 0.03804164764442592
+          },
+          "packed_bytes": 105048,
+          "trees": 100,
+          "sha256": "7e8daec878480834ab180e9288ccb50ef68f7ad9b76833bfa20982cc5c0eb698"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.1883353550856785,
+            "f1_weighted": 0.5628958086874656,
+            "loss": 0.1379437217280486,
+            "brier": 0.036483986477775704
+          },
+          "D_quality": {
+            "f1_macro": 0.14814339659940046,
+            "f1_weighted": 0.5428208293300307,
+            "loss": 0.14595289564359606,
+            "brier": 0.03834092587312489
+          },
+          "packed_bytes": 114992,
+          "trees": 100,
+          "sha256": "d3f1ecd83ba8f1b721665572f62e7c0d0da0c417242c80be39e67c525cfb1564"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.19423848829077267,
+            "f1_weighted": 0.5661756797981976,
+            "loss": 0.1356273726803217,
+            "brier": 0.03585147589638608
+          },
+          "D_quality": {
+            "f1_macro": 0.17117620482878948,
+            "f1_weighted": 0.5631449626178315,
+            "loss": 0.14372035262552116,
+            "brier": 0.037989128382838466
+          },
+          "packed_bytes": 60816,
+          "trees": 100,
+          "sha256": "5b8af1ac48fb1f3ce0d6ba8b069bb523f27aaf8a91199091eedc949d7d0bd899"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.21281001761882565,
+            "f1_weighted": 0.5831859903520062,
+            "loss": 0.1273290010405745,
+            "brier": 0.03462908014494052
+          },
+          "D_quality": {
+            "f1_macro": 0.17131992406602517,
+            "f1_weighted": 0.5773144294875708,
+            "loss": 0.1345640747489472,
+            "brier": 0.036536838086490366
+          },
+          "packed_bytes": 271588,
+          "trees": 150,
+          "sha256": "7403fc9bed1c730894e148b244fc835f42df29eb9f7cad778389436acb6b47c2"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.2127578821601451,
+            "f1_weighted": 0.5854047902681795,
+            "loss": 0.12720088648550096,
+            "brier": 0.034548915307455894
+          },
+          "D_quality": {
+            "f1_macro": 0.17162610242616536,
+            "f1_weighted": 0.5707023918402716,
+            "loss": 0.1343196311977523,
+            "brier": 0.036468613517317575
+          },
+          "packed_bytes": 272956,
+          "trees": 150,
+          "sha256": "d5bf64a33a3f09ca0045f022ddb2ba99411bf2bd3d0db35850a1250edb0fe463"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.19429732826208562,
+            "f1_weighted": 0.5631078969807676,
+            "loss": 0.1378389342071772,
+            "brier": 0.03629011427775152
+          },
+          "D_quality": {
+            "f1_macro": 0.17840368001714849,
+            "f1_weighted": 0.5577068710024496,
+            "loss": 0.14780191877849075,
+            "brier": 0.03867240075673789
+          },
+          "packed_bytes": 272956,
+          "trees": 150,
+          "sha256": "0d434ae0a33a005577010e9831991c28c35ad1ea889b71f6452418b4e5eb5453"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.1721076405273762,
+            "f1_weighted": 0.5594729207849081,
+            "loss": 0.13653076325213387,
+            "brier": 0.03611186944982187
+          },
+          "D_quality": {
+            "f1_macro": 0.15735565050297176,
+            "f1_weighted": 0.5471998489341302,
+            "loss": 0.14474017100909095,
+            "brier": 0.03783166696123203
+          },
+          "packed_bytes": 154400,
+          "trees": 150,
+          "sha256": "bd846ae8a8f280519f610d7b05867b462ac5a06a507624067fdafc0e8fd1aa2d"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.18998292063250802,
+            "f1_weighted": 0.5691860294749624,
+            "loss": 0.13605366458131182,
+            "brier": 0.03606787029058288
+          },
+          "D_quality": {
+            "f1_macro": 0.15539009255049102,
+            "f1_weighted": 0.5356577225171353,
+            "loss": 0.1446259863522304,
+            "brier": 0.03816988164765182
+          },
+          "packed_bytes": 169312,
+          "trees": 150,
+          "sha256": "5a3f3cd3dc2075a47c89e2c10dea2c07ba0f58a9adfbd75c5c32ed638120438d"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.2074999674655889,
+            "f1_weighted": 0.5677524843846148,
+            "loss": 0.1357058473857969,
+            "brier": 0.03570519699798629
+          },
+          "D_quality": {
+            "f1_macro": 0.1766605768786837,
+            "f1_weighted": 0.5641206557418398,
+            "loss": 0.1437642725473085,
+            "brier": 0.03788337085177083
+          },
+          "packed_bytes": 88112,
+          "trees": 150,
+          "sha256": "aeb4248e4a96226da53b67d1b9a42e3b4c8f36bc041ae84d93db117048ae0da5"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.19687457263402286,
+            "f1_weighted": 0.5779776174123762,
+            "loss": 0.12651011761244194,
+            "brier": 0.0343392515823817
+          },
+          "D_quality": {
+            "f1_macro": 0.17293402918942605,
+            "f1_weighted": 0.5767323950946988,
+            "loss": 0.13422613372700826,
+            "brier": 0.036307819808098996
+          },
+          "packed_bytes": 362104,
+          "trees": 200,
+          "sha256": "15900224190e68db0f6503fa95051389a9a238c382141f0d1ac0ac8b6e62d485"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.19687457263402286,
+            "f1_weighted": 0.5779776174123762,
+            "loss": 0.12651011761244194,
+            "brier": 0.0343392515823817
+          },
+          "D_quality": {
+            "f1_macro": 0.17293402918942605,
+            "f1_weighted": 0.5767323950946988,
+            "loss": 0.13422613372700826,
+            "brier": 0.036307819808098996
+          },
+          "packed_bytes": 362104,
+          "trees": 200,
+          "sha256": "15900224190e68db0f6503fa95051389a9a238c382141f0d1ac0ac8b6e62d485"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.19486485345800056,
+            "f1_weighted": 0.5638894026617033,
+            "loss": 0.13771277048063799,
+            "brier": 0.036253674945794775
+          },
+          "D_quality": {
+            "f1_macro": 0.17832928939268877,
+            "f1_weighted": 0.5642068781408894,
+            "loss": 0.14583418443832674,
+            "brier": 0.03812790373865666
+          },
+          "packed_bytes": 362104,
+          "trees": 200,
+          "sha256": "ce007c34858f16665b71fcfe16b0d7a9883dfe549d1940ec6fb4e60bb91ea002"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.17591375381766333,
+            "f1_weighted": 0.555418361505876,
+            "loss": 0.13664794396468202,
+            "brier": 0.036245896813832806
+          },
+          "D_quality": {
+            "f1_macro": 0.1529516767869736,
+            "f1_weighted": 0.5425838416264124,
+            "loss": 0.14367820644857401,
+            "brier": 0.0375035217971664
+          },
+          "packed_bytes": 202884,
+          "trees": 200,
+          "sha256": "8c168fb02b0f221a1a52ac5c61b24872180c6f175c009da3bf242d23ea86183f"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.18870577922859014,
+            "f1_weighted": 0.5622058813770312,
+            "loss": 0.13643688941827384,
+            "brier": 0.036239380579817904
+          },
+          "D_quality": {
+            "f1_macro": 0.1712892179025136,
+            "f1_weighted": 0.5476487151304947,
+            "loss": 0.14332754408160592,
+            "brier": 0.037791034797576936
+          },
+          "packed_bytes": 222680,
+          "trees": 200,
+          "sha256": "6d24da1bfbd0b5b8d2becd641a2baed4ea46cce79e4f636709110fdfd0fba75e"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.20434249808964708,
+            "f1_weighted": 0.5674314043775064,
+            "loss": 0.13682722167250438,
+            "brier": 0.03605413198662815
+          },
+          "D_quality": {
+            "f1_macro": 0.1763716274867125,
+            "f1_weighted": 0.5690586578650461,
+            "loss": 0.14464666301944767,
+            "brier": 0.0378235335876385
+          },
+          "packed_bytes": 115408,
+          "trees": 200,
+          "sha256": "82016c7ebdd68704c3fcb273bd1e09088ddbf057b16c99631132f875fa4154f5"
+        }
+      ]
+    },
+    {
+      "case": "cal500_71904",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.1965569675308305,
+            "f1_weighted": 0.4403821450007193,
+            "loss": 0.33662503994277226,
+            "brier": 0.1028233189948344
+          },
+          "D_quality": {
+            "f1_macro": 0.17772751108212226,
+            "f1_weighted": 0.42199984093797654,
+            "loss": 0.33262279761654506,
+            "brier": 0.10054192439375935
+          },
+          "packed_bytes": 279144,
+          "trees": 50,
+          "sha256": "943f6b085d2a110399269d553e08a6f14df6293e4071ec3471f4f74c4502090d"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.2031161320832676,
+            "f1_weighted": 0.4481998449025755,
+            "loss": 0.33573835020686277,
+            "brier": 0.10252926642461505
+          },
+          "D_quality": {
+            "f1_macro": 0.17690502934123606,
+            "f1_weighted": 0.42224481177279544,
+            "loss": 0.3326851738728792,
+            "brier": 0.10055946512021394
+          },
+          "packed_bytes": 284840,
+          "trees": 50,
+          "sha256": "86808720f5e53330ce0e760b86862ed65c92a6cd6404642a27de5c40226dfbcd"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.17510189603928936,
+            "f1_weighted": 0.4023823098410624,
+            "loss": 0.44101411459909545,
+            "brier": 0.12193255744616568
+          },
+          "D_quality": {
+            "f1_macro": 0.16774510019313346,
+            "f1_weighted": 0.39661790615597,
+            "loss": 0.4378513693567845,
+            "brier": 0.12101005879437055
+          },
+          "packed_bytes": 284840,
+          "trees": 50,
+          "sha256": "0980c4b7793a38b49ed4dfbca059f484adf2fc75125e677fd37cd5de09a377c7"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.1740670752801496,
+            "f1_weighted": 0.3998542581870895,
+            "loss": 0.4275239639402065,
+            "brier": 0.11886877339980348
+          },
+          "D_quality": {
+            "f1_macro": 0.16506823597616388,
+            "f1_weighted": 0.3946175371242693,
+            "loss": 0.4227196725718393,
+            "brier": 0.1166670324653251
+          },
+          "packed_bytes": 154264,
+          "trees": 50,
+          "sha256": "6460b51c965f136307402e1950f50869e2b66d17caf789158781ae7de37651e0"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.1755375635795503,
+            "f1_weighted": 0.40298475009023116,
+            "loss": 0.4268615169401697,
+            "brier": 0.11878846363726352
+          },
+          "D_quality": {
+            "f1_macro": 0.16528105992016612,
+            "f1_weighted": 0.39687975705022654,
+            "loss": 0.4225976139264159,
+            "brier": 0.11671124185803147
+          },
+          "packed_bytes": 166940,
+          "trees": 50,
+          "sha256": "40062925b0b91413548cb06a5d2fcc24160be6844ff6d69c5cbf9e8f76cf2c7a"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.18606106099966996,
+            "f1_weighted": 0.41590098448755447,
+            "loss": 0.41558218612736203,
+            "brier": 0.11757943172787182
+          },
+          "D_quality": {
+            "f1_macro": 0.17754933537153378,
+            "f1_weighted": 0.40461674388990315,
+            "loss": 0.4173215715901494,
+            "brier": 0.11613159192690721
+          },
+          "packed_bytes": 106780,
+          "trees": 50,
+          "sha256": "e3cefbabedff5a1d9f1868fd1216b6cab43e06d20e85615d8048d5fcefbc2411"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.18484157323944397,
+            "f1_weighted": 0.4202702194159498,
+            "loss": 0.34245396427100183,
+            "brier": 0.1040166497700171
+          },
+          "D_quality": {
+            "f1_macro": 0.1730186662973182,
+            "f1_weighted": 0.4131462331965994,
+            "loss": 0.34056130712274324,
+            "brier": 0.10241063642587193
+          },
+          "packed_bytes": 549704,
+          "trees": 100,
+          "sha256": "455501acc03ad9c680f0362c3fe87588c9c037c0380aee9e499dba66a8040670"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.19272642110559488,
+            "f1_weighted": 0.43035575580565044,
+            "loss": 0.34261509719699773,
+            "brier": 0.10414628444597532
+          },
+          "D_quality": {
+            "f1_macro": 0.1690518239840572,
+            "f1_weighted": 0.41070821083556497,
+            "loss": 0.33940115956108863,
+            "brier": 0.10206028163210272
+          },
+          "packed_bytes": 563232,
+          "trees": 100,
+          "sha256": "1c115b006e0624854401156488e51304be7794b7004a6aa1b5947549377eeac7"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.16646283118961563,
+            "f1_weighted": 0.4004614978408314,
+            "loss": 0.42603655675552,
+            "brier": 0.11936789406356284
+          },
+          "D_quality": {
+            "f1_macro": 0.15426006505655984,
+            "f1_weighted": 0.3895575267905377,
+            "loss": 0.4220411309932636,
+            "brier": 0.1177133007817838
+          },
+          "packed_bytes": 563232,
+          "trees": 100,
+          "sha256": "ec25e5753c35634d061c6a0c89f1db4db2091e598e4ada08e293601048634e81"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.1719348066956981,
+            "f1_weighted": 0.40584293145252637,
+            "loss": 0.4140996265657786,
+            "brier": 0.11674113490795753
+          },
+          "D_quality": {
+            "f1_macro": 0.1484994483548659,
+            "f1_weighted": 0.38199306210758444,
+            "loss": 0.4086322840396731,
+            "brier": 0.11414794622633037
+          },
+          "packed_bytes": 260616,
+          "trees": 100,
+          "sha256": "7bbe552efa50571b0f347e7cf54e817598865fecd0c9f6f929226e0ac5ef7f67"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.17714046912393064,
+            "f1_weighted": 0.41085063706685654,
+            "loss": 0.41340547108481973,
+            "brier": 0.11664274684291771
+          },
+          "D_quality": {
+            "f1_macro": 0.14812732754857702,
+            "f1_weighted": 0.3845632454592943,
+            "loss": 0.40851023816975046,
+            "brier": 0.11422898051896153
+          },
+          "packed_bytes": 285736,
+          "trees": 100,
+          "sha256": "885d1b25dc631717b73adb45ee9ca905765489157a7f6ceaf8d8a7fae85ebbff"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.17302330550221925,
+            "f1_weighted": 0.4021821110248221,
+            "loss": 0.43435782327404177,
+            "brier": 0.12024950202564459
+          },
+          "D_quality": {
+            "f1_macro": 0.17334601195666352,
+            "f1_weighted": 0.4017472125870506,
+            "loss": 0.4233900134155116,
+            "brier": 0.11644761737599803
+          },
+          "packed_bytes": 167548,
+          "trees": 100,
+          "sha256": "f78e926c774e9ee4fa77697ec27379e3c60f36a1d91ed41d761bdb2e7ffae541"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.18884397333857797,
+            "f1_weighted": 0.42819948461349316,
+            "loss": 0.34853168615068686,
+            "brier": 0.10510198192880486
+          },
+          "D_quality": {
+            "f1_macro": 0.16369703795317558,
+            "f1_weighted": 0.4042231339824594,
+            "loss": 0.3466221660106851,
+            "brier": 0.10360960629235016
+          },
+          "packed_bytes": 811008,
+          "trees": 150,
+          "sha256": "75a25f4047ae9444430e79986b7c1873dac4309551c560f52ce39ab88af0bea7"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.19082786676116426,
+            "f1_weighted": 0.4291688632212299,
+            "loss": 0.34971963332408507,
+            "brier": 0.10552685612051692
+          },
+          "D_quality": {
+            "f1_macro": 0.16795149648486,
+            "f1_weighted": 0.4065743291216961,
+            "loss": 0.3470124448848218,
+            "brier": 0.10347181972197242
+          },
+          "packed_bytes": 835928,
+          "trees": 150,
+          "sha256": "84c5a41e59098cf55a1d39e070e836db3ba50bfcc79c5b5da0c71b103899efa3"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.16806193686772167,
+            "f1_weighted": 0.4022747936656817,
+            "loss": 0.41190734056578704,
+            "brier": 0.11670761792817136
+          },
+          "D_quality": {
+            "f1_macro": 0.15431048092290728,
+            "f1_weighted": 0.39295244994250705,
+            "loss": 0.40966665790998447,
+            "brier": 0.11531022988074066
+          },
+          "packed_bytes": 835928,
+          "trees": 150,
+          "sha256": "1267a861d37e1069934b86bc4303b81291941195c0626b5e4201b713c064616b"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.17253417617453498,
+            "f1_weighted": 0.4115543332864315,
+            "loss": 0.4024757293502765,
+            "brier": 0.11451189406926766
+          },
+          "D_quality": {
+            "f1_macro": 0.15181798697782556,
+            "f1_weighted": 0.3912536796096054,
+            "loss": 0.39795537306939116,
+            "brier": 0.11211959338082403
+          },
+          "packed_bytes": 364792,
+          "trees": 150,
+          "sha256": "d820d7cb48b0a97bca6c05edb7f1447040368baf900416623743d11fd79d6a65"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.1692223236005201,
+            "f1_weighted": 0.4046750953639711,
+            "loss": 0.40197159427077445,
+            "brier": 0.1143815003436839
+          },
+          "D_quality": {
+            "f1_macro": 0.14954501624040017,
+            "f1_weighted": 0.3873469759846302,
+            "loss": 0.39813749953958044,
+            "brier": 0.1121854164239204
+          },
+          "packed_bytes": 402108,
+          "trees": 150,
+          "sha256": "5189b127e8267b50223b2f4d264ac6fad8879eb365e2ff292b8561082b4bd568"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.1688851704026964,
+            "f1_weighted": 0.40081562290208544,
+            "loss": 0.43340808475990616,
+            "brier": 0.12045390748841751
+          },
+          "D_quality": {
+            "f1_macro": 0.14922926023979474,
+            "f1_weighted": 0.3786313435584881,
+            "loss": 0.42509127957110576,
+            "brier": 0.11702231022751508
+          },
+          "packed_bytes": 228316,
+          "trees": 150,
+          "sha256": "5463bea2fbe2b0ff1d5429bdf41c6851790f8cf368aa85640a7504ee19909bf9"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.18319012463447132,
+            "f1_weighted": 0.4225260237361331,
+            "loss": 0.3554148408283156,
+            "brier": 0.106261058516369
+          },
+          "D_quality": {
+            "f1_macro": 0.16260835966510748,
+            "f1_weighted": 0.4045651451788537,
+            "loss": 0.35335209641702325,
+            "brier": 0.10454792585265164
+          },
+          "packed_bytes": 1068040,
+          "trees": 200,
+          "sha256": "7475156d30d8f790c518a70aae17b2aba844724848fc8289660a9fb13580cd7f"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.18319012463447132,
+            "f1_weighted": 0.4225260237361331,
+            "loss": 0.3554148408283156,
+            "brier": 0.106261058516369
+          },
+          "D_quality": {
+            "f1_macro": 0.16260835966510748,
+            "f1_weighted": 0.4045651451788537,
+            "loss": 0.35335209641702325,
+            "brier": 0.10454792585265164
+          },
+          "packed_bytes": 1068040,
+          "trees": 200,
+          "sha256": "7475156d30d8f790c518a70aae17b2aba844724848fc8289660a9fb13580cd7f"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.17388318366949945,
+            "f1_weighted": 0.40636796778585227,
+            "loss": 0.4045458482107362,
+            "brier": 0.11531693867855221
+          },
+          "D_quality": {
+            "f1_macro": 0.15139579979100573,
+            "f1_weighted": 0.3876125387045624,
+            "loss": 0.4019425760106552,
+            "brier": 0.11398221216385677
+          },
+          "packed_bytes": 1068040,
+          "trees": 200,
+          "sha256": "e6352597f30002b0f33d1c5317e9f19be7ffa72f31c0a307f73864498d87b3fe"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.17090833067704153,
+            "f1_weighted": 0.40764058031321126,
+            "loss": 0.3958552761796075,
+            "brier": 0.11319967023788602
+          },
+          "D_quality": {
+            "f1_macro": 0.1493135149984656,
+            "f1_weighted": 0.38858777525978794,
+            "loss": 0.39150966847581997,
+            "brier": 0.11097627748503802
+          },
+          "packed_bytes": 453464,
+          "trees": 200,
+          "sha256": "56d9279ddce125ea566b81e6d824e2080e790c3df08bf29aee77844a7dce1372"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.17343831707688323,
+            "f1_weighted": 0.4080623162374665,
+            "loss": 0.395214064185443,
+            "brier": 0.11308705841512165
+          },
+          "D_quality": {
+            "f1_macro": 0.14947043654652992,
+            "f1_weighted": 0.3895227664798895,
+            "loss": 0.3915603668566694,
+            "brier": 0.11100082432071372
+          },
+          "packed_bytes": 501164,
+          "trees": 200,
+          "sha256": "1090b31612bea3124fa4c87e0b989849fde6cf82745d5bc884540dd290d89a2d"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.17677724871595937,
+            "f1_weighted": 0.4058570542844739,
+            "loss": 0.4228156876119549,
+            "brier": 0.11810479675815859
+          },
+          "D_quality": {
+            "f1_macro": 0.1561605987186586,
+            "f1_weighted": 0.3909766738821278,
+            "loss": 0.42190552666573183,
+            "brier": 0.11739985488614235
+          },
+          "packed_bytes": 289084,
+          "trees": 200,
+          "sha256": "1bbd59ccdefe30b0c267678c519ef954164e3edfbb03c3c77845bc4a201ce122"
+        }
+      ]
+    },
+    {
+      "case": "corel5k_72004",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.01617487027915535,
+            "f1_weighted": 0.12252728811338978,
+            "loss": 0.040959459144595374,
+            "brier": 0.008637490401228196
+          },
+          "D_quality": {
+            "f1_macro": 0.012797784018391246,
+            "f1_weighted": 0.10919257278276455,
+            "loss": 0.04102385035476856,
+            "brier": 0.008628676474647786
+          },
+          "packed_bytes": 480856,
+          "trees": 50,
+          "sha256": "458efba5fafd1827a905b7b55bcde8557e073a9a570b58efc9b3660d5c2ee74a"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.014182483665420402,
+            "f1_weighted": 0.11810505485314729,
+            "loss": 0.04092106008914396,
+            "brier": 0.008632395378780031
+          },
+          "D_quality": {
+            "f1_macro": 0.010514828290426576,
+            "f1_weighted": 0.10211899809482489,
+            "loss": 0.041035636847444976,
+            "brier": 0.00863102506442624
+          },
+          "packed_bytes": 485392,
+          "trees": 50,
+          "sha256": "738446360746711a5acdce28e98b1902267812250fc3d337efb5c80eaf2d8cfc"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.03265580178979957,
+            "f1_weighted": 0.17165895419974778,
+            "loss": 0.04014168781803347,
+            "brier": 0.008484256020330478
+          },
+          "D_quality": {
+            "f1_macro": 0.02703000380605365,
+            "f1_weighted": 0.16150504531947,
+            "loss": 0.04046457034618903,
+            "brier": 0.008516382500185708
+          },
+          "packed_bytes": 485392,
+          "trees": 50,
+          "sha256": "6bbd1d589935ed95e70974f61944f705a16717fcefc463ef207981f9060b8b3f"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.032901406219947714,
+            "f1_weighted": 0.1750490452459029,
+            "loss": 0.039970383487865635,
+            "brier": 0.008475859493165988
+          },
+          "D_quality": {
+            "f1_macro": 0.02773429582821531,
+            "f1_weighted": 0.1601217357621709,
+            "loss": 0.04019950334864116,
+            "brier": 0.008485404912202314
+          },
+          "packed_bytes": 185576,
+          "trees": 50,
+          "sha256": "31e5cf617992048c646df51c6d7296a73f5b3d0da71ca44debc76452fe4820d6"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.03426730237551018,
+            "f1_weighted": 0.17745305228327843,
+            "loss": 0.039996469247625524,
+            "brier": 0.008475917225838799
+          },
+          "D_quality": {
+            "f1_macro": 0.02736670672701282,
+            "f1_weighted": 0.15921970849564357,
+            "loss": 0.04023975664640748,
+            "brier": 0.00849586614239752
+          },
+          "packed_bytes": 205944,
+          "trees": 50,
+          "sha256": "5c5ef50f9fb746a75c91ad234030434478c7ef8ee425e48cc4f59d87726c7bbe"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.03452052213484944,
+            "f1_weighted": 0.1778111675653719,
+            "loss": 0.04009035793189403,
+            "brier": 0.008493588355275779
+          },
+          "D_quality": {
+            "f1_macro": 0.027548580390688096,
+            "f1_weighted": 0.16081024212275616,
+            "loss": 0.04028266512881418,
+            "brier": 0.008494816768542033
+          },
+          "packed_bytes": 165980,
+          "trees": 50,
+          "sha256": "a8492091dbb8024dd55beb19353fffbb66d299cf889b8a1f9f9d8842adaaffe5"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.025362576643985443,
+            "f1_weighted": 0.1527031197343064,
+            "loss": 0.04021018196386473,
+            "brier": 0.008547239746068047
+          },
+          "D_quality": {
+            "f1_macro": 0.018933640298857034,
+            "f1_weighted": 0.13241607497777824,
+            "loss": 0.04031198842495264,
+            "brier": 0.008544958920883607
+          },
+          "packed_bytes": 955624,
+          "trees": 100,
+          "sha256": "e270d000fc1a68598b0ce68de7474ddd2723c75528cbfe61a8b9b16ebd570a8b"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.025611762189402677,
+            "f1_weighted": 0.1521460047107649,
+            "loss": 0.04023998218666534,
+            "brier": 0.008551228870435076
+          },
+          "D_quality": {
+            "f1_macro": 0.018563408865424246,
+            "f1_weighted": 0.13180230884110827,
+            "loss": 0.04037342684639226,
+            "brier": 0.008553417285410224
+          },
+          "packed_bytes": 975280,
+          "trees": 100,
+          "sha256": "d2b9d443b816d7f83a82719a8ad4f7bb1bd36ca82f599f1ddbdc2e2e2d3a190e"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.03270209110174535,
+            "f1_weighted": 0.17473492413799066,
+            "loss": 0.04105822444472265,
+            "brier": 0.008637921197773693
+          },
+          "D_quality": {
+            "f1_macro": 0.03085935334478485,
+            "f1_weighted": 0.1712699457995725,
+            "loss": 0.040444809620576415,
+            "brier": 0.008504384963096285
+          },
+          "packed_bytes": 975280,
+          "trees": 100,
+          "sha256": "d8f51c2bd5300f531fa8e3c39fd2c2d293eb802252d0a26d1bb8cb1c469ea981"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.03434558861141093,
+            "f1_weighted": 0.18134069431394517,
+            "loss": 0.040056264984431704,
+            "brier": 0.008491263040829814
+          },
+          "D_quality": {
+            "f1_macro": 0.02945308325078892,
+            "f1_weighted": 0.1725467280910904,
+            "loss": 0.03983340138053937,
+            "brier": 0.008422573313103438
+          },
+          "packed_bytes": 273704,
+          "trees": 100,
+          "sha256": "81e79184fffbd27d66f3776e09625b5da9738d1aacb7c8892243425f5b0affaa"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.031630876908779686,
+            "f1_weighted": 0.17613186303139505,
+            "loss": 0.040153393669518166,
+            "brier": 0.008506059441058235
+          },
+          "D_quality": {
+            "f1_macro": 0.028954329735789354,
+            "f1_weighted": 0.16902904590402504,
+            "loss": 0.03987821455990668,
+            "brier": 0.008436126020010972
+          },
+          "packed_bytes": 314752,
+          "trees": 100,
+          "sha256": "a8054a8e6c0c13877a9d7e1a81e21f0b1444b2f26e85e272a530212a7b0999b4"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.03381049847593153,
+            "f1_weighted": 0.18325371177890623,
+            "loss": 0.040216237629562376,
+            "brier": 0.008525425156062895
+          },
+          "D_quality": {
+            "f1_macro": 0.02981166875245609,
+            "f1_weighted": 0.1714150394264517,
+            "loss": 0.03996336912873094,
+            "brier": 0.008444569857137913
+          },
+          "packed_bytes": 233148,
+          "trees": 100,
+          "sha256": "f9bec49ed6ce2a42f56c8ca505b1e3eb67f95c2a835a7b6b7702bce9c2dfa3be"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.030230995100196726,
+            "f1_weighted": 0.1748339614903665,
+            "loss": 0.03970266379376356,
+            "brier": 0.008478499087704766
+          },
+          "D_quality": {
+            "f1_macro": 0.021987021751303785,
+            "f1_weighted": 0.145371342307215,
+            "loss": 0.03985979369744904,
+            "brier": 0.008491717915295361
+          },
+          "packed_bytes": 1398640,
+          "trees": 150,
+          "sha256": "a7389a258ec4a3dfc16114f40c69e42e2e7f7983788dbdf8f3ce7bf501a0f89c"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.030033333646128743,
+            "f1_weighted": 0.17357003526775683,
+            "loss": 0.03974396351123366,
+            "brier": 0.008483153292480193
+          },
+          "D_quality": {
+            "f1_macro": 0.022208436277775707,
+            "f1_weighted": 0.1469340192386265,
+            "loss": 0.039875931694370495,
+            "brier": 0.008493144729058072
+          },
+          "packed_bytes": 1430392,
+          "trees": 150,
+          "sha256": "b54d4b0d18af6586beeaf05b2c30d287213cb53b66e17ef48767c27c9cb662ea"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.03735715235763119,
+            "f1_weighted": 0.18813439800183707,
+            "loss": 0.041033548217450935,
+            "brier": 0.00861831370426685
+          },
+          "D_quality": {
+            "f1_macro": 0.030893243004890148,
+            "f1_weighted": 0.17026929014568018,
+            "loss": 0.04044496483285426,
+            "brier": 0.008509350115079547
+          },
+          "packed_bytes": 1430392,
+          "trees": 150,
+          "sha256": "e3f7fee8163d5df979d1515ae300721d7b8383a80df41c702aa28a037d1440fc"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.0351225895706459,
+            "f1_weighted": 0.18727639041164104,
+            "loss": 0.039918323009368976,
+            "brier": 0.00846017754797171
+          },
+          "D_quality": {
+            "f1_macro": 0.030370595369234473,
+            "f1_weighted": 0.17041779507540752,
+            "loss": 0.03973096213709225,
+            "brier": 0.008403705079058165
+          },
+          "packed_bytes": 355576,
+          "trees": 150,
+          "sha256": "188d5dff238a20aff2f8b14def3060be2e997008b7852a92501701f8f8b0d1e3"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.035733963683769555,
+            "f1_weighted": 0.18851694199439586,
+            "loss": 0.039972312483453135,
+            "brier": 0.008468064700093134
+          },
+          "D_quality": {
+            "f1_macro": 0.029109679073262035,
+            "f1_weighted": 0.1641076189739659,
+            "loss": 0.039732132677791056,
+            "brier": 0.008415020883725857
+          },
+          "packed_bytes": 415844,
+          "trees": 150,
+          "sha256": "fc9badab01b0fc6af3f4b7c44dee6260f727a35d4ffd59d3c93f118a0a7fac9f"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.03672137736812199,
+            "f1_weighted": 0.1895016675583029,
+            "loss": 0.039979801467524105,
+            "brier": 0.008480912934005184
+          },
+          "D_quality": {
+            "f1_macro": 0.031350938228880035,
+            "f1_weighted": 0.17225775334654017,
+            "loss": 0.03981489274856207,
+            "brier": 0.008419572633480905
+          },
+          "packed_bytes": 300316,
+          "trees": 150,
+          "sha256": "fc566f33f43d6bbf629fd553e535b358b3bafc8986c9f35b586fe309c3a90636"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.032287616384019065,
+            "f1_weighted": 0.1850265928420218,
+            "loss": 0.039367761549020046,
+            "brier": 0.008436177587665782
+          },
+          "D_quality": {
+            "f1_macro": 0.025233632838497392,
+            "f1_weighted": 0.1552484899015832,
+            "loss": 0.03945142360637179,
+            "brier": 0.008444436331604197
+          },
+          "packed_bytes": 1838632,
+          "trees": 200,
+          "sha256": "b9a72f33bd294aed6edfa2880af9eb1a4ca811339056ab2e0656e67d99e16252"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.032287616384019065,
+            "f1_weighted": 0.1850265928420218,
+            "loss": 0.039367761549020046,
+            "brier": 0.008436177587665782
+          },
+          "D_quality": {
+            "f1_macro": 0.025233632838497392,
+            "f1_weighted": 0.1552484899015832,
+            "loss": 0.03945142360637179,
+            "brier": 0.008444436331604197
+          },
+          "packed_bytes": 1838632,
+          "trees": 200,
+          "sha256": "b9a72f33bd294aed6edfa2880af9eb1a4ca811339056ab2e0656e67d99e16252"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.03889051409722707,
+            "f1_weighted": 0.191423139233569,
+            "loss": 0.041224104052502965,
+            "brier": 0.008615733180743226
+          },
+          "D_quality": {
+            "f1_macro": 0.03049664557584139,
+            "f1_weighted": 0.16980492123678398,
+            "loss": 0.04039603650494428,
+            "brier": 0.008497456285109006
+          },
+          "packed_bytes": 1838632,
+          "trees": 200,
+          "sha256": "4dba046044ac291f7a2d64323f1d881d12a82749027749f701b6c6cc49df8960"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.03836982426879891,
+            "f1_weighted": 0.19698386636985976,
+            "loss": 0.039792824792203606,
+            "brier": 0.008426903860927844
+          },
+          "D_quality": {
+            "f1_macro": 0.029478596908381546,
+            "f1_weighted": 0.17041982724912866,
+            "loss": 0.039575556510672155,
+            "brier": 0.008381746656566937
+          },
+          "packed_bytes": 429016,
+          "trees": 200,
+          "sha256": "a5390fba344c7b86044151a7bec5f73c1f0b2a42c9e9d4fcf0e046f6a6aa6341"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.03920428303951499,
+            "f1_weighted": 0.1995761619418462,
+            "loss": 0.03976502968862613,
+            "brier": 0.00842180537390511
+          },
+          "D_quality": {
+            "f1_macro": 0.02977718998503278,
+            "f1_weighted": 0.168939242494988,
+            "loss": 0.03956777394548162,
+            "brier": 0.008393836807373534
+          },
+          "packed_bytes": 506516,
+          "trees": 200,
+          "sha256": "7dbf88e88824f54cd7d1e48d3798ea897f14bcae5a81851a0406f151bea95806"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.03943306377161176,
+            "f1_weighted": 0.1978466501662384,
+            "loss": 0.03974931614605318,
+            "brier": 0.00842175901824313
+          },
+          "D_quality": {
+            "f1_macro": 0.030299436492800858,
+            "f1_weighted": 0.1718016912926068,
+            "loss": 0.03968942402367595,
+            "brier": 0.008400539630231905
+          },
+          "packed_bytes": 367484,
+          "trees": 200,
+          "sha256": "a41106bb038e1535d2a67632b5aee6722824e021154bb1aac125d9c7cc89f58b"
+        }
+      ]
+    },
+    {
+      "case": "delicious_72104",
+      "models": [
+        {
+          "uid": "prefix/t50",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.08052847290074266,
+            "f1_weighted": 0.2595200054381304,
+            "loss": 0.0675628862348691,
+            "brier": 0.0159446835974069
+          },
+          "D_quality": {
+            "f1_macro": 0.07807603498617796,
+            "f1_weighted": 0.274709779392693,
+            "loss": 0.06632686746561359,
+            "brier": 0.015795260388184428
+          },
+          "packed_bytes": 1579240,
+          "trees": 50,
+          "sha256": "b8b1f4d638ab2e0db9319ab8cbf9c7e1539722dcd7e595fd57ba762773dc06b3"
+        },
+        {
+          "uid": "remove/t50",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.07913573627680669,
+            "f1_weighted": 0.25792737583278874,
+            "loss": 0.06762056483016538,
+            "brier": 0.01595687601617305
+          },
+          "D_quality": {
+            "f1_macro": 0.07662835688886546,
+            "f1_weighted": 0.27322030644808104,
+            "loss": 0.06638917388996064,
+            "brier": 0.015808679149724295
+          },
+          "packed_bytes": 1583188,
+          "trees": 50,
+          "sha256": "694433b2e9d8f8cdf534d33fa91a1585ec20f3a2f685626a220ecd80db2fa19a"
+        },
+        {
+          "uid": "refit/t50",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.11879435791497246,
+            "f1_weighted": 0.29758287136136835,
+            "loss": 0.06534765574425443,
+            "brier": 0.015496747327945898
+          },
+          "D_quality": {
+            "f1_macro": 0.1165030673919493,
+            "f1_weighted": 0.31272356577178323,
+            "loss": 0.06383663213439485,
+            "brier": 0.01528575407646265
+          },
+          "packed_bytes": 1583188,
+          "trees": 50,
+          "sha256": "3b2fabab989adace7dd59c5e63c284bcec102b7eeebc88e375e868347e3f247e"
+        },
+        {
+          "uid": "refit_AB/t50",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.09687565372063482,
+            "f1_weighted": 0.2893212535207216,
+            "loss": 0.0656735427041278,
+            "brier": 0.015606621458280274
+          },
+          "D_quality": {
+            "f1_macro": 0.09504863321078878,
+            "f1_weighted": 0.3034649454392158,
+            "loss": 0.06426175830613323,
+            "brier": 0.015431088562818317
+          },
+          "packed_bytes": 368112,
+          "trees": 50,
+          "sha256": "3823346c360e9188e5d4be4554bc8b0d46d815bcebac85f09c97b431cf506915"
+        },
+        {
+          "uid": "refit_ABL/t50",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.11144250137270574,
+            "f1_weighted": 0.2941289441640655,
+            "loss": 0.06539170186728564,
+            "brier": 0.015545170505331926
+          },
+          "D_quality": {
+            "f1_macro": 0.10881883043313977,
+            "f1_weighted": 0.3078283149198091,
+            "loss": 0.06389162725166332,
+            "brier": 0.015350726048826124
+          },
+          "packed_bytes": 432464,
+          "trees": 50,
+          "sha256": "1fe421b59c04652aa247e13cdf6c3ec18b4bc910c0d66dd699fea5cd39a3027d"
+        },
+        {
+          "uid": "coarse_refit_ABL/t50",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.10616817552246552,
+            "f1_weighted": 0.28529916082919843,
+            "loss": 0.06576248233040048,
+            "brier": 0.015642252074870633
+          },
+          "D_quality": {
+            "f1_macro": 0.10579158118252523,
+            "f1_weighted": 0.3027227860893981,
+            "loss": 0.06440278181921599,
+            "brier": 0.015472775848336798
+          },
+          "packed_bytes": 346244,
+          "trees": 50,
+          "sha256": "beb7ce6e2835b34b2d44e1c60d757e6e33d937ea57636f23f27f0014dec47f7c"
+        },
+        {
+          "uid": "prefix/t100",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.09788145257679089,
+            "f1_weighted": 0.2823097640048476,
+            "loss": 0.0657888694533682,
+            "brier": 0.015645989095721353
+          },
+          "D_quality": {
+            "f1_macro": 0.09405736931558464,
+            "f1_weighted": 0.3007962165369553,
+            "loss": 0.06435677561872291,
+            "brier": 0.015452851486582667
+          },
+          "packed_bytes": 3118960,
+          "trees": 100,
+          "sha256": "e35edca00babbe7f5c94607299f9b06bf33c61744cd073f46ad88e5c360c7cff"
+        },
+        {
+          "uid": "remove/t100",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.09490667938646079,
+            "f1_weighted": 0.2802283716095885,
+            "loss": 0.06590839718650132,
+            "brier": 0.015671344495048003
+          },
+          "D_quality": {
+            "f1_macro": 0.09069201444818024,
+            "f1_weighted": 0.2972551121583409,
+            "loss": 0.06450189027527832,
+            "brier": 0.015486216434679742
+          },
+          "packed_bytes": 3146596,
+          "trees": 100,
+          "sha256": "7726d615caca4f2be1b886b29c707ff1fd237363fd63e7bc8c2b043a370fab1b"
+        },
+        {
+          "uid": "refit/t100",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.12599213964708483,
+            "f1_weighted": 0.3065827189542511,
+            "loss": 0.06492376250961632,
+            "brier": 0.015402398971270667
+          },
+          "D_quality": {
+            "f1_macro": 0.1233175127704168,
+            "f1_weighted": 0.32001583722753324,
+            "loss": 0.06360491389456409,
+            "brier": 0.015199944454060352
+          },
+          "packed_bytes": 3146596,
+          "trees": 100,
+          "sha256": "b6498738526988c3fe4fa99a28e389919eb8b74eca6826b51cfc132c449d41f9"
+        },
+        {
+          "uid": "refit_AB/t100",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.09924966523121298,
+            "f1_weighted": 0.2962355544608847,
+            "loss": 0.0652098687917106,
+            "brier": 0.015526577954513362
+          },
+          "D_quality": {
+            "f1_macro": 0.09942957208593367,
+            "f1_weighted": 0.3109912658689884,
+            "loss": 0.06386035771019204,
+            "brier": 0.015359837641749514
+          },
+          "packed_bytes": 475824,
+          "trees": 100,
+          "sha256": "c618491bf1dda37d7edcad3e9888592138387470879f21930bc8c37a31d7b63a"
+        },
+        {
+          "uid": "refit_ABL/t100",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.11892951742758742,
+            "f1_weighted": 0.3023924701371536,
+            "loss": 0.06497009177227514,
+            "brier": 0.015505625234668448
+          },
+          "D_quality": {
+            "f1_macro": 0.11673877842523671,
+            "f1_weighted": 0.3161840138952545,
+            "loss": 0.0635940547495141,
+            "brier": 0.015332287891013058
+          },
+          "packed_bytes": 604040,
+          "trees": 100,
+          "sha256": "72c8b3bed4d110b9607ba5849c903b412b260a477d5b43a679d5aec5ab53b1f5"
+        },
+        {
+          "uid": "coarse_refit_ABL/t100",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.11477172345187123,
+            "f1_weighted": 0.29659678936108297,
+            "loss": 0.06554893996253952,
+            "brier": 0.015650080110840108
+          },
+          "D_quality": {
+            "f1_macro": 0.11056271840031373,
+            "f1_weighted": 0.31049026782698486,
+            "loss": 0.06425390538142582,
+            "brier": 0.015502723841948899
+          },
+          "packed_bytes": 432900,
+          "trees": 100,
+          "sha256": "b512f61f5056decaf14cc3174ff69a4b221025a4d9234ab2dea82a5199bca25f"
+        },
+        {
+          "uid": "prefix/t150",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.10897666904439852,
+            "f1_weighted": 0.2938128698142776,
+            "loss": 0.06495926833721032,
+            "brier": 0.015498370828999604
+          },
+          "D_quality": {
+            "f1_macro": 0.10307706941559316,
+            "f1_weighted": 0.3106399546963049,
+            "loss": 0.06347187285361795,
+            "brier": 0.015294388051206236
+          },
+          "packed_bytes": 4678420,
+          "trees": 150,
+          "sha256": "3dccaa0a9c4370b01f74f3311a52c510296116f65f58cbd53bd3f8fd68761cef"
+        },
+        {
+          "uid": "remove/t150",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.10714844144938718,
+            "f1_weighted": 0.2910473457001828,
+            "loss": 0.0650240304277595,
+            "brier": 0.015509990977291789
+          },
+          "D_quality": {
+            "f1_macro": 0.10386953086160312,
+            "f1_weighted": 0.3092135788651845,
+            "loss": 0.06352943698502508,
+            "brier": 0.015305761087136492
+          },
+          "packed_bytes": 4698160,
+          "trees": 150,
+          "sha256": "263fa7ab5ae2a481d2bb1e535cfa824f27374c32c9e9df21bc6e91b97a4d9637"
+        },
+        {
+          "uid": "refit/t150",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.13046920680454527,
+            "f1_weighted": 0.30938263564507407,
+            "loss": 0.06493632592184233,
+            "brier": 0.015386087423046821
+          },
+          "D_quality": {
+            "f1_macro": 0.12735216296903218,
+            "f1_weighted": 0.3224240988259374,
+            "loss": 0.06378157630862112,
+            "brier": 0.015209311039071872
+          },
+          "packed_bytes": 4698160,
+          "trees": 150,
+          "sha256": "6f6ce36155a99ff2ca071ab645d12e697d961af9584e9c712051b58c29ee8027"
+        },
+        {
+          "uid": "refit_AB/t150",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.10201600918882069,
+            "f1_weighted": 0.2995737949338575,
+            "loss": 0.06510589566121829,
+            "brier": 0.015498532171558967
+          },
+          "D_quality": {
+            "f1_macro": 0.09592483477653513,
+            "f1_weighted": 0.31121498980213624,
+            "loss": 0.06380277573688513,
+            "brier": 0.015332717784819526
+          },
+          "packed_bytes": 582720,
+          "trees": 150,
+          "sha256": "20e313c03da4a5bf5cece8ee3a835265392e92bed2331903e3d6c0e160d6704f"
+        },
+        {
+          "uid": "refit_ABL/t150",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.11902041953024463,
+            "f1_weighted": 0.304091310211589,
+            "loss": 0.06502039389585515,
+            "brier": 0.01553317218106484
+          },
+          "D_quality": {
+            "f1_macro": 0.11786129378245304,
+            "f1_weighted": 0.3189307098167744,
+            "loss": 0.06376222365761591,
+            "brier": 0.015373045651439545
+          },
+          "packed_bytes": 774324,
+          "trees": 150,
+          "sha256": "ba5ffaba1e556168092d53df8a867da27581de0ad59ca404f350e6e70dbb75d6"
+        },
+        {
+          "uid": "coarse_refit_ABL/t150",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.11883000114905866,
+            "f1_weighted": 0.3001567906743593,
+            "loss": 0.0658188360448691,
+            "brier": 0.01573556983584703
+          },
+          "D_quality": {
+            "f1_macro": 0.1170750412378694,
+            "f1_weighted": 0.31487327169635565,
+            "loss": 0.06462364579949771,
+            "brier": 0.015582527644369725
+          },
+          "packed_bytes": 519556,
+          "trees": 150,
+          "sha256": "75de20596fd19166ccf1241bca05a3d4a69603b01842ba1ba673898c075da53a"
+        },
+        {
+          "uid": "prefix/t200",
+          "family": "prefix",
+          "quality": {
+            "f1_macro": 0.11583888694451197,
+            "f1_weighted": 0.29951661652426675,
+            "loss": 0.06444694366895765,
+            "brier": 0.015406250573869703
+          },
+          "D_quality": {
+            "f1_macro": 0.10794355585113295,
+            "f1_weighted": 0.3167644299928463,
+            "loss": 0.06290075575483119,
+            "brier": 0.015185547296245475
+          },
+          "packed_bytes": 6229984,
+          "trees": 200,
+          "sha256": "4a289d96e555a38da15786c0723aed644fb32443f1ecd7850418d63aa79384ea"
+        },
+        {
+          "uid": "remove/t200",
+          "family": "remove",
+          "quality": {
+            "f1_macro": 0.11583888694451197,
+            "f1_weighted": 0.29951661652426675,
+            "loss": 0.06444694366895765,
+            "brier": 0.015406250573869703
+          },
+          "D_quality": {
+            "f1_macro": 0.10794355585113295,
+            "f1_weighted": 0.3167644299928463,
+            "loss": 0.06290075575483119,
+            "brier": 0.015185547296245475
+          },
+          "packed_bytes": 6229984,
+          "trees": 200,
+          "sha256": "4a289d96e555a38da15786c0723aed644fb32443f1ecd7850418d63aa79384ea"
+        },
+        {
+          "uid": "refit/t200",
+          "family": "refit",
+          "quality": {
+            "f1_macro": 0.1315991492297122,
+            "f1_weighted": 0.30994423616176436,
+            "loss": 0.06502951037519944,
+            "brier": 0.01539383705915021
+          },
+          "D_quality": {
+            "f1_macro": 0.13007769070693898,
+            "f1_weighted": 0.3229914451823818,
+            "loss": 0.06381292396353921,
+            "brier": 0.015204054980277503
+          },
+          "packed_bytes": 6229984,
+          "trees": 200,
+          "sha256": "007d6632a34036565ba0b24df7de093c1cc0b223602b55c011347a99544167dd"
+        },
+        {
+          "uid": "refit_AB/t200",
+          "family": "refit_AB",
+          "quality": {
+            "f1_macro": 0.10096194013890916,
+            "f1_weighted": 0.30034307414381567,
+            "loss": 0.065137198580556,
+            "brier": 0.015493556928712335
+          },
+          "D_quality": {
+            "f1_macro": 0.09582136812768456,
+            "f1_weighted": 0.31413137525275486,
+            "loss": 0.06372586075348777,
+            "brier": 0.015312074375874393
+          },
+          "packed_bytes": 688256,
+          "trees": 200,
+          "sha256": "e4a98df9c3508b645582f143a6fceb973fb2f527157c9501938d59d6101c20ad"
+        },
+        {
+          "uid": "refit_ABL/t200",
+          "family": "refit_ABL",
+          "quality": {
+            "f1_macro": 0.12116535867324005,
+            "f1_weighted": 0.30508745367804185,
+            "loss": 0.06521497418847742,
+            "brier": 0.015586234107308312
+          },
+          "D_quality": {
+            "f1_macro": 0.12302892810760248,
+            "f1_weighted": 0.32262168128409546,
+            "loss": 0.06387694393118543,
+            "brier": 0.015417008293462427
+          },
+          "packed_bytes": 942436,
+          "trees": 200,
+          "sha256": "64f488793ce5c0b422ec87839a1737ca739bed9c82f9c786b1a973fe624f2817"
+        },
+        {
+          "uid": "coarse_refit_ABL/t200",
+          "family": "coarse_refit_ABL",
+          "quality": {
+            "f1_macro": 0.12033952491562486,
+            "f1_weighted": 0.30196638212473953,
+            "loss": 0.06624539202846459,
+            "brier": 0.01582008633282243
+          },
+          "D_quality": {
+            "f1_macro": 0.11808492187850896,
+            "f1_weighted": 0.3179422153291143,
+            "loss": 0.06505736246085785,
+            "brier": 0.01566513269709183
+          },
+          "packed_bytes": 606212,
+          "trees": 200,
+          "sha256": "00481b427b8b7e8920fc9a13327153574ddf7bc2376f17537cba74f414818555"
+        }
+      ]
+    }
+  ],
+  "new_trees": 0,
+  "environment": {
+    "sha256": "634d173ce93429e267a57122d1594073b48b9ef25cd410d10798b144c32a6f42",
+    "packages": 45,
+    "actual_runtime_checked": true
+  },
+  "pretest_seal": {
+    "path": "/root/.orx/runs/dc06c27f-9a7c-4ffc-a761-abdd77cebfdf/repo/results/six_R3_20261030/pretest_seal.json",
+    "sha256": "cca0e2aed2eb8b35a3e46fe99926a8c4d3bc606154f0e626d847587fed22028c"
+  },
+  "seconds": 636.5972378775477
+}

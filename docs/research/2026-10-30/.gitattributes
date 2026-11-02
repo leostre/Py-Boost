@@ -1,0 +1,4 @@
+*.json -text whitespace=cr-at-eol
+reports/*.json -text whitespace=cr-at-eol
+data/*.csv -text whitespace=cr-at-eol
+figures/*.svg -text -whitespace

@@ -1,0 +1,10 @@
+family,budget,bank_copies,model_copies,distinct_tasks,owned_pool_bytes,workspace_reserved,censored_at512,replica_stress_only
+ordinary_refit,67108864,23,276,12,63378432,1396736,False,True
+ordinary_refit,268435456,96,1152,12,264536064,1396736,False,True
+ordinary_refit,1073741824,389,4668,12,1071922176,1396736,False,True
+mixed_union,67108864,24,288,12,65544192,1396736,False,True
+mixed_union,268435456,97,1164,12,264907776,1396736,False,True
+mixed_union,1073741824,392,4704,12,1070555136,1396736,False,True
+mixed,67108864,39,468,12,64257024,1396736,False,True
+mixed,268435456,162,1944,12,266913792,1396736,False,True
+mixed,1073741824,512,6144,12,843579392,1396736,True,True

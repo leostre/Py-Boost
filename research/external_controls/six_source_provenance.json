@@ -1,0 +1,372 @@
+{
+  "hash_encoding": "UTF-8 with LF newlines",
+  "files": [
+    {
+      "file": "research/external_controls/six_r1.py",
+      "source_worktree": "HASBoost-Autonomous-R1-20261030",
+      "source_file": "six_r1.py",
+      "source_commit": "a4a3a64950b1f40e814c20b906217bf0ede099c3",
+      "source_sha256": "eafc62f596d8abf4cb54a0fa3aee62d5b8e7eb20f364e42e8c200ca674dca077",
+      "published_sha256": "7501b9b150a0273699bb9932e410b094f895dbbba3bc86ec4f14385492f18deb"
+    },
+    {
+      "file": "research/external_controls/six_r1a.py",
+      "source_worktree": "HASBoost-Autonomous-R1A-20261030",
+      "source_file": "six_r1a.py",
+      "source_commit": "9559e6209c0084132e2232b38dda741b589eb507",
+      "source_sha256": "01b4053e89652cfe85d505a50207822909bb2f8b57b6e4df41f97799689ebad8",
+      "published_sha256": "01b4053e89652cfe85d505a50207822909bb2f8b57b6e4df41f97799689ebad8"
+    },
+    {
+      "file": "research/external_controls/six_common.py",
+      "source_worktree": "HASBoost-Autonomous-R1A-20261030",
+      "source_file": "six_common.py",
+      "source_commit": "9559e6209c0084132e2232b38dda741b589eb507",
+      "source_sha256": "33ea599410bdd0b672e96a3617ea19a6d7347cf3817a27d2f8ebb9395976d8fc",
+      "published_sha256": "33ea599410bdd0b672e96a3617ea19a6d7347cf3817a27d2f8ebb9395976d8fc"
+    },
+    {
+      "file": "research/external_controls/six_train_profiles.csv",
+      "source_worktree": "HASBoost-Autonomous-R1A-20261030",
+      "source_file": "six_train_profiles.csv",
+      "source_commit": "9559e6209c0084132e2232b38dda741b589eb507",
+      "source_sha256": "c05c573a637b749e1962ad3bbac9dcf79470ed781269266164befd5451056f04",
+      "published_sha256": "c05c573a637b749e1962ad3bbac9dcf79470ed781269266164befd5451056f04"
+    },
+    {
+      "file": "research/external_controls/six_r2.py",
+      "source_worktree": "HASBoost-Autonomous-R2-20261030",
+      "source_file": "six_r2.py",
+      "source_commit": "1f9e653ff065f1134d6333ea6bac8396302764b3",
+      "source_sha256": "5426088626cf706ba5e0c5a71fe5eafa9b23d7e5429a35abd35ba30ee60f1531",
+      "published_sha256": "5426088626cf706ba5e0c5a71fe5eafa9b23d7e5429a35abd35ba30ee60f1531"
+    },
+    {
+      "file": "research/external_controls/tests/test_six_residual_gate.py",
+      "source_worktree": "HASBoost-Autonomous-R2-20261030",
+      "source_file": "tests/test_six_residual_gate.py",
+      "source_commit": "1f9e653ff065f1134d6333ea6bac8396302764b3",
+      "source_sha256": "c5e1f9b316389e77d2e0b8ceaffa162b4e0076cae960ad1e6b5eae873b862e05",
+      "published_sha256": "c5e1f9b316389e77d2e0b8ceaffa162b4e0076cae960ad1e6b5eae873b862e05"
+    },
+    {
+      "file": "research/external_controls/six_r3.py",
+      "source_worktree": "HASBoost-Autonomous-R3-20261030",
+      "source_file": "six_r3.py",
+      "source_commit": "2b1a066969205412255bfe48b193a3f1eccbb682",
+      "source_sha256": "681b914d7443b688c0ac3d637b33d8765ff23e1ae9a3e3fb55d7b1e7c414c861",
+      "published_sha256": "681b914d7443b688c0ac3d637b33d8765ff23e1ae9a3e3fb55d7b1e7c414c861"
+    },
+    {
+      "file": "research/external_controls/six_structural_core.py",
+      "source_worktree": "HASBoost-Autonomous-R3-20261030",
+      "source_file": "six_structural_core.py",
+      "source_commit": "2b1a066969205412255bfe48b193a3f1eccbb682",
+      "source_sha256": "0e715bc9ae934a5abfbabc89405f4af8bc67ce8cc1aa83e6e173638ce5a6a43d",
+      "published_sha256": "0e715bc9ae934a5abfbabc89405f4af8bc67ce8cc1aa83e6e173638ce5a6a43d"
+    },
+    {
+      "file": "research/external_controls/tests/test_six_structural.py",
+      "source_worktree": "HASBoost-Autonomous-R3-20261030",
+      "source_file": "tests/test_six_structural.py",
+      "source_commit": "2b1a066969205412255bfe48b193a3f1eccbb682",
+      "source_sha256": "cd409d71285f092fe8a6d8d72834c009ee1a423c18d03282401dd85a34c91ee3",
+      "published_sha256": "cd409d71285f092fe8a6d8d72834c009ee1a423c18d03282401dd85a34c91ee3"
+    },
+    {
+      "file": "research/external_controls/six_r4.py",
+      "source_worktree": "HASBoost-Autonomous-R4-20261030",
+      "source_file": "six_r4.py",
+      "source_commit": "b4076444ab752d6ba99b6ff39db7a50789909a7b",
+      "source_sha256": "319453dbe636a6226a65e0613cf2f646d35f5d2b4f9861badf7644c78f1b6be6",
+      "published_sha256": "319453dbe636a6226a65e0613cf2f646d35f5d2b4f9861badf7644c78f1b6be6"
+    },
+    {
+      "file": "research/external_controls/six_gather_gpu.py",
+      "source_worktree": "HASBoost-Autonomous-R4-20261030",
+      "source_file": "six_gather_gpu.py",
+      "source_commit": "b4076444ab752d6ba99b6ff39db7a50789909a7b",
+      "source_sha256": "e5d7d880e61fc2a8608b2cc7593708064532ddc7015f67ac55cac3b668a3178c",
+      "published_sha256": "e5d7d880e61fc2a8608b2cc7593708064532ddc7015f67ac55cac3b668a3178c"
+    },
+    {
+      "file": "research/external_controls/six_r5.py",
+      "source_worktree": "HASBoost-Autonomous-R5-20261030",
+      "source_file": "six_r5.py",
+      "source_commit": "d27f4980337abae7a00b31717b32c20fba43f8ef",
+      "source_sha256": "808244e40cb32ee3623efe995693f9d9e4b83a30acb2560205b24b8f9208b712",
+      "published_sha256": "808244e40cb32ee3623efe995693f9d9e4b83a30acb2560205b24b8f9208b712"
+    },
+    {
+      "file": "research/external_controls/six_quant_core.py",
+      "source_worktree": "HASBoost-Autonomous-R5-20261030",
+      "source_file": "six_quant_core.py",
+      "source_commit": "d27f4980337abae7a00b31717b32c20fba43f8ef",
+      "source_sha256": "bcfe5dcca1cc6366fdacb1c832ef29f9a92b6ac47a5da49cc08cee27fd3d5a39",
+      "published_sha256": "bcfe5dcca1cc6366fdacb1c832ef29f9a92b6ac47a5da49cc08cee27fd3d5a39"
+    },
+    {
+      "file": "research/external_controls/six_quant_gpu.py",
+      "source_worktree": "HASBoost-Autonomous-R5-20261030",
+      "source_file": "six_quant_gpu.py",
+      "source_commit": "d27f4980337abae7a00b31717b32c20fba43f8ef",
+      "source_sha256": "af54f5cabd6b8e500ad79c8c82cfa7bbefc2ac160156bd993577a02a0a61694b",
+      "published_sha256": "af54f5cabd6b8e500ad79c8c82cfa7bbefc2ac160156bd993577a02a0a61694b"
+    },
+    {
+      "file": "research/external_controls/tests/test_six_quant.py",
+      "source_worktree": "HASBoost-Autonomous-R5-20261030",
+      "source_file": "tests/test_six_quant.py",
+      "source_commit": "d27f4980337abae7a00b31717b32c20fba43f8ef",
+      "source_sha256": "495dff7532fd188af7344cdaa6bf5645c0a15698cfc7300ed091911c43fbcf83",
+      "published_sha256": "495dff7532fd188af7344cdaa6bf5645c0a15698cfc7300ed091911c43fbcf83"
+    },
+    {
+      "file": "research/external_controls/six_r5a.py",
+      "source_worktree": "HASBoost-Autonomous-R5A-20261030",
+      "source_file": "six_r5a.py",
+      "source_commit": "727fe92bbdd8a325aa2ac7e4e3ad1077dccf0c0c",
+      "source_sha256": "23bf4d841030a8c4644010e2130bf88a1729213cd1a1dfabdbdbffc0172df1b2",
+      "published_sha256": "23bf4d841030a8c4644010e2130bf88a1729213cd1a1dfabdbdbffc0172df1b2"
+    },
+    {
+      "file": "research/external_controls/six_mixed_quant.py",
+      "source_worktree": "HASBoost-Autonomous-R5A-20261030",
+      "source_file": "six_mixed_quant.py",
+      "source_commit": "727fe92bbdd8a325aa2ac7e4e3ad1077dccf0c0c",
+      "source_sha256": "700927a0e5be9010fad786780a50652d744e2e2f590a7debddb9a34864a6b0e2",
+      "published_sha256": "700927a0e5be9010fad786780a50652d744e2e2f590a7debddb9a34864a6b0e2"
+    },
+    {
+      "file": "research/external_controls/tests/test_six_mixed_quant.py",
+      "source_worktree": "HASBoost-Autonomous-R5A-20261030",
+      "source_file": "tests/test_six_mixed_quant.py",
+      "source_commit": "727fe92bbdd8a325aa2ac7e4e3ad1077dccf0c0c",
+      "source_sha256": "42d699867552b409c9491dbd8af12cc88aa3240b89bf1e11cb7a2cad5f265869",
+      "published_sha256": "42d699867552b409c9491dbd8af12cc88aa3240b89bf1e11cb7a2cad5f265869"
+    },
+    {
+      "file": "research/external_controls/six_r5qm.py",
+      "source_worktree": "HASBoost-Autonomous-R5QM-20261030",
+      "source_file": "six_r5q.py",
+      "source_commit": "63d2f1e5eda6116adfa9e57ebed5d6d13fcf6287",
+      "source_sha256": "2c0b13fccd4dc3c7c4554cd874b959b22bacf643090d468e817fc760e13b9fd7",
+      "published_sha256": "2c0b13fccd4dc3c7c4554cd874b959b22bacf643090d468e817fc760e13b9fd7"
+    },
+    {
+      "file": "research/external_controls/quantized_direct_gpu.py",
+      "source_worktree": "HASBoost-Autonomous-R5QM-20261030",
+      "source_file": "quantized_direct_gpu.py",
+      "source_commit": "63d2f1e5eda6116adfa9e57ebed5d6d13fcf6287",
+      "source_sha256": "d2675550b34eb47f0f66b048da4fc4370888915b98b755d05ff914601690abb7",
+      "published_sha256": "deca095fd4769cd22c274403f80ac662d06052dab63576144a492697329aa4a0"
+    },
+    {
+      "file": "research/external_controls/quant_metric_core.py",
+      "source_worktree": "HASBoost-Autonomous-R5QM-20261030",
+      "source_file": "quant_metric_core.py",
+      "source_commit": "63d2f1e5eda6116adfa9e57ebed5d6d13fcf6287",
+      "source_sha256": "b2962f2d389579e59f6c709ddd2287b392f8052fb2e40cb9073864473713a7e0",
+      "published_sha256": "b2962f2d389579e59f6c709ddd2287b392f8052fb2e40cb9073864473713a7e0"
+    },
+    {
+      "file": "research/external_controls/tests/test_quant_metric.py",
+      "source_worktree": "HASBoost-Autonomous-R5QM-20261030",
+      "source_file": "tests/test_quant_metric.py",
+      "source_commit": "63d2f1e5eda6116adfa9e57ebed5d6d13fcf6287",
+      "source_sha256": "fd5f29faca9ebfd3baba8b690091e134fa9047740d950ecb9180e76e0e8c080f",
+      "published_sha256": "fd5f29faca9ebfd3baba8b690091e134fa9047740d950ecb9180e76e0e8c080f"
+    },
+    {
+      "file": "research/external_controls/six_r5s.py",
+      "source_worktree": "HASBoost-Autonomous-R5S-20261030",
+      "source_file": "six_r5s.py",
+      "source_commit": "7c5672e32859dbcc200a2023a7fff8afda701ffc",
+      "source_sha256": "41c0443e5129f4fa5a450689ca318cc85be6a4d92b506053dcd7f653fd7c5440",
+      "published_sha256": "41c0443e5129f4fa5a450689ca318cc85be6a4d92b506053dcd7f653fd7c5440"
+    },
+    {
+      "file": "research/external_controls/six_r5o.py",
+      "source_worktree": "HASBoost-Autonomous-R5O-20261030",
+      "source_file": "six_r5o.py",
+      "source_commit": "7ca4920e5b98088e03ba0059c8e3e33aa6bf8b33",
+      "source_sha256": "be75723f5496d7a9f24ce540c2e47a1cfd797a16934ef68a40a123dcf9fa09a4",
+      "published_sha256": "be75723f5496d7a9f24ce540c2e47a1cfd797a16934ef68a40a123dcf9fa09a4"
+    },
+    {
+      "file": "research/external_controls/fast_quant_gpu.py",
+      "source_worktree": "HASBoost-Autonomous-R5O-20261030",
+      "source_file": "fast_quant_gpu.py",
+      "source_commit": "7ca4920e5b98088e03ba0059c8e3e33aa6bf8b33",
+      "source_sha256": "96549f439d349ab3f348f8928945c0d93cd7bad8ac34b84637e210efd1d0cb53",
+      "published_sha256": "96549f439d349ab3f348f8928945c0d93cd7bad8ac34b84637e210efd1d0cb53"
+    },
+    {
+      "file": "research/external_controls/six_r6d.py",
+      "source_worktree": "HASBoost-Autonomous-R6D-20261030",
+      "source_file": "six_r6d.py",
+      "source_commit": "a9714e89d095ecf0eaf5f1ef4886ff0edd6ef888",
+      "source_sha256": "220a00ddb0db4b133152ce086e934d87f21178919c3c2e883421dc9b0d80801d",
+      "published_sha256": "220a00ddb0db4b133152ce086e934d87f21178919c3c2e883421dc9b0d80801d"
+    },
+    {
+      "file": "research/external_controls/six_r6e.py",
+      "source_worktree": "HASBoost-Autonomous-R6E-20261030",
+      "source_file": "six_r6e.py",
+      "source_commit": "2c340349f4e1c8b67ba53aee5affb263ec540d07",
+      "source_sha256": "c5153e2cf3481f2da90fd5dfd67740963c919f5ebc618aaa2f72ae5b41481a42",
+      "published_sha256": "c5153e2cf3481f2da90fd5dfd67740963c919f5ebc618aaa2f72ae5b41481a42"
+    },
+    {
+      "file": "research/external_controls/six_r6b.py",
+      "source_worktree": "HASBoost-Autonomous-R6B-20261030",
+      "source_file": "six_r6b.py",
+      "source_commit": "66de3fc3447fbf67f6a2f6bf913252c5be71da29",
+      "source_sha256": "83d82e5051a568746d246d87ab9b85508917eca2035d2593d37ad73cdebab48d",
+      "published_sha256": "83d82e5051a568746d246d87ab9b85508917eca2035d2593d37ad73cdebab48d"
+    },
+    {
+      "file": "research/external_controls/six_r6t.py",
+      "source_worktree": "HASBoost-Autonomous-R6T-20261030",
+      "source_file": "six_r6t.py",
+      "source_commit": "1ea472205232d9ba75ed4e63fe77becdf0046a17",
+      "source_sha256": "52c5ee52bb9ba6d291f3af90c95fefeaa316ea4e404f68ed92f828045087b9f3",
+      "published_sha256": "52c5ee52bb9ba6d291f3af90c95fefeaa316ea4e404f68ed92f828045087b9f3"
+    },
+    {
+      "file": "research/external_controls/saved_serving_core.py",
+      "source_worktree": "HASBoost-Autonomous-R6T-20261030",
+      "source_file": "saved_serving_core.py",
+      "source_commit": "1ea472205232d9ba75ed4e63fe77becdf0046a17",
+      "source_sha256": "b5891d5ada4d89d448b891a4e612b62c4918d7d5cf509b190966f3154307659e",
+      "published_sha256": "b5891d5ada4d89d448b891a4e612b62c4918d7d5cf509b190966f3154307659e"
+    },
+    {
+      "file": "research/external_controls/tests/test_saved_serving_core.py",
+      "source_worktree": "HASBoost-Autonomous-R6T-20261030",
+      "source_file": "tests/test_saved_serving_core.py",
+      "source_commit": "1ea472205232d9ba75ed4e63fe77becdf0046a17",
+      "source_sha256": "8a8a260997197f81119a891de6260b24f75d024a10e31d3d7518fb49d7ecfcbf",
+      "published_sha256": "8a8a260997197f81119a891de6260b24f75d024a10e31d3d7518fb49d7ecfcbf"
+    },
+    {
+      "file": "research/external_controls/six_analysis.py",
+      "source_worktree": "HASBoost-Autonomous-R7-20261030",
+      "source_file": "six_analysis.py",
+      "source_commit": "b7e8d2ac6bf9ac4df060b216a23f8c68c8127c0e",
+      "source_sha256": "01c910666345f572f79e8063906e6fccfd8871d31f2048f3f4687268050448c4",
+      "published_sha256": "01c910666345f572f79e8063906e6fccfd8871d31f2048f3f4687268050448c4"
+    },
+    {
+      "file": "research/external_controls/six_figures/plot_six.py",
+      "source_worktree": "HASBoost-Autonomous-R7-20261030",
+      "source_file": "six_figures/plot_six.py",
+      "source_commit": "b7e8d2ac6bf9ac4df060b216a23f8c68c8127c0e",
+      "source_sha256": "f1a375803527f03f8349d320b6aa1fd693eb350a378586f34a3901ef55112456",
+      "published_sha256": "f1a375803527f03f8349d320b6aa1fd693eb350a378586f34a3901ef55112456"
+    },
+    {
+      "file": "research/external_controls/six_figures/orx_figstyle.py",
+      "source_worktree": "HASBoost-Autonomous-R7-20261030",
+      "source_file": "six_figures/orx_figstyle.py",
+      "source_commit": "b7e8d2ac6bf9ac4df060b216a23f8c68c8127c0e",
+      "source_sha256": "9372d4ebbc32c9fdbb364adf76fdcf2b0708a4c50490fc639f06c9af360a61d9",
+      "published_sha256": "9372d4ebbc32c9fdbb364adf76fdcf2b0708a4c50490fc639f06c9af360a61d9"
+    },
+    {
+      "file": "research/external_controls/six_r2c.py",
+      "source_worktree": "HASBoost-Autonomous-R2C-20261030",
+      "source_file": "six_r2.py",
+      "source_commit": "dc4ecb138dcdb8f44470efa1345d8889bab0fcfd",
+      "source_sha256": "d1dc0ce6dd790b4092be53ff422e374b61446c6f45cc79dbdeae2cba19a9c95f",
+      "published_sha256": "d1dc0ce6dd790b4092be53ff422e374b61446c6f45cc79dbdeae2cba19a9c95f"
+    },
+    {
+      "file": "research/external_controls/six_r3c.py",
+      "source_worktree": "HASBoost-Autonomous-R3C-20261030",
+      "source_file": "six_r3.py",
+      "source_commit": "62af6b629fe7f7b44c1d0ea2032b88ccf9c9b85f",
+      "source_sha256": "9d5d58906b790ff1866c3597db1cdfa35fde521b3ee5453e877ceaa608e064e3",
+      "published_sha256": "9d5d58906b790ff1866c3597db1cdfa35fde521b3ee5453e877ceaa608e064e3"
+    },
+    {
+      "file": "research/external_controls/quantized_direct_coordinate_gpu.py",
+      "source_worktree": "HASBoost-Autonomous-R5Q-20261030",
+      "source_file": "quantized_direct_gpu.py",
+      "source_commit": "e2ef43402abde750286a353adf67d0faad2258a2",
+      "source_sha256": "5b4cfe79f952b8633a4983af614a0d1dc3941bda03591c4b9ff5b3b5433b0bf1",
+      "published_sha256": "99d86caa9b0f519125b6d51611984d39ce0c206a19c5bc374c3b5ddf044bd1fd"
+    },
+    {
+      "file": "research/external_controls/six_r5q.py",
+      "source_worktree": "HASBoost-Autonomous-R5Q-20261030",
+      "source_file": "six_r5q.py",
+      "source_commit": "e2ef43402abde750286a353adf67d0faad2258a2",
+      "source_sha256": "b7f83c124b7697b43ed9f193321649a8b7599e72884fe3dafc64c9eb707e6981",
+      "published_sha256": "03bafb102c6d4d5fcae9ef2638c620df31c8c44a924ae6763b176d4893679cc2"
+    },
+    {
+      "file": "research/nvforest_control/nvforest_runner.py",
+      "source_worktree": "HASBoost-nvForest-N2F-20261030",
+      "source_file": "nvforest_runner.py",
+      "source_commit": "8cf4c6c28d53ab97779a734bf4450f264f7b5a39",
+      "source_sha256": "df429a9d43bcebd9f77f6109bce601fca001c3d0e4721968779175f4899d5c4a",
+      "published_sha256": "f72de50e1ba1e8c39b13f874b505b8d64020d0580446bbb0237ed84045383ef8"
+    },
+    {
+      "file": "research/nvforest_control/nvforest_probe.py",
+      "source_worktree": "HASBoost-nvForest-N2F-20261030",
+      "source_file": "nvforest_probe.py",
+      "source_commit": "8cf4c6c28d53ab97779a734bf4450f264f7b5a39",
+      "source_sha256": "bcf130ccacd621a1d3f30df16a90639ac25d188e7d28aafb7ec82c2742646909",
+      "published_sha256": "bcf130ccacd621a1d3f30df16a90639ac25d188e7d28aafb7ec82c2742646909"
+    },
+    {
+      "file": "research/nvforest_control/nvforest_measure.py",
+      "source_worktree": "HASBoost-nvForest-N2F-20261030",
+      "source_file": "nvforest_measure.py",
+      "source_commit": "8cf4c6c28d53ab97779a734bf4450f264f7b5a39",
+      "source_sha256": "f74ecf2094b6bae4755c3c2fb84e849853ffd2a739f7104f0c271ec0e828cc92",
+      "published_sha256": "f74ecf2094b6bae4755c3c2fb84e849853ffd2a739f7104f0c271ec0e828cc92"
+    },
+    {
+      "file": "research/nvforest_control/nvf_block_core.py",
+      "source_worktree": "HASBoost-nvForest-N2F-20261030",
+      "source_file": "nvf_block_core.py",
+      "source_commit": "8cf4c6c28d53ab97779a734bf4450f264f7b5a39",
+      "source_sha256": "ebecfec9722340279f5a7c33c5f8d150dc9d347f6eeda6ee58b77849a6483c86",
+      "published_sha256": "3cd1a9747057daf0d21f71203a4485731a0c51172627127218354d198a49dcbe"
+    },
+    {
+      "file": "research/nvforest_control/nvf_packed_core.py",
+      "source_worktree": "HASBoost-nvForest-N2F-20261030",
+      "source_file": "nvf_packed_core.py",
+      "source_commit": "8cf4c6c28d53ab97779a734bf4450f264f7b5a39",
+      "source_sha256": "660cc8beea54fb338be2893a0a79a0145ed18343749274505e5deb3172aa5912",
+      "published_sha256": "660cc8beea54fb338be2893a0a79a0145ed18343749274505e5deb3172aa5912"
+    },
+    {
+      "file": "research/nvforest_control/nvf_packed_gpu.py",
+      "source_worktree": "HASBoost-nvForest-N2F-20261030",
+      "source_file": "nvf_packed_gpu.py",
+      "source_commit": "8cf4c6c28d53ab97779a734bf4450f264f7b5a39",
+      "source_sha256": "0c6d11d7257a19f8a5041d13ee03ed23001e851f43862a776dc58126eeed3ada",
+      "published_sha256": "0c6d11d7257a19f8a5041d13ee03ed23001e851f43862a776dc58126eeed3ada"
+    },
+    {
+      "file": "research/nvforest_control/nvf_fused_controls.py",
+      "source_worktree": "HASBoost-nvForest-N2F-20261030",
+      "source_file": "nvf_fused_controls.py",
+      "source_commit": "8cf4c6c28d53ab97779a734bf4450f264f7b5a39",
+      "source_sha256": "088b2fea47bab840b5aed0d6a6a433a995ec6622b6b603d1cc643c438adc8131",
+      "published_sha256": "088b2fea47bab840b5aed0d6a6a433a995ec6622b6b603d1cc643c438adc8131"
+    }
+  ],
+  "publication_changes": [
+    "R1 final numpy-int print cast",
+    "original R5Q imports renamed coordinate variant; corrected R5QM separate",
+    "trim final blank lines in three source modules",
+    "nvForest publication guard exits before infrastructure checks",
+    "dispatch by finite stage registry; config templates inert and paths marked for restoration"
+  ]
+}

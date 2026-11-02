@@ -3,6 +3,7 @@ import { EvidenceChart as NativeEvidenceChart, chartConfigEntries, DataComponent
 import hero from '../assets/hasboost-results-infographic-v1.png';
 import {DATASETS,NEW_DATASETS,FAMILIES,LABELS,COLORS,METRICS,ROLES,BANKS,finite,mean,median,groupBy,withinCohort,valid,metricDelta,deltaUnit,deltaDefinition,pairModels,summarizePairs,selectedCurves,sameFunctionExample,representationTimes,exportCSV} from './analytics.js';
 import {MethodsView,InferenceComparison,ExecutorDiagram,BACKENDS} from './Explainers.jsx';
+import {HypothesisAtlas} from './HypothesisAtlas.jsx';
 import './hasboost.css';
 
 function EvidenceChart({id,title,rows,spec,height,...rest}) {const chartRows=rows.map(r=>Object.fromEntries(Object.entries(r).filter(([,v])=>v==null||['string','number','boolean'].includes(typeof v)).map(([k,v])=>[k,v??null])));const physical={...spec};const horizontal=spec.type==='horizontalBar';if(horizontal){delete physical.xLabel;delete physical.yLabel;physical.showXAxisLabel=false;physical.showYAxisLabel=false;}const [chart]=chartConfigEntries({id,title,rows:chartRows,spec:physical,height});return <NativeEvidenceChart {...chart} {...rest}>{horizontal&&<p className='hasboost-chart-caption'>{spec.xLabel}</p>}{rest.children}</NativeEvidenceChart>;}
@@ -194,9 +195,9 @@ export function DashboardContent() {
   const go=d=>exploreDashboard('dataset',{focus:{dataset:d}});
   return <article className="hasboost-dashboard">
     {(!activeTabId||activeTabId==='overview')&&<div className="hasboost-hero"><img src={hero} alt="HASBoost. Компактное обучение и быстрый инференс: 12 наборов, 36 разбиений, 4941 представление модели. Общий базис AB и разреженные поправки L."/></div>}
-      <div className="hasboost-status"><span className="hasboost-dot"/> {activeTabId==='inference'?'Инференс Py-Boost · 30 октября 2026 · 12 прежних наборов':'Срез 29 октября 2026 · 12 многометочных наборов · сохранённые результаты'} <span className="hasboost-status-right"><a href="https://github.com/leostre/Py-Boost/pull/24" target="_blank" rel="noreferrer">Код и PR #24 ↗</a></span></div>
+      <div className="hasboost-status"><span className="hasboost-dot"/> {activeTabId==='inference'?'Инференс Py-Boost · 30 октября 2026 · 12 прежних наборов':'Срез 29 октября 2026 · 12 многометочных наборов · сохранённые результаты'} <span className="hasboost-status-right"><a href="https://github.com/leostre/Py-Boost/pull/28" target="_blank" rel="noreferrer">Методика и PR #28 ↗</a></span></div>
     {['dataset','methods'].includes(activeTabId)&&canReturnFromExploration&&<button className="hasboost-back" onClick={returnFromExploration}>← Вернуться к сравнению</button>}
-    {(!activeTabId||activeTabId==='overview')&&<Overview q={q} go={go}/>}
+    {(!activeTabId||activeTabId==='overview')&&<><HypothesisAtlas q={q}/><Note>Числа этого прототипа: качество — срез 29 октября, исходный Py-Boost — серия S2 от 30 октября. Новые R1–R6 и история изменений вынесены в отдельный методологический документ; серии не смешаны.</Note><Overview q={q} go={go}/></>}
     {activeTabId==='dataset'&&<DatasetView q={q} dataset={dataset} setDataset={choose}/>}
     {activeTabId==='methods'&&<MethodsView q={q}/>}
     {activeTabId==='paired'&&<PairedView q={q} go={go}/>}

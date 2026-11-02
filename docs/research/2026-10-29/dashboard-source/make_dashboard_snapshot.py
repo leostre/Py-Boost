@@ -69,6 +69,17 @@ def main():
         evidenceFlow=[dict(title='Парное отношение',detail='Одинаковые case, uid и batch; прежний / новый исполнитель. Медиана трёх отношений сеансов. Данные взяты из опубликованного inference_pairs.json.')]))
     catalog=Path(__file__).parent/'content/dashboard/mechanisms.json'
     if catalog.exists():queries.update(explanatory_queries(catalog))
+    atlas=Path(__file__).parent/'content/dashboard/hypothesis-atlas.json'
+    if atlas.exists():
+        import base64
+        gallery=json.loads(atlas.read_text(encoding='utf8'))
+        for row in gallery['rows']:
+            assert Path(row['image']).name==row['image']
+            image=a.evidence.parent/'figures/methods'/row['image']
+            row['image_data_url']='data:image/png;base64,'+base64.b64encode(image.read_bytes()).decode('ascii')
+        queries['hypothesis_atlas']=gallery
+    animation=a.evidence.parent/'methodology/animations/frames.json'
+    if animation.exists():queries['inference_animation']=json.loads(animation.read_text(encoding='utf8'))
     assert len(queries['all_quality_points']['rows'])==4941 and len(queries['selected_quality']['rows'])==1008
     meta=dict(files=files,as_of='2026-10-29',new_datasets=['enron','cal500','corel5k','delicious'],
         limitations=['Три train/D-разбиения используют общий тест.', 'Восемь тестов уже использовались при разработке.', 'Окончательный выбор всех моделей выполнен по D до теста.',

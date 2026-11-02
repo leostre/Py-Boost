@@ -1,0 +1,8 @@
+asset,representation_type,visual_primitives,analogy_family,novelty_check,failure_mode
+../figures/methods/shared-leaf-basis.png,intrinsic-geometry,output-plane-and-projection,none,"Плоскость выходов, не карта памяти",Энергия не гарантирует F1
+../figures/methods/sparse-corrections.png,ai-native-geometry,off-plane-residual-and-boundary,none,Адресная поправка и граница решения,Редкая метка не означает малый остаток
+../figures/methods/joint-budget-v2.png,intrinsic-geometry,feasible-budget-region,none,Область допустимых ресурсов,Старые 5% не являются новым отсечением
+../figures/methods/online-training-v2.png,ai-native-geometry,loss-contour-trajectories,none,Две условные траектории обучения,Нет гарантии лучшего качества
+../figures/methods/history-v2.png,intrinsic-geometry,covariance-ellipsoids,none,Средний сигнал и средние моменты,Сохранение энергии не равно полезности
+../figures/methods/serving-memory-v2.png,algorithm-diagram,memory-residency-layout,none,Постоянные и рабочие массивы,Байты не гарантируют задержку
+inference-primer-preview.png,algorithm-diagram,grouped-CUDA-execution-frames,none,Группировка работы вместо матричных буферов,Один запуск не гарантирует скорость
