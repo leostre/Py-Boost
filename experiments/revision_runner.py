@@ -12,6 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 # The same environment contract applies to every phase and experiment node.
 os.environ['CUPY_CACHE_DIR'] = str(Path(tempfile.gettempdir()) / 'cupy_cache_hasboost')
+RUNTIME_TEMP = Path(tempfile.gettempdir()) / 'hasboost_runtime'
+RUNTIME_TEMP.mkdir(parents=True, exist_ok=True)
+os.environ['TEMP'] = str(RUNTIME_TEMP)
+os.environ['TMP'] = str(RUNTIME_TEMP)
 os.environ['HASBOOST_GPU_ACCEPTANCE'] = '1'
 
 
@@ -32,7 +36,8 @@ def main():
                       'source_root': str(ROOT), 'imported_source': str(imported),
                       'python': sys.executable,
                       'runtime_site_packages': runtime_site_packages,
-                      'cupy_cache': os.environ['CUPY_CACHE_DIR']},
+                      'cupy_cache': os.environ['CUPY_CACHE_DIR'],
+                      'runtime_temp': str(RUNTIME_TEMP)},
                      ensure_ascii=False), flush=True)
     if config['phase'] == 'acceptance':
         import pytest
@@ -425,6 +430,74 @@ def main():
             raise SystemExit(int(code))
         from experiments.revision_rmt_validation import run_validation
         run_validation(config)
+        return
+    if config['phase'] == 'rmt_subspace_reproducibility':
+        import pytest
+        code = pytest.main([
+            'tests/test_rmt_subspace_reproducibility_core.py',
+            'tests/test_revision_forecast_replay.py',
+            '-q',
+            '-s',
+        ])
+        if code:
+            raise SystemExit(int(code))
+        from experiments.rmt_subspace_reproducibility import run_reproducibility
+        run_reproducibility(config)
+        return
+    if config['phase'] == 'rmt_scalar_reproducibility':
+        import pytest
+        code = pytest.main([
+            'tests/test_rmt_scalar_reproducibility_core.py',
+            'tests/test_rmt_subspace_reproducibility_core.py',
+            'tests/test_revision_forecast_replay.py',
+            '-q',
+            '-s',
+        ])
+        if code:
+            raise SystemExit(int(code))
+        from experiments.rmt_scalar_reproducibility import run_scalar_reproducibility
+        run_scalar_reproducibility(config)
+        return
+    if config['phase'] == 'rmt_residual_signal':
+        import pytest
+        code = pytest.main([
+            'tests/test_rmt_residual_signal.py',
+            'tests/test_rmt_residual_signal_core.py',
+            'tests/test_rmt_scalar_reproducibility_core.py',
+            'tests/test_rmt_subspace_reproducibility_core.py',
+            'tests/test_revision_forecast_replay.py',
+            '-q',
+            '-s',
+        ])
+        if code:
+            raise SystemExit(int(code))
+        from experiments.rmt_residual_signal import run_residual_signal
+        run_residual_signal(config)
+        return
+    if config['phase'] == 'rmt_residual_signal_expanded':
+        import pytest
+        code = pytest.main([
+            'tests/test_benchmark_datasets.py',
+            'tests/test_rmt_residual_expanded_core.py',
+            'tests/test_rmt_residual_signal_core.py',
+            'tests/test_rmt_scalar_reproducibility_core.py',
+            'tests/test_rmt_subspace_reproducibility_core.py',
+            'tests/test_revision_forecast_replay.py',
+            '-q',
+            '-s',
+        ])
+        if code:
+            raise SystemExit(int(code))
+        from experiments.rmt_residual_expanded import run_expanded_residual_signal
+        run_expanded_residual_signal(config)
+        return
+    if config['phase'] == 'h5_2_event_scheduler':
+        import pytest
+        code = pytest.main(['tests/test_h5_2_event_scheduler.py', '-q', '-s'])
+        if code:
+            raise SystemExit(int(code))
+        from experiments.h5_2_event_scheduler import run_h5_2_event_scheduler
+        run_h5_2_event_scheduler(config)
         return
     if config['phase'] in ('calibration', 'budget_comparison', 'fixed_memory', 'causal_forecast'):
         if config['phase'] == 'causal_forecast':
