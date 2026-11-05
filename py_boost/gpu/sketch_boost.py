@@ -50,8 +50,7 @@ class SketchBoost(GradientBoosting):
             lambda_l2: float > 0, l2 leaf regularization
             gd_steps: int > 0, number of gradient steps
             max_depth: int > 0, maximum tree depth. Setting it to large values (>12) may cause OOM for wide datasets
-            min_data_in_leaf: int, minimal leaf size. Note - for some loss fn leaf size is approximated
-                with hessian values to speed up training
+            min_data_in_leaf: int, inclusive minimum number of training rows in each child leaf
             colsample: float or Callable, sumsample of columns to construct trees or callable - custom sampling
             subsample: float or Callable, sumsample of rows to construct trees or callable - custom sampling
 

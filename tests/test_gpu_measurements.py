@@ -80,9 +80,10 @@ def test_multiple_shadow_budgets_share_same_tree_and_do_not_change_structure():
     reference = GradientBoosting(subsample=1., full_leaf_values=True, **_common()).fit(X, y)
     model = HistoryBasedBoostingModel(multioutput_sketch=CurrentGradientSampling,
         sketch_method='topk', subsample=1., sketch_outputs=2, scheduler_mode='never',
-        split_diagnostics=True, split_diagnostics_top_k=0, **_common())
+        split_diagnostics=True, split_diagnostics_top_k=2, **_common())
     sketch = model.params['multioutput_sketch']
     sketch.research_shadow_budgets = (3, 4)
+    sketch.split_candidate_output_profiles = True
     model.fit(X, y)
     assert not sketch.decision_trace
     np.testing.assert_allclose(model.predict(X), reference.predict(X), rtol=1e-5, atol=1e-6)
@@ -94,3 +95,77 @@ def test_multiple_shadow_budgets_share_same_tree_and_do_not_change_structure():
     for records in by_node.values():
         assert {r['diagnostic_output_budget'] for r in records} == {2, 3, 4}
         assert len({r['full_best_gain'] for r in records}) == 1
+        for record in records:
+            assert len(record['diagnostic_top_k']) == 2
+            assert len(record['candidate_output_contributions']) == 2
+            assert all(len(profile) == 6 for profile in record['candidate_output_contributions'])
+            assert len(record['selected_output_indices']) == record['diagnostic_output_budget']
+            for candidate, profile in zip(
+                record['diagnostic_top_k'],
+                record['candidate_output_contributions'],
+            ):
+                np.testing.assert_allclose(sum(profile), candidate['full_gain'], rtol=1e-5)
+
+
+def test_exact_shortlist_refinement_matches_full_gain_and_stays_shadow_only(monkeypatch):
+    from py_boost import GradientBoosting
+    from py_boost.gpu.history_boosting import HistoryBasedBoostingModel
+    from py_boost.gpu.accumulation.history_callback import CurrentGradientSampling
+    import py_boost.gpu.utils as gpu_utils
+
+    fused_calls = []
+    original_fused = gpu_utils._fused_merge_top_k_split_candidate_arrays
+
+    def tracked_fused(*args, **kwargs):
+        fused_calls.append((args[0].shape, int(args[2])))
+        return original_fused(*args, **kwargs)
+
+    monkeypatch.setattr(
+        gpu_utils,
+        '_fused_merge_top_k_split_candidate_arrays',
+        tracked_fused,
+    )
+
+    X, y = _data()
+    reference = GradientBoosting(
+        subsample=1., full_leaf_values=True, **_common()
+    ).fit(X, y)
+    model = HistoryBasedBoostingModel(
+        multioutput_sketch=CurrentGradientSampling,
+        sketch_method='topk',
+        subsample=1.,
+        sketch_outputs=2,
+        scheduler_mode='never',
+        split_diagnostics=True,
+        split_diagnostics_top_k=1,
+        **_common(),
+    )
+    sketch = model.params['multioutput_sketch']
+    sketch.research_shadow_budgets = (4,)
+    sketch.split_refinement_shadow = True
+    sketch.split_refinement_shortlists = {2: 4, 4: 2}
+    model.fit(X, y)
+
+    assert fused_calls
+    np.testing.assert_allclose(
+        model.predict(X), reference.predict(X), rtol=1e-5, atol=1e-6
+    )
+    assert sketch.split_refinement_trace
+    assert {
+        entry['diagnostic_output_budget'] for entry in sketch.split_refinement_trace
+    } == {2, 4}
+    for entry in sketch.split_refinement_trace:
+        assert entry['shortlist_selector'] == 'exact_fused_feature_list_merge'
+        assert entry['candidate_gains_allclose'] is True, (
+            entry['maximum_candidate_gain_absolute_error'],
+            entry['maximum_candidate_gain_relative_error'],
+            entry['iteration'],
+            entry['depth'],
+            entry['diagnostic_output_budget'],
+        )
+        assert entry['all_refined_winners_gain_equivalent'] is True
+        assert entry['two_stage_seconds'] > 0
+        assert entry['full_search_seconds'] > 0
+        assert all(
+            node['refined_winner_gain_equivalent'] for node in entry['nodes']
+        )

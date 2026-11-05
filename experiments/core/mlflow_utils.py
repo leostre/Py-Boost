@@ -21,4 +21,3 @@ def log_param_dict(params: Dict, allowed_keys: Optional[list] = None) -> None:
         params = {k: v for k, v in params.items() if k in allowed_keys}
     if params:
         mlflow.log_params(params)
-

@@ -427,4 +427,3 @@ bash experiments/bin/run_hyperbolic.sh
 5. Run:
    - Either via `python -m experiments.exp --config-name <name>`,
    - Or via `bash experiments/bin/run_<something>.sh`.
-

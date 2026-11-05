@@ -458,6 +458,9 @@ class DepthwiseTreeBuilder:
                  target_splitter=None,
                  multioutput_sketch=None,
                  full_leaf_values=False,
+                 deterministic_leaf_values=False,
+                 deterministic_histogram=False,
+                 deterministic_histogram_layout='hybrid',
                  gd_steps=1,
                  **tree_params
                  ):
@@ -470,6 +473,9 @@ class DepthwiseTreeBuilder:
             target_splitter: Callable or None, target grouping strategy
             multioutput_sketch: Callable or None, multioutput sketching strategy
             full_leaf_values: estimate leaf values on all rows, independently of structure sampling
+            deterministic_leaf_values: use a fixed-order reduction for leaf statistics
+            deterministic_histogram: use a fixed-order reduction for split histograms
+            deterministic_histogram_layout: ``perf1`` or node-count-based ``hybrid`` layout
             **tree_params: other tree building parameters
         """
         self.borders = borders
@@ -483,12 +489,17 @@ class DepthwiseTreeBuilder:
             'min_data_in_leaf': 10,
             'min_gain_to_split': 0
         }, **tree_params}
+        self.params['deterministic_histogram'] = deterministic_histogram
+        self.params['deterministic_histogram_layout'] = (
+            deterministic_histogram_layout
+        )
 
         self.colsampler = colsampler
         self.subsampler = subsampler
         self.target_grouper = target_splitter
         self.multioutput_sketch = multioutput_sketch
         self.full_leaf_values = full_leaf_values
+        self.deterministic_leaf_values = deterministic_leaf_values
         self.gd_steps = gd_steps
 
     def build_tree(self, X, grad, hess, sample_weight=None, grad_fn=None, *val_arrays):
@@ -603,8 +614,45 @@ class DepthwiseTreeBuilder:
                                     'output_attribution': (
                                         self.multioutput_sketch.split_output_attribution
                                     ),
+                                    'candidate_output_profiles': bool(getattr(
+                                        self.multioutput_sketch,
+                                        'split_candidate_output_profiles',
+                                        False,
+                                    )),
                                     'diagnostic_output_budget': int(diagnostic_G.shape[1]),
+                                    'selected_output_indices': (
+                                        diagnostic_decision.output_indices
+                                    ),
                                 }
+                                if self.multioutput_sketch.split_refinement_shadow:
+                                    split_diagnostic_context.update({
+                                        'refinement_callback': (
+                                            self.multioutput_sketch.record_split_refinement
+                                        ),
+                                        'refinement_shortlists': (
+                                            self.multioutput_sketch.split_refinement_shortlists
+                                        ),
+                                        'apply_refined_splits': bool(getattr(
+                                            self.multioutput_sketch,
+                                            'split_refinement_apply',
+                                            False,
+                                        )),
+                                        'capture_determinism_frontier': bool(getattr(
+                                            self.multioutput_sketch,
+                                            'split_refinement_determinism_capture',
+                                            False,
+                                        )),
+                                        'refinement_failure_diagnostics': bool(getattr(
+                                            self.multioutput_sketch,
+                                            'split_refinement_failure_diagnostics',
+                                            False,
+                                        )),
+                                        'refinement_severe_error_threshold': float(getattr(
+                                            self.multioutput_sketch,
+                                            'split_refinement_severe_error_threshold',
+                                            1.0,
+                                        )),
+                                    })
                                 if self.multioutput_sketch.scheduler_mode == 'adaptive_budget':
                                     probe = self.multioutput_sketch.make_shadow_decision(
                                         full_G, full_H,
@@ -621,8 +669,13 @@ class DepthwiseTreeBuilder:
                                     probe = self.multioutput_sketch.make_shadow_decision(
                                         full_G, full_H, output_budget=budget)
                                     probe_G, probe_H = apply_output_indices(full_G, full_H, probe.output_indices)
-                                    research_probes.append({'grad': probe_G, 'hess': probe_H,
-                                                            'rows': probe.row_indices, 'budget': int(probe_G.shape[1])})
+                                    research_probes.append({
+                                        'grad': probe_G,
+                                        'hess': probe_H,
+                                        'rows': probe.row_indices,
+                                        'budget': int(probe_G.shape[1]),
+                                        'selected_output_indices': probe.output_indices,
+                                    })
                                 split_diagnostic_context['research_probes'] = research_probes
                     else:
                         G, H = self.multioutput_sketch(G, H)
@@ -658,7 +711,8 @@ class DepthwiseTreeBuilder:
             self.full_leaf_values,
         )
         values = calc_node_values(grad, hess, leaves, leaf_row_indexer, group_index, max_leaves, self.params['lr'],
-                                  lambda_l2=self.params['lambda_l2'])
+                                  lambda_l2=self.params['lambda_l2'],
+                                  deterministic=self.deterministic_leaf_values)
         pred = apply_values(leaves, group_index, values)
 
         tree.set_borders(self.borders)
@@ -666,7 +720,8 @@ class DepthwiseTreeBuilder:
         for i in range(1, self.gd_steps):
             grad, hess = grad_fn(pred)
             values += calc_node_values(grad, hess, leaves, leaf_row_indexer, group_index, max_leaves, self.params['lr'],
-                                       lambda_l2=self.params['lambda_l2'])
+                                       lambda_l2=self.params['lambda_l2'],
+                                       deterministic=self.deterministic_leaf_values)
             pred = apply_values(leaves, group_index, values)
 
         # transform leaves to values
