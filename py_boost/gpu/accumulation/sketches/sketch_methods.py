@@ -209,6 +209,7 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
         tensor: cp.ndarray, shape (m, n)
         subsample: float, row fraction, default 0.5
         sketch_outputs: int, projection width and column count, default 1
+        random_state: optional CuPy RandomState for the projection draw
 
     Returns:
         SketchDecision with row and output indices.
@@ -218,7 +219,9 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
     k_row = max(1, int(tensor.shape[0] * subsample))
     k_col = max(1, sketch_outputs)
 
-    P = cp.random.randn(tensor.shape[1], k_col, dtype=cp.float32)
+    random_state = kwargs.get('random_state')
+    rng = cp.random if random_state is None else random_state
+    P = rng.randn(tensor.shape[1], k_col, dtype=cp.float32)
     P /= cp.sqrt(k_col)
     projected = cp.dot(tensor, P)
 

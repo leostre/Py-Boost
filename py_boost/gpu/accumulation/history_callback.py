@@ -189,6 +189,7 @@ class GradHessHistory(GradSketch):
                 'topk': {'record_probabilities'},
                 'rand': {'record_probabilities', 'random_state'},
                 'uniform': {'record_probabilities', 'random_state'},
+                'proj': {'random_state'},
                 'svd_heuristic': {'lambda_max_ratio', 'gamma'},
             }
             unused_sketch_params = self.sketch_params.keys() - supported.get(sketch_method, set())
