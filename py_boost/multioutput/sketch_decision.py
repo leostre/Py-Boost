@@ -11,6 +11,9 @@ class SketchDecision:
     Row indices address training objects. Output indices address gradient and
     Hessian columns. Feature indices deliberately do not belong to this object:
     feature sampling is an independent tree-building concern.
+
+    The optional probability fields are normalized scores or draw weights.
+    For draws without replacement, they are not inclusion probabilities.
     """
 
     row_indices: Any

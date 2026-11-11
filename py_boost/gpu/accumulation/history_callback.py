@@ -1,5 +1,7 @@
 import logging
+import warnings
 from collections import deque
+from numbers import Real
 
 import cupy as cp
 from py_boost.gpu.accumulation.sketches.sketch_methods import SUPPORTED_SKETCH_METHODS
@@ -28,7 +30,7 @@ from py_boost.multioutput.budget_policy import gradient_energy_budget
 
 
 class GradHessHistory(GradSketch):
-    """Grad/hess history sketching. Schedules row/col subsampling when norm deltas stabilize."""
+    """Schedule row and output subsampling when gradient norms stabilize."""
 
     def __init__(self, **kwargs):
         """
@@ -58,11 +60,24 @@ class GradHessHistory(GradSketch):
             )
         self.sketch_method = sketch_method
 
-        self.subsample = kwargs.get('subsample', 0.5)
-        self.sketch_outputs = kwargs.get('sketch_outputs', 1)
+        uses_raw_gradients = type(self)._decision_tensor is GradHessHistory._decision_tensor
+        if sketch_method in ('topk', 'rand') and uses_raw_gradients:
+            raise ValueError(
+                f"sketch_method={sketch_method!r} requires non-negative weights. "
+                "Use WeightedHistorySampling or a method that accepts signed gradients."
+            )
+
+        self.sketch_params = dict(kwargs.get('sketch_params') or {})
+        for name, default in (('subsample', 0.5), ('sketch_outputs', 1), ('tau', 1e-3)):
+            if name in self.sketch_params:
+                default = self.sketch_params.pop(name)
+                if name in kwargs and kwargs[name] != default:
+                    raise ValueError(f"Conflicting values for {name!r} and sketch_params[{name!r}]")
+            setattr(self, name, kwargs.get(name, default))
+        if not isinstance(self.subsample, Real) or not 0 < self.subsample <= 1:
+            raise ValueError('The history row fraction must be in (0, 1]')
         self.configured_sketch_outputs = int(self.sketch_outputs)
-        self.tau = float(kwargs.get('tau', 1e-3))
-        self.sketch_params = kwargs.get('sketch_params')
+        self.tau = float(self.tau)
 
         self.smoothing_alpha = kwargs.get('smoothing_alpha', 0.1 ** (1 / 9))
         self.stabilization_threshold = float(kwargs.get('stabilization_threshold', 0.2))
@@ -150,6 +165,38 @@ class GradHessHistory(GradSketch):
 
         self.eps = kwargs.get('eps', 1e-6)
         self.weight_transform = kwargs.get('weight_transform', 'sigmoidal')
+
+        # Subclasses can consume additional options in their own constructors.
+        if type(self) in (GradHessHistory, WeightedHistorySampling):
+            unused = kwargs.keys() - {
+                'sketch_method', 'subsample', 'sketch_outputs', 'sketch_params',
+                'smoothing_alpha', 'stabilization_threshold', 'destabilization_threshold',
+                'min_warmup_rounds', 'eps', 'tau', 'weight_transform', 'seed',
+                'scheduler_mode', 'scheduler_window', 'scheduler_min_observations',
+                'scheduler_patience_on', 'scheduler_patience_off', 'scheduler_robust_k',
+                'scheduler_cooldown_rounds', 'split_diagnostics', 'split_diagnostics_top_k',
+                'split_output_attribution', 'split_diagnostics_control_interval', 'shadow_seed',
+                'record_selection_indices', 'adaptive_budgets', 'adaptive_safe_threshold',
+                'adaptive_unsafe_threshold', 'adaptive_patience_down', 'adaptive_min_dwell_rounds',
+                'adaptive_cooldown_after_increase_rounds',
+            }
+            if unused:
+                warnings.warn(
+                    f"Unused {type(self).__name__} parameters: {', '.join(sorted(unused))}",
+                    stacklevel=2,
+                )
+            supported = {
+                'topk': {'record_probabilities'},
+                'rand': {'record_probabilities', 'random_state'},
+                'uniform': {'record_probabilities', 'random_state'},
+                'svd_heuristic': {'lambda_max_ratio', 'gamma'},
+            }
+            unused_sketch_params = self.sketch_params.keys() - supported.get(sketch_method, set())
+            if unused_sketch_params:
+                warnings.warn(
+                    f"Unused sketch_params for {sketch_method!r}: {', '.join(sorted(unused_sketch_params))}",
+                    stacklevel=2,
+                )
 
         self.logger = logging.getLogger(self.__class__.__name__)
 
@@ -440,8 +487,7 @@ class GradHessHistory(GradSketch):
             tensor: cp.ndarray, 2d matrix to sketch (grad or weights)
 
         Returns:
-            cp.ndarray, row indices
-            cp.ndarray, output indices
+            SketchDecision, or a pair of index arrays from a legacy external method.
         """
         sketch_params = dict(self.sketch_params or {})
         sketch_params.setdefault('subsample', self.subsample)
