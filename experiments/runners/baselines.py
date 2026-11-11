@@ -89,4 +89,3 @@ class BaselinesExperiment(BaseExperiment):
             final_histories_file = f"histories_{context.dataset_name}.pkl"
             with open(final_histories_file, "wb") as file:
                 pickle.dump(all_histories, file)
-
