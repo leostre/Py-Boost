@@ -1,5 +1,8 @@
 """Gradient boosting builder"""
 
+from numbers import Real
+import warnings
+
 try:
     import cupy as cp
 except Exception:
@@ -32,6 +35,7 @@ class GradientBoosting(Ensemble):
                  target_splitter='Single',
                  multioutput_sketch=None,
                  use_hess=True,
+                 full_leaf_values=False,
 
                  quantization='Quantile',
                  quant_sample=2000000,
@@ -61,13 +65,15 @@ class GradientBoosting(Ensemble):
             min_data_in_leaf: int, minimal leaf size. Note - for some loss fn leaf size is approximated
                 with hessian values to speed up training
             colsample: float or Callable, sumsample of columns to construct trees or callable - custom sampling
-            subsample: float or Callable, sumsample of rows to construct trees or callable - custom sampling
+            subsample: float, Callable or None. Row fraction, custom sampler, or no sampler.
+                A sketch with make_decision owns row selection and requires None or 1.0.
             quant_sample: int, subsample to quantize features
             target_splitter: str or Callable, target splitter, defined multioutput strategy:
                 'Single', 'OneVsAll' or custom
             multioutput_sketch: None or Callable. Defines the sketching strategy to simplify scoring function
                 in multioutput case. If None full scoring function is used
             use_hess: If True hessians will be used in tree structure search
+            full_leaf_values: If True leaf values are estimated from all training rows
 
             quantization: str or Quantizer, method for quantizatrion. One of 'Quantile', 'Uniform',
                 'Uniquant' or custom implementation
@@ -83,6 +89,15 @@ class GradientBoosting(Ensemble):
             debug: bool, if debug mode is enabled (it removes ability to use deprecated functions,
                          thus optimizing memory usage)
         """
+
+        if callable(getattr(multioutput_sketch, 'make_decision', None)):
+            if subsample is not None and not (isinstance(subsample, Real) and subsample == 1):
+                raise ValueError('A sketch with make_decision requires subsample=None or 1.0')
+        if kwargs:
+            warnings.warn(
+                f"Unused GradientBoosting parameters: {', '.join(sorted(kwargs))}",
+                stacklevel=2,
+            )
 
         super().__init__()
 
@@ -104,6 +119,7 @@ class GradientBoosting(Ensemble):
             'target_splitter': target_splitter,
             'multioutput_sketch': multioutput_sketch,
             'use_hess': use_hess,
+            'full_leaf_values': full_leaf_values,
 
             'quantization': quantization,
             'quant_sample': quant_sample,
@@ -132,14 +148,15 @@ class GradientBoosting(Ensemble):
         self.max_depth = self.params['max_depth']
         self.min_data_in_leaf = self.params['min_data_in_leaf']
         self.use_hess = self.params['use_hess']
+        self.full_leaf_values = self.params['full_leaf_values']
 
         self.colsample = self.params['colsample']
         if type(self.params['colsample']) in [float, int]:
             self.colsample = BaseSampler(self.params['colsample'], axis=1)
 
         self.subsample = self.params['subsample']
-        if type(self.params['subsample']) in [float, int]:
-            self.subsample = BaseSampler(self.params['subsample'], axis=0)
+        if isinstance(self.subsample, Real):
+            self.subsample = BaseSampler(self.subsample, axis=0)
 
         if self.params['target_splitter'] == 'Single':
             splitter = SingleSplitter()
@@ -177,7 +194,7 @@ class GradientBoosting(Ensemble):
 
         self.callbacks = CallbackPipeline(
 
-            self.subsample,
+            *([] if self.subsample is None else [self.subsample]),
             self.colsample,
             self.target_splitter,
             self.multioutput_sketch,
@@ -306,6 +323,7 @@ class GradientBoosting(Ensemble):
                                        subsampler=self.subsample,
                                        target_splitter=self.target_splitter,
                                        multioutput_sketch=self.multioutput_sketch,
+                                       full_leaf_values=self.full_leaf_values,
                                        gd_steps=self.gd_steps,
                                        lr=self.lr,
                                        min_gain_to_split=self.min_gain_to_split,

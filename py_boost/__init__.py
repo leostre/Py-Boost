@@ -61,4 +61,8 @@ try:
 except ModuleNotFoundError:
     import importlib_metadata
 
-__version__ = importlib_metadata.version(__name__)
+try:
+    __version__ = importlib_metadata.version(__name__)
+except importlib_metadata.PackageNotFoundError:
+    # Source-tree execution (for example from PyCharm) has no installed metadata.
+    __version__ = '0.5.2'
