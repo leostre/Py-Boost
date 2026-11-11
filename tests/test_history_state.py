@@ -81,5 +81,9 @@ def test_ema_history_stays_between_previous_and_current(alpha, previous, current
 
     updated = update_scale_history(previous_array, current_array, alpha)
 
-    assert np.all(updated >= np.minimum(previous_array, current_array))
-    assert np.all(updated <= np.maximum(previous_array, current_array))
+    lower = np.minimum(previous_array, current_array)
+    upper = np.maximum(previous_array, current_array)
+    # The two products and their sum can round at an endpoint.
+    tolerance = 2 * np.spacing(upper)
+    assert np.all(updated >= lower - tolerance)
+    assert np.all(updated <= upper + tolerance)

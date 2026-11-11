@@ -1,5 +1,8 @@
 """Gradient boosting builder"""
 
+from numbers import Real
+import warnings
+
 try:
     import cupy as cp
 except Exception:
@@ -62,7 +65,8 @@ class GradientBoosting(Ensemble):
             min_data_in_leaf: int, minimal leaf size. Note - for some loss fn leaf size is approximated
                 with hessian values to speed up training
             colsample: float or Callable, sumsample of columns to construct trees or callable - custom sampling
-            subsample: float or Callable, sumsample of rows to construct trees or callable - custom sampling
+            subsample: float, Callable or None. Row fraction, custom sampler, or no sampler.
+                A sketch with make_decision owns row selection and requires None or 1.0.
             quant_sample: int, subsample to quantize features
             target_splitter: str or Callable, target splitter, defined multioutput strategy:
                 'Single', 'OneVsAll' or custom
@@ -85,6 +89,15 @@ class GradientBoosting(Ensemble):
             debug: bool, if debug mode is enabled (it removes ability to use deprecated functions,
                          thus optimizing memory usage)
         """
+
+        if callable(getattr(multioutput_sketch, 'make_decision', None)):
+            if subsample is not None and not (isinstance(subsample, Real) and subsample == 1):
+                raise ValueError('A sketch with make_decision requires subsample=None or 1.0')
+        if kwargs:
+            warnings.warn(
+                f"Unused GradientBoosting parameters: {', '.join(sorted(kwargs))}",
+                stacklevel=2,
+            )
 
         super().__init__()
 
@@ -142,8 +155,8 @@ class GradientBoosting(Ensemble):
             self.colsample = BaseSampler(self.params['colsample'], axis=1)
 
         self.subsample = self.params['subsample']
-        if type(self.params['subsample']) in [float, int]:
-            self.subsample = BaseSampler(self.params['subsample'], axis=0)
+        if isinstance(self.subsample, Real):
+            self.subsample = BaseSampler(self.subsample, axis=0)
 
         if self.params['target_splitter'] == 'Single':
             splitter = SingleSplitter()
@@ -181,7 +194,7 @@ class GradientBoosting(Ensemble):
 
         self.callbacks = CallbackPipeline(
 
-            self.subsample,
+            *([] if self.subsample is None else [self.subsample]),
             self.colsample,
             self.target_splitter,
             self.multioutput_sketch,

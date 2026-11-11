@@ -555,14 +555,15 @@ class DepthwiseTreeBuilder:
                     H = hess[:, grp_indexer]
                 else:
                     H = sample_weight if sample_weight is not None else cp.ones((G.shape[0], 1), dtype=cp.float32)
-                if self.multioutput_sketch is not None:
-                    if callable(decision_maker):
-                        decision = decision_maker(G, H)
-                        indexers = resolve_structure_indexers(row_indexer, col_indexer, decision)
-                        structure_row_indexer = indexers.row_indices
-                        G, H = apply_output_indices(G, H, indexers.output_indices)
-                    else:
-                        G, H = self.multioutput_sketch(G, H)
+
+            if callable(decision_maker):
+                decision = decision_maker(G, H)
+                indexers = resolve_structure_indexers(row_indexer, col_indexer, decision)
+                structure_row_indexer = indexers.row_indices
+                if G.shape[1] > 1:
+                    G, H = apply_output_indices(G, H, indexers.output_indices)
+            elif self.multioutput_sketch is not None and G.shape[1] > 1:
+                G, H = self.multioutput_sketch(G, H)
 
             group_index[grp_indexer] = n_grp
             # grow single group of the tree and get nodes index
