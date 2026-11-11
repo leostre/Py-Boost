@@ -40,7 +40,7 @@ def _weighted_sample_without_replacement(
 
 
 def sample_svd_sketch_heuristic(tensor: cp.ndarray, **kwargs):
-    """
+    r"""
     Samples rows and columns using SVD sketching with smooth spectral thresholding.
     Applies smooth thresholding to singular values to enhance tail sensitivity during sketching.
 
@@ -64,7 +64,7 @@ def sample_svd_sketch_heuristic(tensor: cp.ndarray, **kwargs):
         gamma: Curvature parameter for threshold decay.
 
     Returns:
-        tuple: (row_indices, column_indices) as cupy arrays.
+        SketchDecision with row and output indices.
     """
     lambda_max_ratio = kwargs.get('lambda_max_ratio', 0.01)
     gamma = kwargs.get('gamma', 1.0)
@@ -90,7 +90,7 @@ def sample_svd_sketch_heuristic(tensor: cp.ndarray, **kwargs):
     col_norms = cp.linalg.norm(s_diag_root @ Vh, axis=0)
     col_indexer = cp.sort(cp.argsort(col_norms)[-k_col:]).astype(cp.uint64)
 
-    return row_indexer, col_indexer
+    return SketchDecision(row_indexer, col_indexer)
 
 
 def sample_svd_sketch(tensor: cp.ndarray, **kwargs):
@@ -102,8 +102,7 @@ def sample_svd_sketch(tensor: cp.ndarray, **kwargs):
         sketch_outputs: int, number of columns to keep, default 1
 
     Returns:
-        cp.ndarray, row indices
-        cp.ndarray, column indices
+        SketchDecision with row and output indices.
     """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
@@ -119,7 +118,7 @@ def sample_svd_sketch(tensor: cp.ndarray, **kwargs):
     col_norms = cp.linalg.norm(s_diag_root @ Vh, axis=0)
     col_indexer = cp.sort(cp.argsort(col_norms)[-k_col:]).astype(cp.uint64)
 
-    return row_indexer, col_indexer
+    return SketchDecision(row_indexer, col_indexer)
 
 
 def sample_topk_sketch(tensor: cp.ndarray, **kwargs):
@@ -129,10 +128,10 @@ def sample_topk_sketch(tensor: cp.ndarray, **kwargs):
         tensor: cp.ndarray, shape (m, n)
         subsample: float, row fraction, default 0.5
         sketch_outputs: int, number of columns to keep, default 1
+        record_probabilities: bool, attach normalized scores to the decision, default False
 
     Returns:
-        cp.ndarray, row indices
-        cp.ndarray, column indices
+        SketchDecision with row and output indices.
     """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
@@ -145,7 +144,9 @@ def sample_topk_sketch(tensor: cp.ndarray, **kwargs):
 
     col_indexer = cp.sort(cp.argsort(output_probs)[-k_col:]).astype(cp.uint64)
 
-    return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
+    if kwargs.get('record_probabilities', False):
+        return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
+    return SketchDecision(row_indexer, col_indexer)
 
 
 def sample_random_sampling_sketch(tensor: cp.ndarray, **kwargs):
@@ -155,10 +156,10 @@ def sample_random_sampling_sketch(tensor: cp.ndarray, **kwargs):
         tensor: cp.ndarray, shape (m, n)
         subsample: float, row fraction, default 0.5
         sketch_outputs: int, number of columns to keep, default 1
+        record_probabilities: bool, attach normalized draw weights, default False
 
     Returns:
-        cp.ndarray, row indices
-        cp.ndarray, column indices
+        SketchDecision with row and output indices.
     """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
@@ -175,7 +176,9 @@ def sample_random_sampling_sketch(tensor: cp.ndarray, **kwargs):
         _weighted_sample_without_replacement(output_probs, k_col, random_state=random_state)
     )
 
-    return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
+    if kwargs.get('record_probabilities', False):
+        return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
+    return SketchDecision(row_indexer, col_indexer)
 
 
 def sample_uniform_sketch(tensor: cp.ndarray, **kwargs):
@@ -192,9 +195,11 @@ def sample_uniform_sketch(tensor: cp.ndarray, **kwargs):
     rng = cp.random if kwargs.get('random_state') is None else kwargs['random_state']
     row_indexer = cp.sort(rng.permutation(tensor.shape[0])[:k_row]).astype(cp.uint64)
     col_indexer = cp.sort(rng.permutation(tensor.shape[1])[:k_col]).astype(cp.uint64)
-    row_probs = cp.full(tensor.shape[0], 1 / tensor.shape[0], dtype=cp.float32)
-    output_probs = cp.full(tensor.shape[1], 1 / tensor.shape[1], dtype=cp.float32)
-    return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
+    if kwargs.get('record_probabilities', False):
+        row_probs = cp.full(tensor.shape[0], 1 / tensor.shape[0], dtype=cp.float32)
+        output_probs = cp.full(tensor.shape[1], 1 / tensor.shape[1], dtype=cp.float32)
+        return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
+    return SketchDecision(row_indexer, col_indexer)
 
 
 def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
@@ -204,17 +209,19 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
         tensor: cp.ndarray, shape (m, n)
         subsample: float, row fraction, default 0.5
         sketch_outputs: int, projection width and column count, default 1
+        random_state: optional CuPy RandomState for the projection draw
 
     Returns:
-        cp.ndarray, row indices
-        cp.ndarray, column indices
+        SketchDecision with row and output indices.
     """
     sketch_outputs = kwargs.get('sketch_outputs', 1)
     subsample = kwargs.get('subsample', 0.5)
     k_row = max(1, int(tensor.shape[0] * subsample))
     k_col = max(1, sketch_outputs)
 
-    P = cp.random.randn(tensor.shape[1], k_col, dtype=cp.float32)
+    random_state = kwargs.get('random_state')
+    rng = cp.random if random_state is None else random_state
+    P = rng.randn(tensor.shape[1], k_col, dtype=cp.float32)
     P /= cp.sqrt(k_col)
     projected = cp.dot(tensor, P)
 
@@ -224,10 +231,9 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
     col_weights = (tensor ** 2).mean(axis=0)
     col_indexer = cp.sort(cp.argsort(col_weights)[-k_col:]).astype(cp.uint64)
 
-    return row_indexer, col_indexer
+    return SketchDecision(row_indexer, col_indexer)
 
 
-# svd_heuristic, svd, topk, rand, proj -> sketch callables for GradHessHistory
 SUPPORTED_SKETCH_METHODS = {
     'svd_heuristic': sample_svd_sketch_heuristic,
     'svd': sample_svd_sketch,

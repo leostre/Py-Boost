@@ -21,7 +21,8 @@ class CPUOnly:
         self.original=pytest.importorskip
         def importorskip(name,*args,**kwargs):
             if name.split('.')[0]=='cupy':
-                pytest.skip('CPU publication verification; CUDA acceptance is a separate protocol')
+                pytest.skip('CPU publication verification; CUDA acceptance is a separate protocol',
+                            allow_module_level=True)
             return self.original(name,*args,**kwargs)
         pytest.importorskip=importorskip
 

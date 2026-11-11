@@ -169,3 +169,50 @@ def test_exact_shortlist_refinement_matches_full_gain_and_stays_shadow_only(monk
         assert all(
             node['refined_winner_gain_equivalent'] for node in entry['nodes']
         )
+
+
+def test_projection_diagnostics_preserve_feature_samples_and_trees(monkeypatch):
+    from py_boost.gpu.history_boosting import HistoryBasedBoostingModel
+    from py_boost.sampling.bagging import BaseSampler
+
+    # Balanced binary features give one threshold per feature. Distinct effects
+    # keep split gains separated as the stumps fit the additive signal.
+    feature_bits = np.arange(8)
+    X = ((np.arange(256)[:, None] >> feature_bits) & 1).astype(np.float32)
+    effects = np.exp2((feature_bits - 7).astype(np.float32))
+    signal = X @ effects
+    y = np.stack((signal, 0.5 * signal, -0.25 * signal), axis=1)
+    feature_samples = []
+    sample = BaseSampler.__call__
+
+    def record_features(sampler):
+        indices = sample(sampler)
+        if sampler.axis == 1:
+            feature_samples.append(indices.get())
+        return indices
+
+    monkeypatch.setattr(BaseSampler, '__call__', record_features)
+    params = _common()
+    params.update(
+        loss='mse', use_hess=False, max_depth=1, sketch_method='proj',
+        sketch_outputs=2, history_subsample=0.5, scheduler_mode='never', colsample=0.5,
+        split_diagnostics_top_k=0,
+    )
+    reference = HistoryBasedBoostingModel(split_diagnostics=False, **params).fit(X, y)
+    expected_samples = np.stack(feature_samples)
+    feature_samples.clear()
+    diagnostic = HistoryBasedBoostingModel(split_diagnostics=True, **params).fit(X, y)
+
+    sketch = diagnostic.params['multioutput_sketch']
+    assert not sketch.decision_trace
+    assert len(sketch.shadow_decision_trace) == params['ntrees']
+    assert sketch.split_diagnostics_trace
+    assert expected_samples.shape == (params['ntrees'], X.shape[1] // 2)
+    np.testing.assert_array_equal(np.stack(feature_samples), expected_samples)
+
+    assert len(reference.models) == len(diagnostic.models) == params['ntrees']
+    for expected, actual in zip(reference.models, diagnostic.models):
+        assert expected.values.shape[0] == 2
+        np.testing.assert_array_equal(actual.test_format, expected.test_format)
+        np.testing.assert_array_equal(actual.test_format_offsets, expected.test_format_offsets)
+        np.testing.assert_allclose(actual.values, expected.values, rtol=1e-5, atol=1e-6)

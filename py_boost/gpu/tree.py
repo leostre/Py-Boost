@@ -567,118 +567,120 @@ class DepthwiseTreeBuilder:
                     H = hess[:, grp_indexer]
                 else:
                     H = sample_weight if sample_weight is not None else cp.ones((G.shape[0], 1), dtype=cp.float32)
-                if self.multioutput_sketch is not None:
-                    if callable(decision_maker):
-                        full_G, full_H = G, H
-                        decision = decision_maker(G, H)
-                        if decision is not None:
-                            indexers = resolve_structure_indexers(row_indexer, col_indexer, decision)
-                            structure_row_indexer = indexers.row_indices
-                            G, H = apply_output_indices(G, H, indexers.output_indices)
 
-                        needs_diagnostics = getattr(
+            multiple_outputs = G.shape[1] > 1
+            if callable(decision_maker):
+                full_G, full_H = G, H
+                decision = decision_maker(G, H)
+                if decision is not None:
+                    indexers = resolve_structure_indexers(row_indexer, col_indexer, decision)
+                    structure_row_indexer = indexers.row_indices
+                    if multiple_outputs:
+                        G, H = apply_output_indices(G, H, indexers.output_indices)
+
+                needs_diagnostics = getattr(
+                    self.multioutput_sketch,
+                    'needs_split_diagnostics',
+                    None,
+                )
+                if multiple_outputs and callable(needs_diagnostics) and needs_diagnostics():
+                    diagnostic_decision = decision
+                    if diagnostic_decision is None:
+                        shadow_maker = getattr(
                             self.multioutput_sketch,
-                            'needs_split_diagnostics',
+                            'make_shadow_decision',
                             None,
                         )
-                        if callable(needs_diagnostics) and needs_diagnostics():
-                            diagnostic_decision = decision
-                            if diagnostic_decision is None:
-                                shadow_maker = getattr(
+                        if callable(shadow_maker):
+                            diagnostic_decision = shadow_maker(full_G, full_H)
+                    if diagnostic_decision is not None:
+                        diagnostic_indexers = resolve_structure_indexers(
+                            row_indexer,
+                            col_indexer,
+                            diagnostic_decision,
+                        )
+                        diagnostic_G, diagnostic_H = apply_output_indices(
+                            full_G,
+                            full_H,
+                            diagnostic_indexers.output_indices,
+                        )
+                        split_diagnostic_context = {
+                            'timings': {},
+                            'callback': self.multioutput_sketch.record_split_diagnostics,
+                            'diagnostic_grad': diagnostic_G,
+                            'diagnostic_hess': diagnostic_H,
+                            'diagnostic_rows': diagnostic_indexers.row_indices,
+                            'full_grad': full_G,
+                            'full_hess': full_H,
+                            'top_k': self.multioutput_sketch.split_diagnostics_top_k,
+                            'output_attribution': (
+                                self.multioutput_sketch.split_output_attribution
+                            ),
+                            'candidate_output_profiles': bool(getattr(
+                                self.multioutput_sketch,
+                                'split_candidate_output_profiles',
+                                False,
+                            )),
+                            'diagnostic_output_budget': int(diagnostic_G.shape[1]),
+                            'selected_output_indices': (
+                                diagnostic_decision.output_indices
+                            ),
+                        }
+                        if self.multioutput_sketch.split_refinement_shadow:
+                            split_diagnostic_context.update({
+                                'refinement_callback': (
+                                    self.multioutput_sketch.record_split_refinement
+                                ),
+                                'refinement_shortlists': (
+                                    self.multioutput_sketch.split_refinement_shortlists
+                                ),
+                                'apply_refined_splits': bool(getattr(
                                     self.multioutput_sketch,
-                                    'make_shadow_decision',
-                                    None,
-                                )
-                                if callable(shadow_maker):
-                                    diagnostic_decision = shadow_maker(full_G, full_H)
-                            if diagnostic_decision is not None:
-                                diagnostic_indexers = resolve_structure_indexers(
-                                    row_indexer,
-                                    col_indexer,
-                                    diagnostic_decision,
-                                )
-                                diagnostic_G, diagnostic_H = apply_output_indices(
-                                    full_G,
-                                    full_H,
-                                    diagnostic_indexers.output_indices,
-                                )
-                                split_diagnostic_context = {
-                                    'timings': {},
-                                    'callback': self.multioutput_sketch.record_split_diagnostics,
-                                    'diagnostic_grad': diagnostic_G,
-                                    'diagnostic_hess': diagnostic_H,
-                                    'diagnostic_rows': diagnostic_indexers.row_indices,
-                                    'full_grad': full_G,
-                                    'full_hess': full_H,
-                                    'top_k': self.multioutput_sketch.split_diagnostics_top_k,
-                                    'output_attribution': (
-                                        self.multioutput_sketch.split_output_attribution
-                                    ),
-                                    'candidate_output_profiles': bool(getattr(
-                                        self.multioutput_sketch,
-                                        'split_candidate_output_profiles',
-                                        False,
-                                    )),
-                                    'diagnostic_output_budget': int(diagnostic_G.shape[1]),
-                                    'selected_output_indices': (
-                                        diagnostic_decision.output_indices
-                                    ),
-                                }
-                                if self.multioutput_sketch.split_refinement_shadow:
-                                    split_diagnostic_context.update({
-                                        'refinement_callback': (
-                                            self.multioutput_sketch.record_split_refinement
-                                        ),
-                                        'refinement_shortlists': (
-                                            self.multioutput_sketch.split_refinement_shortlists
-                                        ),
-                                        'apply_refined_splits': bool(getattr(
-                                            self.multioutput_sketch,
-                                            'split_refinement_apply',
-                                            False,
-                                        )),
-                                        'capture_determinism_frontier': bool(getattr(
-                                            self.multioutput_sketch,
-                                            'split_refinement_determinism_capture',
-                                            False,
-                                        )),
-                                        'refinement_failure_diagnostics': bool(getattr(
-                                            self.multioutput_sketch,
-                                            'split_refinement_failure_diagnostics',
-                                            False,
-                                        )),
-                                        'refinement_severe_error_threshold': float(getattr(
-                                            self.multioutput_sketch,
-                                            'split_refinement_severe_error_threshold',
-                                            1.0,
-                                        )),
-                                    })
-                                if self.multioutput_sketch.scheduler_mode == 'adaptive_budget':
-                                    probe = self.multioutput_sketch.make_shadow_decision(
-                                        full_G, full_H,
-                                        output_budget=self.multioutput_sketch._adaptive_probe_budget)
-                                    probe_G, probe_H = apply_output_indices(
-                                        full_G, full_H, probe.output_indices)
-                                    split_diagnostic_context['probe'] = {
-                                        'grad': probe_G, 'hess': probe_H,
-                                        'rows': probe.row_indices,
-                                        'budget': int(probe_G.shape[1]),
-                                    }
-                                research_probes = []
-                                for budget in getattr(self.multioutput_sketch, 'research_shadow_budgets', ()):
-                                    probe = self.multioutput_sketch.make_shadow_decision(
-                                        full_G, full_H, output_budget=budget)
-                                    probe_G, probe_H = apply_output_indices(full_G, full_H, probe.output_indices)
-                                    research_probes.append({
-                                        'grad': probe_G,
-                                        'hess': probe_H,
-                                        'rows': probe.row_indices,
-                                        'budget': int(probe_G.shape[1]),
-                                        'selected_output_indices': probe.output_indices,
-                                    })
-                                split_diagnostic_context['research_probes'] = research_probes
-                    else:
-                        G, H = self.multioutput_sketch(G, H)
+                                    'split_refinement_apply',
+                                    False,
+                                )),
+                                'capture_determinism_frontier': bool(getattr(
+                                    self.multioutput_sketch,
+                                    'split_refinement_determinism_capture',
+                                    False,
+                                )),
+                                'refinement_failure_diagnostics': bool(getattr(
+                                    self.multioutput_sketch,
+                                    'split_refinement_failure_diagnostics',
+                                    False,
+                                )),
+                                'refinement_severe_error_threshold': float(getattr(
+                                    self.multioutput_sketch,
+                                    'split_refinement_severe_error_threshold',
+                                    1.0,
+                                )),
+                            })
+                        if self.multioutput_sketch.scheduler_mode == 'adaptive_budget':
+                            probe = self.multioutput_sketch.make_shadow_decision(
+                                full_G, full_H,
+                                output_budget=self.multioutput_sketch._adaptive_probe_budget)
+                            probe_G, probe_H = apply_output_indices(
+                                full_G, full_H, probe.output_indices)
+                            split_diagnostic_context['probe'] = {
+                                'grad': probe_G, 'hess': probe_H,
+                                'rows': probe.row_indices,
+                                'budget': int(probe_G.shape[1]),
+                            }
+                        research_probes = []
+                        for budget in getattr(self.multioutput_sketch, 'research_shadow_budgets', ()):
+                            probe = self.multioutput_sketch.make_shadow_decision(
+                                full_G, full_H, output_budget=budget)
+                            probe_G, probe_H = apply_output_indices(full_G, full_H, probe.output_indices)
+                            research_probes.append({
+                                'grad': probe_G,
+                                'hess': probe_H,
+                                'rows': probe.row_indices,
+                                'budget': int(probe_G.shape[1]),
+                                'selected_output_indices': probe.output_indices,
+                            })
+                        split_diagnostic_context['research_probes'] = research_probes
+            elif self.multioutput_sketch is not None and multiple_outputs:
+                G, H = self.multioutput_sketch(G, H)
 
             group_index[grp_indexer] = n_grp
             # grow single group of the tree and get nodes index
