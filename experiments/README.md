@@ -1,5 +1,193 @@
 ### Experiment launch guide
 
+#### Reproducible HASBoost diagnostics
+
+Install the pinned experiment dependencies and run a small GPU check first:
+
+```bash
+pip install -r experiments/requirements.txt
+python -m experiments.benchmark_helena \
+  --scenario main --datasets helena --max-samples 3000 --ntrees 5 --seed 42
+```
+
+The benchmark supports deterministic performance, observability, scheduler,
+and trajectory scenarios:
+
+```bash
+# Five primary variants, three seeds, 12,000 Helena rows and 50 trees.
+python -m experiments.benchmark_helena --scenario main --datasets helena
+
+# Mechanism ablations: gating, p_i/q_j versus uniform allocation, one-axis
+# sketches, full-data leaf values, and random versus greedy selection.
+python -m experiments.benchmark_helena \
+  --scenario ablations --datasets helena --ntrees 30 --seed 42
+
+# Scheduler grid: theta in {0.1, 0.2, 0.3}, alpha in {0.8, 0.9, 0.95}.
+python -m experiments.benchmark_helena \
+  --scenario scheduler_sweep --datasets helena --ntrees 30 --seed 42
+
+# Row budgets {0.25, 0.5, 0.75} and output budgets {10, 25, 50}, varied separately.
+python -m experiments.benchmark_helena \
+  --scenario budget_sweep --datasets helena --ntrees 30 --seed 42
+
+# Stage A: keep the model full while a deterministic output-only policy runs
+# in shadow mode. Saves per-node full/sketched Top-K and normalized gain regret.
+python -m experiments.benchmark_helena \
+  --scenario observability --datasets helena --ntrees 50 --seed 42
+
+# Stage B: compare the current rule, K={2,5,10}, a robust volatility window,
+# and the shadow split-risk scheduler at one fixed output-only budget.
+python -m experiments.benchmark_helena \
+  --scenario scheduler_diagnostics --datasets helena --ntrees 50 --seed 42
+
+python -m experiments.analyze_scheduler_diagnostics \
+  results/diagnostics/<scheduler-report>.json
+
+# Non-mutating risk curves for output budgets {10, 25, 50, 75} and both
+# history-weighted random sampling and history Top-K selection.
+python -m experiments.benchmark_helena \
+  --scenario risk_budget_sweep --datasets helena --ntrees 50 --seed 42
+
+# Repeat the same scheduler cases without diagnostic histogram overhead when
+# measuring end-to-end speed.
+python -m experiments.benchmark_helena \
+  --scenario scheduler_diagnostics --datasets helena --ntrees 50 --seed 42 \
+  --disable-case-diagnostics
+
+# Stage C: capture the full optimization trajectory. `ghz` supports every
+# planned representation ablation; use `z --trajectory-window 8` for a smaller run.
+python -m experiments.benchmark_helena \
+  --scenario rmt_offline --datasets helena --ntrees 50 --seed 42 \
+  --trajectory ghz
+
+python -m experiments.analyze_optimization_history \
+  results/diagnostics/artifacts/<run-id>/trajectories/<trajectory>.npz \
+  --representations g z newton_step gh_separate --windows 4 8 16 --n-null 20
+
+# Hardware-friendly pilot: keep the exact observed covariance, but evaluate
+# every fourth window and cap only the empirical-null row sample.
+python -m experiments.analyze_optimization_history \
+  results/diagnostics/artifacts/<run-id>/trajectories/<trajectory>.npz \
+  --representations g z newton_step gh_separate --windows 4 8 16 \
+  --n-null 20 --stride 4 --null-max-rows 4096
+
+# Test whether subspace rotation predicts the next tree's measured split risk.
+python -m experiments.analyze_spectral_risk \
+  results/spectral/spectral_windows.csv \
+  results/diagnostics/artifacts/<run-id>/split_diagnostics/<trace>.json
+
+# H-RMT-2: record exact leave-one-output split attributions, then compare them
+# with the spectral output ranking.
+python -m experiments.benchmark_helena \
+  --scenario observability --datasets helena --ntrees 50 --seed 42 \
+  --split-output-attribution
+python -m experiments.analyze_output_attribution \
+  results/spectral/spectral_windows.json \
+  results/diagnostics/artifacts/<run-id>/split_diagnostics/<trace>.json \
+  --budgets 10 25 50
+
+# Stage D: compare uniform, current-gradient Top-K, history Top-K, and online
+# spectral Top-K at budgets {25, 50, 75} without changing the fitted trees.
+python -m experiments.benchmark_helena \
+  --scenario spectral_shadow --datasets helena --ntrees 50 --seeds 42 52 62 \
+  --spectral-window 16 --spectral-null-permutations 5 \
+  --spectral-null-rows 2048 --spectral-null-interval 5
+python -m experiments.analyze_spectral_shadow \
+  results/diagnostics/<one-or-more-shadow-reports>.json --min-iteration 16
+
+# Calibrate output-budget risk on a longer Helena trajectory, then compare
+# fixed controls with the risk-controlled adaptive budget.
+python -m experiments.benchmark_helena \
+  --scenario adaptive_budget_diagnostics --datasets helena \
+  --max-samples 12000 --ntrees 100 --seeds 42 52 62
+python -m experiments.benchmark_helena \
+  --scenario adaptive_budget --datasets helena \
+  --max-samples 12000 --ntrees 100 --seeds 42 52 62
+python -m experiments.analyze_adaptive_budget \
+  results/diagnostics/<adaptive-budget-report>.json
+
+# Transfer the adaptive policy to a compact MediaMill subset. Dataset-sized
+# levels avoid a redundant 100/101 transition.
+python -m experiments.benchmark_helena \
+  --scenario adaptive_budget --datasets mediamill \
+  --max-samples 10000 --ntrees 50 --seeds 42 52 62 \
+  --adaptive-budgets 25 50 75 101
+
+# Separate row and output effects: full, rows-only, outputs-only, and joint
+# sketches for both current-gradient and history Top-K policies.
+python -m experiments.benchmark_helena \
+  --scenario row_output_factorial --datasets mediamill \
+  --max-samples 10000 --ntrees 50 --seeds 42 52 62
+python -m experiments.analyze_row_output_factorial \
+  results/diagnostics/<row-output-factorial-report>.json
+
+# Stabilize the adaptive controller, then confirm the selected p2/c10 rule
+# with paired seeds on both compact reference datasets.
+python -m experiments.benchmark_helena \
+  --scenario adaptive_budget_stability --datasets helena \
+  --max-samples 12000 --ntrees 100 --seeds 42 52 62
+python -m experiments.benchmark_helena \
+  --scenario adaptive_budget_stability --datasets helena mediamill \
+  --case-ids full adaptive_current_p2_c10 \
+  --max-samples 12000 --ntrees 100 --seeds 42 52 62 72 82
+python -m experiments.analyze_paired_confirmation \
+  results/diagnostics/<confirmation-report>.json \
+  --candidate-cases adaptive_current_p2_c10 \
+  --output-dir results/diagnostics/adaptive_budget_confirmation/analysis
+
+# Isolate row sampling while retaining every output. This scenario disables
+# split diagnostics so its time and sampled GPU-memory peak are comparable.
+python -m experiments.benchmark_helena \
+  --scenario row_budget_sweep --datasets helena \
+  --max-samples 12000 --ntrees 100 --seeds 42 52 62
+
+# Build per-iteration safe-budget labels and evaluate whether compact spectral
+# state transfers between Helena and MediaMill better than training progress.
+python -m experiments.benchmark_helena \
+  --scenario rmt_budget --datasets helena mediamill \
+  --max-samples 10000 --ntrees 50 --seeds 42 52 62 \
+  --spectral-null-permutations 3 --spectral-null-rows 1024
+python -m experiments.analyze_rmt_budget \
+  results/diagnostics/<rmt-budget-report>.json \
+  --output-dir results/diagnostics/rmt_budget_cross_dataset/analysis
+
+# Compare direct spectral Top-K with sequential redundancy suppression at the
+# same 75-output budget. All policies remain shadow-only in this diagnostic.
+python -m experiments.benchmark_helena \
+  --scenario spectral_diversity --datasets helena mediamill \
+  --max-samples 10000 --ntrees 50 --seeds 42 52 62 \
+  --spectral-null-permutations 3 --spectral-null-rows 1024
+
+# CPU-only smoke control with known latent rank and a regime change.
+python -m experiments.generate_synthetic_trajectory
+python -m experiments.analyze_optimization_history \
+  results/spectral/synthetic_trajectory.npz --windows 4 8 16 --n-null 20
+
+# Compact SketchBoost-derived validation suite. Defaults retain complete Birds
+# and Yeast and a stratified 10,000-row MediaMill subset.
+python -m experiments.benchmark_helena \
+  --scenario main --datasets birds yeast mediamill --ntrees 30
+```
+
+Use `--dry-plan` to inspect every resolved case without downloading data or
+starting a GPU run. OpenML datasets are cached by immutable data ID. MediaMill
+uses the stable train/test files from LIBSVM Tools because the legacy
+`scikit-multilearn` catalog endpoint is no longer available.
+
+Each run writes JSON, per-run CSV, and seed-aggregated CSV files under
+`results/diagnostics/`. Reports include task quality, end-to-end fit time,
+repeated inference time, scheduler activation, row/output sketch sizes,
+index-uniqueness checks, split regret, false activations, and timings for
+`get_weights` and `get_indexers`. Diagnostic runs include the cost of the extra
+full histogram and must not be used as speed measurements; rerun them with
+`--disable-case-diagnostics` for that comparison.
+Combine independent scenario reports with:
+
+```bash
+python -m experiments.aggregate_benchmark_reports \
+  --input-dir results/diagnostics/final
+```
+
 #### 1. Environment setup
 
 - **Install the main project package** (from the repo root):

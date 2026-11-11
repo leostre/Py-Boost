@@ -1,5 +1,7 @@
 """GPU regression checks for row ownership and the sketch result contract."""
 
+import warnings
+
 import numpy as np
 import pytest
 
@@ -39,10 +41,21 @@ def test_row_fraction_conflicts_and_effective_configuration():
         HistoryBasedBoostingModel(loss="mse", history_subsample=0.4, sketch_params={"subsample": 0.75})
 
     nested = {"subsample": 0.75, "sketch_outputs": 2}
-    model = HistoryBasedBoostingModel(loss="mse", sketch_params=nested)
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", UserWarning)
+        model = HistoryBasedBoostingModel(
+            loss="mse", sketch_params=nested, seed=17,
+            scheduler_mode="adaptive_budget", adaptive_budgets=(1, 2),
+            split_diagnostics_control_interval=2,
+        )
     sketch = model.params["multioutput_sketch"]
     assert model.params["history_subsample"] == sketch.subsample == 0.75
     assert model.params["subsample"] is None
+    assert sketch.sketch_outputs == 2
+    assert sketch.shadow_seed == 17
+    assert sketch.split_diagnostics_enabled
+    sketch.sketch_outputs = 1
+    sketch.before_train({})
     assert sketch.sketch_outputs == 2
     assert nested == {"subsample": 0.75, "sketch_outputs": 2}
     with pytest.warns(UserWarning, match="stabilization_window"):
@@ -62,7 +75,7 @@ def test_builtin_methods_return_one_result_type(method):
     assert cp.unique(outputs).size == 2
     assert decision.row_probabilities is None
     assert decision.output_probabilities is None
-    if method in ("topk", "rand"):
+    if method in ("topk", "rand", "uniform"):
         recorded = select(tensor, subsample=0.5, sketch_outputs=2, record_probabilities=True)
         assert float(recorded.row_probabilities.sum()) == pytest.approx(1)
         assert float(recorded.output_probabilities.sum()) == pytest.approx(1)

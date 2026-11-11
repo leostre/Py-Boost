@@ -5,6 +5,9 @@ import math
 import numba
 import numpy as np
 
+from py_boost.multioutput.split_diagnostics import action_gain_regret, normalized_gain_regret
+from time import perf_counter
+
 try:
     import cupy as cp
 
@@ -809,7 +812,258 @@ def get_gpu_splitters(unique_nodes, new_nodes_id, best_feat, best_split, best_na
     return out, new_unique_nodes
 
 
-def depthwise_grow_tree(tree, group, arr, grad, hess, row_indexer, col_indexer, params, valid_arrs=None):
+def _counts_for_rows(node_indexes, row_indexer, nnodes):
+    """Count selected rows in active nodes, reserving the last bin as a sentinel."""
+
+    counts = cp.zeros((nnodes + 1,), dtype=np.uint64)
+    counts.scatter_add(node_indexes[row_indexer], 1)
+    return counts[:-1]
+
+
+def _loss_for_statistics(
+    arr,
+    grad,
+    hess,
+    node_indexes,
+    row_indexer,
+    col_indexer,
+    nnodes,
+    params,
+    return_components=False,
+):
+    """Compute split-candidate gains for one explicit row/output statistic set."""
+
+    n_out = grad.shape[1]
+    gh = cp.concatenate((grad, hess), axis=1)
+    gh_hist = histogram(
+        arr,
+        gh,
+        node_indexes,
+        col_indexer=col_indexer,
+        row_indexer=row_indexer,
+        out_indexer=cp.arange(gh.shape[1], dtype=cp.uint64),
+        nnodes=nnodes,
+        max_bins=params['max_bin'],
+    )
+    loss = calc_loss(
+        gh_hist[:n_out],
+        gh_hist[n_out:],
+        _counts_for_rows(node_indexes, row_indexer, nnodes),
+        lambda_l2=params['lambda_l2'],
+        min_data_in_leaf=params['min_data_in_leaf'],
+    )
+    aggregated = loss.sum(axis=0) if loss.shape[0] > 1 else loss[0]
+    if return_components:
+        return aggregated, loss
+    return aggregated
+
+
+def _top_k_split_candidates(loss, col_indexer, top_k):
+    """Materialize the top split candidates for every active node."""
+
+    nnodes, nfeats, nbins, nnan_directions = loss.shape
+    candidates_per_node = nfeats * nbins * nnan_directions
+    k = min(int(top_k), candidates_per_node)
+    if k <= 0:
+        return [[] for _ in range(nnodes)]
+    flattened = loss.reshape((nnodes, candidates_per_node))
+    order = cp.argsort(flattened, axis=1)[:, -k:][:, ::-1]
+    gains = cp.take_along_axis(flattened, order, axis=1)
+    bins_x_directions = nbins * nnan_directions
+    feature_positions = order // bins_x_directions
+    within_feature = order % bins_x_directions
+    split_bins = within_feature // nnan_directions
+    nan_left = (within_feature % nnan_directions) == 0
+    features = col_indexer[feature_positions]
+
+    features_cpu = features.get()
+    gains_cpu = gains.get()
+    split_bins_cpu = split_bins.get()
+    nan_left_cpu = nan_left.get()
+    return [
+        [
+            {
+                'feature': int(features_cpu[node, rank]),
+                'split_bin': int(split_bins_cpu[node, rank]),
+                'nan_left': bool(nan_left_cpu[node, rank]),
+                'gain': float(gains_cpu[node, rank]),
+            }
+            for rank in range(k)
+        ]
+        for node in range(nnodes)
+    ]
+
+
+def _score_splits(loss, col_indexer, features, split_bins, nan_left):
+    """Evaluate selected split identities against another gain tensor."""
+
+    feature_positions = (col_indexer[cp.newaxis, :] == features[:, cp.newaxis]).argmax(axis=1)
+    node_positions = cp.arange(features.shape[0])
+    direction_positions = cp.where(nan_left, 0, 1)
+    return loss[node_positions, feature_positions, split_bins, direction_positions]
+
+
+def _leave_one_output_regrets(
+    full_loss_components,
+    full_loss,
+    col_indexer,
+    full_best_gain,
+    min_gain_to_split,
+):
+    """Measure full-statistic split regret after removing each output."""
+
+    n_outputs = full_loss_components.shape[0]
+    n_nodes = full_loss.shape[0]
+    selected_full_gains = cp.empty((n_outputs, n_nodes), dtype=full_loss.dtype)
+    for output_index in range(n_outputs):
+        reduced_loss = full_loss - full_loss_components[output_index]
+        feature, gain, split_bin, nan_left = get_best_split(
+            reduced_loss,
+            col_indexer,
+        )
+        candidate_full_gain = _score_splits(
+            full_loss,
+            col_indexer,
+            feature,
+            split_bin,
+            nan_left,
+        )
+        selected_full_gains[output_index] = cp.where(
+            gain > min_gain_to_split,
+            candidate_full_gain,
+            0,
+        )
+
+    best_cpu = full_best_gain.get()
+    selected_cpu = selected_full_gains.get().T
+    return [
+        [
+            (
+                normalized_gain_regret(float(best_cpu[node]), float(candidate))
+                if float(best_cpu[node]) > min_gain_to_split
+                else None
+            )
+            for candidate in selected_cpu[node]
+        ]
+        for node in range(n_nodes)
+    ]
+
+
+def _build_split_diagnostic_records(
+    diagnostic_loss,
+    full_loss,
+    col_indexer,
+    unique_nodes,
+    top_k,
+    min_gain_to_split,
+    full_loss_components=None,
+):
+    """Compare the diagnostic winner with full-statistic candidates per node."""
+
+    selected_feat, selected_gain, selected_split, selected_nan_left = get_best_split(
+        diagnostic_loss, col_indexer
+    )
+    full_feat, full_gain, full_split, full_nan_left = get_best_split(full_loss, col_indexer)
+    output_regrets = (
+        _leave_one_output_regrets(
+            full_loss_components,
+            full_loss,
+            col_indexer,
+            full_gain,
+            min_gain_to_split,
+        )
+        if full_loss_components is not None
+        else None
+    )
+    selected_full_gain = _score_splits(
+        full_loss,
+        col_indexer,
+        selected_feat,
+        selected_split,
+        selected_nan_left,
+    )
+
+    arrays = [
+        selected_feat,
+        selected_gain,
+        selected_split,
+        selected_nan_left,
+        full_feat,
+        full_gain,
+        full_split,
+        full_nan_left,
+        selected_full_gain,
+    ]
+    (
+        selected_feat,
+        selected_gain,
+        selected_split,
+        selected_nan_left,
+        full_feat,
+        full_gain,
+        full_split,
+        full_nan_left,
+        selected_full_gain,
+    ) = [array.get() for array in arrays]
+    diagnostic_top_k = _top_k_split_candidates(diagnostic_loss, col_indexer, top_k)
+    full_top_k = _top_k_split_candidates(full_loss, col_indexer, top_k)
+
+    records = []
+    for position, node_id in enumerate(unique_nodes):
+        best_gain = float(full_gain[position])
+        candidate_full_gain = float(selected_full_gain[position])
+        full_split_available = best_gain > min_gain_to_split
+        diagnostic_split_available = (
+            float(selected_gain[position]) > min_gain_to_split
+        )
+        spurious_split = diagnostic_split_available and not full_split_available
+        action_full_gain = candidate_full_gain if diagnostic_split_available else 0.0
+        regret = action_gain_regret(best_gain, candidate_full_gain,
+                                  diagnostic_split_available, full_split_available)
+        records.append(
+            {
+                'node_id': int(node_id),
+                'selected_feature': int(selected_feat[position]),
+                'selected_split_bin': int(selected_split[position]),
+                'selected_nan_left': bool(selected_nan_left[position]),
+                'selected_diagnostic_gain': float(selected_gain[position]),
+                'selected_full_gain': candidate_full_gain,
+                'action_full_gain': action_full_gain,
+                'full_best_feature': int(full_feat[position]),
+                'full_best_split_bin': int(full_split[position]),
+                'full_best_nan_left': bool(full_nan_left[position]),
+                'full_best_gain': best_gain,
+                'full_split_available': full_split_available,
+                'diagnostic_split_available': diagnostic_split_available,
+                'spurious_split': spurious_split,
+                'same_split': bool(
+                    selected_feat[position] == full_feat[position]
+                    and selected_split[position] == full_split[position]
+                    and selected_nan_left[position] == full_nan_left[position]
+                ),
+                'regret': regret,
+                'diagnostic_top_k': diagnostic_top_k[position],
+                'full_top_k': full_top_k[position],
+                'leave_one_output_regret': (
+                    output_regrets[position] if output_regrets is not None else None
+                ),
+            }
+        )
+    return records
+
+
+def depthwise_grow_tree(
+    tree,
+    group,
+    arr,
+    grad,
+    hess,
+    row_indexer,
+    col_indexer,
+    params,
+    valid_arrs=None,
+    split_diagnostics=None,
+):
     if valid_arrs is None:
         valid_arrs = []
 
@@ -829,6 +1083,30 @@ def depthwise_grow_tree(tree, group, arr, grad, hess, row_indexer, col_indexer, 
     # index of node in unique array
     node_indexes = nodes
     prev_hist, small_index, big_index = [None] * 3
+
+    diagnostic_callback = None
+    diagnostic_grad = diagnostic_hess = diagnostic_rows = None
+    full_grad = full_hess = None
+    diagnostic_top_k = 5
+    if split_diagnostics is not None:
+        diagnostic_callback = split_diagnostics['callback']
+        diagnostic_grad = split_diagnostics['diagnostic_grad']
+        diagnostic_hess = split_diagnostics['diagnostic_hess']
+        diagnostic_rows = split_diagnostics['diagnostic_rows']
+        full_grad = split_diagnostics['full_grad']
+        full_hess = split_diagnostics['full_hess']
+        diagnostic_top_k = split_diagnostics.get('top_k', 5)
+        output_attribution = bool(split_diagnostics.get('output_attribution', False))
+        full_rows = cp.arange(arr.shape[0], dtype=cp.uint64)
+
+        def measured_loss(kind, *args, **kwargs):
+            cp.cuda.get_current_stream().synchronize()
+            started = perf_counter()
+            result = _loss_for_statistics(*args, **kwargs)
+            cp.cuda.get_current_stream().synchronize()
+            timings = split_diagnostics.setdefault('timings', {})
+            timings[kind] = timings.get(kind, 0.0) + perf_counter() - started
+            return result
 
     for niter in range(params['max_depth']):
 
@@ -853,6 +1131,64 @@ def depthwise_grow_tree(tree, group, arr, grad, hess, row_indexer, col_indexer, 
             loss = loss[0]
 
         best_feat, best_gain, best_split, best_nan_left = get_best_split(loss, col_indexer)
+
+        if diagnostic_callback is not None:
+            diagnostic_loss = measured_loss('current_statistics_seconds',
+                arr,
+                diagnostic_grad,
+                diagnostic_hess,
+                node_indexes,
+                diagnostic_rows,
+                col_indexer,
+                nnodes,
+                params,
+            )
+            full_statistics = measured_loss('full_statistics_seconds',
+                arr,
+                full_grad,
+                full_hess,
+                node_indexes,
+                full_rows,
+                col_indexer,
+                nnodes,
+                params,
+                return_components=output_attribution,
+            )
+            if output_attribution:
+                full_loss, full_loss_components = full_statistics
+            else:
+                full_loss = full_statistics
+                full_loss_components = None
+            records = _build_split_diagnostic_records(
+                    diagnostic_loss,
+                    full_loss,
+                    col_indexer,
+                    unique_nodes,
+                    diagnostic_top_k,
+                    params['min_gain_to_split'],
+                    full_loss_components,
+                )
+            for record in records:
+                record['diagnostic_output_budget'] = split_diagnostics.get('diagnostic_output_budget')
+                record['diagnostic_kind'] = 'current'
+            diagnostic_callback(group, niter, records)
+            probe = split_diagnostics.get('probe')
+            probes = list(split_diagnostics.get('research_probes', ()))
+            if probe is not None:
+                probes.append(probe)
+            for probe in probes:
+                if probe['budget'] == split_diagnostics.get('diagnostic_output_budget'):
+                    continue
+                probe_loss = measured_loss('prospective_statistics_seconds',
+                    arr, probe['grad'], probe['hess'], node_indexes, probe['rows'],
+                    col_indexer, nnodes, params)
+                records = _build_split_diagnostic_records(
+                    probe_loss, full_loss, col_indexer, unique_nodes, diagnostic_top_k,
+                    params['min_gain_to_split'])
+                for record in records:
+                    record['diagnostic_output_budget'] = probe['budget']
+                    record['diagnostic_kind'] = 'prospective'
+                diagnostic_callback(group, niter, records)
 
         # move to CPU and apply min_gain_to_split condition
         unique_nodes, new_nodes_id, best_feat, best_gain, best_split, best_nan_left, is_valid_node = \

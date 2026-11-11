@@ -1,6 +1,5 @@
 import functools
-import inspect
-import types
+from collections.abc import Mapping
 from typing import Dict, Iterable
 
 from experiments.core.gpu import GPUTimer
@@ -8,7 +7,7 @@ from experiments.core.gpu import GPUTimer
 
 def time_patch_methods(model, method_names: Iterable[str]) -> Dict[str, dict]:
     """
-    Monkey‑patch selected methods on a model (and its params) to record
+    Monkey-patch selected methods on a model and nested parameter objects to record
     cumulative GPU time and call counts.
 
     Returns a dict mapping method name to ``{\"total_time\", \"call_count\"}``.
@@ -40,29 +39,27 @@ def time_patch_methods(model, method_names: Iterable[str]) -> Dict[str, dict]:
             return
 
         timed_method = create_timed_method(original_method, method_name)
-        if inspect.isclass(obj):
-            setattr(obj, method_name, timed_method)
-        else:
-            if hasattr(original_method, "__self__") and original_method.__self__ is not None:
-                setattr(obj, method_name, types.MethodType(timed_method, original_method.__self__))
-            else:
-                setattr(obj, method_name, types.MethodType(timed_method, obj))
+        # ``original_method`` is already bound. Assigning the closure directly
+        # to the instance avoids binding ``self`` a second time.
+        setattr(obj, method_name, timed_method)
 
     objects_to_check = [model]
-    if hasattr(model, "params"):
-        objects_to_check.append(model.params)
+    params = getattr(model, "params", None)
+    if isinstance(params, Mapping):
+        objects_to_check.extend(params.values())
 
+    seen = set()
     for obj in objects_to_check:
-        for attr_name in dir(obj):
+        if obj is None or id(obj) in seen:
+            continue
+        seen.add(id(obj))
+        for method_name in method_names:
             try:
-                attr = getattr(obj, attr_name)
-                for method_name in method_names:
-                    if hasattr(attr, method_name):
-                        method = getattr(attr, method_name)
-                        if callable(method):
-                            patch_method(attr, method_name, method)
-            except Exception:
+                method = getattr(obj, method_name)
+            except (AttributeError, TypeError):
                 continue
+            if callable(method):
+                patch_method(obj, method_name, method)
 
     return timing_data
 
