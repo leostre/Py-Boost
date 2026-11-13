@@ -3,7 +3,7 @@
   "files": {
     ".gitignore": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": ".gitignore",
       "source_sha256": "9b46e4a118c91b3d09417a1cf849f6542048897dbe30c1d0e1ef9f8c751caea0",
       "published_sha256": "a11d6748f5214428955d24940db58b4cec94ae8cb11a1e5954d207f51b9ced8e",
@@ -13,7 +13,7 @@
     },
     "experiments/README.md": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/README.md",
       "source_sha256": "b0e1f4eb2be87a7582a7722747665c0537971944ed5b19f16f69f1021d3c7028",
       "published_sha256": "0db09d6abeb9557cad91dfd304a9cd6e4ece5ee709ad4e3eceff69e5549f2d44",
@@ -23,7 +23,7 @@
     },
     "experiments/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/__init__.py",
       "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -31,7 +31,7 @@
     },
     "experiments/bin/run_analogues_catboost.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_analogues_catboost.sh",
       "source_sha256": "af97132d8fa8500cf10cea042d842abb82d8242282b9c832a28c88e9e585602f",
       "published_sha256": "fa1c3d814865615016db0cea9aff46df71edf26ab8d45dfda8e25d21f08dd4e2",
@@ -41,7 +41,7 @@
     },
     "experiments/bin/run_analogues_lgbm.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_analogues_lgbm.sh",
       "source_sha256": "f80abf49316541f46709e887dc04e9ce22d0f124922db57e2aba2c18ed6ffeda",
       "published_sha256": "5708632d236b4a8818f0008d06c1afc4905ffd63031b7e068e4a97b4f37e642e",
@@ -51,7 +51,7 @@
     },
     "experiments/bin/run_baselines.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_baselines.sh",
       "source_sha256": "a0c7baf4934d828efa8623d76f34ec39635ed74cde21dc23980b167a36752d4e",
       "published_sha256": "f37dfd9f5994abcce6d3f16313c0779f15e36db972b8c8952defd536da1953a5",
@@ -61,7 +61,7 @@
     },
     "experiments/bin/run_baselines_corrupted.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_baselines_corrupted.sh",
       "source_sha256": "756f5e1e95db1be48d509c35cc6295d045caeb01023e4f73813c27c1a1207d73",
       "published_sha256": "282db0b2514ad6bbda7343103f25dc7e25debe15bfe52007eb53babf55b1dc72",
@@ -71,7 +71,7 @@
     },
     "experiments/bin/run_hyperbolic.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_hyperbolic.sh",
       "source_sha256": "57886aa137bf9e6af1f0330f9f42f6b04ea3cc6585e167570df705feef553cfe",
       "published_sha256": "5247407cde5bbc8a0a76beabaa58f42b5135b289d25505a064aee5d71e100fb9",
@@ -81,7 +81,7 @@
     },
     "experiments/bin/run_hyperbolic_corrupted.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_hyperbolic_corrupted.sh",
       "source_sha256": "22a038f457636a5ac599d900cdd0df03b8d5b17a2fc420017ecbcb4456d5f704",
       "published_sha256": "cb97095e546c7fa95582e8601ed4810d6bdb4a8e7495018787fe4eb01890711b",
@@ -91,7 +91,7 @@
     },
     "experiments/bin/run_sigmoid.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_sigmoid.sh",
       "source_sha256": "659b8b5bf99241163d3775017186557bdc3d0bdcf2dc932a59d88db32a6c2871",
       "published_sha256": "659b8b5bf99241163d3775017186557bdc3d0bdcf2dc932a59d88db32a6c2871",
@@ -99,7 +99,7 @@
     },
     "experiments/bin/run_sigmoid_corrupted.sh": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/bin/run_sigmoid_corrupted.sh",
       "source_sha256": "90c0b3f84011083f7ec3de499c4bfaf3c10ca0078ebe04a810db012497a9fd72",
       "published_sha256": "cfbc37dd0eded27176e6da98e05e42ad1f1a29fe765912d0b31e8e9018272a04",
@@ -109,7 +109,7 @@
     },
     "experiments/config/baselines.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/baselines.yaml",
       "source_sha256": "b23173374975d533c4b796414c410e7bfbbc425c17d8a4439b6c9bf4b715d20f",
       "published_sha256": "b23173374975d533c4b796414c410e7bfbbc425c17d8a4439b6c9bf4b715d20f",
@@ -117,7 +117,7 @@
     },
     "experiments/config/baselines_corrupted.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/baselines_corrupted.yaml",
       "source_sha256": "57707cdf9359457faf8c7470024d722be57ba664924d67f66b18b35cab63963c",
       "published_sha256": "57707cdf9359457faf8c7470024d722be57ba664924d67f66b18b35cab63963c",
@@ -125,7 +125,7 @@
     },
     "experiments/config/catboost.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/catboost.yaml",
       "source_sha256": "bf49644de45e8ff916c690f917a87a3a97bc578f7c0c2c0625bb510b0b015ead",
       "published_sha256": "bf49644de45e8ff916c690f917a87a3a97bc578f7c0c2c0625bb510b0b015ead",
@@ -133,7 +133,7 @@
     },
     "experiments/config/datasets/default.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/datasets/default.yaml",
       "source_sha256": "cfcc3b1a5b401e71e58fa8e2e946e31687bf66fb4699e9191a531ea68241ff32",
       "published_sha256": "cfcc3b1a5b401e71e58fa8e2e946e31687bf66fb4699e9191a531ea68241ff32",
@@ -141,7 +141,7 @@
     },
     "experiments/config/datasets/helena.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/datasets/helena.yaml",
       "source_sha256": "2e5dde64aaae59af6b2bafa5a29bf6a07759149bb0d032f587e838012223cb80",
       "published_sha256": "2e5dde64aaae59af6b2bafa5a29bf6a07759149bb0d032f587e838012223cb80",
@@ -149,7 +149,7 @@
     },
     "experiments/config/hyperbolic.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/hyperbolic.yaml",
       "source_sha256": "494afd575abf017c0a8ba8db94c5a045f4a2ea783fce9634dd94308aebd975f6",
       "published_sha256": "494afd575abf017c0a8ba8db94c5a045f4a2ea783fce9634dd94308aebd975f6",
@@ -157,7 +157,7 @@
     },
     "experiments/config/hyperbolic_corrupted.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/hyperbolic_corrupted.yaml",
       "source_sha256": "aa99114916c4892e62cbbdc01e5eb63c7c029c3c308b72b934195f45342cd975",
       "published_sha256": "aa99114916c4892e62cbbdc01e5eb63c7c029c3c308b72b934195f45342cd975",
@@ -165,7 +165,7 @@
     },
     "experiments/config/lgbm.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/lgbm.yaml",
       "source_sha256": "0cd23f5446851cf636af24f397d35a0808fa96092ff01c6c778456c4bf040a7c",
       "published_sha256": "0cd23f5446851cf636af24f397d35a0808fa96092ff01c6c778456c4bf040a7c",
@@ -173,7 +173,7 @@
     },
     "experiments/config/sigmoid.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/sigmoid.yaml",
       "source_sha256": "75a2ddc0885d730cd5a3cad14ca0f3ffbb9f04830e38a9d0dd717727971fd6ac",
       "published_sha256": "75a2ddc0885d730cd5a3cad14ca0f3ffbb9f04830e38a9d0dd717727971fd6ac",
@@ -181,7 +181,7 @@
     },
     "experiments/config/sigmoid_corrupted.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/sigmoid_corrupted.yaml",
       "source_sha256": "e6465183607238ba2957f2bdc68b765072a3e79284d03f96ea8c91dc8dc493b9",
       "published_sha256": "e6465183607238ba2957f2bdc68b765072a3e79284d03f96ea8c91dc8dc493b9",
@@ -189,7 +189,7 @@
     },
     "experiments/config/xgboost.yaml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/config/xgboost.yaml",
       "source_sha256": "8e8a046ccc4899e3a6cd86225434c95fb7308d5c422efb615778b0cfc9951f7b",
       "published_sha256": "b67c213fda62d437a4db3567c411744ecf958826e879b0bff8402bab96f0e309",
@@ -199,7 +199,7 @@
     },
     "experiments/constants.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/constants.py",
       "source_sha256": "3bd71b1270645ed3ede6e7c56d1fee75fccdcb90293a6d17aa609804127adf9d",
       "published_sha256": "67a6660bf6bfa1c658d0495bed5d82777a630b2c363520dd277da459ea63fa8a",
@@ -209,7 +209,7 @@
     },
     "experiments/core/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/__init__.py",
       "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -217,7 +217,7 @@
     },
     "experiments/core/cv.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/cv.py",
       "source_sha256": "96538dbfea1e6e1a17714fcc1f7cf802e85299fd3a4556b5c727ee13f140ea66",
       "published_sha256": "a65e1c9acb5fb484c832404327b6b50f9765410cc37a4893f7ed574c59c1a7cd",
@@ -227,7 +227,7 @@
     },
     "experiments/core/experiment.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/experiment.py",
       "source_sha256": "5c3c66ca7d031336cb186c004b3fd34928ef0e6521c1937b85014c488dfe8771",
       "published_sha256": "ce16fabd006dca411a9a87875eb433da5233941ab3e4632b916ab32894263020",
@@ -237,7 +237,7 @@
     },
     "experiments/core/gpu.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/gpu.py",
       "source_sha256": "3072a7a205fa94c4b876207beb458fd91e69290dc50933534561fa948f57206c",
       "published_sha256": "84c7ed3eedd0ded9d309e1dac07ea9591ba80705237e4a33ee29b8625ab7bec7",
@@ -247,7 +247,7 @@
     },
     "experiments/core/metrics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/metrics.py",
       "source_sha256": "3414a57d2c57b2fe5d37f42e2e6a7de0b571ad8371f6510eca203a6607992f93",
       "published_sha256": "3414a57d2c57b2fe5d37f42e2e6a7de0b571ad8371f6510eca203a6607992f93",
@@ -255,7 +255,7 @@
     },
     "experiments/core/mlflow_utils.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/mlflow_utils.py",
       "source_sha256": "447a51b7e1bec4a2626476314fabaec5bf32ad800c0896462c896678f22f1662",
       "published_sha256": "4ee4e0f011dc410c0860bc8bc18327a784c6c494252077e6fe864debffed8135",
@@ -265,7 +265,7 @@
     },
     "experiments/core/model_timing.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/model_timing.py",
       "source_sha256": "12bfcba16939e26e89fdc02fd274962e129cef7617b0a511a9f7c6c67d2e20f3",
       "published_sha256": "8ae53925fc2e395c4a831424cdc8430bb90936ccf53ff039b2cac336a915bc20",
@@ -275,7 +275,7 @@
     },
     "experiments/core/process_runner.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/core/process_runner.py",
       "source_sha256": "aff7f69094c9ac55d1e92ebe12d327b776836fe98f4ace5b7266b14153ef48d2",
       "published_sha256": "a10002e4d45f07930c2ab657f6bd4e79a70d42c15df8b2ad0d6258b8943da1db",
@@ -285,7 +285,7 @@
     },
     "experiments/dataset_loading.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/dataset_loading.py",
       "source_sha256": "f24268d54bba61d8e2dcc2fee20aecadd8dc0503dd053b3f3f053838f5416a14",
       "published_sha256": "7683d6336c345a704d484a259d490fcb547f6dbea0afc39ba8e99298459664f1",
@@ -295,7 +295,7 @@
     },
     "experiments/exp.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/exp.py",
       "source_sha256": "73014b6bc1115716382159a3e16107f3ef1cf5ee98aafa1dca2c0ea4a07cc37d",
       "published_sha256": "73014b6bc1115716382159a3e16107f3ef1cf5ee98aafa1dca2c0ea4a07cc37d",
@@ -303,7 +303,7 @@
     },
     "experiments/models.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/models.py",
       "source_sha256": "248a46cf1153719d5a5a0a997b345f997908ea998b2b25bf41b199b044f07ee9",
       "published_sha256": "062b24e85a9bc1ca66b0d89f9bf4d0a04cee3e1ec3212047b9b43ca4ff19a791",
@@ -313,7 +313,7 @@
     },
     "experiments/requirements.txt": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/requirements.txt",
       "source_sha256": "a17b8c21aa717f9567b981cf416a8fe68933ccbe7bbaf44292b2221c38ff5d67",
       "published_sha256": "a17b8c21aa717f9567b981cf416a8fe68933ccbe7bbaf44292b2221c38ff5d67",
@@ -321,7 +321,7 @@
     },
     "experiments/runners/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/runners/__init__.py",
       "source_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "published_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -329,7 +329,7 @@
     },
     "experiments/runners/analogues.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/runners/analogues.py",
       "source_sha256": "38e8a6a8af1f7b614d517d5fc4601d58dda8e7d7049d73a36a9aeee0e0878752",
       "published_sha256": "38e8a6a8af1f7b614d517d5fc4601d58dda8e7d7049d73a36a9aeee0e0878752",
@@ -337,7 +337,7 @@
     },
     "experiments/runners/baselines.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/runners/baselines.py",
       "source_sha256": "eeefc874e347219d5e926ee8e7f5f4be9df2c048fc6b4a3a001879aa186df8fa",
       "published_sha256": "2c66fd4f1e60a3413204898d639167ce08f83826ddda734a8f345604f348bdc8",
@@ -347,7 +347,7 @@
     },
     "experiments/runners/corrupted_labels.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/runners/corrupted_labels.py",
       "source_sha256": "1c2190bb592d56ccb367528e1df70741535003c36b25500e00d4339f6cdf2d58",
       "published_sha256": "1c2190bb592d56ccb367528e1df70741535003c36b25500e00d4339f6cdf2d58",
@@ -355,7 +355,7 @@
     },
     "experiments/runners/fundamentals.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/runners/fundamentals.py",
       "source_sha256": "92185d3ed5452353af6fd7cccc7dace836407bfa18e8ede0a947a0aee8422e78",
       "published_sha256": "0a0360e73e5fd7d2ebe3be108be5b0d21227c3b16f4417d6fbba639957d6041a",
@@ -365,7 +365,7 @@
     },
     "experiments/smoke_helena.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/smoke_helena.py",
       "source_sha256": "f445a63a97ca825d1eb687d06fb6733de6df86969f88aa32143aecdf595eae9f",
       "published_sha256": "f445a63a97ca825d1eb687d06fb6733de6df86969f88aa32143aecdf595eae9f",
@@ -373,7 +373,7 @@
     },
     "py_boost/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/__init__.py",
       "source_sha256": "003148fa15a83c5c37c1c504b823fd5ad3664486ce74d82fedac709365c15966",
       "published_sha256": "003148fa15a83c5c37c1c504b823fd5ad3664486ce74d82fedac709365c15966",
@@ -381,7 +381,7 @@
     },
     "py_boost/callbacks/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/callbacks/__init__.py",
       "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -389,7 +389,7 @@
     },
     "py_boost/callbacks/callback.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/callbacks/callback.py",
       "source_sha256": "633a16f46a2979b332c5c5a6a14a188bd9b6065600e422ed036a32ab088dd4d6",
       "published_sha256": "633a16f46a2979b332c5c5a6a14a188bd9b6065600e422ed036a32ab088dd4d6",
@@ -397,7 +397,7 @@
     },
     "py_boost/cv/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/cv/__init__.py",
       "source_sha256": "3fa4b0e2198259f1b12cda81b3122354bca6539b488805ee9c5f897a72bb2875",
       "published_sha256": "3fa4b0e2198259f1b12cda81b3122354bca6539b488805ee9c5f897a72bb2875",
@@ -405,7 +405,7 @@
     },
     "py_boost/cv/adaptive_es.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/cv/adaptive_es.py",
       "source_sha256": "da9916dee1856ca6dc82cd52eeec4946ea941f7563743f06407e24527bae9790",
       "published_sha256": "da9916dee1856ca6dc82cd52eeec4946ea941f7563743f06407e24527bae9790",
@@ -413,7 +413,7 @@
     },
     "py_boost/cv/base.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/cv/base.py",
       "source_sha256": "4a617c9fa3ca7e462ce5d4eb6401d2c566c01e08d024c9c3f558de890b7763de",
       "published_sha256": "4a617c9fa3ca7e462ce5d4eb6401d2c566c01e08d024c9c3f558de890b7763de",
@@ -421,7 +421,7 @@
     },
     "py_boost/cv/cluster_tree.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/cv/cluster_tree.py",
       "source_sha256": "2e99706bf582605b92cce769380fd7891f8d54685f013641ff7902dee1ed005f",
       "published_sha256": "2e99706bf582605b92cce769380fd7891f8d54685f013641ff7902dee1ed005f",
@@ -429,7 +429,7 @@
     },
     "py_boost/gpu/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/__init__.py",
       "source_sha256": "b7f5b9f2b43de7bfa21011c0aa466d1012a263820c4ad2424d04e454ae22f3c5",
       "published_sha256": "b7f5b9f2b43de7bfa21011c0aa466d1012a263820c4ad2424d04e454ae22f3c5",
@@ -437,7 +437,7 @@
     },
     "py_boost/gpu/accumulation/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/accumulation/__init__.py",
       "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -445,7 +445,7 @@
     },
     "py_boost/gpu/accumulation/history_callback.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/accumulation/history_callback.py",
       "source_sha256": "ca2b75eb2c30db50c951380ce95fd76792b191a9bce9a8f953dadc4adde496f0",
       "published_sha256": "ca2b75eb2c30db50c951380ce95fd76792b191a9bce9a8f953dadc4adde496f0",
@@ -453,7 +453,7 @@
     },
     "py_boost/gpu/accumulation/sketches/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/accumulation/sketches/__init__.py",
       "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -461,7 +461,7 @@
     },
     "py_boost/gpu/accumulation/sketches/sketch_methods.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/accumulation/sketches/sketch_methods.py",
       "source_sha256": "940b322be8434964c0c31f5cc42662ca33e14ec3c6a892a830ec5662d68bae34",
       "published_sha256": "940b322be8434964c0c31f5cc42662ca33e14ec3c6a892a830ec5662d68bae34",
@@ -469,7 +469,7 @@
     },
     "py_boost/gpu/base.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/base.py",
       "source_sha256": "497b34111771e2e8ed980af93061b7612d0e94b24e9e1ac3aded964a5cd0873d",
       "published_sha256": "497b34111771e2e8ed980af93061b7612d0e94b24e9e1ac3aded964a5cd0873d",
@@ -477,7 +477,7 @@
     },
     "py_boost/gpu/boosting.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/boosting.py",
       "source_sha256": "7dace3503fbf59745546c7716e83f752c901eb7c1633779040a9cb9cea733c7e",
       "published_sha256": "7dace3503fbf59745546c7716e83f752c901eb7c1633779040a9cb9cea733c7e",
@@ -485,7 +485,7 @@
     },
     "py_boost/gpu/history_boosting.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/history_boosting.py",
       "source_sha256": "4e84217aa7b4d3d569fb2fba0ea9279d8e7e3c79956987a218980c278faff5bd",
       "published_sha256": "4e84217aa7b4d3d569fb2fba0ea9279d8e7e3c79956987a218980c278faff5bd",
@@ -493,7 +493,7 @@
     },
     "py_boost/gpu/losses/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/losses/__init__.py",
       "source_sha256": "6a8f2873607e6d70a6bc7a43a4a59dd4d7771e66222582db105c00ffa4cf1594",
       "published_sha256": "6a8f2873607e6d70a6bc7a43a4a59dd4d7771e66222582db105c00ffa4cf1594",
@@ -501,7 +501,7 @@
     },
     "py_boost/gpu/losses/losses.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/losses/losses.py",
       "source_sha256": "ffa2142662c974947cad795299c64b4a99b1bd025e4e131e1ee2205c9fe28f55",
       "published_sha256": "ffa2142662c974947cad795299c64b4a99b1bd025e4e131e1ee2205c9fe28f55",
@@ -509,7 +509,7 @@
     },
     "py_boost/gpu/losses/metrics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/losses/metrics.py",
       "source_sha256": "4c0cd6288963cbbae203822a3fda7539cd58a36fd01edc85635ceac777fdcb8a",
       "published_sha256": "4c0cd6288963cbbae203822a3fda7539cd58a36fd01edc85635ceac777fdcb8a",
@@ -517,7 +517,7 @@
     },
     "py_boost/gpu/losses/multiclass_metrics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/losses/multiclass_metrics.py",
       "source_sha256": "ac44cdcfc3f36a75702aac1ca5225683761346938f78ff244f7545eaf905696d",
       "published_sha256": "ac44cdcfc3f36a75702aac1ca5225683761346938f78ff244f7545eaf905696d",
@@ -525,7 +525,7 @@
     },
     "py_boost/gpu/serialization.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/serialization.py",
       "source_sha256": "a2e07117e089417fab5bcb8f06070431dca89e3c8711a70bd47fdc053651ef6b",
       "published_sha256": "a2e07117e089417fab5bcb8f06070431dca89e3c8711a70bd47fdc053651ef6b",
@@ -533,7 +533,7 @@
     },
     "py_boost/gpu/sketch_boost.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/sketch_boost.py",
       "source_sha256": "2a40feb09d218d41d65b5166290df01d7a32ef0ee18e65593c0b55da2fa1caae",
       "published_sha256": "2a40feb09d218d41d65b5166290df01d7a32ef0ee18e65593c0b55da2fa1caae",
@@ -541,7 +541,7 @@
     },
     "py_boost/gpu/tree.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/tree.py",
       "source_sha256": "f1bdd6f8a3363dc87bcdfacea949a0381d50e4671baee1f4efca322dd60fe472",
       "published_sha256": "f1bdd6f8a3363dc87bcdfacea949a0381d50e4671baee1f4efca322dd60fe472",
@@ -549,7 +549,7 @@
     },
     "py_boost/gpu/utils.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/gpu/utils.py",
       "source_sha256": "c45de924ca57c03b95df05ebf2c5727677e4c94044a8d66a14b846b0c77f8a07",
       "published_sha256": "c45de924ca57c03b95df05ebf2c5727677e4c94044a8d66a14b846b0c77f8a07",
@@ -557,7 +557,7 @@
     },
     "py_boost/multioutput/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/__init__.py",
       "source_sha256": "a6b440853dc3d08f8a8eebe99c796b41d2c5829e3824e53d9160eeb4ce76d3cd",
       "published_sha256": "a6b440853dc3d08f8a8eebe99c796b41d2c5829e3824e53d9160eeb4ce76d3cd",
@@ -565,7 +565,7 @@
     },
     "py_boost/multioutput/history_state.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/history_state.py",
       "source_sha256": "c98126e04674d8b83bc5d277d8034def9dd694898d0f749dfdaafb96da7ff4a1",
       "published_sha256": "c98126e04674d8b83bc5d277d8034def9dd694898d0f749dfdaafb96da7ff4a1",
@@ -573,7 +573,7 @@
     },
     "py_boost/multioutput/sketch_decision.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/sketch_decision.py",
       "source_sha256": "f90e841960e5f4c68414da0932130f77c110adca99f9c3bb6fee954a9688e79f",
       "published_sha256": "f90e841960e5f4c68414da0932130f77c110adca99f9c3bb6fee954a9688e79f",
@@ -581,7 +581,7 @@
     },
     "py_boost/multioutput/sketching.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/sketching.py",
       "source_sha256": "5868ab5982af9c0b1c49573f45eefa7aff7fa55985dc54615ab1d7b904e6cdfe",
       "published_sha256": "5868ab5982af9c0b1c49573f45eefa7aff7fa55985dc54615ab1d7b904e6cdfe",
@@ -589,7 +589,7 @@
     },
     "py_boost/multioutput/target_splitter.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/target_splitter.py",
       "source_sha256": "6af9255e8d469e1eeeafcf520ad6574a331d2a4ceaaf308e91e62fbdc9dc4dd8",
       "published_sha256": "6af9255e8d469e1eeeafcf520ad6574a331d2a4ceaaf308e91e62fbdc9dc4dd8",
@@ -597,7 +597,7 @@
     },
     "py_boost/paths.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/paths.py",
       "source_sha256": "eda1c200e2480482c7561abe5dcf9bfc945a5fb6ae8bf1ed3151f49ef88e4136",
       "published_sha256": "eda1c200e2480482c7561abe5dcf9bfc945a5fb6ae8bf1ed3151f49ef88e4136",
@@ -605,7 +605,7 @@
     },
     "py_boost/quantization/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/quantization/__init__.py",
       "source_sha256": "1bb16ee6c957a5fd542227964c3cbe37a91cd0a79dc25883b4aa6112411447af",
       "published_sha256": "1bb16ee6c957a5fd542227964c3cbe37a91cd0a79dc25883b4aa6112411447af",
@@ -613,7 +613,7 @@
     },
     "py_boost/quantization/base.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/quantization/base.py",
       "source_sha256": "1707fb27b0f47ad720a5a5c35cb9be8acd1cad437d32e50b625cc949b3d35fba",
       "published_sha256": "1707fb27b0f47ad720a5a5c35cb9be8acd1cad437d32e50b625cc949b3d35fba",
@@ -621,7 +621,7 @@
     },
     "py_boost/quantization/utils.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/quantization/utils.py",
       "source_sha256": "a20a4985e935025f2532f97ef76233cbfcd9d621b5d102d5aefba7563340832b",
       "published_sha256": "a20a4985e935025f2532f97ef76233cbfcd9d621b5d102d5aefba7563340832b",
@@ -629,7 +629,7 @@
     },
     "py_boost/sampling/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/sampling/__init__.py",
       "source_sha256": "2ec06e4be08acfbdb052e6594dfd5a6cbd9234db0dcf5ed58ba00ae29183c40e",
       "published_sha256": "2ec06e4be08acfbdb052e6594dfd5a6cbd9234db0dcf5ed58ba00ae29183c40e",
@@ -637,7 +637,7 @@
     },
     "py_boost/sampling/bagging.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/sampling/bagging.py",
       "source_sha256": "c48b82f765c10962c03aa43b347a6ade6330033b9ca2529350af1a05b87a2b49",
       "published_sha256": "c48b82f765c10962c03aa43b347a6ade6330033b9ca2529350af1a05b87a2b49",
@@ -645,7 +645,7 @@
     },
     "py_boost/utils/__init__.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/utils/__init__.py",
       "source_sha256": "485c2ae3fe6b39fb2699ba242039fdb8c8ebae6a79465fbf786b3450ed00c97a",
       "published_sha256": "485c2ae3fe6b39fb2699ba242039fdb8c8ebae6a79465fbf786b3450ed00c97a",
@@ -653,7 +653,7 @@
     },
     "py_boost/utils/logging.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/utils/logging.py",
       "source_sha256": "d3f788dcba503482be58adec22c95d5911d21519032c68d4a0cc120defb6e512",
       "published_sha256": "d3f788dcba503482be58adec22c95d5911d21519032c68d4a0cc120defb6e512",
@@ -661,7 +661,7 @@
     },
     "py_boost/utils/onnx_wrapper.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/utils/onnx_wrapper.py",
       "source_sha256": "00808f5cfbabc4a1fe1bb370843a74c5aa971a00f6cfd011e2b3fb5f6f29a6de",
       "published_sha256": "00808f5cfbabc4a1fe1bb370843a74c5aa971a00f6cfd011e2b3fb5f6f29a6de",
@@ -669,7 +669,7 @@
     },
     "py_boost/utils/tl_wrapper.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/utils/tl_wrapper.py",
       "source_sha256": "5648a782db2c6325b07f5ff6fef6f6bd440f3e46144df8f296af2d6626691231",
       "published_sha256": "1c4d6a01025dad0434884bc6d090d70dc9f711accc21e196d37ae93e38c03ade",
@@ -679,7 +679,7 @@
     },
     "pyproject.toml": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "pyproject.toml",
       "source_sha256": "88ddc6989e1ae3a64e4d73c49ec20caa466e184a70e1403f443557f8eb2a6d90",
       "published_sha256": "88ddc6989e1ae3a64e4d73c49ec20caa466e184a70e1403f443557f8eb2a6d90",
@@ -687,7 +687,7 @@
     },
     "tests/test_history_boosting_config.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_history_boosting_config.py",
       "source_sha256": "038357d4ae9c7ca4fc150b1625dfec69d8746d3c6acfd8809a69f76e2bd7ca45",
       "published_sha256": "038357d4ae9c7ca4fc150b1625dfec69d8746d3c6acfd8809a69f76e2bd7ca45",
@@ -695,7 +695,7 @@
     },
     "tests/test_history_state.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_history_state.py",
       "source_sha256": "6971d4552f6bc1abe4323e35d94bf66e09c7425438ad00c20644f478c7305ad9",
       "published_sha256": "6971d4552f6bc1abe4323e35d94bf66e09c7425438ad00c20644f478c7305ad9",
@@ -703,7 +703,7 @@
     },
     "tests/test_sketch_decision.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_sketch_decision.py",
       "source_sha256": "bf498833440ed8915b8217f43facbc89ab084d8446a624a6b4ab48f5167b5714",
       "published_sha256": "bf498833440ed8915b8217f43facbc89ab084d8446a624a6b4ab48f5167b5714",
@@ -711,7 +711,7 @@
     },
     "experiments/aggregate_benchmark_reports.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/aggregate_benchmark_reports.py",
       "source_sha256": "2334d3c62886a7ce0ae5d986a2e65eff7e8a094a5d870e730cfedc15815e4afd",
       "published_sha256": "2334d3c62886a7ce0ae5d986a2e65eff7e8a094a5d870e730cfedc15815e4afd",
@@ -719,7 +719,7 @@
     },
     "experiments/analyze_adaptive_budget.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_adaptive_budget.py",
       "source_sha256": "33ddee76fcd9240b619729668ae2d99adee670f59d8652bc1e8d7302117e4b83",
       "published_sha256": "33ddee76fcd9240b619729668ae2d99adee670f59d8652bc1e8d7302117e4b83",
@@ -727,7 +727,7 @@
     },
     "experiments/analyze_optimization_history.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_optimization_history.py",
       "source_sha256": "d2428dfb9af47ad33a66037527acdfa9dd31a62ae39a3063b2749302352d5b66",
       "published_sha256": "d2428dfb9af47ad33a66037527acdfa9dd31a62ae39a3063b2749302352d5b66",
@@ -735,7 +735,7 @@
     },
     "experiments/analyze_output_attribution.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_output_attribution.py",
       "source_sha256": "277b51bf340236cf26226997079c4dba537df330315a896de1daf1691819f131",
       "published_sha256": "277b51bf340236cf26226997079c4dba537df330315a896de1daf1691819f131",
@@ -743,7 +743,7 @@
     },
     "experiments/analyze_paired_confirmation.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_paired_confirmation.py",
       "source_sha256": "6f00b4247f2815d3d0af2bb66a0c28f10fe2f3b868331faef0f5791220bfc4f7",
       "published_sha256": "6f00b4247f2815d3d0af2bb66a0c28f10fe2f3b868331faef0f5791220bfc4f7",
@@ -751,7 +751,7 @@
     },
     "experiments/analyze_rmt_budget.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_rmt_budget.py",
       "source_sha256": "18cc3f12218e2ba9f6ec1b2d9184aa75fe903fe98c74d25db8b380a9b8eed512",
       "published_sha256": "18cc3f12218e2ba9f6ec1b2d9184aa75fe903fe98c74d25db8b380a9b8eed512",
@@ -759,7 +759,7 @@
     },
     "experiments/analyze_row_output_factorial.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_row_output_factorial.py",
       "source_sha256": "9358c66b4a6ccf21cd1577b59146fadd478c55de467feda91aea08b11fe44720",
       "published_sha256": "9358c66b4a6ccf21cd1577b59146fadd478c55de467feda91aea08b11fe44720",
@@ -767,7 +767,7 @@
     },
     "experiments/analyze_scheduler_diagnostics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_scheduler_diagnostics.py",
       "source_sha256": "cf6b92521b5888bee5a7325a2089cdbdd36e725ea8cfa25b4c32ad4b711fe999",
       "published_sha256": "cf6b92521b5888bee5a7325a2089cdbdd36e725ea8cfa25b4c32ad4b711fe999",
@@ -775,7 +775,7 @@
     },
     "experiments/analyze_spectral_risk.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_spectral_risk.py",
       "source_sha256": "ff18612c7217ac4c4fc61b06510a3ae0a9f5eae8f271e77c13064371d33baa65",
       "published_sha256": "ff18612c7217ac4c4fc61b06510a3ae0a9f5eae8f271e77c13064371d33baa65",
@@ -783,7 +783,7 @@
     },
     "experiments/analyze_spectral_shadow.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/analyze_spectral_shadow.py",
       "source_sha256": "e2baa02204557388f15295ddf865f0727e405cc40c1b966e4e8b91658fcdb47f",
       "published_sha256": "e2baa02204557388f15295ddf865f0727e405cc40c1b966e4e8b91658fcdb47f",
@@ -791,15 +791,15 @@
     },
     "experiments/benchmark_datasets.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/benchmark_datasets.py",
-      "source_sha256": "5e9a6dd882eea28a509ae0e75e4f5e89257f04a7ffd886cf787cb0e416a172a3",
-      "published_sha256": "5e9a6dd882eea28a509ae0e75e4f5e89257f04a7ffd886cf787cb0e416a172a3",
+      "source_sha256": "dd83f487b754bea54829bd713105815f33b7f3eb8b6d2147cfca860e84cdd1ff",
+      "published_sha256": "dd83f487b754bea54829bd713105815f33b7f3eb8b6d2147cfca860e84cdd1ff",
       "adaptations": []
     },
     "experiments/benchmark_helena.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/benchmark_helena.py",
       "source_sha256": "f5fe55f42d5cf835911a0399c415bc4441596852edb23d5eac61aeeb1ea92b77",
       "published_sha256": "f5fe55f42d5cf835911a0399c415bc4441596852edb23d5eac61aeeb1ea92b77",
@@ -807,7 +807,7 @@
     },
     "experiments/benchmark_plan.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/benchmark_plan.py",
       "source_sha256": "6747eddb3a15fb74d10cf1edd3ab11b2c7920574fd83054a8d704b68702734e4",
       "published_sha256": "6747eddb3a15fb74d10cf1edd3ab11b2c7920574fd83054a8d704b68702734e4",
@@ -815,7 +815,7 @@
     },
     "experiments/diagnostic_results.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/diagnostic_results.py",
       "source_sha256": "ab940f63b9fae5780de956f2b88fd08cfcc9d99c277886f7a4cdebc91cedb974",
       "published_sha256": "ab940f63b9fae5780de956f2b88fd08cfcc9d99c277886f7a4cdebc91cedb974",
@@ -823,7 +823,7 @@
     },
     "experiments/generate_synthetic_trajectory.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/generate_synthetic_trajectory.py",
       "source_sha256": "50bbe32dc98f95f7eb0dcf1c1edfe4a84415e6da6dcbb84bab9a6e24f865b619",
       "published_sha256": "50bbe32dc98f95f7eb0dcf1c1edfe4a84415e6da6dcbb84bab9a6e24f865b619",
@@ -831,7 +831,7 @@
     },
     "experiments/reproducibility.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/reproducibility.py",
       "source_sha256": "5cd0c76c7243b5a400dc9d6a61d855befaca1d5b6c568768430c1ee7d6910898",
       "published_sha256": "5cd0c76c7243b5a400dc9d6a61d855befaca1d5b6c568768430c1ee7d6910898",
@@ -839,7 +839,7 @@
     },
     "experiments/revision_comparison.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/revision_comparison.py",
       "source_sha256": "0064ecd606ed6c0318d311c465e8190b61952a82a84a38c5f39ebcd7862fee91",
       "published_sha256": "0064ecd606ed6c0318d311c465e8190b61952a82a84a38c5f39ebcd7862fee91",
@@ -847,17 +847,17 @@
     },
     "experiments/revision_config.json": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/revision_config.json",
-      "source_sha256": "ce3c61e467b94230785d45994024e82c7941d453744e9d613bd7bfcc08ae3d36",
-      "published_sha256": "bdc75c6fab5fa9db267731fc949e571deee960855a2eebcc56ba2055c2c1a88f",
+      "source_sha256": "8b2096841e40836a30d0293d5271c0c966ecae996a01c4693c48125151189a79",
+      "published_sha256": "ff52d31de14412285d1949306c4f1cadeb6c11647f4bfabc40301ceb4d259603",
       "adaptations": [
         "machine-specific paths and editable-package override removed"
       ]
     },
     "experiments/revision_forecast.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/revision_forecast.py",
       "source_sha256": "4904334f82106c192f142b3fc8d300a0c0c20d03e3c21a2e1ab8456578b3b6d3",
       "published_sha256": "4904334f82106c192f142b3fc8d300a0c0c20d03e3c21a2e1ab8456578b3b6d3",
@@ -865,7 +865,7 @@
     },
     "experiments/revision_forecast_replay.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/revision_forecast_replay.py",
       "source_sha256": "6df8be53ee7cce05df2abacd6dd4eddd1707a89e1109027732ab73424472acbe",
       "published_sha256": "6df8be53ee7cce05df2abacd6dd4eddd1707a89e1109027732ab73424472acbe",
@@ -873,7 +873,7 @@
     },
     "experiments/revision_memory_analysis.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/revision_memory_analysis.py",
       "source_sha256": "597d7b01ac2f729de0ae1bd29808e842564d1a204b5b9c2509deefec81a0ecb2",
       "published_sha256": "597d7b01ac2f729de0ae1bd29808e842564d1a204b5b9c2509deefec81a0ecb2",
@@ -881,7 +881,7 @@
     },
     "experiments/revision_rmt_validation.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/revision_rmt_validation.py",
       "source_sha256": "5df11d9a6216dfb3cb17c286113c69f1b588e8298c58023481e234e9552ead55",
       "published_sha256": "5df11d9a6216dfb3cb17c286113c69f1b588e8298c58023481e234e9552ead55",
@@ -889,17 +889,17 @@
     },
     "experiments/revision_runner.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/revision_runner.py",
-      "source_sha256": "4099e068f84707587b783648a3f242449339c873a1c1a86f806d883f077e54f4",
-      "published_sha256": "17772a9b4f78de0d965d97969f7ce4d86e17ae4b99764268180344b0fc99d7be",
+      "source_sha256": "74db980c3ebfa401aac27b9ad32a5c431d5d650bf528aee133c521dab67bf134",
+      "published_sha256": "6175aafcbf7c94810a49f3ba8e1f5fe2ac18fc285393d49bc3cd6502da1992b2",
       "adaptations": [
         "portable temporary/cache paths"
       ]
     },
     "experiments/rmt_followup.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/rmt_followup.py",
       "source_sha256": "17ad8347c0cae0fcd231b049fa046c85d262200e5eb6735631825b7523a7b681",
       "published_sha256": "17ad8347c0cae0fcd231b049fa046c85d262200e5eb6735631825b7523a7b681",
@@ -907,7 +907,7 @@
     },
     "experiments/rmt_followup_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/rmt_followup_core.py",
       "source_sha256": "fab0c1aac2838e89e6b3164f00307d59341860c942a35e63b8a3d0938fe437e4",
       "published_sha256": "fab0c1aac2838e89e6b3164f00307d59341860c942a35e63b8a3d0938fe437e4",
@@ -915,7 +915,7 @@
     },
     "experiments/rmt_followup_protocol.md": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/rmt_followup_protocol.md",
       "source_sha256": "1b7ae3342cdabd8f9e7acad7d3164495fde18864f2c44e2d6f7579e867cbc380",
       "published_sha256": "1b7ae3342cdabd8f9e7acad7d3164495fde18864f2c44e2d6f7579e867cbc380",
@@ -923,7 +923,7 @@
     },
     "py_boost/callbacks/optimization.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/callbacks/optimization.py",
       "source_sha256": "ee88dcec733f7733a2c14c0189d483c18f94d0dfbc8450ff193e0c863fb0d701",
       "published_sha256": "ee88dcec733f7733a2c14c0189d483c18f94d0dfbc8450ff193e0c863fb0d701",
@@ -931,7 +931,7 @@
     },
     "py_boost/multioutput/budget_policy.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/budget_policy.py",
       "source_sha256": "d5297036f22d52595f29c0764172ac201a1e501a608dec9f203c5d25ea7858ec",
       "published_sha256": "d5297036f22d52595f29c0764172ac201a1e501a608dec9f203c5d25ea7858ec",
@@ -939,7 +939,7 @@
     },
     "py_boost/multioutput/output_subspace.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/output_subspace.py",
       "source_sha256": "8e8a0dd9d9fac77438a7735461e0e158bf8cdaea3d3ae3683ec322d38878d0ab",
       "published_sha256": "8e8a0dd9d9fac77438a7735461e0e158bf8cdaea3d3ae3683ec322d38878d0ab",
@@ -947,7 +947,7 @@
     },
     "py_boost/multioutput/split_diagnostics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "py_boost/multioutput/split_diagnostics.py",
       "source_sha256": "237504c079071e891ad3a828624c18f42397fc6cb3470c5004b880274cab0a35",
       "published_sha256": "237504c079071e891ad3a828624c18f42397fc6cb3470c5004b880274cab0a35",
@@ -955,7 +955,7 @@
     },
     "tests/test_adaptive_analysis.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_adaptive_analysis.py",
       "source_sha256": "7c4eb6999c52caece86a4e5d94975def42b601b87d12724cfa7a5d5ee37a5b20",
       "published_sha256": "7c4eb6999c52caece86a4e5d94975def42b601b87d12724cfa7a5d5ee37a5b20",
@@ -963,15 +963,15 @@
     },
     "tests/test_benchmark_datasets.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_benchmark_datasets.py",
-      "source_sha256": "95934ba1f6f6f42f27590db9a4c85610ee9e3b6445b73c7d953f7e1a80b9d6ab",
-      "published_sha256": "95934ba1f6f6f42f27590db9a4c85610ee9e3b6445b73c7d953f7e1a80b9d6ab",
+      "source_sha256": "aaa76d174c50a39939609e2564bf24a48a559869c38520c796702d73d65f5557",
+      "published_sha256": "aaa76d174c50a39939609e2564bf24a48a559869c38520c796702d73d65f5557",
       "adaptations": []
     },
     "tests/test_benchmark_plan.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_benchmark_plan.py",
       "source_sha256": "9be1cc9d6ff905ddf93efb3326834396af66b8e14854c05be5770076f85f78d5",
       "published_sha256": "9be1cc9d6ff905ddf93efb3326834396af66b8e14854c05be5770076f85f78d5",
@@ -979,7 +979,7 @@
     },
     "tests/test_budget_policy.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_budget_policy.py",
       "source_sha256": "5fce42da0805ad028cd0e9625871ff0e63d5bb895a6354905364456c4f2c9ab3",
       "published_sha256": "5fce42da0805ad028cd0e9625871ff0e63d5bb895a6354905364456c4f2c9ab3",
@@ -987,7 +987,7 @@
     },
     "tests/test_diagnostic_results.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_diagnostic_results.py",
       "source_sha256": "942461f5e18a261d31ee0bcea69e16eda6452e16b6b9e683d16d6f34664a6642",
       "published_sha256": "942461f5e18a261d31ee0bcea69e16eda6452e16b6b9e683d16d6f34664a6642",
@@ -995,7 +995,7 @@
     },
     "tests/test_energy_history.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_energy_history.py",
       "source_sha256": "b727041d2ae1046401f8c99adedfdc8feca04b1107eec3e3cd986c347ce4d0c6",
       "published_sha256": "b727041d2ae1046401f8c99adedfdc8feca04b1107eec3e3cd986c347ce4d0c6",
@@ -1003,7 +1003,7 @@
     },
     "tests/test_gpu_measurements.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_gpu_measurements.py",
       "source_sha256": "75bcd47d967d09d3c2a226873f545b5fdb05f08ec3b12152655052561b9ab2d0",
       "published_sha256": "75bcd47d967d09d3c2a226873f545b5fdb05f08ec3b12152655052561b9ab2d0",
@@ -1011,7 +1011,7 @@
     },
     "tests/test_optimization_trajectory.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_optimization_trajectory.py",
       "source_sha256": "656b461b07473a8da4585de2ca0e448f7dd43e61f3bc76cdb36e1e0cc9ce9bf7",
       "published_sha256": "656b461b07473a8da4585de2ca0e448f7dd43e61f3bc76cdb36e1e0cc9ce9bf7",
@@ -1019,7 +1019,7 @@
     },
     "tests/test_output_attribution.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_output_attribution.py",
       "source_sha256": "219630b9c8a1293e6abd7ebdd83d67c8b5ca3112c736fe53ea31c96787f0a30f",
       "published_sha256": "219630b9c8a1293e6abd7ebdd83d67c8b5ca3112c736fe53ea31c96787f0a30f",
@@ -1027,7 +1027,7 @@
     },
     "tests/test_output_subspace.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_output_subspace.py",
       "source_sha256": "9ad9c3e5ccf4a667179f2af0ba13d31a0aa847ff8e1fc5e6ae69ffde8ac2ece6",
       "published_sha256": "9ad9c3e5ccf4a667179f2af0ba13d31a0aa847ff8e1fc5e6ae69ffde8ac2ece6",
@@ -1035,7 +1035,7 @@
     },
     "tests/test_paired_confirmation.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_paired_confirmation.py",
       "source_sha256": "365048498d844903e57a25a7429761eb0c3f0cd466bf0024026f18b5a8637801",
       "published_sha256": "365048498d844903e57a25a7429761eb0c3f0cd466bf0024026f18b5a8637801",
@@ -1043,7 +1043,7 @@
     },
     "tests/test_reproducibility.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_reproducibility.py",
       "source_sha256": "eceb9b8d32c97fe126141054e344341d011a7090ec55b2f18afe513c4c4d1385",
       "published_sha256": "eceb9b8d32c97fe126141054e344341d011a7090ec55b2f18afe513c4c4d1385",
@@ -1051,7 +1051,7 @@
     },
     "tests/test_revision_comparison.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_revision_comparison.py",
       "source_sha256": "22b9d3f26bfee3ff9f22dbce836bb0a4ec63f57106df6f605924d4647e0e6486",
       "published_sha256": "22b9d3f26bfee3ff9f22dbce836bb0a4ec63f57106df6f605924d4647e0e6486",
@@ -1059,7 +1059,7 @@
     },
     "tests/test_revision_forecast.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_revision_forecast.py",
       "source_sha256": "3ce57186df36260212363afef872642db166b6ea873038a1b83258667c78c567",
       "published_sha256": "3ce57186df36260212363afef872642db166b6ea873038a1b83258667c78c567",
@@ -1067,7 +1067,7 @@
     },
     "tests/test_revision_forecast_replay.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_revision_forecast_replay.py",
       "source_sha256": "585dda59e41e85dacb7d32f56c30a5923873026466c5a32b95246868193b734f",
       "published_sha256": "585dda59e41e85dacb7d32f56c30a5923873026466c5a32b95246868193b734f",
@@ -1075,7 +1075,7 @@
     },
     "tests/test_rmt_analysis.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_rmt_analysis.py",
       "source_sha256": "175d7bfeda30b1ce78027872f9c8f1934437e019b08694cd97df341c4de07b05",
       "published_sha256": "175d7bfeda30b1ce78027872f9c8f1934437e019b08694cd97df341c4de07b05",
@@ -1083,7 +1083,7 @@
     },
     "tests/test_rmt_budget.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_rmt_budget.py",
       "source_sha256": "9c0a9719c88c76f89a651cbdcd5b2e7a65463b10639648604c276b4d9015377f",
       "published_sha256": "9c0a9719c88c76f89a651cbdcd5b2e7a65463b10639648604c276b4d9015377f",
@@ -1091,7 +1091,7 @@
     },
     "tests/test_rmt_followup.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_rmt_followup.py",
       "source_sha256": "4c30e45e39247f1338599e0295228464fd961c643f4a6182b40b840b5d68d432",
       "published_sha256": "4c30e45e39247f1338599e0295228464fd961c643f4a6182b40b840b5d68d432",
@@ -1099,7 +1099,7 @@
     },
     "tests/test_rmt_validation.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_rmt_validation.py",
       "source_sha256": "79384ad32efa463a9bce771b060c47ed0591f6f39e80e0c3425b5a397379e121",
       "published_sha256": "79384ad32efa463a9bce771b060c47ed0591f6f39e80e0c3425b5a397379e121",
@@ -1107,7 +1107,7 @@
     },
     "tests/test_scheduler_analysis.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_scheduler_analysis.py",
       "source_sha256": "ece0fd1225480a2b90680d0686bbaaa7f4ede7c51d803b844cd81cb4c24085ea",
       "published_sha256": "ece0fd1225480a2b90680d0686bbaaa7f4ede7c51d803b844cd81cb4c24085ea",
@@ -1115,7 +1115,7 @@
     },
     "tests/test_spectral_risk.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_spectral_risk.py",
       "source_sha256": "7f075e266a4644f87a13119ccff398afb41cd8c1fbeed72b9461a0378aec803b",
       "published_sha256": "7f075e266a4644f87a13119ccff398afb41cd8c1fbeed72b9461a0378aec803b",
@@ -1123,7 +1123,7 @@
     },
     "tests/test_spectral_shadow.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_spectral_shadow.py",
       "source_sha256": "a5a07de44ac299291f9de1181681df379f3691b7eac079c89da2e76b32abd825",
       "published_sha256": "a5a07de44ac299291f9de1181681df379f3691b7eac079c89da2e76b32abd825",
@@ -1131,7 +1131,7 @@
     },
     "tests/test_split_diagnostics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_split_diagnostics.py",
       "source_sha256": "31c3e904bc565c2fdb736f49596ab86f5371ec34a8d484ac0cc23433f4abcab3",
       "published_sha256": "31c3e904bc565c2fdb736f49596ab86f5371ec34a8d484ac0cc23433f4abcab3",
@@ -1139,7 +1139,7 @@
     },
     "experiments/decision_aware_collection.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_collection.py",
       "source_sha256": "ab486753f828628f642808c937ab2fce91a9a227ae28297247778660c08d1f18",
       "published_sha256": "ab486753f828628f642808c937ab2fce91a9a227ae28297247778660c08d1f18",
@@ -1147,7 +1147,7 @@
     },
     "experiments/decision_aware_collection_replay.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_collection_replay.py",
       "source_sha256": "8a0014e67c8870c84d4df3de29ee7a6775a10a521c06de33158e5a57eebd5a68",
       "published_sha256": "8a0014e67c8870c84d4df3de29ee7a6775a10a521c06de33158e5a57eebd5a68",
@@ -1155,7 +1155,7 @@
     },
     "experiments/decision_aware_feasibility.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_feasibility.py",
       "source_sha256": "0d173b11601dda7d05c09fd28c101cf9a59817d9557c4e3cb74dc9347d5a4266",
       "published_sha256": "0d173b11601dda7d05c09fd28c101cf9a59817d9557c4e3cb74dc9347d5a4266",
@@ -1163,7 +1163,7 @@
     },
     "experiments/decision_aware_feasibility_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_feasibility_core.py",
       "source_sha256": "745d5759b576a210fdf57db6f3122c2ee7a4fd0a9def3f44b87a81c7e2a23791",
       "published_sha256": "745d5759b576a210fdf57db6f3122c2ee7a4fd0a9def3f44b87a81c7e2a23791",
@@ -1171,7 +1171,7 @@
     },
     "experiments/decision_aware_refinement.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_refinement.py",
       "source_sha256": "3d4f23d436ab7b4350b85f7820b4162c30fe30638062c9f4f6c3f830941c469e",
       "published_sha256": "3d4f23d436ab7b4350b85f7820b4162c30fe30638062c9f4f6c3f830941c469e",
@@ -1179,7 +1179,7 @@
     },
     "experiments/decision_aware_refinement_apply.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_refinement_apply.py",
       "source_sha256": "57ad30061717c85d3ac4bdf326ba798d07389f04e08f8d30d11372bd1866ac72",
       "published_sha256": "57ad30061717c85d3ac4bdf326ba798d07389f04e08f8d30d11372bd1866ac72",
@@ -1187,7 +1187,7 @@
     },
     "experiments/decision_aware_refinement_apply_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_refinement_apply_core.py",
       "source_sha256": "405fff86a74ec4af3264c42f2b8880e7722b8ce5e33585fc76cc34df088cae96",
       "published_sha256": "405fff86a74ec4af3264c42f2b8880e7722b8ce5e33585fc76cc34df088cae96",
@@ -1195,7 +1195,7 @@
     },
     "experiments/decision_aware_refinement_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_refinement_core.py",
       "source_sha256": "9fa0cd5be59858d7a3fe50ddf61dd4eebb85fcaedefe6a47182dff6cc5d677da",
       "published_sha256": "9fa0cd5be59858d7a3fe50ddf61dd4eebb85fcaedefe6a47182dff6cc5d677da",
@@ -1203,7 +1203,7 @@
     },
     "experiments/decision_aware_refinement_determinism.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_refinement_determinism.py",
       "source_sha256": "3db7f35ba60413b08cead98e694bb9be95601a5589a3f484d17e7ea3114a2c69",
       "published_sha256": "3db7f35ba60413b08cead98e694bb9be95601a5589a3f484d17e7ea3114a2c69",
@@ -1211,7 +1211,7 @@
     },
     "experiments/decision_aware_refinement_shadow.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_refinement_shadow.py",
       "source_sha256": "96eb3ee12952d7c36b2f08134276d67e733ed5438df24a085b0bc5a18143438a",
       "published_sha256": "96eb3ee12952d7c36b2f08134276d67e733ed5438df24a085b0bc5a18143438a",
@@ -1219,7 +1219,7 @@
     },
     "experiments/decision_aware_refinement_shadow_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/decision_aware_refinement_shadow_core.py",
       "source_sha256": "4cba29db47c31f0117400e9915ef2ab6541c80271c403dca02b51dfccc56970e",
       "published_sha256": "4cba29db47c31f0117400e9915ef2ab6541c80271c403dca02b51dfccc56970e",
@@ -1227,7 +1227,7 @@
     },
     "experiments/deterministic_histogram.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram.py",
       "source_sha256": "39bf53ecbc1d721a0886f12e6c5c122a5d56971483426286669edc7bb1804f11",
       "published_sha256": "39bf53ecbc1d721a0886f12e6c5c122a5d56971483426286669edc7bb1804f11",
@@ -1235,7 +1235,7 @@
     },
     "experiments/deterministic_histogram_article_suite.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_article_suite.py",
       "source_sha256": "15a2afcdd9ef376f17580fa79af414fa3b5f704836f3166f0ddcc2879120a699",
       "published_sha256": "248e27b68e047b05e190c9b5621b3e205318b5fc2a61d437df90b0c6f84badad",
@@ -1245,7 +1245,7 @@
     },
     "experiments/deterministic_histogram_article_suite_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_article_suite_core.py",
       "source_sha256": "2c3cf7a36e5e0836b3f70ae9fa9eed41527eb8e03d83fc38eb9c2eb9f4d4c1a3",
       "published_sha256": "00c6bbb9fea29c1a9d4ed841823c3f31b49c0b5d8133ba9a4b183b8a938be1a5",
@@ -1255,7 +1255,7 @@
     },
     "experiments/deterministic_histogram_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_core.py",
       "source_sha256": "1c3d0adcb1654bd2339166a738b4564630edfc9c9c5103d770f141f35614d0c8",
       "published_sha256": "1c3d0adcb1654bd2339166a738b4564630edfc9c9c5103d770f141f35614d0c8",
@@ -1263,7 +1263,7 @@
     },
     "experiments/deterministic_histogram_cross_dataset.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_cross_dataset.py",
       "source_sha256": "3064df8d8d6c7e2b54224850658770bd197494e55ce254680f7412ca240d4753",
       "published_sha256": "3064df8d8d6c7e2b54224850658770bd197494e55ce254680f7412ca240d4753",
@@ -1271,7 +1271,7 @@
     },
     "experiments/deterministic_histogram_perf2.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_perf2.py",
       "source_sha256": "ba75156a90946f8dab9a87acebd8e4d10892b72d8c49397fcc3a0361b419ed8c",
       "published_sha256": "ba75156a90946f8dab9a87acebd8e4d10892b72d8c49397fcc3a0361b419ed8c",
@@ -1279,7 +1279,7 @@
     },
     "experiments/deterministic_histogram_perf3.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_perf3.py",
       "source_sha256": "961bf682a8062117b58a9d0807943d884218e7ba2f95bdbdc2e45ee342416bd2",
       "published_sha256": "961bf682a8062117b58a9d0807943d884218e7ba2f95bdbdc2e45ee342416bd2",
@@ -1287,7 +1287,7 @@
     },
     "experiments/deterministic_histogram_profile.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_profile.py",
       "source_sha256": "d93244c5a4b70dcb4b1b55acf6b8df2e067873cf38768d201f39967d532fdbf1",
       "published_sha256": "d93244c5a4b70dcb4b1b55acf6b8df2e067873cf38768d201f39967d532fdbf1",
@@ -1295,7 +1295,7 @@
     },
     "experiments/deterministic_histogram_profile_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_profile_core.py",
       "source_sha256": "4fe5c1228dc37f02de6a0b2f6b9901ed822cbc04bad0b4da6cdad38a34e20172",
       "published_sha256": "4fe5c1228dc37f02de6a0b2f6b9901ed822cbc04bad0b4da6cdad38a34e20172",
@@ -1303,7 +1303,7 @@
     },
     "experiments/deterministic_histogram_timing_repeats.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_timing_repeats.py",
       "source_sha256": "cf8ed20b9b43d8261253ec68f8af8a9ea719f9ef80f2c96da8840cab019a9b4b",
       "published_sha256": "cf8ed20b9b43d8261253ec68f8af8a9ea719f9ef80f2c96da8840cab019a9b4b",
@@ -1311,7 +1311,7 @@
     },
     "experiments/deterministic_histogram_timing_repeats_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_histogram_timing_repeats_core.py",
       "source_sha256": "e22275a31774d38d452653aa3791e5d8a04ee5b89cbbe1af4c3610849b837dfe",
       "published_sha256": "e22275a31774d38d452653aa3791e5d8a04ee5b89cbbe1af4c3610849b837dfe",
@@ -1319,7 +1319,7 @@
     },
     "experiments/deterministic_leaf_reduction.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_leaf_reduction.py",
       "source_sha256": "501405d4336ee9e380e997cec83f8079c10f11fedbad82cb1cba02d5d178f5cc",
       "published_sha256": "501405d4336ee9e380e997cec83f8079c10f11fedbad82cb1cba02d5d178f5cc",
@@ -1327,7 +1327,7 @@
     },
     "experiments/deterministic_leaf_reduction_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/deterministic_leaf_reduction_core.py",
       "source_sha256": "4e2f43d2ce1a22181d02e954b52028fb5f33d0188f9339baa2b8ce43ef99b982",
       "published_sha256": "4e2f43d2ce1a22181d02e954b52028fb5f33d0188f9339baa2b8ce43ef99b982",
@@ -1335,7 +1335,7 @@
     },
     "experiments/refinement_determinism_forensics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/refinement_determinism_forensics.py",
       "source_sha256": "3c55f412a671f5564aff4fc0cbca9ea07be8c025f9f8dc7dcdf6029b7054e6a7",
       "published_sha256": "3c55f412a671f5564aff4fc0cbca9ea07be8c025f9f8dc7dcdf6029b7054e6a7",
@@ -1343,7 +1343,7 @@
     },
     "experiments/refinement_determinism_forensics_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/refinement_determinism_forensics_core.py",
       "source_sha256": "db1f6cbadbbc66c04baf9fcba92573e389af5473122196191f7172a72ee0be04",
       "published_sha256": "db1f6cbadbbc66c04baf9fcba92573e389af5473122196191f7172a72ee0be04",
@@ -1351,7 +1351,7 @@
     },
     "experiments/refinement_determinism_frontier_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/refinement_determinism_frontier_core.py",
       "source_sha256": "6f2a4c064c8041a15b725a03b87526877c87c784581733e6d5a2e06f4400f743",
       "published_sha256": "6f2a4c064c8041a15b725a03b87526877c87c784581733e6d5a2e06f4400f743",
@@ -1359,7 +1359,7 @@
     },
     "experiments/refinement_integration_benchmark.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/refinement_integration_benchmark.py",
       "source_sha256": "5e0e6cb46444ba8701158ede64954e4dc950ad5dac27f93068b018a0b33d741f",
       "published_sha256": "5e0e6cb46444ba8701158ede64954e4dc950ad5dac27f93068b018a0b33d741f",
@@ -1367,7 +1367,7 @@
     },
     "experiments/refinement_mismatch_diagnostic.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/refinement_mismatch_diagnostic.py",
       "source_sha256": "b10f27cc1c71891bf7caf6f30568ceed3287f244805089daf77b00886ea50a24",
       "published_sha256": "b10f27cc1c71891bf7caf6f30568ceed3287f244805089daf77b00886ea50a24",
@@ -1375,7 +1375,7 @@
     },
     "experiments/refinement_numeric_diagnostic.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/refinement_numeric_diagnostic.py",
       "source_sha256": "ad71caf5b328d5c84e7d440a45fc7e1c3efd309b2dfd4dd5209a04755a0553c7",
       "published_sha256": "ad71caf5b328d5c84e7d440a45fc7e1c3efd309b2dfd4dd5209a04755a0553c7",
@@ -1383,7 +1383,7 @@
     },
     "experiments/split_diagnostic_artifact.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/split_diagnostic_artifact.py",
       "source_sha256": "f4a9662c21c07db9fc6167d151b62cdee12494e6c8b46b7b9b99d5666f78516a",
       "published_sha256": "f4a9662c21c07db9fc6167d151b62cdee12494e6c8b46b7b9b99d5666f78516a",
@@ -1391,7 +1391,7 @@
     },
     "experiments/top_k_benchmark.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "experiments/top_k_benchmark.py",
       "source_sha256": "58c6c8892c29a29186f061e66dfc4682167ddc08c82c62175f5a43601ce14d5c",
       "published_sha256": "58c6c8892c29a29186f061e66dfc4682167ddc08c82c62175f5a43601ce14d5c",
@@ -1399,7 +1399,7 @@
     },
     "tests/test_candidate_gpu_statistics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_candidate_gpu_statistics.py",
       "source_sha256": "169fbe6256fdfb496ee20f16abeed401532afc07a22a1cb574e723f23d71f833",
       "published_sha256": "169fbe6256fdfb496ee20f16abeed401532afc07a22a1cb574e723f23d71f833",
@@ -1407,7 +1407,7 @@
     },
     "tests/test_decision_aware_feasibility.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_decision_aware_feasibility.py",
       "source_sha256": "1641b6dc329d6535ee3e8a6cd3b5aa1821f85394cdcbbd9d69207def8521532c",
       "published_sha256": "1641b6dc329d6535ee3e8a6cd3b5aa1821f85394cdcbbd9d69207def8521532c",
@@ -1415,7 +1415,7 @@
     },
     "tests/test_decision_aware_refinement.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_decision_aware_refinement.py",
       "source_sha256": "25a12f4819edb29a832ea8b9ad814d5834f3809fe44290f8e7b03ca0a6c5c6df",
       "published_sha256": "25a12f4819edb29a832ea8b9ad814d5834f3809fe44290f8e7b03ca0a6c5c6df",
@@ -1423,7 +1423,7 @@
     },
     "tests/test_decision_aware_refinement_shadow.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_decision_aware_refinement_shadow.py",
       "source_sha256": "1da928612ceb096a665f5a8d28d295e07880e12f42a6742505d5a1fdd25c6875",
       "published_sha256": "1da928612ceb096a665f5a8d28d295e07880e12f42a6742505d5a1fdd25c6875",
@@ -1431,7 +1431,7 @@
     },
     "tests/test_deterministic_histogram.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_deterministic_histogram.py",
       "source_sha256": "b6384a9b1c0185f6abbfd7f6aac726adc4010e80a9c26de82b9eda1737c7d028",
       "published_sha256": "b6384a9b1c0185f6abbfd7f6aac726adc4010e80a9c26de82b9eda1737c7d028",
@@ -1439,7 +1439,7 @@
     },
     "tests/test_deterministic_histogram_article_suite_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_deterministic_histogram_article_suite_core.py",
       "source_sha256": "7c7648d4f2f6c7d14db56c8dcacbb38ecea31ceada4016da0cf3e9994156a17f",
       "published_sha256": "b180d323fa2c3a62e6132ca232d9f0cf97f407fe90cfc5e3a4644eab5f81b7c5",
@@ -1449,7 +1449,7 @@
     },
     "tests/test_deterministic_histogram_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_deterministic_histogram_core.py",
       "source_sha256": "884ee5464bc640d2dc131fe904b8d780ec59fd5fdf7b60a65a8054c9c2cf1c0e",
       "published_sha256": "884ee5464bc640d2dc131fe904b8d780ec59fd5fdf7b60a65a8054c9c2cf1c0e",
@@ -1457,7 +1457,7 @@
     },
     "tests/test_deterministic_histogram_profile_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_deterministic_histogram_profile_core.py",
       "source_sha256": "672858d74a8fb42920618676b26c7285926242a094fd74875b3495a7f3f5fbea",
       "published_sha256": "672858d74a8fb42920618676b26c7285926242a094fd74875b3495a7f3f5fbea",
@@ -1465,7 +1465,7 @@
     },
     "tests/test_deterministic_histogram_timing_repeats_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_deterministic_histogram_timing_repeats_core.py",
       "source_sha256": "f3ec2ccbcf00df2c96bbfa99f8b3029124ba8f6bae98a96618393f535553a221",
       "published_sha256": "f3ec2ccbcf00df2c96bbfa99f8b3029124ba8f6bae98a96618393f535553a221",
@@ -1473,7 +1473,7 @@
     },
     "tests/test_deterministic_leaf_reduction_core.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_deterministic_leaf_reduction_core.py",
       "source_sha256": "49833a1a854eef4c0eda43c10f75b5f98d265980fd17b980022fe3fd5d296061",
       "published_sha256": "49833a1a854eef4c0eda43c10f75b5f98d265980fd17b980022fe3fd5d296061",
@@ -1481,7 +1481,7 @@
     },
     "tests/test_deterministic_leaf_values.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_deterministic_leaf_values.py",
       "source_sha256": "e52d4bf5cf9b082f6fd2014b1a54ac153729b11166852fc91540b7b5b31bf98f",
       "published_sha256": "e52d4bf5cf9b082f6fd2014b1a54ac153729b11166852fc91540b7b5b31bf98f",
@@ -1489,7 +1489,7 @@
     },
     "tests/test_exact_leaf_counts.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_exact_leaf_counts.py",
       "source_sha256": "8b8512eed9b43e5a161ebe25eda022cce6ea32e9ed80e803f265b63f4bd837ae",
       "published_sha256": "8b8512eed9b43e5a161ebe25eda022cce6ea32e9ed80e803f265b63f4bd837ae",
@@ -1497,7 +1497,7 @@
     },
     "tests/test_refinement_application.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_refinement_application.py",
       "source_sha256": "d928118dce87729d2ed63f8b14b1f243c65d33db0abf4235d8c7a2008bc5d075",
       "published_sha256": "d928118dce87729d2ed63f8b14b1f243c65d33db0abf4235d8c7a2008bc5d075",
@@ -1505,7 +1505,7 @@
     },
     "tests/test_refinement_determinism_forensics.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_refinement_determinism_forensics.py",
       "source_sha256": "e1e80615d8065475a4a29b955125eba7b7606b624c319c009b3c7ca877ebbba0",
       "published_sha256": "e1e80615d8065475a4a29b955125eba7b7606b624c319c009b3c7ca877ebbba0",
@@ -1513,7 +1513,7 @@
     },
     "tests/test_refinement_determinism_frontier.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_refinement_determinism_frontier.py",
       "source_sha256": "a148cb1dfc1909e4c8261e8272bacf508fb0827f80c3c8dc043db89d067c90bc",
       "published_sha256": "a148cb1dfc1909e4c8261e8272bacf508fb0827f80c3c8dc043db89d067c90bc",
@@ -1521,7 +1521,7 @@
     },
     "tests/test_refinement_integration_benchmark.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_refinement_integration_benchmark.py",
       "source_sha256": "b2e72df8526454a39069f42414b957837c69a62b17465b023b3417546f14d915",
       "published_sha256": "b2e72df8526454a39069f42414b957837c69a62b17465b023b3417546f14d915",
@@ -1529,7 +1529,7 @@
     },
     "tests/test_refinement_mismatch_diagnostic.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_refinement_mismatch_diagnostic.py",
       "source_sha256": "3ba1f214f951cedf142014ce18ae12eed5b12d377e5e95abd9d6cbed898f5875",
       "published_sha256": "3ba1f214f951cedf142014ce18ae12eed5b12d377e5e95abd9d6cbed898f5875",
@@ -1537,7 +1537,7 @@
     },
     "tests/test_refinement_numeric_diagnostic.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_refinement_numeric_diagnostic.py",
       "source_sha256": "899af54627be207f517f7ca91ffd7e3ca7146c7755f73d7a95578c56b43164af",
       "published_sha256": "899af54627be207f517f7ca91ffd7e3ca7146c7755f73d7a95578c56b43164af",
@@ -1545,7 +1545,7 @@
     },
     "tests/test_split_diagnostic_artifact.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_split_diagnostic_artifact.py",
       "source_sha256": "e21da5f6ac0f0160287df2dd61e701b8b085fb444e4de6c8c22fcf4eda11fc3d",
       "published_sha256": "e21da5f6ac0f0160287df2dd61e701b8b085fb444e4de6c8c22fcf4eda11fc3d",
@@ -1553,7 +1553,7 @@
     },
     "tests/test_top_k_extraction.py": {
       "source_repository": "Py-Boost-HASBoost-A100",
-      "source_commit": "2c782756a09daf9d9d5e273314fa7c8845427cfd",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
       "source_path": "tests/test_top_k_extraction.py",
       "source_sha256": "17660740c4874a2db84009022b23068ad9cda84034dd326293e9d303f194bca4",
       "published_sha256": "17660740c4874a2db84009022b23068ad9cda84034dd326293e9d303f194bca4",
@@ -1573,6 +1573,158 @@
       "source_path": "tests/test_age_prediction_provenance.py",
       "source_sha256": "62332cbc18d609f84d9546c378957fa5bc27b99567c86a738a69f35c9e447b47",
       "published_sha256": "62332cbc18d609f84d9546c378957fa5bc27b99567c86a738a69f35c9e447b47",
+      "adaptations": []
+    },
+    "experiments/h5_2_event_scheduler.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/h5_2_event_scheduler.py",
+      "source_sha256": "0c251dd2ee4026863572bc0a24727bc33b62d68ec9a02c56f8e670192aa030b8",
+      "published_sha256": "0c251dd2ee4026863572bc0a24727bc33b62d68ec9a02c56f8e670192aa030b8",
+      "adaptations": []
+    },
+    "experiments/h5_2_event_scheduler_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/h5_2_event_scheduler_core.py",
+      "source_sha256": "327b73a190915aba75681c8a3424c9c43b51a8845e08c662467399b7e7dec507",
+      "published_sha256": "327b73a190915aba75681c8a3424c9c43b51a8845e08c662467399b7e7dec507",
+      "adaptations": []
+    },
+    "experiments/rmt_residual_expanded.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_residual_expanded.py",
+      "source_sha256": "ba30fca12cf1ecbf0dc4115370ccb75923378c4b7f696d3836d68b32b88a7a69",
+      "published_sha256": "ba30fca12cf1ecbf0dc4115370ccb75923378c4b7f696d3836d68b32b88a7a69",
+      "adaptations": []
+    },
+    "experiments/rmt_residual_expanded_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_residual_expanded_core.py",
+      "source_sha256": "594f2ed203b76cfe6d42f9d5749ff114ec94322e9b75f5de1cc0a258d1b5a158",
+      "published_sha256": "594f2ed203b76cfe6d42f9d5749ff114ec94322e9b75f5de1cc0a258d1b5a158",
+      "adaptations": []
+    },
+    "experiments/rmt_residual_signal.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_residual_signal.py",
+      "source_sha256": "0c52c04c5bb14c0d0c427dbc74df2c22bb39d9360957203ec7e825ca0c56d829",
+      "published_sha256": "0c52c04c5bb14c0d0c427dbc74df2c22bb39d9360957203ec7e825ca0c56d829",
+      "adaptations": []
+    },
+    "experiments/rmt_residual_signal_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_residual_signal_core.py",
+      "source_sha256": "0ca816f1811597c0d9d3f802e06b2581fc41a2770f710a1fda3af766572ad407",
+      "published_sha256": "0ca816f1811597c0d9d3f802e06b2581fc41a2770f710a1fda3af766572ad407",
+      "adaptations": []
+    },
+    "experiments/rmt_scalar_reproducibility.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_scalar_reproducibility.py",
+      "source_sha256": "737565b302920d00a7d1dc0084578e2600d98c7948d618e50b1a61aac57a542c",
+      "published_sha256": "737565b302920d00a7d1dc0084578e2600d98c7948d618e50b1a61aac57a542c",
+      "adaptations": []
+    },
+    "experiments/rmt_scalar_reproducibility_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_scalar_reproducibility_core.py",
+      "source_sha256": "c9fb01c061ee5d2b08a9cec1a6f0f63112bf5241774befd791163bdf3c0ef81e",
+      "published_sha256": "c9fb01c061ee5d2b08a9cec1a6f0f63112bf5241774befd791163bdf3c0ef81e",
+      "adaptations": []
+    },
+    "experiments/rmt_subspace_reproducibility.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_subspace_reproducibility.py",
+      "source_sha256": "46c8f4d771edd323dc8f8dcdd1aab55550f9c9cf0f8a7abf8a10af55d08db339",
+      "published_sha256": "46c8f4d771edd323dc8f8dcdd1aab55550f9c9cf0f8a7abf8a10af55d08db339",
+      "adaptations": []
+    },
+    "experiments/rmt_subspace_reproducibility_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "experiments/rmt_subspace_reproducibility_core.py",
+      "source_sha256": "5a99ba2bcbafec55a1288892f7b38292e8861c1311de70a935776fd2567dd74a",
+      "published_sha256": "5a99ba2bcbafec55a1288892f7b38292e8861c1311de70a935776fd2567dd74a",
+      "adaptations": []
+    },
+    "tests/test_h5_2_event_scheduler.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "tests/test_h5_2_event_scheduler.py",
+      "source_sha256": "c7a38d869cc20a8f31df84761cb09b62d02437a5a31c5808dc7f53c88e9f02ea",
+      "published_sha256": "c7a38d869cc20a8f31df84761cb09b62d02437a5a31c5808dc7f53c88e9f02ea",
+      "adaptations": []
+    },
+    "tests/test_rmt_residual_expanded_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "tests/test_rmt_residual_expanded_core.py",
+      "source_sha256": "d5a5c5a3b2a182e6b0865f81a8e373f431f12a8d1c5de5861c44f3bd9e833424",
+      "published_sha256": "d5a5c5a3b2a182e6b0865f81a8e373f431f12a8d1c5de5861c44f3bd9e833424",
+      "adaptations": []
+    },
+    "tests/test_rmt_residual_signal.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "tests/test_rmt_residual_signal.py",
+      "source_sha256": "92c662692f4c0aba1f63fa01a31ffd3f352b36c5e023245b4ea094bf06897868",
+      "published_sha256": "92c662692f4c0aba1f63fa01a31ffd3f352b36c5e023245b4ea094bf06897868",
+      "adaptations": []
+    },
+    "tests/test_rmt_residual_signal_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "tests/test_rmt_residual_signal_core.py",
+      "source_sha256": "79ae7ec73a16a1f6e6d33d6af9e7d36ef18b679e662b9f281253328cf2f0f3c4",
+      "published_sha256": "79ae7ec73a16a1f6e6d33d6af9e7d36ef18b679e662b9f281253328cf2f0f3c4",
+      "adaptations": []
+    },
+    "tests/test_rmt_scalar_reproducibility_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "tests/test_rmt_scalar_reproducibility_core.py",
+      "source_sha256": "120b4f09bcf1c64a0487c09dc9bae4564a8cda53edbc0be6342380da21718dd6",
+      "published_sha256": "120b4f09bcf1c64a0487c09dc9bae4564a8cda53edbc0be6342380da21718dd6",
+      "adaptations": []
+    },
+    "tests/test_rmt_subspace_reproducibility_core.py": {
+      "source_repository": "Py-Boost-HASBoost-A100",
+      "source_commit": "b71ef5e5d9f5da7a4dbe36645b6d291e41983c68",
+      "source_path": "tests/test_rmt_subspace_reproducibility_core.py",
+      "source_sha256": "a12146ea3ccf507b7fea2e7a3d417a96319529d18ae5b4859fbb7e9b65f7378f",
+      "published_sha256": "a12146ea3ccf507b7fea2e7a3d417a96319529d18ae5b4859fbb7e9b65f7378f",
+      "adaptations": []
+    },
+    "experiments/rmt_residual_synthetic_control.py": {
+      "source_repository": "Py-Boost-HASBoost",
+      "source_commit": "a197cde3d8d53ba8ccd662711befcaef4b9bea3e",
+      "source_path": "experiments/rmt_residual_synthetic_control.py",
+      "source_sha256": "3d98cff8db5c745788b1aa2095176d019f3688015a39f8bf255ae3eaccb646c7",
+      "published_sha256": "3d98cff8db5c745788b1aa2095176d019f3688015a39f8bf255ae3eaccb646c7",
+      "adaptations": []
+    },
+    "experiments/rmt_residual_synthetic_control_core.py": {
+      "source_repository": "Py-Boost-HASBoost",
+      "source_commit": "a197cde3d8d53ba8ccd662711befcaef4b9bea3e",
+      "source_path": "experiments/rmt_residual_synthetic_control_core.py",
+      "source_sha256": "d3071036590a38947977bd15fbc2507ce7f569b73994c68846d812e108086f31",
+      "published_sha256": "d3071036590a38947977bd15fbc2507ce7f569b73994c68846d812e108086f31",
+      "adaptations": []
+    },
+    "tests/test_rmt_residual_synthetic_control_core.py": {
+      "source_repository": "Py-Boost-HASBoost",
+      "source_commit": "a197cde3d8d53ba8ccd662711befcaef4b9bea3e",
+      "source_path": "tests/test_rmt_residual_synthetic_control_core.py",
+      "source_sha256": "35c1f37f363841dbb7c7ecfc6381133fc9ef86524c6ada7af5629a436655ceed",
+      "published_sha256": "35c1f37f363841dbb7c7ecfc6381133fc9ef86524c6ada7af5629a436655ceed",
       "adaptations": []
     }
   }
