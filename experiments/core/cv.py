@@ -15,4 +15,3 @@ SKLEARN_FOLDS = StratifiedKFold(
     shuffle=True,
     random_state=RANDOM_STATE,
 )
-

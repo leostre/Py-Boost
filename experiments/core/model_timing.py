@@ -85,4 +85,3 @@ def log_timing_data(timing_data, mlflow, fold: int) -> None:
                 data["total_time"] / data["call_count"],
                 step=fold,
             )
-
