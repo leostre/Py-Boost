@@ -12,10 +12,10 @@ dedicated GPU checks and artifacts.
 
 ## Historical RTX 5080 results
 
-The observations below come from the original RTX 5080 report. The restored
-harness uses its own versioned synthetic workload. Recomputing the historical
-numbers at tighter tolerances requires the original Q3 split comparisons or
-the corresponding trees with debug data.
+The historical observations below come from the original RTX 5080 report.
+The restored harness uses its own versioned synthetic workload. Recomputing
+the historical numbers at tighter tolerances requires the original Q3 split
+comparisons or the corresponding trees with debug data.
 
 ### Environment and protocol
 
@@ -53,13 +53,12 @@ Strict = any integer difference in (feature, bin, NaN direction, child topology)
   repetitions is itself atomic noise in the experiment.
 - First structural divergence at tree index 4–9 of 30 — divergence starts early
   and compounds through the ensemble.
-- Prediction drift despite full structure churn: max abs diff 3.58e-7 / 4.17e-7
-  per pair = **3 x 2^-23 and 7 x 2^-24**, i.e. 3 and 7 float32 ulps at logit
-  magnitude in [1,2). Pure reordered-accumulation rounding, nothing else.
+- The reported maximum absolute logit differences of 3.58e-7 and 4.17e-7
+  were measured on the training inputs.
 - Leaf-value-only divergences (structure identical, values differ): 15–23 trees
   per pair; worst leaf-value drift 1.02e-6.
 
-## Observation 3 (Q3, tolerant comparison): all atomic noise is sub-tolerance
+## Observation 3 (Q3, tolerant comparison): zero hard flips at the recorded tolerances
 
 Tolerant element-wise classification of every divergent split node
 (defaults: `bin_tol=1` adjacent bins; gain band `atol + rtol*|g|`):
@@ -82,8 +81,7 @@ Results (three repetitions at gain_atol=5e-3, gain_rtol=5e-5):
   every run; zero residue.
 - **Pooled: 0 hard flips in 630 tree comparisons -> Wilson 95% upper bound
   on the hard-flip tree rate ~= 0.6%.**
-- Every root divergence occurred at depth 5 (deepest level): atomic noise
-  perturbs fringe near-tie decisions, never early high-stakes splits.
+- Every first split divergence within a tree occurred at depth 5 in these runs.
 
 ## Observation 4: tolerance scale matters, and the intended sweep mislabeled itself
 
@@ -95,8 +93,9 @@ Results (three repetitions at gain_atol=5e-3, gain_rtol=5e-5):
 - Three artifacts tagged `atol1e-4/1e-5/1e-6` all record `gain_atol=0.005`:
   the flags never reached the script; they are repetitions, not a sweep.
   Lesson: always verify `config.tolerances` in the artifact.
-- Consequence: "0 hard flips" is currently proven only at application-audit
-  scale. Behavior at gain_atol in {1e-4, 1e-5, 1e-6} is still unmeasured.
+- The RTX 5080 result of zero hard flips applies to the recorded audit
+  tolerances. The RTX 4080 follow-up below reports the tighter sweep on a
+  new workload.
 
 ## Observation 5: integer paths were never non-deterministic
 
@@ -105,14 +104,13 @@ node ids, and NaN counts are exactly associative under reordering — the noise
 enters only through two float kernels: `histogram_kernel_idx` (grad/hess
 histograms) and `accumulate_gh_kernel` (leaf values).
 
-## Verdicts by claim type
+## Historical conclusions for the RTX 5080 workload
 
 | claim | requirement | verdict |
 |---|---|---|
-| accuracy / metrics | any | atomic mode sufficient (drift <= 4.2e-7 on logits) |
-| structure equivalence at audit tolerance 5e-3 | atomic | sufficient: 0/630 hard flips, bound 0.6% |
-| bitwise fingerprints, exact split identities, byte-level artifact comparison | deterministic | atomic impossible (0/21 pairs); deterministic proven (Q2 PASS) |
-| research diagnostics on exact identities (split traces, refinement audits) | deterministic | implementation is necessary and inevitable — no upper-level switch can remove atomics from those two kernels |
+| training-input logits | compare raw logits | maximum observed atomic difference was about 4.2e-7 |
+| split differences at the recorded audit tolerances | compare matched paths | 0/630 hard flips |
+| bitwise fingerprints and exact split identities | repeated seeded fits | the deterministic arm matched bitwise, and 0/21 atomic pairs matched on logits |
 
 Recommended policy: keep deterministic kernels opt-in (default off);
 require them for any experiment archiving fingerprints or comparing exact
@@ -120,16 +118,12 @@ split identities.
 
 ## Open items
 
-1. Real tolerance sweep (verify `config.tolerances` after each run):
-   `python3 experiments/prove_atomic_flip_rate.py --gain-atol 1e-4 --gain-rtol 2e-6 --tag sweep1e-4`
-   (likewise 1e-5/2e-7, 1e-6/2e-8).
-2. Cost side of the deterministic path (canonicalization overhead:
-   host sort + PCIe per histogram call; perf1/perf2-hybrid dispatch policy) —
-   never measured; no timing artifacts exist under `results/`.
-3. Scale dependence: atomic noise grows as sqrt(n) per bin; this proof is at
-   32k rows, the repo benchmarks go to ~1M rows.
-4. The flip-rate Wilson bounds bound, not eliminate, rare hard flips;
-   `--replicas` tightens them.
+1. Replaying the historical RTX 5080 sweep requires the original split-level
+   records. The new RTX 4080 sweep is complete.
+2. Measure the runtime and memory costs of deterministic training across
+   dispatch layouts and workload sizes.
+3. Check how exact split differences and held-out predictions vary with
+   dataset size, tree count and the choice of held-out split.
 
 ## Artifact index (results/proving/)
 
@@ -139,6 +133,88 @@ split identities.
 | `atomic_flip_rate_NVIDIA_GeForce_RTX_5080.json` | Q3 at 5e-3 (Nov 3) |
 | `atomic_flip_rate_atol{1e-4,1e-5,1e-6}_...json` | Q3 repetitions at 5e-3 (mislabeled tags, Nov 5) |
 | `atomic_flip_rate_smoke_...json`, `end_to_end_determinism_smoke_...json` | tiny-config smoke runs |
+
+## RTX 4080 follow-up on 2026-11-18
+
+The follow-up used source commit `9b95dd1`, an RTX 4080, Windows, CuPy 13.3.0
+and CUDA 12.6. The test processes disabled CuPy accelerators. Training used
+cross-entropy, 30 trees of depth at most 6, learning rate 0.1, a minimum of 10
+rows per leaf, full leaf values, all rows and columns, the `hybrid` histogram
+layout and seed 17. Both deterministic flags changed together.
+
+### Q3 rerun and CPU tolerance sweep
+
+The `balanced_gaussian_v1` workload had 32,768 rows, 16 features and six
+classes. Three separate processes each fitted eight models per arm and
+compared replicas 1–7 with replica 0 of the same arm. All 24 deterministic
+models matched bitwise on structures, leaf values and training-input logits
+across processes.
+
+In the atomic arm, 442 of 630 tree comparisons differed under the strict
+criterion. The only difference in all 820 differing split comparisons was
+the bin index (820 of 38,766 compared split paths). The largest absolute
+logit difference on training inputs was 6.91e-6.
+
+The table reclassifies the same saved comparisons on CPU at each gain
+tolerance. The bin tolerance remained 1. Each changed tree is counted once
+under its most severe split category.
+
+| `gain_atol` | `gain_rtol` | `near_tie` trees | `gain_equivalent` trees | `hard_flip` trees out of 630 |
+|---:|---:|---:|---:|---:|
+| `5e-3` | `5e-5` | 131 | 311 | 0 |
+| `1e-4` | `2e-6` | 131 | 311 | 0 |
+| `1e-5` | `2e-7` | 131 | 288 | 23 (3.7%) |
+| `1e-6` | `2e-8` | 131 | 103 | 208 (33.0%) |
+
+At the tightest tolerance, all 252 `hard_flip` nodes were at depths 4–5
+(root at depth 0). Their bin gaps had a median of 3 and ranged from 2 to 14.
+These rates describe the observed pairs. Trees from the same fit and
+comparisons with a shared reference are dependent.
+
+### Held-out checks
+
+Each dataset used one fixed train/test split for both arms. The synthetic
+test used independent draws around the original Q3 class centers
+(`holdout_seed=170817`). Pendigits and Satimage used their original train/test
+files. Helena and MNIST reused the archived 12,000-row sample and split
+(`hybrid_fit_1_seed314`, `split_seed=242`). The held-out runs used the same
+three-process, eight-model-per-arm protocol. All 24 deterministic fits on
+each dataset matched bitwise on structure, leaf values and test logits.
+
+D is the deterministic result and A is the range across atomic fits.
+Log loss is computed from raw logits in float64. The switch counts are the
+numbers of test objects with different top-1 classes per pair, over 24
+comparisons between modes and 21 comparisons within the atomic arm.
+
+| Dataset | Train / test rows | Accuracy %, D / A | Macro-F1 %, D / A | Log loss, D / A | Class switches, A vs D / A vs A |
+|---|---:|---:|---:|---:|---:|
+| Synthetic Q3 | 32,768 / 8,192 | 96.667 / 96.667 | 96.670 / 96.670 | 0.134790 / 0.134775–0.134817 | 0 / 0 |
+| Pendigits | 7,494 / 3,498 | 95.855 / 95.769–95.826 | 95.883 / 95.795–95.855 | 0.167359 / 0.170071–0.170649 | 14–21 / 0–13 |
+| Satimage | 4,435 / 2,000 | 89.850 / 89.850 | 88.252 / 88.252 | 0.292365 / 0.292127–0.292476 | 0 / 0 |
+| Helena | 9,600 / 2,400 | 30.583 / 30.583–30.625 | 13.452 / 13.452–13.472 | 3.004249 / 3.004036–3.004240 | 0–1 / 0–1 |
+| MNIST | 9,600 / 2,400 | 92.708 / 92.708 | 92.615 / 92.615 | 0.301700 / 0.301542–0.301717 | 0 / 0 |
+
+- On the synthetic test, the largest logit difference between atomic fits
+  reached 0.286. Their predicted classes agreed on all 8,192 test objects.
+- On Pendigits, the deterministic model gave 1–3 more correct answers and
+  lower log loss than each atomic fit.
+- On Helena, the same object switched classes in 7 of the 24 comparisons
+  between modes. Each switch gave the atomic model one extra correct answer.
+  Log loss also favored the atomic mode by 0.000009–0.000213.
+- Satimage and MNIST agreed exactly on classes, accuracy and macro-F1.
+  Their log-loss differences were small and changed sign across pairs.
+
+The follow-up supports using the deterministic mode when an experiment
+requires exact split or prediction comparisons. Held-out quality effects
+varied by dataset on these fixed splits.
+
+### Evidence retained for this follow-up
+
+The local experiment archive contains `q3-summary.json` for the three raw Q3
+runs and nine CPU replays, `q3-heldout-summary.json` for the synthetic and
+Pendigits checks, and `q3-real-heldout-summary.json` for Satimage, Helena
+and MNIST. The summaries record input and split fingerprints, per-pair
+metrics where applicable, and checksums of the raw JSON or NPZ files.
 
 ## Running the restored Q2 and Q3 checks
 
