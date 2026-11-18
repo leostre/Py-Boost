@@ -9,6 +9,7 @@ pandas==2.3.3
 numpy==2.2.6
 scikit-learn==1.7.2
 scipy==1.15.3
+requests>=2.31
 
 lightgbm==4.6.0
 catboost==1.2.8
@@ -36,5 +37,9 @@ plotly==6.5.0
 
 ucimlrepo==0.0.7
 
-cupy-cuda12x==13.6.0
+cupy-cuda12x==13.3.0
 tbb
+
+pytest==9.1.1
+# 6.151.9 and 6.167.1 fail inside Hypothesis DataTree on this Python 3.10 setup.
+hypothesis==6.128.2

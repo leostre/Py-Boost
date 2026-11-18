@@ -6,6 +6,7 @@ from py_boost.multioutput.sketch_decision import SketchDecision, marginal_probab
 def _weighted_sample_without_replacement(
     probabilities: cp.ndarray,
     size: int,
+    random_state=None,
 ) -> cp.ndarray:
     """Draw a weighted sample without replacement using Gumbel-top-k.
 
@@ -26,7 +27,11 @@ def _weighted_sample_without_replacement(
             'positive probabilities as selected elements; use tau > 0'
         )
 
-    uniform = cp.random.random(probabilities.shape)
+    uniform = (
+        cp.random.random(probabilities.shape)
+        if random_state is None
+        else random_state.random_sample(probabilities.shape)
+    )
     tiny = cp.finfo(uniform.dtype).tiny
     uniform = cp.clip(uniform, tiny, 1 - cp.finfo(uniform.dtype).eps)
     gumbel = -cp.log(-cp.log(uniform))
@@ -161,16 +166,38 @@ def sample_random_sampling_sketch(tensor: cp.ndarray, **kwargs):
     k_row = min(tensor.shape[0], max(1, int(tensor.shape[0] * subsample)))
     k_col = min(tensor.shape[1], max(1, sketch_outputs))
     tau = kwargs.get('tau', 1e-3)
+    random_state = kwargs.get('random_state')
 
     row_probs, output_probs = marginal_probabilities(tensor, tau=tau)
     row_indexer = cp.sort(
-        _weighted_sample_without_replacement(row_probs, k_row)
+        _weighted_sample_without_replacement(row_probs, k_row, random_state=random_state)
     )
     col_indexer = cp.sort(
-        _weighted_sample_without_replacement(output_probs, k_col)
+        _weighted_sample_without_replacement(output_probs, k_col, random_state=random_state)
     )
 
     if kwargs.get('record_probabilities', False):
+        return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
+    return SketchDecision(row_indexer, col_indexer)
+
+
+def sample_uniform_sketch(tensor: cp.ndarray, **kwargs):
+    """Sample rows and outputs uniformly without replacement.
+
+    This strategy is an ablation baseline for separating the effect of the
+    article-defined ``p_i q_j`` allocation from the effect of sketch size.
+    """
+    sketch_outputs = kwargs.get('sketch_outputs', 1)
+    subsample = kwargs.get('subsample', 0.5)
+    k_row = min(tensor.shape[0], max(1, int(tensor.shape[0] * subsample)))
+    k_col = min(tensor.shape[1], max(1, sketch_outputs))
+
+    rng = cp.random if kwargs.get('random_state') is None else kwargs['random_state']
+    row_indexer = cp.sort(rng.permutation(tensor.shape[0])[:k_row]).astype(cp.uint64)
+    col_indexer = cp.sort(rng.permutation(tensor.shape[1])[:k_col]).astype(cp.uint64)
+    if kwargs.get('record_probabilities', False):
+        row_probs = cp.full(tensor.shape[0], 1 / tensor.shape[0], dtype=cp.float32)
+        output_probs = cp.full(tensor.shape[1], 1 / tensor.shape[1], dtype=cp.float32)
         return SketchDecision(row_indexer, col_indexer, row_probs, output_probs)
     return SketchDecision(row_indexer, col_indexer)
 
@@ -182,6 +209,7 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
         tensor: cp.ndarray, shape (m, n)
         subsample: float, row fraction, default 0.5
         sketch_outputs: int, projection width and column count, default 1
+        random_state: optional CuPy RandomState for the projection draw
 
     Returns:
         SketchDecision with row and output indices.
@@ -191,7 +219,9 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
     k_row = max(1, int(tensor.shape[0] * subsample))
     k_col = max(1, sketch_outputs)
 
-    P = cp.random.randn(tensor.shape[1], k_col, dtype=cp.float32)
+    random_state = kwargs.get('random_state')
+    rng = cp.random if random_state is None else random_state
+    P = rng.randn(tensor.shape[1], k_col, dtype=cp.float32)
     P /= cp.sqrt(k_col)
     projected = cp.dot(tensor, P)
 
@@ -204,11 +234,11 @@ def sample_random_projection_sketch(tensor: cp.ndarray, **kwargs):
     return SketchDecision(row_indexer, col_indexer)
 
 
-# svd_heuristic, svd, topk, rand, proj -> sketch callables for GradHessHistory
 SUPPORTED_SKETCH_METHODS = {
     'svd_heuristic': sample_svd_sketch_heuristic,
     'svd': sample_svd_sketch,
     'topk': sample_topk_sketch,
     'rand': sample_random_sampling_sketch,
+    'uniform': sample_uniform_sketch,
     'proj': sample_random_projection_sketch,
 }
