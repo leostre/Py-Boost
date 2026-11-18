@@ -2,15 +2,22 @@
 
 Scope: the opt-in deterministic histogram / leaf-value kernels in
 `py_boost/gpu/utils.py` (`deterministic_histogram`, `deterministic_histogram_layout`,
-`deterministic_leaf_values`). Two previously open questions were closed with
-dedicated proving scripts and GPU artifacts:
+`deterministic_leaf_values`). The original report addressed two questions with
+dedicated GPU checks and artifacts.
 
 - **Q2** — is a full model fit bitwise reproducible run-to-run in deterministic mode?
 - **Q3** — how often does the default atomic mode actually change tree structure
   between identical seeded runs (the null hypothesis the deterministic kernels
   were built against, never previously measured)?
 
-## Environment and protocol
+## Historical RTX 5080 results
+
+The observations below come from the original RTX 5080 report. The restored
+harness uses its own versioned synthetic workload. Recomputing the historical
+numbers at tighter tolerances requires the original Q3 split comparisons or
+the corresponding trees with debug data.
+
+### Environment and protocol
 
 - Hardware: NVIDIA GeForce RTX 5080, compute capability 12.0, cupy 13.6.0.
 - Workload: synthetic 6-class problem, 32 768 rows x 16 features, crossentropy,
@@ -132,3 +139,34 @@ split identities.
 | `atomic_flip_rate_NVIDIA_GeForce_RTX_5080.json` | Q3 at 5e-3 (Nov 3) |
 | `atomic_flip_rate_atol{1e-4,1e-5,1e-6}_...json` | Q3 repetitions at 5e-3 (mislabeled tags, Nov 5) |
 | `atomic_flip_rate_smoke_...json`, `end_to_end_determinism_smoke_...json` | tiny-config smoke runs |
+
+## Running the restored Q2 and Q3 checks
+
+```sh
+python experiments/prove_end_to_end_determinism.py --replicas 2 --ntrees 3 --nrows 512 --nfeatures 8 --nclasses 4 --max-depth 3 --min-data-in-leaf 5 --tag smoke
+python experiments/prove_atomic_flip_rate.py --replicas 2 --ntrees 3 --nrows 512 --nfeatures 8 --nclasses 4 --max-depth 3 --min-data-in-leaf 5 --tag smoke
+```
+
+The JSON records the effective tolerances, workload fingerprint and source
+fingerprint. The comparison checks raw logits before softmax. It matches nodes
+by output group and path from the root. An internal node contributes one
+comparison if either replica splits at that path. A near tie requires matching
+feature, NaN direction and child types, with thresholds in neighboring bins
+within the configured distance. A tree is assigned its most severe split
+category. Leaf-value tolerances apply to trees with matching structure. The
+Wilson intervals are descriptive because trees from one fit and comparisons
+against the same reference replica are dependent.
+
+Q3 can reclassify split decisions on CPU from a report produced by the restored
+harness. Use the full JSON file, including the paired split decisions and their
+gains. Unspecified tolerances come from the source report. Leaf-value results
+are copied at their saved tolerances.
+
+```sh
+python experiments/prove_atomic_flip_rate.py --replay saved-q3.json --gain-atol 1e-4 --gain-rtol 2e-6 --tag tighter
+```
+
+For the historical sweep, recover the per-node `elementwise` records for both
+arms or the original models with debug split arrays. The aggregate counts in
+this note show the original tolerance and cannot determine the counts at a
+new tolerance.

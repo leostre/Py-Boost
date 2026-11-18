@@ -40,9 +40,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-import numpy as np
-
 from experiments.proving_common import (
+    DEFAULT_TOLERANCES,
     base_report,
     compare_replica,
     fit_replica,
@@ -92,6 +91,8 @@ def main():
                         help='do not fit the atomic control arm')
     parser.add_argument('--tag', default='')
     args = parser.parse_args()
+    if args.replicas < 2 or args.ntrees < 1:
+        parser.error('need at least two replicas and one tree')
 
     config = {
         'replicas': args.replicas,
@@ -104,6 +105,7 @@ def main():
         'min_data_in_leaf': args.min_data_in_leaf,
         'layout': args.layout,
         'seed': args.seed,
+        'tolerances': DEFAULT_TOLERANCES,
         'subsample': 1.0,
         'colsample': 1.0,
         'full_leaf_values': True,
@@ -117,27 +119,23 @@ def main():
                           'deterministic_leaf_values': True},
         'atomic_control': None if args.skip_atomic_control else {
             'deterministic_histogram': False, 'deterministic_leaf_values': False},
-    })
+    }, X, y)
     report['question'] = (
         'Q2: does deterministic mode make a full model fit bitwise '
         'reproducible run-to-run?'
     )
 
-    tolerances = {
-        'gain_atol': 5e-3, 'gain_rtol': 5e-5,
-        'bin_tol': 1, 'value_atol': 1e-6, 'value_rtol': 1e-5,
-    }
     det_records, det_cmp, det_bitwise = run_arm(
-        X, y, config, True, args.replicas, tolerances)
+        X, y, config, True, args.replicas, DEFAULT_TOLERANCES)
     report['detail']['deterministic'] = {
         'all_replicas_bitwise_identical': det_bitwise,
         'comparisons_vs_replica0': det_cmp,
     }
 
-    control_sensitive = args.skip_atomic_control
+    control_sensitive = None
     if not args.skip_atomic_control:
         _, atom_cmp, atom_bitwise = run_arm(
-            X, y, config, False, args.replicas, tolerances)
+            X, y, config, False, args.replicas, DEFAULT_TOLERANCES)
         control_sensitive = not atom_bitwise
         report['detail']['atomic_control'] = {
             'all_replicas_bitwise_identical': atom_bitwise,
@@ -151,7 +149,13 @@ def main():
             '(predictions + every tree structure + every leaf value), and the '
             'atomic control arm deviates, so the check has discriminative power.'
         )
-    elif det_bitwise and not control_sensitive:
+    elif det_bitwise and args.skip_atomic_control:
+        report['proven'] = True
+        report['verdict'] = (
+            'PASS: deterministic replicas match bitwise (predictions, tree '
+            'structures and leaf values). Atomic control was skipped.'
+        )
+    elif det_bitwise:
         report['proven'] = False
         report['verdict'] = (
             'INCONCLUSIVE: deterministic arm is bitwise identical, but the '

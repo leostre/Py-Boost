@@ -21,9 +21,8 @@ Protocol
      flip rate;
    - leaf values only: trees whose structure matches but values differ;
    - predictions: bitwise equality and max absolute deviation.
-3. Control arm: R replicas with deterministic mode on. This must show zero
-   flips; otherwise some *other* unseeded source of non-determinism exists
-   and the atomic arm cannot be interpreted.
+3. Control arm: R replicas with deterministic mode on. A discrepancy in
+   this arm invalidates attribution of the differences to atomic reductions.
 
 Tolerant classification
 -----------------------
@@ -46,20 +45,21 @@ Interpreting the verdict
 ------------------------
 - ``ATOMIC FLIPS OBSERVED``: report the Wilson CI - this is the effect size
   the deterministic lever protects against.
-- ``NULL CONFIRMED``: zero flips at this scale. The upper bound of the
-  Wilson CI states the largest flip rate consistent with the observation.
-  If that bound is below the rate at which sketch-induced structure changes
-  matter for the research conclusions, the deterministic histogram is
-  overhead without demonstrated necessity at this scale.
+- ``NO HARD FLIPS OBSERVED``: zero hard flips in this sample at the specified
+  tolerances. Trees in the same fit and pairs sharing replica 0 are dependent,
+  so the Wilson intervals are descriptive.
 
 Usage
 -----
     python3 experiments/prove_atomic_flip_rate.py
     python3 experiments/prove_atomic_flip_rate.py --replicas 8 --ntrees 30
+    python3 experiments/prove_atomic_flip_rate.py --replay saved.json --gain-atol 1e-4
 """
 
 import argparse
+from hashlib import sha256
 import json
+from math import isfinite
 import sys
 from pathlib import Path
 
@@ -68,15 +68,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import numpy as np
 
 from experiments.proving_common import (
-    DEFAULT_BIN_TOL,
-    DEFAULT_GAIN_ATOL,
-    DEFAULT_GAIN_RTOL,
-    DEFAULT_VALUE_ATOL,
-    DEFAULT_VALUE_RTOL,
+    DEFAULT_TOLERANCES,
+    SCHEMA_VERSION,
     base_report,
     compare_replica,
     fit_replica,
     make_dataset,
+    reclassify_splits,
     replica_record,
     strip_heavy_fields,
     wilson_ci,
@@ -158,7 +156,7 @@ def run_arm(X, y, config, deterministic, replicas, tolerances):
     return records, comparisons
 
 
-def main():
+def parse_args():
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--replicas', type=int, default=8)
@@ -171,14 +169,18 @@ def main():
     parser.add_argument('--min-data-in-leaf', type=int, default=10)
     parser.add_argument('--layout', default='hybrid', choices=['hybrid', 'perf1'])
     parser.add_argument('--seed', type=int, default=17)
-    parser.add_argument('--gain-atol', type=float, default=DEFAULT_GAIN_ATOL)
-    parser.add_argument('--gain-rtol', type=float, default=DEFAULT_GAIN_RTOL)
-    parser.add_argument('--bin-tol', type=int, default=DEFAULT_BIN_TOL)
-    parser.add_argument('--value-atol', type=float, default=DEFAULT_VALUE_ATOL)
-    parser.add_argument('--value-rtol', type=float, default=DEFAULT_VALUE_RTOL)
+    parser.add_argument('--gain-atol', type=float)
+    parser.add_argument('--gain-rtol', type=float)
+    parser.add_argument('--bin-tol', type=int)
+    parser.add_argument('--value-atol', type=float)
+    parser.add_argument('--value-rtol', type=float)
     parser.add_argument('--tag', default='')
-    args = parser.parse_args()
+    parser.add_argument('--replay', type=Path,
+                        help='reclassify all saved Q3 split comparisons with no GPU fit')
+    return parser, parser.parse_args()
 
+
+def collect(args, tolerances):
     config = {
         'replicas': args.replicas,
         'ntrees': args.ntrees,
@@ -190,13 +192,7 @@ def main():
         'min_data_in_leaf': args.min_data_in_leaf,
         'layout': args.layout,
         'seed': args.seed,
-        'tolerances': {
-            'gain_atol': args.gain_atol,
-            'gain_rtol': args.gain_rtol,
-            'bin_tol': args.bin_tol,
-            'value_atol': args.value_atol,
-            'value_rtol': args.value_rtol,
-        },
+        'tolerances': tolerances,
         'subsample': 1.0,
         'colsample': 1.0,
         'full_leaf_values': True,
@@ -209,21 +205,65 @@ def main():
         'atomic': {'deterministic_histogram': False, 'deterministic_leaf_values': False},
         'deterministic_control': {'deterministic_histogram': True,
                                   'deterministic_leaf_values': True},
-    })
+    }, X, y)
     report['question'] = (
         'Q3: how often does default atomic-mode GPU noise flip a split '
         'decision between identical seeded runs?'
     )
 
-    tolerances = {
-        'gain_atol': args.gain_atol,
-        'gain_rtol': args.gain_rtol,
-        'bin_tol': args.bin_tol,
-        'value_atol': args.value_atol,
-        'value_rtol': args.value_rtol,
-    }
     atom_records, atom_cmp = run_arm(X, y, config, False, args.replicas, tolerances)
     det_records, det_cmp = run_arm(X, y, config, True, args.replicas, tolerances)
+    report['detail']['replica_summaries'] = {
+        'atomic': [strip_heavy_fields(r) for r in atom_records],
+        'deterministic_control': [strip_heavy_fields(r) for r in det_records],
+    }
+    return report, atom_cmp, det_cmp
+
+
+def replay_comparisons(report, tolerances):
+    def replay_arm(name):
+        pairs = report['detail'][name]['comparisons_vs_replica0']
+        if len(pairs) != report['config']['replicas'] - 1 or not pairs:
+            raise ValueError(f'incomplete replica pairs for {name}')
+        for pair in pairs:
+            counts = [len(tree['elementwise']) for tree in pair['trees']]
+            if (len(counts) != pair['total_trees']
+                    or sum(bool(count) for count in counts) != pair['flipped_trees']
+                    or sum(counts) != pair['flipped_split_nodes']):
+                raise ValueError(f'incomplete split details for {name}')
+        return [reclassify_splits(pair, tolerances) for pair in pairs]
+
+    return replay_arm('atomic'), replay_arm('deterministic_control')
+
+
+def main():
+    parser, args = parse_args()
+    overrides = {
+        key: getattr(args, key) for key in DEFAULT_TOLERANCES if getattr(args, key) is not None
+    }
+    if any(not isfinite(value) or value < 0 for value in overrides.values()):
+        parser.error('comparison tolerances must be finite and non-negative')
+
+    if args.replay is None:
+        if args.replicas < 2 or args.ntrees < 1:
+            parser.error('need at least two replicas and one tree')
+        tolerances = {**DEFAULT_TOLERANCES, **overrides}
+        report, atom_cmp, det_cmp = collect(args, tolerances)
+    else:
+        if 'value_atol' in overrides or 'value_rtol' in overrides:
+            parser.error('replay supports split tolerances only; leaf-value results are preserved')
+        try:
+            contents = args.replay.read_bytes()
+            report = json.loads(contents)
+            if (not isinstance(report, dict) or report.get('schema_version') != SCHEMA_VERSION
+                    or report.get('experiment') != 'prove_atomic_flip_rate'):
+                raise ValueError(f'expected a Q3 artifact with schema_version={SCHEMA_VERSION}')
+            tolerances = {**report['config']['tolerances'], **overrides}
+            atom_cmp, det_cmp = replay_comparisons(report, tolerances)
+        except (OSError, KeyError, TypeError, ValueError) as error:
+            parser.error(f'cannot replay {args.replay}: {error}')
+        report['config']['tolerances'] = tolerances
+        report['replay_source_sha256'] = sha256(contents).hexdigest()
 
     atom_summary = summarize_arm(atom_cmp)
     det_summary = summarize_arm(det_cmp)
@@ -235,11 +275,6 @@ def main():
         **det_summary,
         'comparisons_vs_replica0': det_cmp,
     }
-    report['detail']['replica_summaries'] = {
-        'atomic': [strip_heavy_fields(r) for r in atom_records],
-        'deterministic_control': [strip_heavy_fields(r) for r in det_records],
-    }
-
     control_clean = (
         det_summary['flipped_trees'] == 0
         and det_summary['leaf_value_only_trees'] == 0
@@ -256,8 +291,7 @@ def main():
         report['proven'] = False
         report['verdict'] = (
             'INVALID: the deterministic control arm diverged between identical '
-            'seeded runs, so non-atomic unseeded non-determinism exists and the '
-            'atomic arm cannot be interpreted. Investigate before re-running.'
+            'seeded runs. The comparison cannot isolate the effect of atomic reductions.'
         )
     elif flips_observed:
         report['proven'] = True
@@ -267,8 +301,8 @@ def main():
             f"Wilson 95% CI [{strict_rate['lower']:.3e}, {strict_rate['upper']:.3e}] "
             f"({atom_summary['flipped_trees']} of {atom_summary['total_trees']} "
             'trees). After element-wise tolerant classification '
-            f'(bin_tol={args.bin_tol}, gain_atol={args.gain_atol}, '
-            f'gain_rtol={args.gain_rtol}): near-tie trees {near_tie}, '
+            f"(bin_tol={tolerances['bin_tol']}, gain_atol={tolerances['gain_atol']}, "
+            f"gain_rtol={tolerances['gain_rtol']}): near-tie trees {near_tie}, "
             f'gain-equivalent trees {gain_equiv}, HARD-FLIP trees {hard}, '
             f"hard-flip tree rate {hard_rate['point']:.3e}, Wilson 95% CI "
             f"[{hard_rate['lower']:.3e}, {hard_rate['upper']:.3e}]. "
@@ -280,14 +314,11 @@ def main():
         upper = atom_summary['hard_flip_tree_rate_wilson_ci']['upper']
         report['proven'] = True
         report['verdict'] = (
-            'NULL CONFIRMED at this scale: no atomic-induced HARD structural '
+            'NO HARD FLIPS OBSERVED: no HARD structural '
             f'flips observed across {atom_summary["replica_pairs"]} replica '
             f'pairs and {atom_summary["tolerant"]["total_split_nodes"]} '
             'split-node comparisons at the configured tolerances. The Wilson '
-            f'95% upper bound on the hard-flip tree rate is {upper:.3e}. '
-            'If that bound is far below the sketch-induced structure-change '
-            'rates under study, the deterministic histogram is not '
-            'demonstrably necessary at this scale.'
+            f'descriptive 95% upper limit on the hard-flip tree rate is {upper:.3e}.'
         )
 
     report['summary'] = {
@@ -299,8 +330,9 @@ def main():
         'deterministic_control_clean': control_clean,
     }
 
+    tag = args.tag or ('replay' if args.replay else '')
     path = write_artifact(
-        f"atomic_flip_rate_{args.tag + '_' if args.tag else ''}"
+        f"atomic_flip_rate_{tag + '_' if tag else ''}"
         f"{report['environment']['device_name'].replace(' ', '_')}.json",
         report,
     )
