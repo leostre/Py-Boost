@@ -151,3 +151,11 @@ mlruns/
 
 # Hydra outputs
 outputs/
+
+.venv/
+results/
+.publication-test*/
+*.tar
+*.tar.gz
+*.npz
+*.safetensors
