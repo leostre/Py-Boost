@@ -1,28 +1,42 @@
 {
-  "phase": "deterministic_histogram_timing_repeats",
-  "dataset_seed": 42,
-  "ntrees": 30,
-  "max_depth": 5,
+  "phase": "h5_2_event_scheduler",
   "runtime_site_packages": null,
-  "cache_dir": "results/imported/benchmarks",
-  "deterministic_histogram_timing_repeats": {
-    "experiment_id": "fad74309-7766-4e2c-929f-d38125b15027",
-    "parent_experiment_id": "51153190-999e-4c44-a571-70afe58eff08",
+  "h5_2_event_scheduler": {
+    "hypothesis": "H5-2 event-driven audit scheduling at equal control count",
+    "source_report": "results/imported/hasboost_revision_2026-09-18/rmt_residual_signal_expanded/20260925T131545Z/report.json",
+    "source_report_sha256": "b7dd134a1e7c44a9c612c59b946db57035ecb0f884f55b55fedaa432ac77eebe",
+    "source_verdict": "rejected",
     "datasets": [
-      "mediamill"
+      "helena",
+      "mediamill",
+      "dionis"
     ],
-    "model_seed": 314,
-    "split_seed": 242,
-    "maximum_output_budget": 50,
-    "shortlist_size": 64,
-    "warmup_pairs": 2,
-    "measured_pairs": 20,
-    "alternate_execution_order": true,
-    "maximum_regression_fraction": 0.1,
-    "bootstrap_samples": 20000,
-    "bootstrap_seed": 1729,
-    "require_exact_pair_results": true,
-    "require_both_hybrid_layouts": true,
-    "output_path": "results/revision/deterministic_histogram_timing_mediamill/report.json"
+    "primary_dataset": "mediamill",
+    "development_seeds": [
+      204,
+      214,
+      224,
+      234
+    ],
+    "holdout_seeds": [
+      244,
+      254,
+      264,
+      274
+    ],
+    "trees": 100,
+    "warmup_audits": [
+      5,
+      10
+    ],
+    "block_size": 10,
+    "safe_threshold": 0.1,
+    "margin_fraction": 0.8,
+    "margin_delay": 4,
+    "alarm_quantile": 0.9,
+    "minimum_periodic_unsafe": 4,
+    "minimum_unsafe_reduction": 0.1,
+    "minimum_safe_exposure_ratio": 0.95,
+    "output_path": "results/revision/h5_2_event_scheduler/report.json"
   }
 }
